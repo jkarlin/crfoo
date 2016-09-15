@@ -1,0 +1,12 @@
+<script>
+var x = Math.random();  // Disables the preload scanner's doc.write check
+document.write('<scr'+'ipt id="docScript" type="text/javascript" src="https://cr2.kungfoo.net/docwrite/hello.js"></scr'+'ipt>');
+
+document.getElementById("docScript").onload = function() { document.getElementById("loaded").innerHTML = "<font color=green>loaded</font>"; }
+document.getElementById("docScript").onerror = function(err) { document.getElementById("loaded").innerHTML = "<font color=red>not loaded</font>"; }
+
+window.onerror = function (message, source, lineno, colno, error) {
+ console.log("Window Error", message, source, lineno, colno, error);
+};
+</script>
+</body>
