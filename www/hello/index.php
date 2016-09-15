@@ -1,3 +1,3 @@
 <body>
-Hello World! :D :D
+Hello World!
 </body>
