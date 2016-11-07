@@ -1,7 +1,5 @@
 # crfoo
 
-Add your demo under www/XYZ/
+This is a repo for making web demos and bug reproductions. The contents of www/ are mirrored on http(s)://cr.kungfoo.net/ and http(s)://cr2.kungfoo.net/
 
 PHP is supported so you can delay responses, add response headers, etc.
-
-Files pushed in this repo become available at http(s)://cr.kungfoo.net/XYZ/ and http(s)://cr2.kungfoo.net/XYZ/. 
