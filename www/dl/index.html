@@ -8,6 +8,7 @@
   <li><a href="https://storage.googleapis.com/chrome-auth-lab-staging/public/5mb.bin">5MB file from Google Storage</a></li>
   <li><a href="Foo.dmg" download="foo.apk">.apk file</a></li>
   <li><a href="Foo.dmg" download="foo.crx">.crx file</a></li>
+  <li><a href="Foo.dmg" download="foo.swf">.swf file</a></li>
   <li><a href="" id="blobtarget" download="bar.apk">.apk file via Blob</a></li>
   <script>
     (function() {
@@ -21,6 +22,15 @@
   <script>
     (function() {
       var anchor = document.getElementById("blobtarget-2");
+      var fileParts = ['Hello the content doesn\'t really matter'];
+      var blob = new Blob(fileParts);
+      anchor.href = URL.createObjectURL(blob);
+    })()
+  </script>
+  <li><a href="" id="blobtarget-3" download="bar.swf">.swf file via Blob</a></li>
+  <script>
+    (function() {
+      var anchor = document.getElementById("blobtarget-3");
       var fileParts = ['Hello the content doesn\'t really matter'];
       var blob = new Blob(fileParts);
       anchor.href = URL.createObjectURL(blob);
