@@ -10,10 +10,21 @@
   <li><a href="Foo.dmg" download="foo.crx">.crx file</a></li>
   <li><a href="" id="blobtarget" download="bar.apk">.apk file via Blob</a></li>
   <script>
-    var anchor = document.getElementById("blobtarget");
-    var fileParts = ['Hello the content doesn\'t really matter'];
-    var blob = new Blob(fileParts, {type: 'application/vnd.android.package-archive'});
-    anchor.href = URL.createObjectURL(blob);
+    function() {
+      var anchor = document.getElementById("blobtarget");
+      var fileParts = ['Hello the content doesn\'t really matter'];
+      var blob = new Blob(fileParts, {type: 'application/vnd.android.package-archive'});
+      anchor.href = URL.createObjectURL(blob);
+    }()
+  </script>
+  <li><a href="" id="blobtarget-2" download="bar.crx">.crx file via Blob</a></li>
+  <script>
+    function() {
+      var anchor = document.getElementById("blobtarget-2");
+      var fileParts = ['Hello the content doesn\'t really matter'];
+      var blob = new Blob(fileParts);
+      anchor.href = URL.createObjectURL(blob);
+    }()
   </script>
 </ul>
 </body>
