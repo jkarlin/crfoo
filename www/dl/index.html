@@ -8,6 +8,13 @@
   <li><a href="https://storage.googleapis.com/chrome-auth-lab-staging/public/5mb.bin">5MB file from Google Storage</a></li>
   <li><a href="Foo.dmg" download="foo.apk">.apk file</a></li>
   <li><a href="Foo.dmg" download="foo.crx">.crx file</a></li>
+  <li><a href="" id="blobtarget" download="bar.apk">.apk file via Blob</a></li>
+  <script>
+    var anchor = document.getElementById("blobtarget");
+    var fileParts = ['Hello the content doesn\'t really matter'];
+    var blob = new Blob(fileParts, {type: 'application/vnd.android.package-archive'});
+    anchor.href = URL.createObjectURL(blob);
+  </script>
 </ul>
 </body>
 </html>
