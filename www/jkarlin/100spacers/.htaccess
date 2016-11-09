@@ -1,4 +1,0 @@
-<ifModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType image/gif "access plus 2592000 seconds"
-</ifModule>
