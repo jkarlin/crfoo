@@ -1,4 +1,8 @@
 <?php
+header("Cache-Control: no-store");
+?>
+
+<?php
 echo 'You posted: ' . htmlspecialchars($_POST["say"]) . '!';
 ?>
 
