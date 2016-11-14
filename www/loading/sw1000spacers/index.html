@@ -8,11 +8,11 @@
   </style>
   <script>
     navigator.serviceWorker.register('sw.js', {scope: './'})
-      .then(function(registration)) {
+      .then(function(registration) {
         if (registration.active) {
           console.log("ServiceWorker is active for this load");
         }
-      }
+      })
   </script>
 </head>
 <body>
