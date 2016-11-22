@@ -1,5 +1,7 @@
 <script>
+var args = window.location.search.slice(1).split('&');
+var url = args[0];
 var headers = new Headers();
 headers.append("Origin", 'https://cr.kungfoo.net');
-fetch("script.php", { method: "GET", headers: headers, mode: 'cors'});
+fetch(url, { method: "GET", headers: headers, mode: 'no-cors'});
 </script>
