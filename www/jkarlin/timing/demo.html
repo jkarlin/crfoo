@@ -73,6 +73,7 @@ function timeResourceLoad(size) {
     // Find the best guess in size for the given timing
     let guessBytes = -1;
     for (var val in times) {
+      console.log(val);
       let size = val[0];
       let time = val[1];
       console.log("size = " + size + " time = " + time)
