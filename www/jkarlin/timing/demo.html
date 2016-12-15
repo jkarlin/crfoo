@@ -10,7 +10,7 @@
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
-  link.rel = "prefetch";
+  link.rel = "preload";
 
   return new Promise(function(resolve, reject) {
     let startTime = (new Date()).getTime();
