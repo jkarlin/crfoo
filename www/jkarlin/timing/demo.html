@@ -52,7 +52,7 @@ function timeResourceLoad(size) {
         console.log("Bytes: " + numBytes + " Median = " + median);
   }
 
-  console.log("Okay, now performing " + numGuesses + "requests of uniformly random sizes between 0 bytes and 1MB");
+  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 1MB");
 
   for (let i = 0; i < numGuesses; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 1024);
@@ -89,10 +89,11 @@ function timeResourceLoad(size) {
     // How far off is the guess?
     let delta = Math.abs(guessBytes - actualBytes);
     let diff = delta / actualBytes;
-    console.log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB)");
+    console.log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actualy size: " + Math.floor(actualBytes/1024) + " Guessed size: " + Math.floor(delta/1024);
   }
 
 })();
+
 
 </script>
 
