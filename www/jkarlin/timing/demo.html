@@ -6,7 +6,6 @@
 <body>
 
 <script>
- 
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
@@ -31,7 +30,7 @@ function timeResourceLoad(size) {
 
 (async function() {
   let times = [];
-  let numAttemptsPerSize = 10;
+  let numAttemptsPerSize = 20;
   let maxExponent = 20;  // Up to 2^20 (1MB)
   let numGuesses = 100;
 
@@ -54,7 +53,7 @@ function timeResourceLoad(size) {
 
   console.log("Okay, now performing 100 requests of uniformly random sizes between 0 bytes and 1MB");
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < numAttemptsPerSize; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 1024);
 
     let results = [];
@@ -93,7 +92,6 @@ function timeResourceLoad(size) {
   }
 
 })();
-
 
 
 </script>
