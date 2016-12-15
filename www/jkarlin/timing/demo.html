@@ -75,6 +75,27 @@ function timeResourceLoad(size) {
     link.href = "size.php?size=" + size;
     document.body.appendChild(link);
   });
+
+// Creates a link rel=prefetch and times how long the resource load takes.
+function timeResourceLoad(size) {
+  var link = document.createElement('link');
+  link.rel = "prefetch";
+
+  return new Promise(function(resolve, reject) {
+    let startTime = (new Date()).getTime();
+    link.onerror = function() {
+      console.log("OnError");
+      let endTime = (new Date()).getTime();
+      resolve(endTime - startTime);
+    }
+    link.onload = function() {
+      let endTime = (new Date()).getTime();
+      resolve(endTime - startTime);
+    }
+
+    link.href = "size.php?size=" + size;
+    document.body.appendChild(link);
+  });
 }
 
 (async function() {
@@ -100,9 +121,7 @@ function timeResourceLoad(size) {
         console.log("Bytes: " + numBytes + " Median = " + median);
   }
 
-  console.log(
-      "Okay, now performing 100 requests of uniformly random sizes between 0 "
-      "bytes and 1MB");
+  console.log("Okay, now performing 100 requests of uniformly random sizes between 0 bytes and 1MB");
 
   for (let i = 0; i < 10; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 1024);
