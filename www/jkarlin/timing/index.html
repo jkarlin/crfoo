@@ -24,14 +24,14 @@ function timeResourceLoad(size) {
       resolve(endTime - startTime);
     }
 
-    link.href = "size.php?size=" + size;
+    link.href = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
     document.body.appendChild(link);
   });
 }
 
 (async function() {
   let times = [];
-  let numAttemptsPerSize = 10;
+  let numAttemptsPerSize = 20;
   let maxExponent = 20;  // Up to 2^20 (1MB)
   let numGuesses = 20;
 
@@ -53,10 +53,10 @@ function timeResourceLoad(size) {
   }
 
   console.log("");
-  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 150KB");
+  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 100KB");
 
   for (let i = 0; i < numGuesses; i++) {
-    let actualBytes = Math.floor(Math.random() * 1024 * 150);
+    let actualBytes = Math.floor(Math.random() * 1024 * 300);
 
     let results = [];
     for (let i = 0; i <= numAttemptsPerSize; i++) {
@@ -98,6 +98,7 @@ function timeResourceLoad(size) {
   }
 
 })();
+
 
 
 </script>
