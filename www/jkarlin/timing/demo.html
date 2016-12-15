@@ -89,12 +89,10 @@ function timeResourceLoad(size) {
     // How far off is the guess?
     let delta = guessBytes - actualBytes;
     console.log("Bytes = " + actualBytes + " time = " + median + " guess bytes = " + guessBytes);
-    console.log("Delta = " + delta);
+    console.log("Delta = " + Math.abs(delta / 1024) + "KB");
   }
 
 })();
-
-
 
 </script>
 
