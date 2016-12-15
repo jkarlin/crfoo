@@ -7,7 +7,6 @@
 
 <script>
   
-  
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
@@ -72,7 +71,7 @@ function timeResourceLoad(size) {
 
     // Find the best guess in size for the given timing
     let guessBytes = -1;
-    for (var val in times) {
+    for (let val of times) {
       console.log(val);
       let size = val[0];
       let time = val[1];
@@ -91,7 +90,6 @@ function timeResourceLoad(size) {
   }
 
 })();
-
 
 </script>
 
