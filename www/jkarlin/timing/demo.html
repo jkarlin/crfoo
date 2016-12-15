@@ -8,7 +8,7 @@
 <script>
 
 // Creates a link rel=prefetch and times how long the resource load takes.
-let timeResourceLoad = function(size) {
+async function timeResourceLoad(size) {
   var link = document.createElement('link');
   link.rel="prefetch";
 
