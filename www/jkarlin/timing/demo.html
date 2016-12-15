@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+
+<script>
+
+// Creates a link rel=prefetch and times how long the resource load takes.
+let timeResourceLoad = function(size) {
+  var link = document.createElement('link');
+  link.rel="prefetch";
+
+  return new Promise(function(resolve, reject) {
+    let startTime = (new Date()).getTime();
+    link.onerror = function() {
+      console.log("OnError");
+      let endTime = (new Date()).getTime();
+      resolve(endTime - startTime);
+    }
+    link.onload = function() {
+      let endTime = (new Date()).getTime();
+      resolve(endTime - startTime);
+    }
+
+    link.href = "size.php?size=" + size;
+    document.body.appendChild(link);
+  });
+}
+
+// Create a mapping of time-to-load to resource size
+let times = {}
+let numAttemptsPerSize = 10;
+let maxExponent = 20;  // Up to 2^20 (1MB)
+let numGuesses = 100;
+
+console.log("Gathering sample timings for this machine...");
+for(let exp = 0; exp <= 20; exp++) {
+  let numBytes = Math.pow(2, exp);
+  let results = [];
+  for(let i = 0; i <= numAttemptsPerSize; i++) {
+    let time = await loadResource(numBytes);
+    // Ignore the first attempt, which includes socket and TLS setup.
+    if (i > 0)    
+      results.push(time);
+  }
+  
+  results.sort(function(a, b){return a-b});
+  let median = results[Math.floor(results.length / 2)];
+  times[numBytes] = median;
+  console.log("Bytes: " + numBytes + " Median = " + median);
+}
+
+console.log("Okay, now performing requests and guessing sizes");
+
+
+
+}
+
+
+</script>
+
+</body>
