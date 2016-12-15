@@ -30,7 +30,7 @@ function timeResourceLoad(size) {
 }
 
 (async function() {
-  let times = {};
+  let times = [];
   let numAttemptsPerSize = 10;
   let maxExponent = 20;  // Up to 2^20 (1MB)
   let numGuesses = 100;
@@ -48,11 +48,45 @@ function timeResourceLoad(size) {
 
     results.sort(function(a, b){return a - b});
     let median = results[Math.floor(results.length / 2)];
-    times[numBytes] = median;
+    times.push([numBytes, median])
     console.log("Bytes: " + numBytes + " Median = " + median);
   }
 
-  console.log("Okay, now performing requests and guessing sizes");
+  console.log("Okay, now performing 100 requests of uniformly random sizes between 0 bytes and 1MB");
+
+  for(let i = 0; i < 10; i++) {
+    let actualBytes = Math.floor(Math.random() * 1024 * 1024);
+
+    let results = [];
+    for (let i = 0; i <= numAttemptsPerSize; i++) {
+      let time = await timeResourceLoad(actualBytes);
+      // Ignore the first attempt, which includes socket and TLS setup.
+      if (i > 0)
+        results.push(time);
+    }
+
+    results.sort(function(a, b){return a - b});
+    let median = results[Math.floor(results.length / 2)];
+
+    // Find the best guess in size for the given timing
+    let guessBytes = -1;
+    for (var val in times) {
+      let size = val[0]
+      let time = val[1]
+      if time > median {
+        // Guess half-way between the upper and lower bound
+        guessBytes = size/2 + (size-size/2);
+        break;
+      }
+    }
+
+    // How far off is the guess?
+    let delta = guessBytes - actualBytes
+    console.log("Delta = " + delta);
+  }
+
+
+
 })();
 
 
