@@ -36,7 +36,7 @@ function timeResourceLoad(size) {
   let numGuesses = 20;
 
   console.log("Gathering sample timings for this machine...");
-  for (let exp = 0; exp <= 20; exp++) {
+  for (let exp = 11; exp <= 20; exp++) {
     let numBytes = Math.pow(2, exp);
     let results = [];
     for (let i = 0; i <= numAttemptsPerSize; i++) {
@@ -55,7 +55,7 @@ function timeResourceLoad(size) {
   console.log("");
   console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 100KB");
 
-  for (let i = 11; i < numGuesses; i++) {
+  for (let i = 0; i < numGuesses; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 300);
 
     let results = [];
