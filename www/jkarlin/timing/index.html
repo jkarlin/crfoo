@@ -53,10 +53,10 @@ function timeResourceLoad(size) {
   }
 
   console.log("");
-  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 50KB");
+  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 100KB");
 
   for (let i = 0; i < numGuesses; i++) {
-    let actualBytes = Math.floor(Math.random() * 1024 * 50);
+    let actualBytes = Math.floor(Math.random() * 1024 * 100);
 
     let results = [];
     for (let i = 0; i <= numAttemptsPerSize; i++) {
@@ -81,7 +81,8 @@ function timeResourceLoad(size) {
         let upperTime = time
         let lowerTime = last[1]
         let pos = (median - lowerTime) / (upperTime - lowerTime);
-        guessBytes = pos*(size - last[0]) + last[0]
+        guessBytes = pos*(size - last[0]) + last[0];
+        console.log("Made a guess");
         break;
       }
       last = val;
