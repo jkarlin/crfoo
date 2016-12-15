@@ -10,7 +10,7 @@
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
-  link.rel="prefetch";
+  link.rel = "prefetch";
 
   return new Promise(function(resolve, reject) {
     let startTime = (new Date()).getTime();
@@ -29,31 +29,31 @@ function timeResourceLoad(size) {
   });
 }
 
-// Create a mapping of time-to-load to resource size
-let times = {}
-let numAttemptsPerSize = 10;
-let maxExponent = 20;  // Up to 2^20 (1MB)
-let numGuesses = 100;
+async function() {
+  let times = {} let numAttemptsPerSize = 10;
+  let maxExponent = 20;  // Up to 2^20 (1MB)
+  let numGuesses = 100;
 
-console.log("Gathering sample timings for this machine...");
-for(let exp = 0; exp <= 20; exp++) {
-  let numBytes = Math.pow(2, exp);
-  let results = [];
-  for(let i = 0; i <= numAttemptsPerSize; i++) {
-    let time = await timeResourceLoad(numBytes);
-    // Ignore the first attempt, which includes socket and TLS setup.
-    if (i > 0)    
-      results.push(time);
+  console.log("Gathering sample timings for this machine...");
+  for (let exp = 0; exp <= 20; exp++) {
+    let numBytes = Math.pow(2, exp);
+    let results = [];
+    for (let i = 0; i <= numAttemptsPerSize; i++) {
+      let time = await timeResourceLoad(numBytes);
+      // Ignore the first attempt, which includes socket and TLS setup.
+      if (i > 0)
+        results.push(time);
+    }
+
+    results.sort(function(a, b){return a - b});
+    let median = results[Math.floor(results.length / 2)];
+    times[numBytes] = median;
+    console.log("Bytes: " + numBytes + " Median = " + median);
   }
-  
-  results.sort(function(a, b){return a-b});
-  let median = results[Math.floor(results.length / 2)];
-  times[numBytes] = median;
-  console.log("Bytes: " + numBytes + " Median = " + median);
+
+  console.log("Okay, now performing requests and guessing sizes");
 }
-
-console.log("Okay, now performing requests and guessing sizes");
-
+})();
 
 
 }
