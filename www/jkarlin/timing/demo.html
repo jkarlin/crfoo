@@ -7,6 +7,7 @@
 
 <script>
 
+
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
@@ -82,13 +83,13 @@ function timeResourceLoad(size) {
 
     // How far off is the guess?
     let delta = guessBytes - actualBytes
+    console.log("Bytes = " + actualBytes + " time = " + median + " guess bytes = " + guessBytes);
     console.log("Delta = " + delta);
   }
 
 
 
 })();
-
 
 </script>
 
