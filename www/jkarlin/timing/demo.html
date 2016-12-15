@@ -7,7 +7,6 @@
 
 <script>
 
-
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
@@ -63,7 +62,7 @@ function timeResourceLoad(size) {
       let time = await timeResourceLoad(actualBytes);
       // Ignore the first attempt, which includes socket and TLS setup.
       if (i > 0)
-        results.push(time);
+        results.push([size,time]);
     }
 
     results.sort(function(a, b){return a - b});
@@ -74,7 +73,7 @@ function timeResourceLoad(size) {
     for (var val in times) {
       let size = val[0]
       let time = val[1]
-      if (time > median) {
+      if (time >= median) {
         // Guess half-way between the upper and lower bound
         guessBytes = size/2 + (size-size/2);
         break;
@@ -82,7 +81,7 @@ function timeResourceLoad(size) {
     }
 
     // How far off is the guess?
-    let delta = guessBytes - actualBytes
+    let delta = guessBytes - actualBytes;
     console.log("Bytes = " + actualBytes + " time = " + median + " guess bytes = " + guessBytes);
     console.log("Delta = " + delta);
   }
