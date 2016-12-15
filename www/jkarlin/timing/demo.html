@@ -89,7 +89,7 @@ function timeResourceLoad(size) {
     // How far off is the guess?
     let delta = Math.abs(guessBytes - actualBytes);
     let diff = delta / actualBytes;
-    console.log(Math.floor(diff) + "% off (" + Math.floor(delta / 1024) + "KB)");
+    console.log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB)");
   }
 
 })();
