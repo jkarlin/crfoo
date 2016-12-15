@@ -53,10 +53,10 @@ function timeResourceLoad(size) {
   }
 
   console.log("");
-  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 1MB");
+  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 50KB");
 
   for (let i = 0; i < numGuesses; i++) {
-    let actualBytes = Math.floor(Math.random() * 1024 * 1024);
+    let actualBytes = Math.floor(Math.random() * 1024 * 50);
 
     let results = [];
     for (let i = 0; i <= numAttemptsPerSize; i++) {
