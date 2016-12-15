@@ -40,7 +40,7 @@ for(let exp = 0; exp <= 20; exp++) {
   let numBytes = Math.pow(2, exp);
   let results = [];
   for(let i = 0; i <= numAttemptsPerSize; i++) {
-    let time = await loadResource(numBytes);
+    let time = await timeResourceLoad(numBytes);
     // Ignore the first attempt, which includes socket and TLS setup.
     if (i > 0)    
       results.push(time);
