@@ -32,32 +32,6 @@ function timeResourceLoad(size) {
 (async function() {
   let times = [];
   let numAttemptsPerSize = 10;
-
-// Creates a link rel=prefetch and times how long the resource load takes.
-function timeResourceLoad(size) {
-  var link = document.createElement('link');
-  link.rel = "prefetch";
-
-  return new Promise(function(resolve, reject) {
-    let startTime = (new Date()).getTime();
-    link.onerror = function() {
-      console.log("OnError");
-      let endTime = (new Date()).getTime();
-      resolve(endTime - startTime);
-    }
-    link.onload = function() {
-      let endTime = (new Date()).getTime();
-      resolve(endTime - startTime);
-    }
-
-    link.href = "size.php?size=" + size;
-    document.body.appendChild(link);
-  });
-}
-
-(async function() {
-  let times = [];
-  let numAttemptsPerSize = 10;
   let maxExponent = 20;  // Up to 2^20 (1MB)
   let numGuesses = 100;
 
@@ -119,6 +93,7 @@ function timeResourceLoad(size) {
   }
 
 })();
+
 
 
 </script>
