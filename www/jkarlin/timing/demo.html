@@ -6,6 +6,7 @@
 <body>
 
 <script>
+
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
@@ -53,7 +54,7 @@ function timeResourceLoad(size) {
 
   console.log("Okay, now performing 100 requests of uniformly random sizes between 0 bytes and 1MB");
 
-  for (let i = 0; i < numAttemptsPerSize; i++) {
+  for (let i = 0; i < 10; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 1024);
 
     let results = [];
@@ -74,7 +75,7 @@ function timeResourceLoad(size) {
     for (let val of times) {
       let size = val[0];
       let time = val[1];
-       if (time >= median) {
+       if (time >= median || val[0] == times[times.length-1][0]) {
         // Guess between the two 
         let upperTime = time
         let lowerTime = last[1]
@@ -92,7 +93,6 @@ function timeResourceLoad(size) {
   }
 
 })();
-
 
 </script>
 
