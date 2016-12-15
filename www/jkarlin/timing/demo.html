@@ -73,7 +73,7 @@ function timeResourceLoad(size) {
     for (var val in times) {
       let size = val[0]
       let time = val[1]
-      if time > median {
+      if (time > median) {
         // Guess half-way between the upper and lower bound
         guessBytes = size/2 + (size-size/2);
         break;
