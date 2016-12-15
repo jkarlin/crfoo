@@ -33,7 +33,7 @@ function timeResourceLoad(size) {
   let times = [];
   let numAttemptsPerSize = 20;
   let maxExponent = 20;  // Up to 2^20 (1MB)
-  let numGuesses = 100;
+  let numGuesses = 10;
 
   console.log("Gathering sample timings for this machine...");
   for (let exp = 13; exp <= 20; exp++) {
@@ -52,9 +52,9 @@ function timeResourceLoad(size) {
         console.log("Bytes: " + numBytes + " Median = " + median);
   }
 
-  console.log("Okay, now performing 100 requests of uniformly random sizes between 0 bytes and 1MB");
+  console.log("Okay, now performing " + numGuesses + "requests of uniformly random sizes between 0 bytes and 1MB");
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < numGuesses; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 1024);
 
     let results = [];
