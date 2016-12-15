@@ -24,7 +24,8 @@ function timeResourceLoad(size) {
       resolve(endTime - startTime);
     }
 
-    link.href = "size.php?size=" + size;
+    // Note that this is from a different origin.
+    link.href = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
     document.body.appendChild(link);
   });
 }
