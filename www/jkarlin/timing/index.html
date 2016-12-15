@@ -80,9 +80,12 @@ function timeResourceLoad(size) {
         // Guess between the two 
         let upperTime = time
         let lowerTime = last[1]
-        let pos = (median - lowerTime) / (upperTime - lowerTime);
-        guessBytes = pos*(size - last[0]) + last[0];
-        console.log("Made a guess");
+        if (upperTime == lowerTime) {
+          guessBytes = size;
+        } else {
+          let pos = (median - lowerTime) / (upperTime - lowerTime);
+          guessBytes = pos*(size - last[0]) + last[0];
+        }
         break;
       }
       last = val;
@@ -95,6 +98,7 @@ function timeResourceLoad(size) {
   }
 
 })();
+
 
 </script>
 
