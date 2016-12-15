@@ -24,8 +24,7 @@ function timeResourceLoad(size) {
       resolve(endTime - startTime);
     }
 
-    // Note that this is from a different origin.
-    link.href = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
+    link.href = "size.php?size=" + size;
     document.body.appendChild(link);
   });
 }
@@ -53,6 +52,7 @@ function timeResourceLoad(size) {
         console.log("Bytes: " + numBytes + " Median = " + median);
   }
 
+  console.log("");
   console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 1MB");
 
   for (let i = 0; i < numGuesses; i++) {
@@ -90,11 +90,10 @@ function timeResourceLoad(size) {
     // How far off is the guess?
     let delta = Math.abs(guessBytes - actualBytes);
     let diff = delta / actualBytes;
-    console.log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actualy size: " + Math.floor(actualBytes/1024) + " Guessed size: " + Math.floor(guessBytes/1024));
+    console.log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actual size: " + Math.floor(actualBytes/1024) + "KB Guessed size: " + Math.floor(guessBytes/1024) + "KB");
   }
 
 })();
-
 
 </script>
 
