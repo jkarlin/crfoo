@@ -36,7 +36,7 @@ function timeResourceLoad(size) {
   let numGuesses = 20;
 
   console.log("Gathering sample timings for this machine...");
-  for (let exp = 13; exp <= 20; exp++) {
+  for (let exp = 0; exp <= 20; exp++) {
     let numBytes = Math.pow(2, exp);
     let results = [];
     for (let i = 0; i <= numAttemptsPerSize; i++) {
