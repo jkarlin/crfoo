@@ -54,6 +54,40 @@ function timeResourceLoad(size) {
     let numBytes = Math.pow(2, exp);
     let results = [];
     for (let i = 0; i <= numAttemptsPerSize; i++) {
+
+// Creates a link rel=prefetch and times how long the resource load takes.
+function timeResourceLoad(size) {
+  var link = document.createElement('link');
+  link.rel = "prefetch";
+
+  return new Promise(function(resolve, reject) {
+    let startTime = (new Date()).getTime();
+    link.onerror = function() {
+      console.log("OnError");
+      let endTime = (new Date()).getTime();
+      resolve(endTime - startTime);
+    }
+    link.onload = function() {
+      let endTime = (new Date()).getTime();
+      resolve(endTime - startTime);
+    }
+
+    link.href = "size.php?size=" + size;
+    document.body.appendChild(link);
+  });
+}
+
+(async function() {
+  let times = [];
+  let numAttemptsPerSize = 10;
+  let maxExponent = 20;  // Up to 2^20 (1MB)
+  let numGuesses = 100;
+
+  console.log("Gathering sample timings for this machine...");
+  for (let exp = 13; exp <= 20; exp++) {
+    let numBytes = Math.pow(2, exp);
+    let results = [];
+    for (let i = 0; i <= numAttemptsPerSize; i++) {
       let time = await timeResourceLoad(numBytes);
       // Ignore the first attempt, which includes socket and TLS setup.
       if (i > 0)
@@ -62,21 +96,24 @@ function timeResourceLoad(size) {
 
     results.sort(function(a, b){return a - b});
     let median = results[Math.floor(results.length / 2)];
-    times.push([numBytes, median])
-    console.log("Bytes: " + numBytes + " Median = " + median);
+    times.push([ numBytes, median ])
+        console.log("Bytes: " + numBytes + " Median = " + median);
   }
 
-  console.log("Okay, now performing 100 requests of uniformly random sizes between 0 bytes and 1MB");
+  console.log(
+      "Okay, now performing 100 requests of uniformly random sizes between 0 "
+      "bytes and 1MB");
 
-  for(let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 1024);
 
     let results = [];
     for (let i = 0; i <= numAttemptsPerSize; i++) {
       let time = await timeResourceLoad(actualBytes);
       // Ignore the first attempt, which includes socket and TLS setup.
-      if (i > 0)
+      if (i > 0) {
         results.push(size);
+      }
     }
 
     results.sort(function(a, b){return a - b});
@@ -85,22 +122,19 @@ function timeResourceLoad(size) {
     // Find the best guess in size for the given timing
     let guessBytes = -1;
     for (var val in times) {
-      let size = val[0]
-      let time = val[1]
-      if (time >= median) {
+      let size = val[0] let time = val[1] if (time >= median) {
         // Guess half-way between the upper and lower bound
-        guessBytes = size/2 + (size-size/2);
+        guessBytes = size / 2 + (size - size / 2);
         break;
       }
     }
 
     // How far off is the guess?
     let delta = guessBytes - actualBytes;
-    console.log("Bytes = " + actualBytes + " time = " + median + " guess bytes = " + guessBytes);
+    console.log("Bytes = " + actualBytes + " time = " + median +
+                " guess bytes = " + guessBytes);
     console.log("Delta = " + delta);
   }
-
-
 
 })();
 
