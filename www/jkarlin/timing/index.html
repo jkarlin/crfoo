@@ -101,7 +101,7 @@ function timeResourceLoad(size) {
       let time = await timeResourceLoad(actualBytes);
       // Ignore the first attempt, which includes socket and TLS setup.
       if (i > 0) {
-        realResults.push([actualBytes, time]);
+        realResults.push(time);
       }
     }
 	  
