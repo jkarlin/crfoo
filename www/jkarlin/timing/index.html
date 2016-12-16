@@ -157,8 +157,7 @@ function timeResourceLoad(size) {
     results.sort(function(a, b){return a - b});
     let median = results[Math.floor(results.length / 2)];
 
-    // Guess based on linear regression
-    let guessBytes = (median - yIntercept) / slope;
+    let guessBytes = -1;
 	  
     // A bit better than linear regression is to linearly interpolate between the nearest two medians from the sample data.
     let last = times[0]
@@ -180,6 +179,10 @@ function timeResourceLoad(size) {
       last = val;
     }
 
+    // Guess based on linear regression
+    guessBytes = (median - yIntercept) / slope;
+	  
+	  
     // How far off is the guess?
     actualByteArray.push(actualBytes); 
     guessByteArray.push(guessBytes);
