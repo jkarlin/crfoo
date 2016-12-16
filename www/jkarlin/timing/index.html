@@ -53,21 +53,34 @@ function log(msg) {
     document.getElementById("log").appendChild(document.createElement("br"));
 }
 
-function scatterPlot(xs, ys) {
-    plotDiv = document.getElementById('plot');
-    var trace = {
-        x: xs,
-        y: ys,
-        mode: 'markers',
-        type: 'scatter'
-    };
-    Plotly.plot(plotDiv, [trace], {
-        margin: {
-            t: 0
-        }
-    });
+function predictFromMedians(sampleMedian, training) {
+	let prediction = -1;
+	// A bit better than linear regression is to linearly interpolate between the nearest two medians from the sample data.
+	let last = training[0]
+	for (let val of training) {
+	    let size = val[0];
+	    let time = val[1];
+	    if (time >= median || val[0] == training[training.length - 1][0]) {
+		// Guess between the two 
+		let upperTime = time
+		let lowerTime = last[1]
+		if (upperTime == lowerTime) {
+		    prediction = size;
+		} else {
+		    let pos = (median - lowerTime) / (upperTime - lowerTime);
+		    prediction = pos * (size - last[0]) + last[0];
+		}
+		break;
+	    }
+	    last = val;
+	}
+	return prediction;
 }
-
+	
+function predictFromRegression(sampleMedian, slope, yIntercept) {
+         return (sampleMedian - yIntercept) / slope;
+}
+	
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
     var link = document.createElement('link');
@@ -201,43 +214,18 @@ function timeResourceLoad(size) {
     let guessByteArray = [];
 
     for (let realSample of real) {
-        console.log(realSample);
         let actualBytes = realSample[0];
         let median = realSample[1];
-        let guessBytes = -1;
-
-        // A bit better than linear regression is to linearly interpolate between the nearest two medians from the sample data.
-        let last = training[0]
-        for (let val of training) {
-            let size = val[0];
-            let time = val[1];
-            if (time >= median || val[0] == training[training.length - 1][0]) {
-                // Guess between the two 
-                let upperTime = time
-                let lowerTime = last[1]
-                if (upperTime == lowerTime) {
-                    guessBytes = size;
-                } else {
-                    let pos = (median - lowerTime) / (upperTime - lowerTime);
-                    guessBytes = pos * (size - last[0]) + last[0];
-                }
-                break;
-            }
-            last = val;
-        }
-
-        // Guess based on linear regression
-         guessBytes = (median - yIntercept) / slope;
-
+	let guessBytes = predictFromMedians(median, training);
+	//let guessBytes = predictFromRegression(median, slope, yIntercept);
+	    
         // How far off is the guess?
         actualByteArray.push(actualBytes);
         guessByteArray.push(guessBytes);
         let delta = Math.abs(guessBytes - actualBytes);
-
         let diff = delta / actualBytes;
         log(Math.floor(diff * 100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actual size: " + Math.floor(actualBytes / 1024) + "KB Guessed size: " + Math.floor(guessBytes / 1024) + "KB");
     }
-
 
     plotDiv = document.getElementById('guessPlot');
     let scatterGuess = {
