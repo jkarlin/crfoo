@@ -62,6 +62,9 @@ function timeResourceLoad(size) {
   let ys = [];
   let xys = [];
 
+  log("Warming up a connection");
+  let warmup = await timeResourceLoad(1024*1024);
+	
   log("Gathering sample timings for this machine...");
   for (let exp = 11; exp <= 20; exp++) {
     let numBytes = Math.pow(2, exp);
@@ -143,7 +146,7 @@ function timeResourceLoad(size) {
 
     results.sort(function(a, b){return a - b});
     let median = results[Math.floor(results.length / 2)];
-    let guessBytes = (time - yIntercept) / slope;
+    let guessBytes = (median - yIntercept) / slope;
 	
 	  
 	  
