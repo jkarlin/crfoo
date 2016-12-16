@@ -4,9 +4,11 @@
 </head>
 
 <body>
-  
+ 
+<small>
 <div id='log'/>
-
+</small>
+  
 <script>
 
 function log(msg) {
@@ -57,7 +59,7 @@ function timeResourceLoad(size) {
     results.sort(function(a, b){return a - b});
     let median = results[Math.floor(results.length / 2)];
     times.push([ numBytes, median ])
-        console.log("Bytes: " + numBytes + " Median = " + median);
+        log("Bytes: " + numBytes + " Median = " + median);
   }
 
   log("");
@@ -106,6 +108,7 @@ function timeResourceLoad(size) {
   }
 
 })();
+
 
 </script>
 
