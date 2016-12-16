@@ -4,11 +4,15 @@
 </head>
 
 <body>
+  
+<div id='log'/>
 
 <script>
 
 function log(msg) {
-  $( '<p/>' ).text( msg ).appendTo( document.body );
+  var node = document.createElement("p");
+  node.appendChild(document.createTextNode(msg));
+  document.GetElementById("log").appendChild(node);
 }
 
 // Creates a link rel=prefetch and times how long the resource load takes.
@@ -102,7 +106,6 @@ function timeResourceLoad(size) {
   }
 
 })();
-
 
 </script>
 
