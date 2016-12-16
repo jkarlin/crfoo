@@ -58,8 +58,9 @@ function timeResourceLoad(size) {
 }
 
 (async function() {
-  let times = [];
-  let numAttemptsPerSize = 10;
+  let training = [];
+  let real = [];
+  let numAttemptsPerSample = 10;
   let maxExponent = 20;  // Up to 2^20 (1MB)
   let numGuesses = 10;
   let xs = [];
@@ -73,7 +74,9 @@ function timeResourceLoad(size) {
   for (let exp = 11; exp <= 20; exp++) {
     let numBytes = Math.pow(2, exp);
     let results = [];
-    for (let i = 0; i <= numAttemptsPerSize; i++) {
+
+    // Grab a training sample
+    for (let i = 0; i <= numAttemptsPerSample; i++) {
       let time = await timeResourceLoad(numBytes);
       // Ignore the first attempt, which includes socket and TLS setup.
       if (i > 0) {
@@ -88,8 +91,24 @@ function timeResourceLoad(size) {
     let median = results[Math.floor(results.length / 2)];
     console.log(results);
     console.log(median);
-    times.push([ numBytes, median ])
-        log("Bytes: " + numBytes + " Median = " + median);
+    training.push([ numBytes, median ])
+        log("Bytes: " + numBytes + " Median = " + median);	  
+	  
+    // Grab a sample to predict of random size
+    let actualBytes = Math.floor(Math.random() * 1024 * 300);
+    let realResults = [];
+    for (let i = 0; i <= numAttemptsPerSample; i++) {
+      let time = await timeResourceLoad(actualBytes);
+      // Ignore the first attempt, which includes socket and TLS setup.
+      if (i > 0) {
+        realResults.push([actualBytes, time]);
+      }
+    }
+	  
+    realResults.sort(function(a, b){return a - b});
+    median = realResults[Math.floor(realResults.length / 2)];
+    real.push([ actualBytes, median ])
+        log("Bytes: " + numBytes + " Median = " + median);		  
   }
 	
   var result = regression('linear', xys);
@@ -98,7 +117,7 @@ function timeResourceLoad(size) {
 		
   let mxs = [];
   let mys = [];
-  for(let val of times) {
+  for(let val of training) {
     mxs.push(val[0]);
     mys.push(val[1]);
   }
@@ -133,38 +152,21 @@ function timeResourceLoad(size) {
 	
  Plotly.plot(plotDiv, [scatter, medians, fit], {   xaxis: {title: 'Bytes'},
   yaxis: {title: 'Time'}, title: 'Training Data' });	
+
+ let actualByteArray = [];
+ let guessByteArray = [];
 	
-//	scatterPlot([[xs, ys], [pxs, ys);
-
-	
-  log("");
-  log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 300KB");
-
-  let actualByteArray = [];
-  let guessByteArray = [];
-  for (let i = 0; i < numGuesses; i++) {
-    let actualBytes = Math.floor(Math.random() * 1024 * 300);
-
-    let results = [];
-    for (let i = 0; i <= numAttemptsPerSize; i++) {
-      let time = await timeResourceLoad(actualBytes);
-      // Ignore the first attempt, which includes socket and TLS setup.
-      if (i > 0) {
-        results.push(time);
-      }
-    }
-
-    results.sort(function(a, b){return a - b});
-    let median = results[Math.floor(results.length / 2)];
-
-    let guessBytes = -1;
+ for( val of real ) {
+  let actualBytes = val[0];
+  let median = val[1];
+  let guessBytes = -1;
 	  
     // A bit better than linear regression is to linearly interpolate between the nearest two medians from the sample data.
-    let last = times[0]
-    for (let val of times) {
+    let last = training[0]
+    for (let val of training) {
       let size = val[0];
       let time = val[1];
-       if (time >= median || val[0] == times[times.length-1][0]) {
+       if (time >= median || val[0] == training[training.length-1][0]) {
         // Guess between the two 
         let upperTime = time
         let lowerTime = last[1]
@@ -181,7 +183,6 @@ function timeResourceLoad(size) {
 
     // Guess based on linear regression
     guessBytes = (median - yIntercept) / slope;
-	  
 	  
     // How far off is the guess?
     actualByteArray.push(actualBytes); 
