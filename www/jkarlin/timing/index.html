@@ -214,21 +214,30 @@ function timeResourceLoad(size) {
 	
  plotDiv = document.getElementById('distPlot');
  let deltas = [];
+ let sumDeltas = 0;
  for (let i = 0; i < actualByteArray.length; i++) {
    deltas.push(guessByteArray[i] - actualByteArray[i]);
+   sumDeltas += deltas[i];
  }
-
-let histogram = 
+ let cdfX = [];
+ let cdfY = [];
+deltas.sort(function(a, b){return a - b});
+ let curCount = 0;
+ for(let delta of deltas) {
+   cdfX.push(delta);
+   cdfY.push((curCount + 1) / deltas.length);
+   curCount += 1;
+ }
+let cdf = 
   {
-    x: deltas,
-    type: 'histogram',
-	marker: {
-    color: 'rgba(100,250,100,0.7)',
-	},
+    x: cdfX,
+    y: cdfY,
+	type: 'scatter',
+	  mode: 'lines'
   };
 	
- Plotly.plot(plotDiv, [histogram], {   xaxis: {title: 'bytes off from actual'},
-  yaxis: {title: 'count'}, title: 'Estimation Delta Histogram' });	
+ Plotly.plot(plotDiv, [cdf], {   xaxis: {title: 'Bytes delta'},
+  yaxis: {title: 'CDF'}, title: 'Delta CDF' });	
 		
 	
 })();
