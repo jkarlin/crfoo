@@ -224,6 +224,7 @@ function timeResourceLoad(size) {
 deltas.sort(function(a, b){return a - b});
  let curCount = 0;
  for(let delta of deltas) {
+   delta = Math.abs(delta);
    cdfX.push(delta);
    cdfY.push((curCount + 1) / deltas.length);
    curCount += 1;
