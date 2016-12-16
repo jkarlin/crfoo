@@ -6,7 +6,10 @@
 </head>
 
 <body>
-<div id="status"</div>
+<p>This site times network requests from start to the load event firing for various known sizes of requests (11 times per size). It then downloads several randomly sized resources (11 times each) and attempts to guess the size of the resource based on the networking timing.</p>
+	
+	
+<div id="status">Gathering network samples...</div>
 <dev id="result"></div>
 <div id="samplePlot" style="width:900px;height:400px;"></div>
  
@@ -17,266 +20,293 @@
 <div id='log'/>
   
 <script>
+function mean(data) {
+    var sum = data.reduce(function(sum, value) {
+        return sum + value;
+    }, 0);
 
-
-function mean(data){
-  var sum = data.reduce(function(sum, value){
-    return sum + value;
-  }, 0);
-
-  return sum / data.length;
+    return sum / data.length;
 }
-	
-function standardDeviation(values){
-  var avg = mean(values);
-  
-  var squareDiffs = values.map(function(value){
-    var diff = value - avg;
-    var sqrDiff = diff * diff;
-    return sqrDiff;
-  });
-  
-  var avgSquareDiff = mean(squareDiffs);
 
-  var stdDev = Math.sqrt(avgSquareDiff);
-  return stdDev;
+function standardDeviation(values) {
+    var avg = mean(values);
+
+    var squareDiffs = values.map(function(value) {
+        var diff = value - avg;
+        var sqrDiff = diff * diff;
+        return sqrDiff;
+    });
+
+    var avgSquareDiff = mean(squareDiffs);
+
+    var stdDev = Math.sqrt(avgSquareDiff);
+    return stdDev;
 }
 
 function log(msg) {
-  var small = document.createElement("small");
-  small.appendChild(document.createTextNode(msg));
-  document.getElementById("log").appendChild(small);
-  document.getElementById("log").appendChild(document.createElement("br"));
+    var small = document.createElement("small");
+    small.appendChild(document.createTextNode(msg));
+    document.getElementById("log").appendChild(small);
+    document.getElementById("log").appendChild(document.createElement("br"));
 }
-	
+
 function scatterPlot(xs, ys) {
- plotDiv = document.getElementById('plot');
- var trace = {
-	x: xs,
-	y: ys,
-	mode: 'markers',
-	type: 'scatter'
- };
- Plotly.plot(plotDiv, [trace], { margin: { t: 0 } });
+    plotDiv = document.getElementById('plot');
+    var trace = {
+        x: xs,
+        y: ys,
+        mode: 'markers',
+        type: 'scatter'
+    };
+    Plotly.plot(plotDiv, [trace], {
+        margin: {
+            t: 0
+        }
+    });
 }
 
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
-  var link = document.createElement('link');
-  link.rel = "prefetch";
+    var link = document.createElement('link');
+    link.rel = "prefetch";
 
-  return new Promise(function(resolve, reject) {
-    let startTime = window.performance.now();
-    link.onerror = function() {
-      console.log("OnError");
-      let endTime = window.performance.now();
-      resolve(endTime - startTime);
-    }
-    link.onload = function() {
-      let endTime = window.performance.now();
-      resolve(endTime - startTime);
-    }
+    return new Promise(function(resolve, reject) {
+        let startTime = window.performance.now();
+        link.onerror = function() {
+            console.log("OnError");
+            let endTime = window.performance.now();
+            resolve(endTime - startTime);
+        }
+        link.onload = function() {
+            let endTime = window.performance.now();
+            resolve(endTime - startTime);
+        }
 
-    link.href = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
-    document.body.appendChild(link);
-  });
+        link.href = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
+        document.body.appendChild(link);
+    });
 }
 
 (async function() {
-  let training = [];
-  let real = [];
-  let numAttemptsPerSample = 10;
-  let maxExponent = 20;  // Up to 2^20 (1MB)
-  let numGuesses = 10;
-  let xs = [];
-  let ys = [];
-  let xys = [];
+    let training = [];
+    let real = [];
+    let numAttemptsPerSample = 10;
+    let maxExponent = 20; // Up to 2^20 (1MB)
+    let numGuesses = 10;
+    let xs = [];
+    let ys = [];
+    let xys = [];
 
-  log("Warming up a connection");
-  let warmup = await timeResourceLoad(1024*1024);
-	
-  log("Gathering sample timings for this machine...");
-  for (let exp = 11; exp <= 20; exp++) {
-    let numBytes = Math.pow(2, exp);
-    let results = [];
+    log("Warming up a connection");
+    let warmup = await timeResourceLoad(1024 * 1024);
 
-    // Grab a training sample
-    for (let i = 0; i <= numAttemptsPerSample; i++) {
-      let time = await timeResourceLoad(numBytes);
-      // Ignore the first attempt, which includes socket and TLS setup.
-      if (i > 0) {
-	xs.push(numBytes);
-	ys.push(time);
-	xys.push([numBytes, time]);
-        results.push(time);
-      }
-    }
+    log("Gathering sample timings for this machine...");
+    for (let exp = 11; exp <= 20; exp++) {
+        let numBytes = Math.pow(2, exp);
+        let results = [];
 
-    results.sort(function(a, b){return a - b});
-    let median = results[Math.floor(results.length / 2)];
-    console.log(results);
-    console.log(median);
-    training.push([ numBytes, median ])
-        log("Bytes: " + numBytes + " Median = " + median);	  
-	  
-    // Grab a sample to predict of random size
-    let actualBytes = Math.floor(Math.random() * 1024 * 300);
-    let realResults = [];
-    for (let i = 0; i <= numAttemptsPerSample; i++) {
-      let time = await timeResourceLoad(actualBytes);
-      // Ignore the first attempt, which includes socket and TLS setup.
-      if (i > 0) {
-        realResults.push(time);
-      }
-    }
-	  
-    realResults.sort(function(a, b){return a - b});
-    median = realResults[Math.floor(realResults.length / 2)];
-    real.push([ actualBytes, median ])
-        log("Bytes: " + numBytes + " Median = " + median);		  
-  }
-	
-  var result = regression('linear', xys);
-  var slope = result.equation[0];
-  var yIntercept = result.equation[1];
-		
-  let mxs = [];
-  let mys = [];
-  for(let val of training) {
-    mxs.push(val[0]);
-    mys.push(val[1]);
-  }
-
- let plotDiv = document.getElementById('samplePlot');
- let scatter = {
-	x: xs,
-	y: ys,
-	mode: 'markers',
-	type: 'scatter',
-	name: 'samples'
- };
- let medians = {
-	 x: mxs,
-	 y: mys,
-	 mode: 'lines+markers',
-	 type: 'scatter',
-	 name: 'medians'
- };
-	
- let fitYs = [];
- for(let size of mxs) {
-   fitYs.push(yIntercept + slope*size);
- }
- let fit = {
-	 x: mxs,
-	 y: fitYs,
-	 mode: 'lines',
-	 type: 'scatter',
-	 name: 'linear regiression'
- };
-	
- Plotly.plot(plotDiv, [scatter, medians, fit], {   xaxis: {title: 'Bytes'},
-  yaxis: {title: 'Time'}, title: 'Training Data' });	
-
- let actualByteArray = [];
- let guessByteArray = [];
-	
- for(let realSample of real ) {
-  console.log(realSample);
-  let actualBytes = realSample[0];
-  let median = realSample[1];
-  let guessBytes = -1;
-	  
-    // A bit better than linear regression is to linearly interpolate between the nearest two medians from the sample data.
-    let last = training[0]
-    for (let val of training) {
-      let size = val[0];
-      let time = val[1];
-       if (time >= median || val[0] == training[training.length-1][0]) {
-        // Guess between the two 
-        let upperTime = time
-        let lowerTime = last[1]
-        if (upperTime == lowerTime) {
-          guessBytes = size;
-        } else {
-          let pos = (median - lowerTime) / (upperTime - lowerTime);
-          guessBytes = pos*(size - last[0]) + last[0];
+        // Grab a training sample
+        for (let i = 0; i <= numAttemptsPerSample; i++) {
+            let time = await timeResourceLoad(numBytes);
+            // Ignore the first attempt, which includes socket and TLS setup.
+            if (i > 0) {
+                xs.push(numBytes);
+                ys.push(time);
+                xys.push([numBytes, time]);
+                results.push(time);
+            }
         }
-        break;
-      }
-      last = val;
+
+        results.sort(function(a, b) {
+            return a - b
+        });
+        let median = results[Math.floor(results.length / 2)];
+        console.log(results);
+        console.log(median);
+        training.push([numBytes, median])
+        log("Bytes: " + numBytes + " Median = " + median);
+
+        // Grab a sample to predict of random size
+        let actualBytes = Math.floor(Math.random() * 1024 * 300);
+        let realResults = [];
+        for (let i = 0; i <= numAttemptsPerSample; i++) {
+            let time = await timeResourceLoad(actualBytes);
+            // Ignore the first attempt, which includes socket and TLS setup.
+            if (i > 0) {
+                realResults.push(time);
+            }
+        }
+
+        realResults.sort(function(a, b) {
+            return a - b
+        });
+        median = realResults[Math.floor(realResults.length / 2)];
+        real.push([actualBytes, median])
+        log("Bytes: " + numBytes + " Median = " + median);
     }
 
-    // Guess based on linear regression
-    // guessBytes = (median - yIntercept) / slope;
-	  
-    // How far off is the guess?
-    actualByteArray.push(actualBytes); 
-    guessByteArray.push(guessBytes);
-    let delta = Math.abs(guessBytes - actualBytes);
-	
-    let diff = delta / actualBytes;
-    log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actual size: " + Math.floor(actualBytes/1024) + "KB Guessed size: " + Math.floor(guessBytes/1024) + "KB");
-  }
+    var result = regression('linear', xys);
+    var slope = result.equation[0];
+    var yIntercept = result.equation[1];
 
-	
- plotDiv = document.getElementById('guessPlot');
- let scatterGuess = {
-	x: actualByteArray,
-	y: guessByteArray,
-	mode: 'markers',
-	type: 'scatter',
-	name: 'actual vs estimate'
- };
- 
- let xEqualsY = {
-	x: actualByteArray,
-	y: actualByteArray,
-	mode: 'lines',
-	type: 'scatter',
-	name: 'x=y'
- };
+    let mxs = [];
+    let mys = [];
+    for (let val of training) {
+        mxs.push(val[0]);
+        mys.push(val[1]);
+    }
 
- Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {   xaxis: {title: 'Actual'},
-  yaxis: {title: 'Predicted bytes'}, title: 'Predictions' });	
+    let plotDiv = document.getElementById('samplePlot');
+    let scatter = {
+        x: xs,
+        y: ys,
+        mode: 'markers',
+        type: 'scatter',
+        name: 'samples'
+    };
+    let medians = {
+        x: mxs,
+        y: mys,
+        mode: 'lines+markers',
+        type: 'scatter',
+        name: 'medians'
+    };
 
-	
-	
- plotDiv = document.getElementById('distPlot');
- let deltas = [];
- for (let i = 0; i < actualByteArray.length; i++) {
-   deltas.push(Math.abs(guessByteArray[i] - actualByteArray[i]));
- }
-deltas.sort(function(a, b){return a - b});
+    let fitYs = [];
+    for (let size of mxs) {
+        fitYs.push(yIntercept + slope * size);
+    }
+    let fit = {
+        x: mxs,
+        y: fitYs,
+        mode: 'lines',
+        type: 'scatter',
+        name: 'linear regiression'
+    };
 
-	let cdfX = [];
- let cdfY = [];
- let curCount = 0;
- for(let delta of deltas) {
-   cdfX.push(delta);
-   cdfY.push((curCount + 1) / deltas.length);
-   curCount += 1;
- }
-let cdf = 
-  {
-    x: cdfX,
-    y: cdfY,
-	type: 'scatter',
-	  mode: 'lines'
-  };
-	
- Plotly.plot(plotDiv, [cdf], {   xaxis: {title: 'Bytes delta'},
-  yaxis: {title: 'CDF of abs(actual-predicted)'}, title: 'Prediction Delta CDF' });	
+    Plotly.plot(plotDiv, [scatter, medians, fit], {
+        xaxis: {
+            title: 'Bytes'
+        },
+        yaxis: {
+            title: 'Time'
+        },
+        title: 'Training Data'
+    });
 
-result = document.getElementById('result');
-resultMsg = 'Mean prediction delta: ' + Math.floor(mean(deltas) / 1024) + 'KB +/-' + Math.floor(standardDeviation(deltas) / Math.sqrt(deltas.length) / 1024) + 'KB';
-result.appendChild(document.createTextNode(resultMsg));
+    let actualByteArray = [];
+    let guessByteArray = [];
 
-console.log("Mean = " + mean(deltas));
-console.log("Stddev = " + standardDeviation(deltas));
-	
+    for (let realSample of real) {
+        console.log(realSample);
+        let actualBytes = realSample[0];
+        let median = realSample[1];
+        let guessBytes = -1;
+
+        // A bit better than linear regression is to linearly interpolate between the nearest two medians from the sample data.
+        let last = training[0]
+        for (let val of training) {
+            let size = val[0];
+            let time = val[1];
+            if (time >= median || val[0] == training[training.length - 1][0]) {
+                // Guess between the two 
+                let upperTime = time
+                let lowerTime = last[1]
+                if (upperTime == lowerTime) {
+                    guessBytes = size;
+                } else {
+                    let pos = (median - lowerTime) / (upperTime - lowerTime);
+                    guessBytes = pos * (size - last[0]) + last[0];
+                }
+                break;
+            }
+            last = val;
+        }
+
+        // Guess based on linear regression
+        // guessBytes = (median - yIntercept) / slope;
+
+        // How far off is the guess?
+        actualByteArray.push(actualBytes);
+        guessByteArray.push(guessBytes);
+        let delta = Math.abs(guessBytes - actualBytes);
+
+        let diff = delta / actualBytes;
+        log(Math.floor(diff * 100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actual size: " + Math.floor(actualBytes / 1024) + "KB Guessed size: " + Math.floor(guessBytes / 1024) + "KB");
+    }
+
+
+    plotDiv = document.getElementById('guessPlot');
+    let scatterGuess = {
+        x: actualByteArray,
+        y: guessByteArray,
+        mode: 'markers',
+        type: 'scatter',
+        name: 'actual vs estimate'
+    };
+
+    let xEqualsY = {
+        x: actualByteArray,
+        y: actualByteArray,
+        mode: 'lines',
+        type: 'scatter',
+        name: 'x=y'
+    };
+
+    Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {
+        xaxis: {
+            title: 'Actual'
+        },
+        yaxis: {
+            title: 'Predicted bytes'
+        },
+        title: 'Predictions'
+    });
+
+
+
+    plotDiv = document.getElementById('distPlot');
+    let deltas = [];
+    for (let i = 0; i < actualByteArray.length; i++) {
+        deltas.push(Math.abs(guessByteArray[i] - actualByteArray[i]));
+    }
+    deltas.sort(function(a, b) {
+        return a - b
+    });
+
+    let cdfX = [];
+    let cdfY = [];
+    let curCount = 0;
+    for (let delta of deltas) {
+        cdfX.push(delta);
+        cdfY.push((curCount + 1) / deltas.length);
+        curCount += 1;
+    }
+    let cdf = {
+        x: cdfX,
+        y: cdfY,
+        type: 'scatter',
+        mode: 'lines'
+    };
+
+    Plotly.plot(plotDiv, [cdf], {
+        xaxis: {
+            title: 'Bytes delta'
+        },
+        yaxis: {
+            title: 'CDF of abs(actual-predicted)'
+        },
+        title: 'Prediction Delta CDF'
+    });
+
+    result = document.getElementById('result');
+    resultMsg = 'Mean prediction delta: ' + Math.floor(mean(deltas) / 1024) + 'KB +/-' + Math.floor(standardDeviation(deltas) / Math.sqrt(deltas.length) / 1024) + 'KB';
+    result.appendChild(document.createTextNode(resultMsg));
+
+    console.log("Mean = " + mean(deltas));
+    console.log("Stddev = " + standardDeviation(deltas));
+
 })();
-
 </script>
 
 </body>
