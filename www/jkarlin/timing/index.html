@@ -218,15 +218,14 @@ function timeResourceLoad(size) {
    deltas.push(guessByteArray[i] - actualByteArray[i]);
  }
 
-let histogram = [
+let histogram = 
   {
     x: deltas,
     type: 'histogram',
 	marker: {
     color: 'rgba(100,250,100,0.7)',
 	},
-  }
-];
+  };
 	
  Plotly.plot(plotDiv, [histogram], {   xaxis: {title: 'bytes off from actual'},
   yaxis: {title: 'count'}, title: 'Estimation Delta Histogram' });	
