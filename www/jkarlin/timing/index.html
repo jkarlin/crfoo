@@ -114,14 +114,14 @@ function timeResourceLoad(size) {
  for(let size of mxs) {
    fitYs.push(yIntercept + slope*size);
  }
- var regression = {
+ var fit = {
 	 x: mxs,
 	 y: fitYs,
 	 mode: 'lines',
 	 type: 'scatter'
  };
 	
- Plotly.plot(plotDiv, [scatter, medians, regression], { margin: { t: 0 } });	
+ Plotly.plot(plotDiv, [scatter, medians, fit], { margin: { t: 0 } });	
 	
 //	scatterPlot([[xs, ys], [pxs, ys);
 
