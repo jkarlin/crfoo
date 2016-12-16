@@ -116,7 +116,7 @@ function timeResourceLoad(size) {
     log("Warming up a connection");
     let warmup = await timeResourceLoad(1024 * 1024);
 
-    log("Gathering sample timings for this machine...");
+    log("Gathering training samples...");
     for (let exp = 11; exp <= maxExponent; exp++) {
         let numBytes = Math.pow(2, exp);
         let results = [];
@@ -141,7 +141,10 @@ function timeResourceLoad(size) {
         console.log(median);
         training.push([numBytes, median])
         log("Bytes: " + numBytes + " Median = " + median);
-
+    }
+	
+    log("Gathering prediction samples...");
+    for(let i = 0; i < numGuesses; i++) {
         // Grab a sample to predict of random size
         let actualBytes = Math.floor(Math.random() * 1024 * 300);
         let realResults = [];
@@ -216,8 +219,8 @@ function timeResourceLoad(size) {
     for (let realSample of real) {
         let actualBytes = realSample[0];
         let median = realSample[1];
-	let guessBytes = predictFromMedians(median, training);
-	//let guessBytes = predictFromRegression(median, slope, yIntercept);
+	//let guessBytes = predictFromMedians(median, training);
+	let guessBytes = predictFromRegression(median, slope, yIntercept);
 	    
         // How far off is the guess?
         actualByteArray.push(actualBytes);
