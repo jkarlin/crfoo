@@ -108,7 +108,7 @@ function timeResourceLoad(size) {
     let real = [];
     let numAttemptsPerSample = 40;
     let maxExponent = 18; // Up to 2^20 (1MB)
-    let numGuesses = 10;
+    let guessesPerSample = 2;
     let xs = [];
     let ys = [];
     let xys = [];
@@ -141,28 +141,31 @@ function timeResourceLoad(size) {
         console.log(median);
         training.push([numBytes, median])
         log("Bytes: " + numBytes + " Median = " + median);
+
+	    log("Gathering prediction samples...");
+	    for(let i = 0; i < guessesPerSample; i++) {
+		// Grab a sample to predict of random size
+		let actualBytes = Math.floor(Math.random() * 1024 * 300);
+		let realResults = [];
+		for (let i = 0; i <= numAttemptsPerSample; i++) {
+		    let time = await timeResourceLoad(actualBytes);
+		    // Ignore the first attempt, which includes socket and TLS setup.
+		    if (i > 0) {
+			realResults.push(time);
+		    }
+		}
+
+		realResults.sort(function(a, b) {
+		    return a - b
+		});
+		let median = realResults[Math.floor(realResults.length / 2)];
+		real.push([actualBytes, median])
+		log("Bytes: " + actualBytes + " Median = " + median);
+	    }	    
+	    
     }
 	
-    log("Gathering prediction samples...");
-    for(let i = 0; i < numGuesses; i++) {
-        // Grab a sample to predict of random size
-        let actualBytes = Math.floor(Math.random() * 1024 * 300);
-        let realResults = [];
-        for (let i = 0; i <= numAttemptsPerSample; i++) {
-            let time = await timeResourceLoad(actualBytes);
-            // Ignore the first attempt, which includes socket and TLS setup.
-            if (i > 0) {
-                realResults.push(time);
-            }
-        }
 
-        realResults.sort(function(a, b) {
-            return a - b
-        });
-        let median = realResults[Math.floor(realResults.length / 2)];
-        real.push([actualBytes, median])
-        log("Bytes: " + actualBytes + " Median = " + median);
-    }
 
     var result = regression('linear', xys);
     var slope = result.equation[0];
