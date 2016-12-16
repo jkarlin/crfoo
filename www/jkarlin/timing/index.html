@@ -142,7 +142,6 @@ function timeResourceLoad(size) {
         training.push([numBytes, median])
         log("Bytes: " + numBytes + " Median = " + median);
 
-	    log("Gathering prediction samples...");
 	    for(let i = 0; i < guessesPerSample; i++) {
 		// Grab a sample to predict of random size
 		let actualBytes = Math.floor(Math.random() * 1024 * 300);
