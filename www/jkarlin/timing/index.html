@@ -7,6 +7,10 @@
 
 <script>
 
+function log(msg) {
+  $( '<p/>' ).text( msg ).appendTo( document.body );
+}
+
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
@@ -35,7 +39,7 @@ function timeResourceLoad(size) {
   let maxExponent = 20;  // Up to 2^20 (1MB)
   let numGuesses = 20;
 
-  console.log("Gathering sample timings for this machine...");
+  log("Gathering sample timings for this machine...");
   for (let exp = 11; exp <= 20; exp++) {
     let numBytes = Math.pow(2, exp);
     let results = [];
@@ -52,8 +56,8 @@ function timeResourceLoad(size) {
         console.log("Bytes: " + numBytes + " Median = " + median);
   }
 
-  console.log("");
-  console.log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 100KB");
+  log("");
+  log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 100KB");
 
   for (let i = 0; i < numGuesses; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 300);
@@ -94,11 +98,10 @@ function timeResourceLoad(size) {
     // How far off is the guess?
     let delta = Math.abs(guessBytes - actualBytes);
     let diff = delta / actualBytes;
-    console.log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actual size: " + Math.floor(actualBytes/1024) + "KB Guessed size: " + Math.floor(guessBytes/1024) + "KB");
+    log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actual size: " + Math.floor(actualBytes/1024) + "KB Guessed size: " + Math.floor(guessBytes/1024) + "KB");
   }
 
 })();
-
 
 
 </script>
