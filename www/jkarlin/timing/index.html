@@ -47,7 +47,7 @@ function timeResourceLoad(size) {
       let endTime = window.performance.now();
       // close the connection
       let headers = new Headers({"Connection": "close"});
-      fetch('http://cr2.kungfoo.net/jkarlin/timing/size.php?size=1', {headers: headers}).then(resolve(endTime - startTime));
+      fetch('http://cr2.kungfoo.net/jkarlin/timing/size.php?size=1', {mode: 'no-cors', headers: headers}).then(resolve(endTime - startTime));
 //      resolve(endTime - startTime);
     }
 
