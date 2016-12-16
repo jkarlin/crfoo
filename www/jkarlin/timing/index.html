@@ -78,12 +78,29 @@ function timeResourceLoad(size) {
     times.push([ numBytes, median ])
         log("Bytes: " + numBytes + " Median = " + median);
   }
+  let mxs = [];
+  let mys = [];
+  for(let val of times) {
+    mxs.push(val[0]);
+    mys.push(val[1]);
+  }
 
-//  for(let val of times) {
-//    xs.push(val[0]);
-//    ys.push(val[1]);
-//  }
-  scatterPlot(xs, ys);
+ plotDiv = document.getElementById('plot');
+ var scatter = {
+	x: xs,
+	y: ys,
+	mode: 'markers',
+	type: 'scatter'
+ };
+ var medians = {
+	 x: mxs,
+	 y: mys,
+	 mode: 'lines+markers',
+	 type: 'scatter'
+ };
+ Plotly.plot(plotDiv, [scatter, medians], { margin: { t: 0 } });	
+	
+//	scatterPlot([[xs, ys], [pxs, ys);
 
 	
   log("");
