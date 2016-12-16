@@ -127,7 +127,8 @@ function timeResourceLoad(size) {
 	 name: 'linear regiression'
  };
 	
- Plotly.plot(plotDiv, [scatter, medians, fit], { margin: { t: 0 } });	
+ Plotly.plot(plotDiv, [scatter, medians, fit], {   xaxis: {title: 'bytes'},
+  yaxis: {title: 'time'},margin: { t: 0 } });	
 	
 //	scatterPlot([[xs, ys], [pxs, ys);
 
