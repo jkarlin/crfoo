@@ -60,14 +60,14 @@ function predictFromMedians(sampleMedian, training) {
 	for (let val of training) {
 	    let size = val[0];
 	    let time = val[1];
-	    if (time >= median || val[0] == training[training.length - 1][0]) {
+	    if (time >= sampleMedian || val[0] == training[training.length - 1][0]) {
 		// Guess between the two 
 		let upperTime = time
 		let lowerTime = last[1]
 		if (upperTime == lowerTime) {
 		    prediction = size;
 		} else {
-		    let pos = (median - lowerTime) / (upperTime - lowerTime);
+		    let pos = (sampleMedian - lowerTime) / (upperTime - lowerTime);
 		    prediction = pos * (size - last[0]) + last[0];
 		}
 		break;
@@ -117,7 +117,7 @@ function timeResourceLoad(size) {
     let warmup = await timeResourceLoad(1024 * 1024);
 
     log("Gathering sample timings for this machine...");
-    for (let exp = 11; exp <= 20; exp++) {
+    for (let exp = 11; exp <= maxExponent; exp++) {
         let numBytes = Math.pow(2, exp);
         let results = [];
 
@@ -253,8 +253,6 @@ function timeResourceLoad(size) {
         },
         title: 'Predictions'
     });
-
-
 
     plotDiv = document.getElementById('distPlot');
     let deltas = [];
