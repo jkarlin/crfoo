@@ -147,29 +147,26 @@ function timeResourceLoad(size) {
     results.sort(function(a, b){return a - b});
     let median = results[Math.floor(results.length / 2)];
     let guessBytes = (median - yIntercept) / slope;
-	
-	  
 	  
     // Find the best guess in size for the given timing
-//    let guessBytes = -1;
-//    let last = times[0]
-//    for (let val of times) {
-//      let size = val[0];
-//      let time = val[1];
-//       if (time >= median || val[0] == times[times.length-1][0]) {
-//        // Guess between the two 
-//        let upperTime = time
-//        let lowerTime = last[1]
-//        if (upperTime == lowerTime) {
-//          guessBytes = size;
-//        } else {
-//          let pos = (median - lowerTime) / (upperTime - lowerTime);
-//          guessBytes = pos*(size - last[0]) + last[0];
-//        }
-//        break;
-//      }
-//      last = val;
-//    }
+    let last = times[0]
+    for (let val of times) {
+      let size = val[0];
+      let time = val[1];
+       if (time >= median || val[0] == times[times.length-1][0]) {
+        // Guess between the two 
+        let upperTime = time
+        let lowerTime = last[1]
+        if (upperTime == lowerTime) {
+          guessBytes = size;
+        } else {
+          let pos = (median - lowerTime) / (upperTime - lowerTime);
+          guessBytes = pos*(size - last[0]) + last[0];
+        }
+        break;
+      }
+      last = val;
+    }
 
     // How far off is the guess?
     let delta = Math.abs(guessBytes - actualBytes);
