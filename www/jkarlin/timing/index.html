@@ -45,10 +45,13 @@ function timeResourceLoad(size) {
     }
     link.onload = function() {
       let endTime = window.performance.now();
-      resolve(endTime - startTime);
+      // close the connection
+      let headers = new Headers({"Connection": "close"});
+      fetch('http://cr2.kungfoo.net/jkarlin/timing/size.php?size=1', {headers: headers}).then(resolve(endTime - startTime));
+//      resolve(endTime - startTime);
     }
 
-    link.href = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
+    link.href = "http://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
     document.body.appendChild(link);
   });
 }
@@ -62,8 +65,8 @@ function timeResourceLoad(size) {
   let ys = [];
   let xys = [];
 
-  log("Warming up a connection");
-  let warmup = await timeResourceLoad(1024*1024);
+//  log("Warming up a connection");
+//  let warmup = await timeResourceLoad(1024*1024);
 	
   log("Gathering sample timings for this machine...");
   for (let exp = 11; exp <= 20; exp++) {
