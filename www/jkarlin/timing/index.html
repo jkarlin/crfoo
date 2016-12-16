@@ -74,7 +74,7 @@ function timeResourceLoad(size) {
     }
 
     results.sort(function(a, b){return a - b});
-    let median = results[Math.floor(results.length / 2)];
+    let median = results[Math.floor(results.length / 2)-1];
     times.push([ numBytes, median ])
         log("Bytes: " + numBytes + " Median = " + median);
   }
