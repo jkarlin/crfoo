@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src='plotly.js'></script>
+  <script src='plotly.js'></script>
+  <script src='regression.js'></script>
 </head>
 
 <body>
@@ -59,6 +60,7 @@ function timeResourceLoad(size) {
   let numGuesses = 20;
   let xs = [];
   let ys = [];
+  let xys = [];
 
   log("Gathering sample timings for this machine...");
   for (let exp = 11; exp <= 20; exp++) {
@@ -70,6 +72,7 @@ function timeResourceLoad(size) {
       if (i > 0) {
 	xs.push(numBytes);
 	ys.push(time);
+	xys.push([numBytes, time]);
         results.push(time);
       }
     }
@@ -81,6 +84,12 @@ function timeResourceLoad(size) {
     times.push([ numBytes, median ])
         log("Bytes: " + numBytes + " Median = " + median);
   }
+	
+  var data = [[0,1],[32, 67] .... [12, 79]];
+  var result = regression('linear', xys);
+  var slope = result.equation[0];
+  var yIntercept = result.equation[1];
+		
   let mxs = [];
   let mys = [];
   for(let val of times) {
@@ -101,7 +110,19 @@ function timeResourceLoad(size) {
 	 mode: 'lines+markers',
 	 type: 'scatter'
  };
- Plotly.plot(plotDiv, [scatter, medians], { margin: { t: 0 } });	
+	
+ let fitYs = [];
+ for(let size of mxs) {
+   fitYs.push(yIntercept + slope*size);
+ }
+ var regression = {
+	 x: mxs,
+	 y: ,
+	 mode: 'lines',
+	 type: 'scatter'
+ };
+	
+ Plotly.plot(plotDiv, [scatter, medians, regression], { margin: { t: 0 } });	
 	
 //	scatterPlot([[xs, ys], [pxs, ys);
 
