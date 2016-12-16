@@ -7,8 +7,10 @@
 
 <body>
  
-<div id="plot" style="width:1200px;height:500px;"></div>
+<div id="samplePlot" style="width:1200px;height:500px;"></div>
  
+<div id="guessPlot" style="width:1200px;height:500px;"></div>	
+	
 <div id='log'/>
   
 <script>
@@ -99,15 +101,15 @@ function timeResourceLoad(size) {
     mys.push(val[1]);
   }
 
- plotDiv = document.getElementById('plot');
- var scatter = {
+ let plotDiv = document.getElementById('samplePlot');
+ let scatter = {
 	x: xs,
 	y: ys,
 	mode: 'markers',
 	type: 'scatter',
 	name: 'samples'
  };
- var medians = {
+ let medians = {
 	 x: mxs,
 	 y: mys,
 	 mode: 'lines+markers',
@@ -119,7 +121,7 @@ function timeResourceLoad(size) {
  for(let size of mxs) {
    fitYs.push(yIntercept + slope*size);
  }
- var fit = {
+ let fit = {
 	 x: mxs,
 	 y: fitYs,
 	 mode: 'lines',
@@ -128,7 +130,7 @@ function timeResourceLoad(size) {
  };
 	
  Plotly.plot(plotDiv, [scatter, medians, fit], {   xaxis: {title: 'bytes'},
-  yaxis: {title: 'time'}, margin: { t: 0 }, title: 'Sample Data' });	
+  yaxis: {title: 'time'}, title: 'Sample Data' });	
 	
 //	scatterPlot([[xs, ys], [pxs, ys);
 
@@ -136,6 +138,9 @@ function timeResourceLoad(size) {
   log("");
   log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 100KB");
 
+  let actualByteArray = [];
+  let guessByteArray = [];
+  let guessByteDeltas = [];
   for (let i = 0; i < numGuesses; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 300);
 
@@ -175,11 +180,37 @@ function timeResourceLoad(size) {
     }
 
     // How far off is the guess?
+    actualByteArray.push(actualBytes); 
+    guessByteArray.push(guessBytes);
+    deltaByteArray.push(guessBytes - actualBytes);
     let delta = Math.abs(guessBytes - actualBytes);
+	
     let diff = delta / actualBytes;
     log(Math.floor(diff*100) + "% off (" + Math.floor(delta / 1024) + "KB off). Actual size: " + Math.floor(actualBytes/1024) + "KB Guessed size: " + Math.floor(guessBytes/1024) + "KB");
   }
 
+	
+ plotDiv = document.getElementById('guessPlot');
+ let scatterGuess = {
+	x: actualByteArray,
+	y: guessByteArray,
+	mode: 'markers',
+	type: 'scatter',
+	name: 'actual vs estimate'
+ };
+ 
+ let xEqualsY = {
+	x: actualByteArray,
+	y: actualByteArray,
+	mode: 'lines',
+	type: 'scatter',
+	name: 'x=y'
+ };
+
+ Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {   xaxis: {title: 'actual bytes'},
+  yaxis: {title: 'guess bytes'}, title: 'Estimations' });	
+	
+	
 })();
 
 </script>
