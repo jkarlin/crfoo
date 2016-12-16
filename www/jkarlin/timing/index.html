@@ -94,7 +94,7 @@ function timeResourceLoad(size) {
     let training = [];
     let real = [];
     let numAttemptsPerSample = 40;
-    let maxExponent = 20; // Up to 2^20 (1MB)
+    let maxExponent = 18; // Up to 2^20 (1MB)
     let numGuesses = 10;
     let xs = [];
     let ys = [];
@@ -227,7 +227,7 @@ function timeResourceLoad(size) {
         }
 
         // Guess based on linear regression
-        // guessBytes = (median - yIntercept) / slope;
+         guessBytes = (median - yIntercept) / slope;
 
         // How far off is the guess?
         actualByteArray.push(actualBytes);
