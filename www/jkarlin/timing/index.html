@@ -269,7 +269,7 @@ let cdf =
   yaxis: {title: 'CDF of abs(actual-predicted)'}, title: 'Prediction Delta CDF' });	
 
 result = document.getElementById('result');
-resultMsg = 'Mean delta: ' + mean(deltas) + '+/-' + standardDeviation(deltas) / Math.sqrt(deltas.length);
+resultMsg = 'Mean delta: ' + Math.floor(mean(deltas) / 1024) + 'KB +/-' + Math.floor(standardDeviation(deltas) / 1024)) + 'KB';
 result.appendChild(document.createTextNode(resultMsg));
 
 console.log("Mean = " + mean(deltas));
