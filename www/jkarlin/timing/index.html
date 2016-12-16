@@ -12,17 +12,22 @@
   
 <script>
  
- TESTER = document.getElementById('plot');
-	Plotly.plot( TESTER, [{
-	x: [1, 2, 3, 4, 5],
-	y: [1, 2, 4, 8, 16] }], {
-	margin: { t: 0 } } );
-
 function log(msg) {
   var small = document.createElement("small");
   small.appendChild(document.createTextNode(msg));
   document.getElementById("log").appendChild(small);
   document.getElementById("log").appendChild(document.createElement("br"));
+}
+	
+function scatterPlot(xs, ys) {
+ plotDiv = document.getElementById('plot');
+ var trace = {
+	x: xs,
+	y: ys,
+	mode: 'markers',
+	type: 'scatter'
+ };
+ Plotly.plot(plotDiv, [trace], { margin: { t: 0 } });
 }
 
 // Creates a link rel=prefetch and times how long the resource load takes.
@@ -70,6 +75,15 @@ function timeResourceLoad(size) {
         log("Bytes: " + numBytes + " Median = " + median);
   }
 
+  let xs = [];
+  let ys = [];
+  for(let val of times) {
+    xs.push(val[0]);
+    ys.push(val[1]);
+  }
+  scatterPlot(xs, ys);
+
+	
   log("");
   log("Okay, now performing " + numGuesses + " requests of uniformly random sizes between 0 bytes and 100KB");
 
