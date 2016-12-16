@@ -131,8 +131,8 @@ function timeResourceLoad(size) {
 	 name: 'linear regiression'
  };
 	
- Plotly.plot(plotDiv, [scatter, medians, fit], {   xaxis: {title: 'bytes'},
-  yaxis: {title: 'time'}, title: 'Sample Data' });	
+ Plotly.plot(plotDiv, [scatter, medians, fit], {   xaxis: {title: 'Bytes'},
+  yaxis: {title: 'Time'}, title: 'Training Data' });	
 	
 //	scatterPlot([[xs, ys], [pxs, ys);
 
@@ -207,8 +207,8 @@ function timeResourceLoad(size) {
 	name: 'x=y'
  };
 
- Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {   xaxis: {title: 'actual bytes'},
-  yaxis: {title: 'guess bytes'}, title: 'Estimations' });	
+ Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {   xaxis: {title: 'Actual'},
+  yaxis: {title: 'Predicted bytes'}, title: 'Predictions' });	
 
 	
 	
@@ -236,7 +236,7 @@ let cdf =
   };
 	
  Plotly.plot(plotDiv, [cdf], {   xaxis: {title: 'Bytes delta'},
-  yaxis: {title: 'CDF'}, title: 'Delta CDF' });	
+  yaxis: {title: 'CDF of abs(actual-predicted)'}, title: 'Prediction Delta CDF' });	
 		
 	
 })();
