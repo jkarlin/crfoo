@@ -214,17 +214,15 @@ function timeResourceLoad(size) {
 	
  plotDiv = document.getElementById('distPlot');
  let deltas = [];
- let sumDeltas = 0;
  for (let i = 0; i < actualByteArray.length; i++) {
-   deltas.push(guessByteArray[i] - actualByteArray[i]);
-   sumDeltas += deltas[i];
+   deltas.push(Math.abs(guessByteArray[i] - actualByteArray[i]));
  }
- let cdfX = [];
- let cdfY = [];
 deltas.sort(function(a, b){return a - b});
+
+	let cdfX = [];
+ let cdfY = [];
  let curCount = 0;
  for(let delta of deltas) {
-   delta = Math.abs(delta);
    cdfX.push(delta);
    cdfY.push((curCount + 1) / deltas.length);
    curCount += 1;
