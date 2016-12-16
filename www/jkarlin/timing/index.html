@@ -7,9 +7,11 @@
 
 <body>
  
-<div id="samplePlot" style="width:1200px;height:500px;"></div>
+<div id="samplePlot" style="width:900px;height:400px;"></div>
  
-<div id="guessPlot" style="width:1200px;height:500px;"></div>	
+<div id="guessPlot" style="width:900px;height:400px;"></div>	
+
+<div id="distPlot" style="width:900px;height:400px;"></div>		
 	
 <div id='log'/>
   
@@ -207,7 +209,25 @@ function timeResourceLoad(size) {
 
  Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {   xaxis: {title: 'actual bytes'},
   yaxis: {title: 'guess bytes'}, title: 'Estimations' });	
+
 	
+	
+ plotDiv = document.getElementById('distPlot');
+ let deltas = [];
+ for (let i = 0; i < actualByteArray.length; i++) {
+   deltas.push(guessByteArray[i] - actualByteArray[i]);
+ }
+
+let histogram = [
+  {
+    x: deltas,
+    type: 'histogram',
+  }
+];
+	
+ Plotly.plot(plotDiv, [histogram], {   xaxis: {title: 'bytes off from actual'},
+  yaxis: {title: 'count'}, title: 'Estimation Delta Histogram' });	
+		
 	
 })();
 
