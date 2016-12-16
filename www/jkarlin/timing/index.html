@@ -208,7 +208,7 @@ function timeResourceLoad(size) {
     }
 
     // Guess based on linear regression
-    guessBytes = (median - yIntercept) / slope;
+    // guessBytes = (median - yIntercept) / slope;
 	  
     // How far off is the guess?
     actualByteArray.push(actualBytes); 
@@ -269,7 +269,7 @@ let cdf =
   yaxis: {title: 'CDF of abs(actual-predicted)'}, title: 'Prediction Delta CDF' });	
 
 result = document.getElementById('result');
-resultMsg = 'Mean delta: ' + Math.floor(mean(deltas) / 1024) + 'KB +/-' + Math.floor(standardDeviation(deltas) / Math.sqrt(deltas.length) / 1024) + 'KB';
+resultMsg = 'Mean prediction delta: ' + Math.floor(mean(deltas) / 1024) + 'KB +/-' + Math.floor(standardDeviation(deltas) / Math.sqrt(deltas.length) / 1024) + 'KB';
 result.appendChild(document.createTextNode(resultMsg));
 
 console.log("Mean = " + mean(deltas));
