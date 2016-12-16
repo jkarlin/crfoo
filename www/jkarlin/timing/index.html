@@ -6,7 +6,8 @@
 </head>
 
 <body>
- 
+
+<dev id="error"></div>
 <div id="samplePlot" style="width:900px;height:400px;"></div>
  
 <div id="guessPlot" style="width:900px;height:400px;"></div>	
@@ -16,7 +17,31 @@
 <div id='log'/>
   
 <script>
- 
+
+
+function mean(data){
+  var sum = data.reduce(function(sum, value){
+    return sum + value;
+  }, 0);
+
+  return sum / data.length;
+}
+	
+function standardDeviation(values){
+  var avg = mean(values);
+  
+  var squareDiffs = values.map(function(value){
+    var diff = value - avg;
+    var sqrDiff = diff * diff;
+    return sqrDiff;
+  });
+  
+  var avgSquareDiff = mean(squareDiffs);
+
+  var stdDev = Math.sqrt(avgSquareDiff);
+  return stdDev;
+}
+
 function log(msg) {
   var small = document.createElement("small");
   small.appendChild(document.createTextNode(msg));
@@ -243,6 +268,9 @@ let cdf =
  Plotly.plot(plotDiv, [cdf], {   xaxis: {title: 'Bytes delta'},
   yaxis: {title: 'CDF of abs(actual-predicted)'}, title: 'Prediction Delta CDF' });	
 		
+
+	console.log("Mean = " + mean(deltas));
+	console.log("Stddev = " + standardDeviation(deltas));
 	
 })();
 
