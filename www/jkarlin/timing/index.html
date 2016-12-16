@@ -67,10 +67,11 @@ function timeResourceLoad(size) {
     for (let i = 0; i <= numAttemptsPerSize; i++) {
       let time = await timeResourceLoad(numBytes);
       // Ignore the first attempt, which includes socket and TLS setup.
-      if (i > 0)
+      if (i > 0) {
 	xs.push(numBytes);
 	ys.push(time);
         results.push(time);
+      }
     }
 
     results.sort(function(a, b){return a - b});
