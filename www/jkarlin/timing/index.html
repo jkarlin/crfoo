@@ -159,9 +159,9 @@ function timeResourceLoad(size) {
         realResults.sort(function(a, b) {
             return a - b
         });
-        median = realResults[Math.floor(realResults.length / 2)];
+        let median = realResults[Math.floor(realResults.length / 2)];
         real.push([actualBytes, median])
-        log("Bytes: " + numBytes + " Median = " + median);
+        log("Bytes: " + actualBytes + " Median = " + median);
     }
 
     var result = regression('linear', xys);
