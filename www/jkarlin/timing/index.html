@@ -140,7 +140,6 @@ function timeResourceLoad(size) {
 
   let actualByteArray = [];
   let guessByteArray = [];
-  let guessByteDeltas = [];
   for (let i = 0; i < numGuesses; i++) {
     let actualBytes = Math.floor(Math.random() * 1024 * 300);
 
@@ -182,7 +181,6 @@ function timeResourceLoad(size) {
     // How far off is the guess?
     actualByteArray.push(actualBytes); 
     guessByteArray.push(guessBytes);
-    deltaByteArray.push(guessBytes - actualBytes);
     let delta = Math.abs(guessBytes - actualBytes);
 	
     let diff = delta / actualBytes;
