@@ -9,15 +9,13 @@
   
 <script>
 
-
 function log(msg) {
-  var node = document.createElement("p");
   var small = document.createElement("small");
-  node.appendChild(small);
   small.appendChild(document.createTextNode(msg));
-  document.getElementById("log").appendChild(node);
+  document.getElementById("log").appendChild(small);
+  document.getElementById("log").appendChild(document.createElement("br");
 }
- 
+
 // Creates a link rel=prefetch and times how long the resource load takes.
 function timeResourceLoad(size) {
   var link = document.createElement('link');
@@ -109,7 +107,6 @@ function timeResourceLoad(size) {
   }
 
 })();
-
 
 </script>
 
