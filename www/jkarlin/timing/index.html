@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <script src='plotly.js'>
 </head>
 
 <body>
  
+<div id="plot" style="width:600px;height:250px;"></div>
+ 
 <div id='log'/>
   
 <script>
+ 
+ TESTER = document.getElementById('plot');
+	Plotly.plot( TESTER, [{
+	x: [1, 2, 3, 4, 5],
+	y: [1, 2, 4, 8, 16] }], {
+	margin: { t: 0 } } );
 
 function log(msg) {
   var small = document.createElement("small");
