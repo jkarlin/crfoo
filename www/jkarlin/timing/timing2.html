@@ -308,7 +308,7 @@ function timeResourceLoad(size) {
     status.parentElement.removeChild(status);
 	
     result = document.getElementById('result');
-    resultMsg = 'Predictions are off by: ' + median(deltas) / 1024 + 'KB' ' at 50th percentile and ' percentile(deltas, 0.9) + 'KB at the 90th percentile');
+    resultMsg = 'Predictions are off by: ' + Math.floor(median(deltas) / 1024) + 'KB at 50th percentile and ' Math.floor(percentile(deltas, 0.9)) + 'KB at the 90th percentile';
     result.appendChild(document.createTextNode(resultMsg));
 
     console.log("Mean = " + mean(deltas));
