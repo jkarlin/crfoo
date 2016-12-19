@@ -131,8 +131,8 @@
     }
 
     result = document.getElementById('result');
-    resultMsg = "Median delta is " + median(deltas) +
-                "KB and 90th percentile delta is " + percentile(deltas, 0.9) +
+    resultMsg = "Median delta is " + Math.floor(median(deltas)) +
+                "KB and 90th percentile delta is " + Math.floor(percentile(deltas, 0.9)) +
                 'KB';
     result.appendChild(document.createTextNode(resultMsg));
 
