@@ -77,10 +77,10 @@
     let unknownTime = await timeResourceLoad(size);
     // Sample large
     let largeTime = await timeResourceLoad(large);
-    
+
     rangeTime = largeTime - smallTime;
     unRangeTime = unknownTime - smallTime;
-    
+
     // Linear interpolation to guess size
     guess = unRangeTime / rangeTime * (large - small);
 
@@ -103,20 +103,20 @@
         guesses.push(guess);
       }
       let guess = median(guesses);
-      deltaKB = Math.abs(guess - bytes) / 1024;
-      deltas.push(deltaKB);
+      delta = Math.abs(guess - bytes);
+      deltas.push(delta);
       actualBytes.push(bytes);
       guessedBytes.push(guess);
     }
 
     result = document.getElementById('result');
-    resultMsg = "Median delta is " + Math.floor(median(deltas)) +
-                "KB and 90th percentile delta is " + Math.floor(percentile(deltas, 0.9)) +
-                'KB';
+    resultMsg = "Median delta is " + Math.floor(median(deltas) / 1024) +
+                "KB and 90th percentile delta is " +
+                Math.floor(percentile(deltas, 0.9) / 1024) + 'KB';
     result.appendChild(document.createTextNode(resultMsg));
 
     // Plot a scatter plot showing guessed vs actual
-    plotDiv = document.getElementById('guessPlot');
+    let plotDiv = document.getElementById('guessPlot');
     let scatterGuess = {
       x : actualBytes,
       y : guessedBytes,
@@ -139,6 +139,29 @@
         , yaxis : {title : 'Predicted bytes'}, title : 'Predictions'
     });
   })();
+
+  // Plot the CDF of deltas
+  plotDiv = document.getElementById('distPlot');
+  let cdfX = [];
+  let cdfY = [];
+  let curCount = 0;
+  deltas.sort(function(a, b) {
+      return a - b
+  });
+  for (let delta of deltas) {
+    cdfX.push(delta);
+    cdfY.push((curCount + 1) / deltas.length);
+    curCount += 1;
+  }
+  let cdf = {x : cdfX, y : cdfY, type : 'scatter', mode : 'lines'};
+  Plotly.plot(plotDiv, [cdf], {
+xaxis : {
+title:
+  'Bytes delta'
+}
+  , yaxis : {title : 'CDF of abs(actual-predicted)'},
+            title : 'Prediction Delta CDF'
+  });
 
   </script>
   </body>
