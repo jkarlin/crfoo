@@ -309,8 +309,9 @@ function timeResourceLoad(size) {
 	
     result = document.getElementById('result');
     resultMsg = 'Median delta predictions are off by: ' + median(deltas) / 1024 + 'KB'
-    resultMsg = 'Median delta predictions are off by: ' + percentile(deltas, 0.5) / 1024 + 'KB'
 	result.appendChild(document.createTextNode(resultMsg));
+
+	console.log('Median delta predictions are off by: ' + percentile(deltas, 0.5) / 1024 + 'KB');
 
     console.log("Mean = " + mean(deltas));
     console.log("Stddev = " + standardDeviation(deltas));
