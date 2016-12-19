@@ -32,12 +32,22 @@ function mean(data) {
 }
 	
 function median(d) {
+	return percentile(d, 0.5);
+}
+	
+function percentile(d, target) {
 	let data = d.slice(0);  // clone d
 	data.sort(function(a, b) {
 	    return a - b
 	});
-	return data[Math.floor(data.length / 2)];	
-}
+	let count = 0;
+	for (val of data) {
+	  count += 1;
+	  if ((count / d.length) >= target)
+	    return val;
+	}
+	return -1;
+}	
 	
 function standardDeviation(values) {
     let avg = mean(values);
@@ -299,7 +309,8 @@ function timeResourceLoad(size) {
 	
     result = document.getElementById('result');
     resultMsg = 'Median delta predictions are off by: ' + median(deltas) / 1024 + 'KB'
-    result.appendChild(document.createTextNode(resultMsg));
+    resultMsg = 'Median delta predictions are off by: ' + percentile(deltas, 0.5) / 1024 + 'KB'
+	result.appendChild(document.createTextNode(resultMsg));
 
     console.log("Mean = " + mean(deltas));
     console.log("Stddev = " + standardDeviation(deltas));
