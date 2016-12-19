@@ -136,7 +136,6 @@ function timeResourceLoad(size) {
         results.sort(function(a, b) {
             return a - b
         });
-	results = results.slice(2,8);
         let median = results[Math.floor(results.length / 2)];
         console.log(results);
         console.log(median);
@@ -159,7 +158,6 @@ function timeResourceLoad(size) {
 		realResults.sort(function(a, b) {
 		    return a - b
 		});
-		realResults = realResults.slice(2,8);
 		let median = realResults[Math.floor(realResults.length / 2)];
 		real.push([actualBytes, median])
 		log("Bytes: " + actualBytes + " Median = " + median);
