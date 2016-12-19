@@ -157,7 +157,37 @@ function timeResourceLoad(size) {
         training.push([numBytes, med])
         log("Bytes: " + numBytes + " Median = " + med);
     }
-    
+
+    // run it again
+    xs = [];
+    ys = [];
+    xys = [];
+    results = [];	
+    for (let numBytes of sampleSizes) {
+        let results = [];
+
+        // Grab a training sample
+        for (let i = 0; i <= numAttemptsPerSample; i++) {
+            let time = await timeResourceLoad(numBytes);
+            // Ignore the first attempt, which includes socket and TLS setup.
+            if (i > 0) {
+                xs.push(numBytes);
+                ys.push(time);
+                xys.push([numBytes, time]);
+                results.push(time);
+            }
+        }
+
+        let med = median(results);
+        console.log(results);
+        console.log(med);
+        training.push([numBytes, med])
+        log("Bytes: " + numBytes + " Median = " + med);
+    }	
+	
+	
+	
+	
 	  for(let i = 0; i < numGuesses; i++) {
 		// Grab a sample to predict of random size
 		let actualBytes = Math.floor(Math.random() * 1024 * 300);
