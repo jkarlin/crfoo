@@ -161,7 +161,7 @@ function timeResourceLoad(size) {
 		});
 		realResults = realResults.slice(2,8);
 		let median = realResults[Math.floor(realResults.length / 2)];
-		real.push([actualBytes, m])
+		real.push([actualBytes, median])
 		log("Bytes: " + actualBytes + " Median = " + median);
       }	    
 	  
