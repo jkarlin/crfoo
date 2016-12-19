@@ -31,7 +31,8 @@ function mean(data) {
     return sum / data.length;
 }
 	
-function median(data) {
+function median(d) {
+	let data = d.slice(0);  // clone d
 	data.sort(function(a, b) {
 	    return a - b
 	});
@@ -297,7 +298,7 @@ function timeResourceLoad(size) {
     status.parentElement.removeChild(status);
 	
     result = document.getElementById('result');
-    resultMsg = 'Median delta predictions are off by: ' + median(deltas) + 'KB'
+    resultMsg = 'Median delta predictions are off by: ' + median(deltas) / 1024 + 'KB'
     result.appendChild(document.createTextNode(resultMsg));
 
     console.log("Mean = " + mean(deltas));
