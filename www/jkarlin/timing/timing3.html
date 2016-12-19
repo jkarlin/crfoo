@@ -13,14 +13,12 @@
     
     
   <div id="status">Gathering network samples...</div>
+  <div id='log'></div>
   <div id="result"></div>
-  <div id="samplePlot" style="width:900px;height:400px;"></div>
-   
   <div id="guessPlot" style="width:900px;height:400px;"></div>  
-
   <div id="distPlot" style="width:900px;height:400px;"></div>   
     
-  <div id='log'></div>
+
     
   <script>
   function mean(data) {
@@ -106,7 +104,7 @@
     
     // Linear interpolation to guess size
     guess = unRangeTime / rangeTime * (large - small);
-    
+
     return guess;
   }
 
@@ -114,23 +112,53 @@
     let numGuesses = 10;
     let samplesPerGuess = 10;
     let deltas = [];
+    let actualBytes = [];
+    let guessedBytes = [];
 
     for (let i = 0; i < numGuesses; i++) {
       // Grab a sample to predict of random size
-      let actualBytes = Math.floor(Math.random() * 1024 * 300);
+      let bytes = Math.floor(Math.random() * 1024 * 300);
       let guesses = [];
       for (let i = 0; i <= samplesPerGuess; i++) {
-        let guess = await guessSize(actualBytes);
+        let guess = await guessSize(bytes);
         guesses.push(guess);
       }
       let guess = median(guesses);
-      deltaKB = Math.abs(guess - actualBytes) / 1024;
+      deltaKB = Math.abs(guess - bytes) / 1024;
       deltas.push(deltaKB);
+      actualBytes.push(bytes);
+      guessedBytes.push(guessedBytes);
     }
 
-    log("Median delta is " + median(deltas) +
-        "KB and 90th percentile delta is " + percentile(deltas, 0.9) + 'KB');
+    result = document.getElementById('result');
+    resultMsg = "Median delta is " + median(deltas) +
+                "KB and 90th percentile delta is " + percentile(deltas, 0.9) +
+                'KB';
+    result.appendChild(document.createTextNode(resultMsg));
 
+    // Plot a scatter plot showing guessed vs actual
+    plotDiv = document.getElementById('guessPlot');
+    let scatterGuess = {
+      x : actualBytes,
+      y : guessBytes,
+      mode : 'markers',
+      type : 'scatter',
+      name : 'actual vs estimate'
+    };
+    let xEqualsY = {
+      x : actualBytes,
+      y : actualBytes,
+      mode : 'lines',
+      type : 'scatter',
+      name : 'x=y'
+    };
+    Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {
+      xaxis : {
+      title:
+        'Actual'
+      }
+        , yaxis : {title : 'Predicted bytes'}, title : 'Predictions'
+    });
   })();
 
   </script>
