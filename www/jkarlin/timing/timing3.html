@@ -138,7 +138,6 @@
       }
         , yaxis : {title : 'Predicted bytes'}, title : 'Predictions'
     });
-  })();
 
   // Plot the CDF of deltas
   plotDiv = document.getElementById('distPlot');
@@ -154,14 +153,10 @@
     curCount += 1;
   }
   let cdf = {x : cdfX, y : cdfY, type : 'scatter', mode : 'lines'};
-  Plotly.plot(plotDiv, [cdf], {
-xaxis : {
-title:
-  'Bytes delta'
-}
-  , yaxis : {title : 'CDF of abs(actual-predicted)'},
+  Plotly.plot(plotDiv, [cdf], { xaxis : { title:'Bytes delta' }, yaxis : {title : 'CDF of abs(actual-predicted)'},
             title : 'Prediction Delta CDF'
   });
 
+  })();
   </script>
   </body>
