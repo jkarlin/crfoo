@@ -37,6 +37,7 @@ function median(d) {
 	
 function percentile(d, target) {
 	let data = d.slice(0);  // clone d
+	console.log(data);
 	data.sort(function(a, b) {
 	    return a - b
 	});
