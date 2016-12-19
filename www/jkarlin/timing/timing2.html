@@ -37,7 +37,6 @@ function median(d) {
 	
 function percentile(d, target) {
 	let data = d.slice(0);  // clone d
-	console.log(data);
 	data.sort(function(a, b) {
 	    return a - b
 	});
@@ -309,10 +308,8 @@ function timeResourceLoad(size) {
     status.parentElement.removeChild(status);
 	
     result = document.getElementById('result');
-    resultMsg = 'Median delta predictions are off by: ' + median(deltas) / 1024 + 'KB'
-	result.appendChild(document.createTextNode(resultMsg));
-
-	console.log('Median delta predictions are off by: ' + percentile(deltas, 0.5) / 1024 + 'KB');
+    resultMsg = 'Predictions are off by: ' + median(deltas) / 1024 + 'KB' ' at 50th percentile and ' percentile(deltas, 0.9) + 'KB at the 90th percentile');
+    result.appendChild(document.createTextNode(resultMsg));
 
     console.log("Mean = " + mean(deltas));
     console.log("Stddev = " + standardDeviation(deltas));
