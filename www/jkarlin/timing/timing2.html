@@ -30,7 +30,14 @@ function mean(data) {
 
     return sum / data.length;
 }
-
+	
+function median(data) {
+	data.sort(function(a, b) {
+	    return a - b
+	});
+	return data[Math.floor(data.length / 2)];	
+}
+	
 function standardDeviation(values) {
     let avg = mean(values);
 
@@ -133,14 +140,11 @@ function timeResourceLoad(size) {
             }
         }
 
-        results.sort(function(a, b) {
-            return a - b
-        });
-        let median = results[Math.floor(results.length / 2)];
+        let med = median(results);
         console.log(results);
-        console.log(median);
-        training.push([numBytes, median])
-        log("Bytes: " + numBytes + " Median = " + median);
+        console.log(med);
+        training.push([numBytes, med])
+        log("Bytes: " + numBytes + " Median = " + med);
     }
     
 	  for(let i = 0; i < numGuesses; i++) {
@@ -155,12 +159,9 @@ function timeResourceLoad(size) {
 		    }
 		}
 
-		realResults.sort(function(a, b) {
-		    return a - b
-		});
-		let median = realResults[Math.floor(realResults.length / 2)];
-		real.push([actualBytes, median])
-		log("Bytes: " + actualBytes + " Median = " + median);
+		let med = median(realResults);
+		real.push([actualBytes, med])
+		log("Bytes: " + actualBytes + " Median = " + med);
       }	    
 	  
 
@@ -219,9 +220,9 @@ function timeResourceLoad(size) {
 
     for (let realSample of real) {
         let actualBytes = realSample[0];
-        let median = realSample[1];
-	let guessBytes = predictFromMedians(median, training);
-	//let guessBytes = predictFromRegression(median, slope, yIntercept);
+        let med = realSample[1];
+	let guessBytes = predictFromMedians(med, training);
+	//let guessBytes = predictFromRegression(med, slope, yIntercept);
 	    
         // How far off is the guess?
         actualByteArray.push(actualBytes);
@@ -296,7 +297,7 @@ function timeResourceLoad(size) {
     status.parentElement.removeChild(status);
 	
     result = document.getElementById('result');
-    resultMsg = 'Mean delta predictions are off by: ' + Math.floor(mean(deltas) / 1024) + 'KB +/-' + Math.floor(standardDeviation(deltas) / Math.sqrt(deltas.length) / 1024) + 'KB';
+    resultMsg = 'Median delta predictions are off by: ' + median(deltas) + 'KB'
     result.appendChild(document.createTextNode(resultMsg));
 
     console.log("Mean = " + mean(deltas));
