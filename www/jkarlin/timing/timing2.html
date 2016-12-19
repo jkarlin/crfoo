@@ -24,7 +24,7 @@
   
 <script>
 function mean(data) {
-    var sum = data.reduce(function(sum, value) {
+    let sum = data.reduce(function(sum, value) {
         return sum + value;
     }, 0);
 
@@ -32,17 +32,17 @@ function mean(data) {
 }
 
 function standardDeviation(values) {
-    var avg = mean(values);
+    let avg = mean(values);
 
-    var squareDiffs = values.map(function(value) {
-        var diff = value - avg;
-        var sqrDiff = diff * diff;
+    let squareDiffs = values.map(function(value) {
+        let diff = value - avg;
+        let sqrDiff = diff * diff;
         return sqrDiff;
     });
 
-    var avgSquareDiff = mean(squareDiffs);
+    let avgSquareDiff = mean(squareDiffs);
 
-    var stdDev = Math.sqrt(avgSquareDiff);
+    let stdDev = Math.sqrt(avgSquareDiff);
     return stdDev;
 }
 
