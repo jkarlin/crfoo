@@ -220,8 +220,8 @@ function timeResourceLoad(size) {
     for (let realSample of real) {
         let actualBytes = realSample[0];
         let median = realSample[1];
-	//let guessBytes = predictFromMedians(median, training);
-	let guessBytes = predictFromRegression(median, slope, yIntercept);
+	let guessBytes = predictFromMedians(median, training);
+	//let guessBytes = predictFromRegression(median, slope, yIntercept);
 	    
         // How far off is the guess?
         actualByteArray.push(actualBytes);
