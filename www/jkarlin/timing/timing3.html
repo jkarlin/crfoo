@@ -21,12 +21,6 @@
 
     
   <script>
-  function mean(data) {
-    let sum = data.reduce(function(sum, value) { return sum + value; }, 0);
-
-    return sum / data.length;
-  }
-
   function median(d) {
     return percentile(d, 0.5);
   }
@@ -41,21 +35,6 @@
         return val;
     }
     return -1;
-  }
-
-  function standardDeviation(values) {
-    let avg = mean(values);
-
-    let squareDiffs = values.map(function(value) {
-      let diff = value - avg;
-      let sqrDiff = diff * diff;
-      return sqrDiff;
-    });
-
-    let avgSquareDiff = mean(squareDiffs);
-
-    let stdDev = Math.sqrt(avgSquareDiff);
-    return stdDev;
   }
 
   function log(msg) {
@@ -110,7 +89,7 @@
 
   (async function() {
     let numGuesses = 10;
-    let samplesPerGuess = 10;
+    let samplesPerGuess = 3;
     let deltas = [];
     let actualBytes = [];
     let guessedBytes = [];
