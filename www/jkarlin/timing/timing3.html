@@ -90,7 +90,7 @@
     });
   }
 
-  function guessSize(size) {
+  async function guessSize(size) {
     let small = 1;
     let large = 1024 * 300;
 
@@ -120,7 +120,8 @@
       let actualBytes = Math.floor(Math.random() * 1024 * 300);
       let guesses = [];
       for (let i = 0; i <= numAttemptsPerSample; i++) {
-        guesses.push(await guessSize(actualBytes));
+        let guess = await guessSize(actualBytes);
+        guesses.push(guess);
       }
       let guess = median(guesses);
       deltaKB = Math.abs(guess - actualBytes) / 1024;
