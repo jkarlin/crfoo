@@ -161,10 +161,8 @@ function timeResourceLoad(size) {
 		let median = realResults[Math.floor(realResults.length / 2)];
 		real.push([actualBytes, median])
 		log("Bytes: " + actualBytes + " Median = " + median);
-	    }	    
-	    
-    }
-	
+      }	    
+	  
 
 
     var result = regression('linear', xys);
