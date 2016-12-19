@@ -68,7 +68,7 @@
   }
 
   // Creates a link rel=prefetch and times how long the resource load takes.
-  function timeResourceLoad(size) {
+  async function timeResourceLoad(size) {
     var link = document.createElement('link');
     link.rel = "prefetch";
 
@@ -95,11 +95,11 @@
     let large = 1024 * 300;
 
     // Sample small
-    smallTime = await timeResourceLoad(small);
+    let smallTime = await timeResourceLoad(small);
     // Sample unknown
-    unknownTime = await(timeResourceLoad(size);
+    let unknownTime = await(timeResourceLoad(size);
     // Sample large
-    largeTime = await(timeResourceLoad(large);
+    let largeTime = await(timeResourceLoad(large);
     
     rangeTime = largeTime - smallTime;
     unRangeTime = unknownTime - smallTime;
