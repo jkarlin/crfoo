@@ -117,7 +117,7 @@ function timeResourceLoad(size) {
     let warmup = await timeResourceLoad(1024 * 1024);
 
     log("Gathering training samples...");
-    sampleSizes = [1,1024*1024]
+    sampleSizes = [1,1024*300]
     for (let numBytes of sampleSizes) {
         let results = [];
 
