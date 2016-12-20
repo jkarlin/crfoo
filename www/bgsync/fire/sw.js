@@ -1,5 +1,6 @@
-self.addEventListener('sync', (evt) = > {
-  console.log('SW sync event fired. Network type is ' + navigator.connection.type);
+self.addEventListener('sync', (evt) => {
+  console.log('SW sync event fired. Network type is ' +
+              navigator.connection.type);
   if (evt.tag == 'send_client_status_reports') {
     evt.waitUntil(sendClientReports());
   }
@@ -15,8 +16,8 @@ function networkChangeHandler() {
   console.log('network type is ' + navigator.connection.type);
   // If we're online the event should fire immediately
   self.registration.sync.register('send_client_status_reports')
-      .then(() = > { console.log('sync registration success'); })
-      .catch(e = > { console.log('sync registation failed, error: ' + e); });
+      .then(() => { console.log('sync registration success'); })
+      .catch(e => { console.log('sync registation failed, error: ' + e); });
 }
 
 function sendClientReports() {
@@ -24,12 +25,12 @@ function sendClientReports() {
   // instead.
   return new Promise(function(resolve, reject) {
     fetch('https://cr.kungfoo.net/jkarlin/timing/size.php?size=1')
-        .then(() = >
+        .then(() =>
                    {
                      console.log('sync download succeeded');
                      resolve();
                    })
-        .catch(e = > {
+        .catch(e => {
           console.log('sync download failed');
           reject();
         });
