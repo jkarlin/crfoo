@@ -17,7 +17,7 @@ Network status:
   
 navigator.serviceWorker.register('sw.js')
 .catch(function(err) {
-  log('ServiceWorker failed to register. Are you visiting the HTTPS site?');
+  log('ServiceWorker failed to register. Are you visiting the HTTPS site from Android (netinfo API required)?');
   log(err.message);
 });
 
