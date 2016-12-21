@@ -117,7 +117,7 @@
       // Grab a sample to predict of random size
       let bytes = Math.floor(Math.random() * 1024 * 300);
       let guesses = [];
-      for (let i = 0; i <= samplesPerGuess; i++) {
+      for (let i = 0; i < samplesPerGuess; i++) {
         let guess = await guessSize(bytes);
         console.log(guess);
         guesses.push(guess);
