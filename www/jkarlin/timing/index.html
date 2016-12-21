@@ -105,7 +105,7 @@
 
     return guess;
   }
-
+    
   (async function() {
     let numGuesses = 10;
     let samplesPerGuess = 10;
@@ -113,7 +113,7 @@
     let actualBytes = [];
     let guessedBytes = [];
 
-    for (let i = 0; i < numGuesses; i++) {
+    for (let i = 0; i <= numGuesses; i++) {
       // Grab a sample to predict of random size
       let bytes = Math.floor(Math.random() * 1024 * 300);
       let guesses = [];
@@ -121,6 +121,10 @@
         let guess = await guessSize(bytes);
         console.log(guess);
         guesses.push(guess);
+      }
+      if (i == 0) {
+        // We throw away the first guess, it's just to get the networking warmed up
+        continue;
       }
       let guess = median(guesses);
       delta = Math.abs(guess - bytes);
