@@ -33,26 +33,34 @@
     return -1;
   }
 
+  // Only call this method serially, wait for its promise to resolve before calling again.
   var timeResourceLoad = (function() {
     let count = 0;
+    let url = '';
+    let resolver = null;
+    let startTime = 0;
+    
+    let observer = new PerformanceObserver(list => {
+      console.log("In observer");
+      list.getEntries().forEach(entry => {
+        if (startTime == -1) {
+          console.LOG("SUCH BROKEN!!! SUCH RACE!!");
+        }
+        console.log(entry.name);
+        console.log("Looking for " + url);
+        if (entry.name == url) {
+          console.log("Bam!");
+          resolver(entry.responseEnd - startTime);        
+        }
+      });
+    });
+    observer.observe({entryTypes: ['resource']});
+   
     return async function(size) {
-      let url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?count=' + count++;
+      url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?count=' + count++;
       return new Promise(async function(resolve, reject) {
-        let startTime = 0;
-        var observer = new PerformanceObserver(list => {
-          console.log("In observer");
-          list.getEntries().forEach(entry => {
-            console.log(entry.name);
-            console.log("Looking for " + url);
-            if (entry.name == url) {
-              console.log("Bam!");
-              observer.disconnect();
-              resolve(entry.responseEnd - startTime);        
-            }
-          });
-        });
-        observer.observe({entryTypes: ['resource']});
-        
+        startTime = -1;
+        resolver = resolve;
         let response = await fetch(url, {mode: 'no-cors'});
         startTime = window.performance.now();
       });
