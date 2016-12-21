@@ -41,7 +41,9 @@
       let interval = setInterval(() => {
         let entries = performance.getEntries();
         var lastEntry = entries[entries.length - 1];
+        console.log(lastEntry);
         if (lastEntry.name == url) {
+          console.log("FOUND IT!");
           clearInterval(interval);
           resolve(lastEntry.respondEnd - startTime);
         }
@@ -61,7 +63,7 @@
         let endTime = window.performance.now();
         resolve(endTime - startTime);
       }
-      link.onload = function() {
+      link.onload = function() {        
         let endTime = window.performance.now();
         resolve(endTime - startTime);
       }
@@ -103,7 +105,7 @@
       // Grab a sample to predict of random size
       let bytes = Math.floor(Math.random() * 1024 * 300);
       let guesses = [];
-      for (let i = 0; i <= samplesPerGuess; i++) {
+      for (let i = 0; i < samplesPerGuess; i++) {
         let guess = await guessSize(bytes, i);
         guesses.push(guess);
       }
