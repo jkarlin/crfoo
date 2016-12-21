@@ -40,7 +40,9 @@
       return new Promise(async function(resolve, reject) {
         let startTime = 0;
         var observer = new PerformanceObserver(list => {
+          console.log("In observer");
           list.getEntries().forEach(entry => {
+            console.log(entry.name);
             if (entry.name == url) {
               resolve(entry.responseEnd - startTime);        
             }
