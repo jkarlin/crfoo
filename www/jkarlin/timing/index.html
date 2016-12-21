@@ -44,8 +44,9 @@
         console.log(lastEntry);
         if (lastEntry.name == url) {
           console.log("FOUND IT!");
+          console.log(lastEntry.responseEnd - startTime);
           clearInterval(interval);
-          resolve(lastEntry.respondEnd - startTime);
+          resolve(lastEntry.responseEnd - startTime);
         }
       },10);
     });
