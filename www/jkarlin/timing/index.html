@@ -96,7 +96,7 @@
   }
 
   (async function() {
-    let numGuesses = 2;
+    let numGuesses = 100;
     let samplesPerGuess = 1;
     let deltas = [];
     let actualBytes = [];
@@ -108,6 +108,7 @@
       let guesses = [];
       for (let i = 0; i < samplesPerGuess; i++) {
         let guess = await guessSize(bytes);
+        console.log(guess);
         guesses.push(guess);
       }
       let guess = median(guesses);
