@@ -41,15 +41,11 @@
     let startTime = 0;
     
     let observer = new PerformanceObserver(list => {
-      console.log("In observer");
       list.getEntries().forEach(entry => {
         if (startTime == -1) {
-          console.LOG("SUCH BROKEN!!! SUCH RACE!!");
+          console.LOG("SUCH BROKEN!!! MUCH RACE!!");
         }
-        console.log(entry.name);
-        console.log("Looking for " + url);
         if (entry.name == url) {
-          console.log("Bam!");
           resolver(entry.responseEnd - startTime);        
         }
       });
