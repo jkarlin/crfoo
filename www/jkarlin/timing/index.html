@@ -43,7 +43,9 @@
           console.log("In observer");
           list.getEntries().forEach(entry => {
             console.log(entry.name);
+            console.log("Looking for " + url);
             if (entry.name == url) {
+              console.log("Bam!");
               resolve(entry.responseEnd - startTime);        
             }
           });
