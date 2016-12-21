@@ -33,7 +33,7 @@
     return -1;
   }
 
-  var timeResourceLoadFetch = (function() {
+  var timeResourceLoad = (function() {
     let count = 0;
     return async function(size) {
       let url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?count=' + count++;
@@ -46,6 +46,7 @@
             console.log("Looking for " + url);
             if (entry.name == url) {
               console.log("Bam!");
+              observer.disconnect();
               resolve(entry.responseEnd - startTime);        
             }
           });
@@ -59,7 +60,7 @@
   })();
     
   // Creates a link rel=prefetch and times how long the resource load takes.
-  async function timeResourceLoad(size) {
+  async function timeResourceLoadPrefetch(size) {
     var link = document.createElement('link');
     link.rel = "prefetch";
 
