@@ -46,6 +46,7 @@
             }
           });
         });
+        observer.observe({entryTypes: ['resource']});
         
         let response = await fetch(url, {mode: 'no-cors'});
         startTime = window.performance.now();
