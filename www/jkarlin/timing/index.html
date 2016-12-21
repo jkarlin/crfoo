@@ -44,8 +44,8 @@
           let entries = performance.getEntries();
           var lastEntry = entries[entries.length - 1];
           if (lastEntry.name == url) {
-            clearInterval(interval);
             resolve(lastEntry.responseEnd - startTime);
+            clearInterval(interval);
           }
         },10);
       });
@@ -96,8 +96,8 @@
   }
 
   (async function() {
-    let numGuesses = 10;
-    let samplesPerGuess = 10;
+    let numGuesses = 2;
+    let samplesPerGuess = 1;
     let deltas = [];
     let actualBytes = [];
     let guessedBytes = [];
