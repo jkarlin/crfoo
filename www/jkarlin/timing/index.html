@@ -33,7 +33,7 @@
     return -1;
   }
 
-  var timeResourceLoad = (function() {
+  var timeResourceLoadFetch = (function() {
     let count = 0;
     return async function(size) {
       let url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?count=' + count++;
@@ -59,7 +59,7 @@
   })();
     
   // Creates a link rel=prefetch and times how long the resource load takes.
-  async function timeResourceLoadOld(size) {
+  async function timeResourceLoad(size) {
     var link = document.createElement('link');
     link.rel = "prefetch";
 
