@@ -33,8 +33,24 @@
     return -1;
   }
 
+  async function timeResourceLoad(size, iteration) {
+    let url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?iteration=' + iteration;
+    return new Promise(function(resolve, reject) {
+      let response = await fetch(url, {mode: 'no-cors'});
+      startTime = window.performance.now();
+      let interval = setInterval(() => {
+        let entries = performance.getEntries();
+        var lastEntry = entries[entries.length - 1];
+        if (lastEntry.name == url) {
+          clearInterval(interval);
+          resolve(lastEntry.respondEnd - startTime);
+        }
+      },10);
+    });
+  }
+    
   // Creates a link rel=prefetch and times how long the resource load takes.
-  async function timeResourceLoad(size) {
+  async function timeResourceLoadOld(size) {
     var link = document.createElement('link');
     link.rel = "prefetch";
 
@@ -56,16 +72,16 @@
     });
   }
 
-  async function guessSize(size) {
+  async function guessSize(size, iteration) {
     let small = 1;
     let large = 1024 * 300;
 
     // Sample small
-    let smallTime = await timeResourceLoad(small);
+    let smallTime = await timeResourceLoad(small, iteration);
     // Sample unknown
-    let unknownTime = await timeResourceLoad(size);
+    let unknownTime = await timeResourceLoad(size, iteration);
     // Sample large
-    let largeTime = await timeResourceLoad(large);
+    let largeTime = await timeResourceLoad(large, iteration);
 
     rangeTime = largeTime - smallTime;
     unRangeTime = unknownTime - smallTime;
@@ -88,7 +104,7 @@
       let bytes = Math.floor(Math.random() * 1024 * 300);
       let guesses = [];
       for (let i = 0; i <= samplesPerGuess; i++) {
-        let guess = await guessSize(bytes);
+        let guess = await guessSize(bytes, i);
         guesses.push(guess);
       }
       let guess = median(guesses);
