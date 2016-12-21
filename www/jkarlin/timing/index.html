@@ -44,7 +44,7 @@
             if (entry.name == url) {
               resolve(entry.responseEnd - startTime);        
             }
-          }
+          });
         });
         
         let response = await fetch(url, {mode: 'no-cors'});
