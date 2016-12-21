@@ -35,7 +35,7 @@
 
   async function timeResourceLoad(size, iteration) {
     let url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?iteration=' + iteration;
-    return new Promise(function(resolve, reject) {
+    return new Promise(async function(resolve, reject) {
       let response = await fetch(url, {mode: 'no-cors'});
       startTime = window.performance.now();
       let interval = setInterval(() => {
