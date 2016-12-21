@@ -32,23 +32,24 @@
     }
     return -1;
   }
-  (
-  let count = 0;
-  async function timeResourceLoad(size) {
-    let url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?count=' + count++;
-    return new Promise(async function(resolve, reject) {
-      let response = await fetch(url, {mode: 'no-cors'});
-      startTime = window.performance.now();
-      let interval = setInterval(() => {
-        let entries = performance.getEntries();
-        var lastEntry = entries[entries.length - 1];
-        if (lastEntry.name == url) {
-          clearInterval(interval);
-          resolve(lastEntry.responseEnd - startTime);
-        }
-      },10);
+
+  var timeResourceLoad = (async function() {
+    let count = 0;
+    return async function(size) {
+      let url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?count=' + count++;
+      return new Promise(async function(resolve, reject) {
+        let response = await fetch(url, {mode: 'no-cors'});
+        startTime = window.performance.now();
+        let interval = setInterval(() => {
+          let entries = performance.getEntries();
+          var lastEntry = entries[entries.length - 1];
+          if (lastEntry.name == url) {
+            clearInterval(interval);
+            resolve(lastEntry.responseEnd - startTime);
+          }
+        },10);
     });
-  })
+  })();
     
   // Creates a link rel=prefetch and times how long the resource load takes.
   async function timeResourceLoadOld(size) {
