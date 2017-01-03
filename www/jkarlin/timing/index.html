@@ -44,10 +44,11 @@
     let startTime = 0;
     
     let observer = new PerformanceObserver(list => {
+      console.log("In performance observer");
       list.getEntries().forEach(entry => {
-        console.LOG("Entry name = " + entry.name);
+        console.log("Entry name = " + entry.name);
         if (startTime == -1) {
-          console.LOG("SUCH BROKEN!!! MUCH RACE!!");
+          console.log("SUCH BROKEN!!! MUCH RACE!!");
         }
         if (entry.name == url) {
           resolver(entry.responseEnd - startTime);        
