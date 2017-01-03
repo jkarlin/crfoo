@@ -33,6 +33,7 @@
     return -1;
   }
 
+  let observer = null;
   // Only call this method serially, wait for its promise to resolve before calling again.
   // TODO(jkarlin): This has a few issues. For one, it periodically stalls out waiting for the observer. Perhaps a race or perhaps
   // observers are a bit broken? The 90th percentile is much tighter with this method than with prefetch, so overall I really want to get 
@@ -43,7 +44,7 @@
     let resolver = null;
     let startTime = 0;
     
-    let observer = new PerformanceObserver(list => {
+    observer = new PerformanceObserver(list => {
       console.log("In performance observer");
       list.getEntries().forEach(entry => {
         console.log("Entry name = " + entry.name);
