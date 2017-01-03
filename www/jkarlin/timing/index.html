@@ -62,6 +62,7 @@
       return new Promise(async function(resolve, reject) {
         startTime = -1;
         resolver = resolve;
+        console.log("Fetching: " + url);
         let response = await fetch(url, {mode: 'no-cors'});
         startTime = window.performance.now();
       });
