@@ -33,18 +33,17 @@
     return -1;
   }
 
-  let observer = null;
   // Only call this method serially, wait for its promise to resolve before calling again.
-  // TODO(jkarlin): This has a few issues. For one, it periodically stalls out waiting for the observer. Perhaps a race or perhaps
+  // TODO(jkarlin): This has a few issues. For one, it usually stalls out waiting for the observer which never gets called. Perhaps a race or perhaps
   // observers are a bit broken? The 90th percentile is much tighter with this method than with prefetch, so overall I really want to get 
   // this approach to work. Is the 50th percentile a bit worse perhaps? Need to verify.
-  var timeResourceLoad = (function() {
+  var timeResourceLoadFetch = (function() {
     let count = 0;
     let url = '';
     let resolver = null;
     let startTime = 0;
     
-    observer = new PerformanceObserver(list => {
+    let observer = new PerformanceObserver(list => {
       console.log("In performance observer");
       list.getEntries().forEach(entry => {
         console.log("Entry name = " + entry.name);
@@ -71,7 +70,7 @@
   })();
     
   // Creates a link rel=prefetch and times how long the resource load takes.
-  async function timeResourceLoadPrefetch(size) {
+  async function timeResourceLoad(size) {
     var link = document.createElement('link');
     link.rel = "prefetch";
 
