@@ -45,6 +45,7 @@
     
     let observer = new PerformanceObserver(list => {
       list.getEntries().forEach(entry => {
+        console.LOG("Entry name = " + entry.name);
         if (startTime == -1) {
           console.LOG("SUCH BROKEN!!! MUCH RACE!!");
         }
