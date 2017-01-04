@@ -1,4 +1,4 @@
 <?php
-header('Location: http://www.yoursite.com/home-page.html');
+header('Location: index2.html');
 ?>
 <!DOCTYPE html>
