@@ -1,9 +1,10 @@
 <body>
-Your connection type is <ins id=conn_type></ins>
+Your connection type is: <ins id=conn_type></ins>
 
 <script>
   var ins = document.getElementById('conn_type');
+  if (!navigator.connection) {
+    ins.innerHTML = "navigator.connection unsupported on this platform of this browser";
   ins.innerHTML = navigator.connection.type;
-  navigator.connection.type
 </script>
 </body>
