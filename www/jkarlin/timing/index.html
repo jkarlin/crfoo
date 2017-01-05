@@ -37,6 +37,7 @@
   // TODO(jkarlin): This has a few issues. For one, it usually stalls out waiting for the observer which never gets called. Perhaps a race or perhaps
   // observers are a bit broken? The 90th percentile is much tighter with this method than with prefetch, so overall I really want to get 
   // this approach to work. Is the 50th percentile a bit worse perhaps? Need to verify.
+let perfObserverCallback = null;  // Keep this in global state so it's not collected.
   var timeResourceLoad = (function() {
     let count = 0;
     let url = '';
@@ -55,8 +56,8 @@
         }
       });
     }
-    
-    let observer = new PerformanceObserver(perfObserver);
+    perfObserverCallback = perfObserver;
+    let observer = new PerformanceObserver(perfObserverCallback);
     observer.observe({entryTypes: ['resource']});
    
     return async function(size) {
