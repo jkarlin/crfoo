@@ -17,6 +17,7 @@
 
     
   <script>
+
   function median(d) {
     return percentile(d, 0.5);
   }
@@ -133,7 +134,7 @@
         continue;
       }
       let guess = median(guesses);
-      guesses.sort();
+//      guesses.sort(function(a, b){return a - b});
       let kbGuesses = guesses.map(function(x) { return Math.floor(x / 1024); });
       console.log("Guesses = " + kbGuesses + " Guess = " + Math.floor(guess / 1024) + " Real = " + Math.floor(bytes / 1024));
       
