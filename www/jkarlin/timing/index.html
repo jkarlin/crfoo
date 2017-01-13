@@ -95,29 +95,6 @@
     });
   }
 
-  async function guessSize2(size, lastGuess) {
-    let small = 1;
-    let large = 1024 * 300;
-    if (lastGuess != -1) {
-      small = lastGuess - 30 * 1024;
-      large = lastGuess + 30 * 1024;
-    }
-    // Sample small
-    let smallTime = await timeResourceLoad(small);
-    // Sample unknown
-    let unknownTime = await timeResourceLoad(size);
-    // Sample large
-    let largeTime = await timeResourceLoad(large);      
-
-    rangeTime = largeTime - smallTime;
-    unRangeTime = unknownTime - smallTime;
-
-    // Linear interpolation to guess size
-    guess = unRangeTime / rangeTime * (large - small);
-
-    return guess;
-  }    
-    
   async function guessSize(size) {
     let small = 1;
     let large = 1024 * 300;
@@ -149,10 +126,8 @@
       // Grab a sample to predict of random size
       let bytes = Math.floor(Math.random() * 1024 * 300);
       let guesses = [];
-      let lastGuess = -1;
       for (let i = 0; i < samplesPerGuess; i++) {
-        let guess = await guessSize2(bytes, lastGuess);
-        lastGuess = guess;
+        let guess = await guessSize(bytes);
         console.log(guess);
         guesses.push(guess);
       }
