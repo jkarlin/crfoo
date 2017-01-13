@@ -134,8 +134,9 @@
       }
       let guess = median(guesses);
       guesses.sort();
-      console.log("Guesses = " + guesses + " median = " + guess);
-
+      let kbGuesses = guesses.map(function(x) { return Math.floor(x / 1024); }
+      console.log("Guesses = " + kbGuesses + " Guess = " + Math.floor(guess / 1024) + " Real = " + Math.floor(bytes / 1024));
+      
       delta = Math.abs(guess - bytes);
       deltas.push(delta);
       actualBytes.push(bytes);
