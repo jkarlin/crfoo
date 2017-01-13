@@ -45,9 +45,7 @@
     let startTime = 0;
     
     function perfObserver(list, obj) {
-      console.log("In performance observer");
       list.getEntries().forEach(entry => {
-        console.log("Entry name = " + entry.name);
         if (startTime == -1) {
           console.log("SUCH BROKEN!!! MUCH RACE!!");
         }
@@ -128,7 +126,6 @@
       let guesses = [];
       for (let i = 0; i < samplesPerGuess; i++) {
         let guess = await guessSize(bytes);
-        console.log(guess);
         guesses.push(guess);
       }
       if (i == 0) {
@@ -136,6 +133,9 @@
         continue;
       }
       let guess = median(guesses);
+      guesses.sort();
+      console.log("Guesses = " + guesses + " median = " + guess);
+
       delta = Math.abs(guess - bytes);
       deltas.push(delta);
       actualBytes.push(bytes);
