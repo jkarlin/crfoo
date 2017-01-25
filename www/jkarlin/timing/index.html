@@ -1,0 +1,197 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='plotly.js'></script>
+  </head>
+
+  <body>
+  <p>This site downloads resources and guesses their size based on how long it takes to download. For each guess, it downloads a resource of known size 1B and 300KB. It then downloads the unknown resource and estimates its size with linear interpolation. This is repeated 10 times per unknown size and the median result is taken as the final guess.</p>
+    
+    
+  <div id="status">Gathering network samples...</div>
+  <div id="result"></div>
+  <div id="guessPlot" style="width:900px;height:400px;"></div>  
+  <div id="distPlot" style="width:900px;height:400px;"></div>   
+    
+
+    
+  <script>
+
+  function median(d) {
+    return percentile(d, 0.5);
+  }
+
+  function percentile(d, target) {
+    let data = d.slice(0);  // clone d
+    data.sort(function(a, b){return a - b});
+    let count = 0;
+    for (val of data) {
+      count += 1;
+      if ((count / d.length) >= target)
+        return val;
+    }
+    return -1;
+  }
+
+  // Only call this method serially, wait for its promise to resolve before calling again.
+  // TODO(jkarlin): This has a few issues. For one, it usually stalls out waiting for the observer which never gets called. Perhaps a race or perhaps
+  // observers are a bit broken? The 90th percentile is much tighter with this method than with prefetch, so overall I really want to get 
+  // this approach to work. Is the 50th percentile a bit worse perhaps? Need to verify.
+  let perfObserverCallback = null;  // Keep this in global state so it's not collected.
+  var timeResourceLoadFetch = (function() {
+    let count = 0;
+    let url = '';
+    let resolver = null;
+    let startTime = 0;
+    
+    function perfObserver(list, obj) {
+      list.getEntries().forEach(entry => {
+        if (startTime == -1) {
+          console.log("SUCH BROKEN!!! MUCH RACE!!");
+        }
+        if (entry.name == url) {
+          resolver(entry.responseEnd - startTime);        
+        }
+      });
+    }
+    perfObserverCallback = perfObserver;
+    let observer = new PerformanceObserver(perfObserverCallback);
+    observer.observe({entryTypes: ['resource']});
+   
+    return async function(size) {
+      url = 'https://cr2.kungfoo.net/jkarlin/timing/size.php?size=' + size + '?count=' + count++;
+      return new Promise(async function(resolve, reject) {
+        startTime = -1;
+        resolver = resolve;
+        console.log("Fetching: " + url);
+        let response = await fetch(url, {mode: 'no-cors'});
+        startTime = window.performance.now();
+      });
+    }
+  })();
+    
+  // Creates a link rel=prefetch and times how long the resource load takes.
+  async function timeResourceLoad(size) {
+    var link = document.createElement('link');
+    link.rel = "prefetch";
+
+    return new Promise(function(resolve, reject) {
+      let startTime = window.performance.now();
+      link.onerror = function() {
+        console.log("OnError");
+        let endTime = window.performance.now();
+        resolve(endTime - startTime);
+      }
+      link.onload = function() {        
+        let endTime = window.performance.now();
+        resolve(endTime - startTime);
+      }
+
+      link.href =
+          "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
+      document.body.appendChild(link);
+    });
+  }
+
+  async function guessSize(size) {
+    let small = 1;
+    let large = 1024 * 300;
+
+    // Sample small
+    let smallTime = await timeResourceLoad(small);
+    // Sample unknown
+    let unknownTime = await timeResourceLoad(size);
+    // Sample large
+    let largeTime = await timeResourceLoad(large);
+
+    rangeTime = largeTime - smallTime;
+    unRangeTime = unknownTime - smallTime;
+
+    // Linear interpolation to guess size
+    guess = unRangeTime / rangeTime * (large - small);
+
+    return guess;
+  }
+    
+  (async function() {
+    let numGuesses = 10;
+    let samplesPerGuess = 11;
+    let deltas = [];
+    let actualBytes = [];
+    let guessedBytes = [];
+
+    for (let i = 0; i <= numGuesses; i++) {
+      // Grab a sample to predict of random size
+      let bytes = Math.floor(Math.random() * 1024 * 300);
+      let guesses = [];
+      for (let i = 0; i < samplesPerGuess; i++) {
+        let guess = await guessSize(bytes);
+        guesses.push(guess);
+      }
+      if (i == 0) {
+        // We throw away the first guess, it's just to get the networking warmed up
+        continue;
+      }
+      let guess = median(guesses);
+//      guesses.sort(function(a, b){return a - b});
+      let kbGuesses = guesses.map(function(x) { return Math.floor(x / 1024); });
+      console.log("Guesses = " + kbGuesses + " Guess = " + Math.floor(guess / 1024) + " Real = " + Math.floor(bytes / 1024));
+      
+      delta = Math.abs(guess - bytes);
+      deltas.push(delta);
+      actualBytes.push(bytes);
+      guessedBytes.push(guess);
+    }
+
+    result = document.getElementById('result');
+    resultMsg = "Median delta is " + Math.floor(median(deltas) / 1024) +
+                "KB and 90th percentile delta is " +
+                Math.floor(percentile(deltas, 0.9) / 1024) + 'KB';
+    result.appendChild(document.createTextNode(resultMsg));
+
+    // Plot a scatter plot showing guessed vs actual
+    let plotDiv = document.getElementById('guessPlot');
+    let scatterGuess = {
+      x : actualBytes,
+      y : guessedBytes,
+      mode : 'markers',
+      type : 'scatter',
+      name : 'actual vs estimate'
+    };
+    let xEqualsY = {
+      x : actualBytes,
+      y : actualBytes,
+      mode : 'lines',
+      type : 'scatter',
+      name : 'x=y'
+    };
+    Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {
+      xaxis : {
+      title:
+        'Actual'
+      }
+        , yaxis : {title : 'Predicted bytes'}, title : 'Predictions'
+    });
+
+  // Plot the CDF of deltas
+  plotDiv = document.getElementById('distPlot');
+  let cdfX = [];
+  let cdfY = [];
+  let curCount = 0;
+  deltas.sort(function(a, b) {
+      return a - b
+  });
+  for (let delta of deltas) {
+    cdfX.push(delta);
+    cdfY.push((curCount + 1) / deltas.length);
+    curCount += 1;
+  }
+  let cdf = {x : cdfX, y : cdfY, type : 'scatter', mode : 'lines'};
+  Plotly.plot(plotDiv, [cdf], { xaxis : { title:'Bytes delta' }, yaxis : {title : 'CDF of abs(actual-predicted)'},
+            title : 'Prediction Delta CDF'
+  });
+
+  })();
+  </script>
+  </body>

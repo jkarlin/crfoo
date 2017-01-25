@@ -1,0 +1,35 @@
+<body>
+Network status:
+<div id="network" style="display:inline">
+</div>
+
+<div class="log"></div>
+
+<script>
+
+  var logEl = document.querySelector('.log');
+  function log(msg) {
+    var p = document.createElement('p');
+    p.textContent = msg;
+    logEl.appendChild(p);
+    console.log(msg);
+  }
+  
+navigator.serviceWorker.register('sw.js')
+.catch(function(err) {
+  log('ServiceWorker failed to register. Are you visiting the HTTPS site from Android?  (netinfo API required)');
+  log(err.message);
+});
+
+  function updateOnlineStatus(event) {
+    var online = navigator.onLine;
+    document.getElementById("network").innerHTML = online ? 'Online' : 'Offline';
+  }
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  
+  updateOnlineStatus();
+  
+  
+</script>
+</body>
