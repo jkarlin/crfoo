@@ -23,6 +23,13 @@
     return percentile(d, 0.5);
   }
 
+  function mean(d) {
+    let sum = 0;
+    for (val of d)
+      sum += val;
+    return val / d.length;
+  }
+
   function percentile(d, target) {
     let data = d.slice(0);  // clone d
     data.sort(function(a, b){return a - b});
@@ -149,7 +156,7 @@
     }
 
     result = document.getElementById('result');
-    resultMsg = "Median delta is " + Math.floor(median(deltas) / 1024) +
+    resultMsg = "Mean delta is " + mean(deltas) +  ", Median delta is " + Math.floor(median(deltas) / 1024) +
                 "KB and 90th percentile delta is " +
                 Math.floor(percentile(deltas, 0.9) / 1024) + 'KB';
     result.appendChild(document.createTextNode(resultMsg));
