@@ -17,7 +17,8 @@
 
     
   <script>
-
+  performance.setResourceTimingBufferSize(1000);
+    
   function median(d) {
     return percentile(d, 0.5);
   }
@@ -75,21 +76,21 @@
   async function timeResourceLoad(size) {
     var link = document.createElement('link');
     link.rel = "prefetch";
+    let url = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
 
     return new Promise(function(resolve, reject) {
       let startTime = window.performance.now();
       link.onerror = function() {
         console.log("OnError");
-        let endTime = window.performance.now();
-        resolve(endTime - startTime);
+        let perf_entry = window.performance.getEntriesByName(url, 'resource');        
+        resolve(perf_entry.responseEnd - perf_entry.responseStart);
       }
       link.onload = function() {        
-        let endTime = window.performance.now();
-        resolve(endTime - startTime);
+        let perf_entry = window.performance.getEntriesByName(url, 'resource');        
+        resolve(perf_entry.responseEnd - perf_entry.responseStart);
       }
 
-      link.href =
-          "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
+      link.href = url;          
       document.body.appendChild(link);
     });
   }
