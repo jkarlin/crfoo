@@ -79,16 +79,14 @@
     link.rel = "prefetch";
 
     return new Promise(function(resolve, reject) {
-      let startTime = window.performance.now();
       let url = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size + '?count=' + resourceCount++;
       link.onerror = function() {
         console.log("OnError");
-        let endTime = window.performance.now();
-        resolve(endTime - startTime);
+        let perf_entry = window.performance.getEntriesByName(url, 'resource')[0];
+        resolve(perf_entry.responseEnd - perf_entry.startTime);
       }
       link.onload = function() {
         let perf_entry = window.performance.getEntriesByName(url, 'resource')[0];
-        let endTime = window.performance.now();
         resolve(perf_entry.responseEnd - perf_entry.startTime);
       }
 
@@ -139,7 +137,10 @@
       let guess = median(guesses);
 //      guesses.sort(function(a, b){return a - b});
       let kbGuesses = guesses.map(function(x) { return Math.floor(x / 1024); });
-      console.log("Guesses = " + kbGuesses + " Guess = " + Math.floor(guess / 1024) + " Real = " + Math.floor(bytes / 1024));
+      let guessKB = Math.floor(guess / 1024);
+      let realKB = Math.floor(bytes / 1024);
+      let deltaKB = Math.abs(guessKB - realKB);
+      console.log("Guesses = " + kbGuesses + " Guess = " + guessKB + " Real = " + realKB + " Delta = " + deltaKB);
 
       delta = Math.abs(guess - bytes);
       deltas.push(delta);
