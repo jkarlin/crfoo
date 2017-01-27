@@ -73,13 +73,14 @@
   })();
 
   // Creates a link rel=prefetch and times how long the resource load takes.
+  let resourceCount = 0;
   async function timeResourceLoad(size) {
     var link = document.createElement('link');
     link.rel = "prefetch";
 
     return new Promise(function(resolve, reject) {
       let startTime = window.performance.now();
-      let url = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size;
+      let url = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size + '?count=' + resourceCount++;
       link.onerror = function() {
         console.log("OnError");
         let endTime = window.performance.now();
