@@ -87,9 +87,9 @@
         resolve(endTime - startTime);
       }
       link.onload = function() {
-        let perf_entry = window.performance.getEntriesByName(url, 'resource');
+        let perf_entry = window.performance.getEntriesByName(url, 'resource')[0];
         let endTime = window.performance.now();
-        resolve(endTime - perf_entry.requestStart);
+        resolve(perf_entry.responseEnd - perf_entry.startTime);
       }
 
       link.href = url;
