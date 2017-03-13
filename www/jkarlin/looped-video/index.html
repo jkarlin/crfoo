@@ -1,8 +1,117 @@
-<div>
-    <video autoplay loop="true">
-        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-    </video>
-</div>
-<div>
-This video is 22 MB File once it is downloaded our expectation is it will serve video content from Cache. 
-</div>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <video height="400" controls></video>
+        <button>Start</button>
+        <p><strong>State</strong>: <span id="state"></span></p>
+        <p><strong>Step</strong>: <span id="step"></span></p>
+        <script type="text/javascript">
+        <!--
+        
+        function is_video_fully_downloaded($video) {
+            var fully_buffered = false;
+            try {
+                fully_buffered = Math.round($video[0].buffered.end(0)) / Math.round($video[0].seekable.end(0)) === 1;
+            }
+            catch (e) {
+            }
+            return fully_buffered;
+        }
+        
+        function step_4($video, $step) {
+            $step.text('4 - skipping around for 10 minutes');
+            
+            var stop_after = 10 * 60 * 1000; // milliseconds
+            var start_time = new Date().getTime();
+            
+            var timeout;
+            
+            var skip_somewhere = function() {
+                if (Math.random() >= 0.5) {
+                    $video[0].currentTime = $video[0].duration * Math.random();
+                }
+                else {
+                    $video[0].currentTime = 0;
+                }
+                $video[0].pause();
+                
+                if ((new Date().getTime() - start_time) > stop_after) {
+                    $step.text('Done');
+                }
+                else {
+                    timeout = setTimeout(skip_somewhere, 500);
+                }
+            };
+            skip_somewhere();
+        }
+    
+        function step_3($video, $step) {
+            $step.text('3 - waiting for video to download');
+            
+            $video.on('progress', function() {
+                if (is_video_fully_downloaded($video)) {
+                    $video.off('progress');
+                    step_4($video, $step);
+                }
+            });
+        }
+        
+        function step_2($video, $step) {
+            $step.text('2 - please click pause and wait');
+            $video.on('pause', function() {
+                $video.off('pause');
+                step_3($video, $step);
+            });
+        };
+        
+        function step_1($video, $step) {
+            $step.text('1 - playing for two seconds');
+            $video.on('canplay', function() {
+                $video.off('canplay');
+                $video[0].play();
+                setTimeout(function() {
+                    step_2($video, $step);
+                }, 2000);
+            });
+        };
+        
+        $(function() {
+            
+            //const VIDEO_URI = 'http://ia902608.us.archive.org/2/items/Hercules_Against_the_Moon_Men/Hercules_Against_the_Moon_Men_512kb.mp4';
+            
+            const VIDEO_URI = 'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4';
+            
+            
+            var downloaded_bytes = 0;
+            
+            var $video = $('video');
+            var $state = $('#state');
+            var $step = $('#step');
+            var $button = $('button');
+            
+            $video.hide();
+            $state.text('Open Network tab and then click Start');
+            
+            $button.on('click', function() {
+                $video.show();
+                $button.remove();
+                $video.attr('src', VIDEO_URI + '?' + new Date().getTime());
+                step_1($video, $step);
+            });
+            
+            $video.on('progress', function(progress_event) {
+                if (is_video_fully_downloaded($video)) {
+                    $state.text('Fully buffered');
+                }
+                else {
+                    $state.text('Still downloading');
+                }
+            });
+            
+        });
+        //-->
+        </script>
+    </body>
+</html>
