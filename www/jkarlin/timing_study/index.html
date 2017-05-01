@@ -1,0 +1,110 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='plotly.js'></script>
+  </head>
+
+  <body>
+    <p>This site downloads opaque resources of various sizes and plots the distributions of the time between resource start and end from the network. This gives us an idea of how accurate network timing attacks may be.</p>
+
+    <div id="status">Gathering samples...</div>div>
+    <div id="plot" style="width:900px;height:400px;"></div>
+
+    <script>
+
+      const kMaxSize = 20;
+      const kSamplesPerSize = 2;
+
+      // Creates a link rel=prefetch and times how long the resource load takes.
+      let resourceCount = 0;
+      async function timeResourceLoad(size) {
+        var link = document.createElement('link');
+        link.rel = "prefetch";
+
+        return new Promise(function(resolve, reject) {
+          let url = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size + '?count=' + resourceCount++;
+          link.onerror = function() {
+            console.log("OnError");
+            let perf_entry = window.performance.getEntriesByName(url, 'resource')[0];
+            resolve(perf_entry.responseEnd - perf_entry.startTime);
+          }
+          link.onload = function() {
+            let perf_entry = window.performance.getEntriesByName(url, 'resource')[0];
+            resolve(perf_entry.responseEnd - perf_entry.startTime);
+          }
+
+          link.href = url;
+          document.body.appendChild(link);
+        });
+      }
+
+    (async function() {
+      await timeResourceLoad(100000); // warm up the network
+
+      all_times = {}
+      let x_data = []
+      for (let exp = 0; exp < kMaxSize; exp++) {
+        let bytes = Math.pow(2, exp);
+        x_data.push(bytes)
+        let times = [];
+        for (let attempt = 0; attempt < kSamplesPerSize; attempt++) {
+          time = await timeResourceLoad(bytes);
+          times.push(time);
+        }
+        all_times[bytes] = times;
+      }
+
+      // Plot the results
+      let data = [];
+      for(var i = 0; i < x_data.length; i++) {
+        bytes = x_data[i];
+        var result = {
+          type: 'box',
+          y: all_times[bytes],
+          name: x_data[i],
+          boxpoints: 'all',
+          jitter: 0.5,
+          whiskerwidth: 0.2,
+          fillcolor: 'cls'
+          marker: {
+            size: 2
+          },
+          line: {
+            width: 1
+          }
+        }
+        data.push(result)
+      }
+
+      layout = {
+          title: '',
+          yaxis: {
+              title: 'Time'
+              autorange: true,
+              showgrid: true,
+              zeroline: true,
+              dtick: 5,
+              gridcolor: 'rgb(255, 255, 255)',
+              gridwidth: 1,
+              zerolinecolor: 'rgb(255, 255, 255)',
+              zerolinewidth: 2
+          },
+          xaxis: {
+            title: 'Size in bytes'
+          },
+          margin: {
+              l: 40,
+              r: 30,
+              b: 80,
+              t: 100
+          },
+          paper_bgcolor: 'rgb(243, 243, 243)',
+          plot_bgcolor: 'rgb(243, 243, 243)',
+          showlegend: false
+      };
+
+      Plotly.newPlot('plot', data, layout);
+
+
+    })();
