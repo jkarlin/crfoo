@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='plotly.js'></script>
+    <script src='regression.js'></script>
   </head>
 
   <body>
@@ -13,8 +14,11 @@
 
     <script>
 
-      const kMaxSize = 20;
-      const kSamplesPerSize = 2;
+      const kMaxPow = 10;
+      const kSamplesPerSize = 10;
+      const kWarmUpCount = 20;
+
+      performance.setResourceTimingBufferSize(kSamplesPerSize * (kMaxPow + 1) + kWarmUpCount );
 
       // Creates a link rel=prefetch and times how long the resource load takes.
       let resourceCount = 0;
@@ -39,13 +43,77 @@
         });
       }
 
+      function standardDeviation(values){
+        let avg = mean(values);
+
+        let squareDiffs = values.map(function(value){
+          var diff = value - avg;
+          var sqrDiff = diff * diff;
+          return sqrDiff;
+        });
+
+        let avgSquareDiff = mean(squareDiffs);
+
+        let stdDev = Math.sqrt(avgSquareDiff);
+        return stdDev;
+      }
+
+      function median(d) {
+        return percentile(d, 0.5);
+      }
+
+      function percentile(d, target) {
+        let data = d.slice(0);  // clone d
+        data.sort(function(a, b){return a - b});
+        let count = 0;
+        for (val of data) {
+          count += 1;
+          if ((count / d.length) >= target)
+            return val;
+        }
+        return -1;
+      }
+
+      function mean(d) {
+        let sum = 0;
+        for (val of d)
+          sum += val;
+        return sum / d.length;
+      }
+
+      function stripOutliers(d) {
+        // An outlier is a point more than 1.5 IQR's below the first quartile
+        // or above the third.
+        let q1 = percentile(d, 0.25);
+        let q3 = percentile(d, 0.75);
+        let iqr = q3-q1;
+        let min = q1 - iqr*1.5;
+        let max = q3 + iqr*1.5;
+
+        out = [];
+        for (val of d) {
+          if (val >= min && val <= max)
+            out.push(val);
+        }
+        return out;
+      }
+
+      function stderr(d) {
+        return standardDeviation(d) / Math.sqrt(d.length);
+      }
+
+      function stderrOfMedian(d) {
+        return stderr(d) * 1.253
+      }
+
     (async function() {
-      await timeResourceLoad(100000); // warm up the network
+      for(let i = 0; i < kWarmUpCount; i++)
+        await timeResourceLoad(1024 * 100); // warm up the network
 
       all_times = {}
       let x_data = []
-      for (let exp = 0; exp < kMaxSize; exp++) {
-        let bytes = Math.pow(2, exp);
+      for (let exp = 0; exp < kMaxPow; exp++) {
+        let bytes = 1024 * Math.pow(2, exp);
         x_data.push(bytes)
         let times = [];
         for (let attempt = 0; attempt < kSamplesPerSize; attempt++) {
@@ -55,32 +123,74 @@
         all_times[bytes] = times;
       }
 
-      // Plot the results
-      let data = [];
-      for(var i = 0; i < x_data.length; i++) {
-        bytes = x_data[i];
-        var result = {
-          type: 'box',
-          y: all_times[bytes],
-          name: x_data[i],
-          boxpoints: 'all',
-          jitter: 0.5,
-          whiskerwidth: 0.2,
-          fillcolor: 'cls'
-          marker: {
-            size: 2
-          },
-          line: {
-            width: 1
-          }
-        }
-        data.push(result)
+      let y_data = []
+      let xy_data = []
+      let y_error = []
+      // for(var key in all_times) {
+      //   let d = stripOutliers(all_times[key])
+      //   y_data.push(mean(d))
+      //   xy_data.push([key, mean(d)])
+      //   y_error.push(stderr(d))
+      // }
+
+      for(var key in all_times) {
+        let d = stripOutliers(all_times[key])
+        y_data.push(median(d))
+        xy_data.push([key, median(d)])
+        y_error.push(stderrOfMedian(d))
       }
+
+      console.log("xy_data " + xy_data);
+      let reg = regression('linear', xy_data);
+      let slope = reg.equation[0]
+      let y_intercept = reg.equation[1]
+      console.log("points = " + reg.points)
+      // Plot the results
+      let data =
+        {
+          x: x_data,
+          y: y_data,
+          error_y: {
+            type: 'data',
+            array: y_error,
+            visible: true
+          },
+          type: 'scatter'
+        }
+      console.log("slope = " + slope);
+      console.log("y_intercept = " + y_intercept)
+
+      let y_fit = []
+      for(val of x_data)
+        y_fit.push(slope*val + y_intercept);
+
+      let fit =
+        {
+          x: x_data,
+          y: y_fit,
+          type: 'line',
+        }
+
+
+      // for(var i = 0; i < x_data.length; i++) {
+      //   bytes = x_data[i];
+      //   var result = {
+      //     type: 'scatter',
+      //     y: mean(all_times[bytes]),
+      //     name: x_data[i],
+      //     // boxpoints: 'false',
+      //     // jitter: 0.5,
+      //     // whiskerwidth: 0.6,
+      //     // fillcolor: 'cls',
+      //     // boxmean: 'sd',
+      //   }
+      //   data.push(result)
+      // }
 
       layout = {
           title: '',
           yaxis: {
-              title: 'Time'
+              title: 'Time',
               autorange: true,
               showgrid: true,
               zeroline: true,
@@ -91,20 +201,25 @@
               zerolinewidth: 2
           },
           xaxis: {
+            // type: 'log',
+            autorange: true,
             title: 'Size in bytes'
           },
-          margin: {
-              l: 40,
-              r: 30,
-              b: 80,
-              t: 100
-          },
+          // margin: {
+          //     l: 40,
+          //     r: 30,
+          //     b: 80,
+          //     t: 100
+          // },
           paper_bgcolor: 'rgb(243, 243, 243)',
           plot_bgcolor: 'rgb(243, 243, 243)',
           showlegend: false
       };
 
-      Plotly.newPlot('plot', data, layout);
+      Plotly.newPlot('plot', [data, fit], layout);
 
 
     })();
+</script>
+</body>
+</html>
