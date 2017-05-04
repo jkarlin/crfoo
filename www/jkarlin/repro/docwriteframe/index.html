@@ -1,0 +1,19 @@
+<html>
+<body>
+
+<div id="frames"></div>
+
+<iframe id="slow_frame" src="slowness.php">
+
+<script>
+  let iframe = document.getElementById("slow_frame");
+  let doc = iframe.contentDocument;
+
+  doc.open();
+  doc.write('<html>Rewritten. <img src=1.png><img src=2.png><img src=3.png></html>');
+  doc.close();  
+ }
+</script>
+
+</body>
+</html>
