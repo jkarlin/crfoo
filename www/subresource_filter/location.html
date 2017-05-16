@@ -1,0 +1,10 @@
+<p>Welcome!
+<script>
+navigator.geolocation.getCurrentPosition(function(position) {
+  var ptag = document.createElement("p");
+  ptag.textContent = "lat: " + position.coords.latitude +
+                     " long: " + position.coords.longitude;
+  document.body.appendChild(ptag);
+});
+</script>
+<img src="social-engineering-ad1.png">
