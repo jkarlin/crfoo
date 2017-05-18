@@ -6,7 +6,7 @@
 // Reload the script using XHR, but make sure the request has no-store header
 xmlhttp=new XMLHttpRequest();
 xmlhttp.open("GET", "a.js");
-//xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+xmlhttp.setRequestHeader("Cache-Control", "no-cache");
 xmlhttp.onreadystatechange = function() {
   console.log(xmlhttp.readyState);
 }
