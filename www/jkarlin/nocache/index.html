@@ -1,0 +1,17 @@
+<html>
+<script src="a.js">
+<body>
+
+<script>
+// Reload the script using XHR, but make sure the request has no-store header
+xmlhttp=new XMLHttpRequest();
+xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+xmlhttp.onreadystatechange = function() {
+  console.log(xmlhttp.readyState);
+}
+xmlhttp.open("GET", "a.js");
+</script>
+
+
+</body>
+</html>
