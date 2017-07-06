@@ -1,0 +1,46 @@
+<script>
+function imageFromBlob(blob) {
+  console.log(blob);
+  var image = new Image();
+  image.src = URL.createObjectURL(blob);
+  return image;
+}
+
+function addResult(workerName, result) {
+  var div = document.createElement('div');
+  div.style = "float:left";
+
+  var h = document.createElement('h2');
+  h.textContent = workerName;
+  div.appendChild(h);
+  div.appendChild(imageFromBlob(result));
+  document.body.appendChild(div);
+}
+
+var worker = new Worker("./worker_fetch.js");
+worker.onmessage = event => {
+  addResult("Dedicated worker", event.data);
+}
+
+var shared_worker = new SharedWorker("shared_worker_fetch.js");
+shared_worker.port.onmessage = event => {
+  addResult("Shared worker", event.data);
+}
+shared_worker.port.start();
+
+navigator.serviceWorker.register('sw_fetch.js', {
+  scope: './'
+});
+// Should be intercepted by SW.
+var src="not_real_request?sw";
+
+var header = navigator.serviceWorker.controller ? "SW (intercepted)" : "SW (not intercepted)";
+
+fetch(src).then((r) => {
+  r.blob().then((blob) => {
+    addResult(header, blob);
+  });
+});
+
+</script>
+
