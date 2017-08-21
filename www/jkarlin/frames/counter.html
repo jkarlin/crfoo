@@ -1,0 +1,12 @@
+<body>
+<p id="text">Counter starting in one sec..</p>
+
+<script>
+  var counter = 0;
+  function update() {
+    var ele = document.getElementById('text');
+    ele.innerHTML = count++;
+  }
+  setInterval(update, 1000);
+</script>
+</body>
