@@ -7,11 +7,11 @@
   var images = document.getElementById("images");
   
   function addImage() {
-    var url = "berry.jpg?" + "infinite=" + counter;
-    var newHTML = "<img src=\"" + url + "\"></img>";
-    console.log(newHTML);
-    
-    images.innerHtml += newHTML;
+    var img = document.createElement("img");
+    img.setAttribute("src", url);
+    img.setAttribute("width", "42");
+    img.setAttribute("height", 42");
+    images.appendChild(img);
   }
   setInterval(addImage, 1000);
 </script>
