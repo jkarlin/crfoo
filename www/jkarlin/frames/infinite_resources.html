@@ -1,0 +1,16 @@
+<body>
+
+<div id="images"></div>
+
+<script>
+  var counter = 0;
+  var images = document.getElementById("images");
+  
+  function addImage() {
+    url = "berry.jpg?" + "infinite=" + counter;
+    images.innerHtml += "<img src=" + url + "></img>";
+  }
+  setInterval(addImage, 1000);
+</script>
+
+</body>
