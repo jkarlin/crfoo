@@ -7,8 +7,11 @@
   var images = document.getElementById("images");
   
   function addImage() {
-    url = "berry.jpg?" + "infinite=" + counter;
-    images.innerHtml += "<img src=" + url + "></img>";
+    var url = "berry.jpg?" + "infinite=" + counter;
+    var newHTML = "<img src=" + url + "></img>";
+    console.log(newHTML);
+    
+    images.innerHtml += newHTML;
   }
   setInterval(addImage, 1000);
 </script>
