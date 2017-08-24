@@ -1,0 +1,16 @@
+<body>
+<p id="text">Counter starting in one sec..</p>
+<a href="https://www.example.com">
+<img src="berry_request_animation_frame.jpg" width="42" height="42"></img>
+  </a>
+
+<script>
+  var counter = 0;
+  function update() {
+    var ele = document.getElementById('text');
+    ele.innerHTML = counter++;
+    window.requestAnimationFrame(update);
+  }
+  window.requestAnimationFrame(update);
+</script>
+</body>

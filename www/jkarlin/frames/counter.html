@@ -1,0 +1,15 @@
+<body>
+<p id="text">Counter starting in one sec..</p>
+<a href="https://www.example.com">
+<img src="berry.jpg" width="42" height="42"></img>
+  </a>
+
+<script>
+  var counter = 0;
+  function update() {
+    var ele = document.getElementById('text');
+    ele.innerHTML = counter++;
+  }
+  setInterval(update, 1000);
+</script>
+</body>
