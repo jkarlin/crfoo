@@ -131,7 +131,9 @@
         let d = all_times[key]
         y_data.push(mean(d))
         xy_data.push([key, mean(d)])
-        y_error.push(stderr(d))
+        t = 2.262  // 95% confidence level 9 degrees freedom
+        let err = t * mean(d) / sqrt(kSamplesPerSize)
+        y_error.push(err)
        }
 
 //       for(var key in all_times) {
