@@ -144,8 +144,7 @@
         let d = all_times[key]
         y_data.push(mean(d))
         xy_data.push([key, mean(d)])
-        let dev = sampleStandardDeviation(d);
-        y_error.push(d)
+        y_error.push(sampleStandardDeviation(d))
        }
 
 //       for(var key in all_times) {
