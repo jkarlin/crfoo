@@ -132,7 +132,7 @@
         y_data.push(mean(d))
         xy_data.push([key, mean(d)])
         t = 2.262  // 95% confidence level 9 degrees freedom
-        let err = t * mean(d) / sqrt(kSamplesPerSize)
+        let err = t * mean(d) / Math.sqrt(kSamplesPerSize)
         y_error.push(err)
        }
 
