@@ -126,19 +126,20 @@
       let y_data = []
       let xy_data = []
       let y_error = []
-      // for(var key in all_times) {
-      //   let d = stripOutliers(all_times[key])
-      //   y_data.push(mean(d))
-      //   xy_data.push([key, mean(d)])
-      //   y_error.push(stderr(d))
-      // }
-
       for(var key in all_times) {
-        let d = stripOutliers(all_times[key])
-        y_data.push(median(d))
-        xy_data.push([key, median(d)])
-        y_error.push(stderrOfMedian(d))
-      }
+      //   let d = stripOutliers(all_times[key])
+        let d = all_times[key]
+        y_data.push(mean(d))
+        xy_data.push([key, mean(d)])
+        y_error.push(stderr(d))
+       }
+
+//       for(var key in all_times) {
+//        let d = all_times[key]
+      //         y_data.push(median(d))
+//         xy_data.push([key, median(d)])
+//         y_error.push(stderrOfMedian(d))
+//       }
 
       console.log("xy_data " + xy_data);
       let reg = regression('linear', xy_data);
