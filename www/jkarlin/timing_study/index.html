@@ -18,7 +18,7 @@
     <script>
 
       const kMaxPow = 7;
-      const kSamplesPerSize = 40;
+      const kSamplesPerSize = 4;
       const kWarmUpCount = 20;
       const numSamples = 20;
       
@@ -174,7 +174,7 @@
 
         let y_delta = y_data[above_index] - y_data[below_index];
         let x_delta = x_data[above_index] - x_data[below_index];
-        if (x_delta == 0) {
+        if (x_delta == 0 || y_delta == 0) {
           return x_data[below_index];
         }
         let slope = y_delta / x_delta;
