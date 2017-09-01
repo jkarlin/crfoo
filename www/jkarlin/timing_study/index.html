@@ -153,6 +153,8 @@
 
       all_times = {}
       let x_data = []
+      
+      
       for (let exp = kMaxPow-1; exp >= 0; exp--) {
         let bytes = 1024 * Math.pow(2, exp);
         x_data.push(bytes)
@@ -167,9 +169,9 @@
       let y_data = []
       let xy_data = []
       let y_error = []
-      for(var key in all_times) {
-        let d = stripOutliers(all_times[key])
-        //let d = all_times[key]
+      for(bytes of x_data) {
+        let d = stripOutliers(all_times[bytes])
+        //let d = all_times[bytes]
         y_data.push(mean(d))
         xy_data.push([key, mean(d)])
         y_error.push(sampleStandardError(d))
