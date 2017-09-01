@@ -18,7 +18,7 @@
     <script>
 
       const kMaxPow = 7;
-      const kSamplesPerSize = 40;
+      const kSamplesPerSize = 4;
       const kWarmUpCount = 20;
       const numSamples = 20;
       
@@ -161,7 +161,6 @@
         // Find the highest value of y_data that this is above.
         let above_index = -1;
         let below_index = -1;
-        console.log("Sample mean = " + sample_mean);
         for(let i = 0; i < y_data.length; i++) {      
           if (sample_mean > y_data[i]) {
             below_index = i;
@@ -172,17 +171,12 @@
         if (below_index == y_data.length-1) {
           above_index = y_data.length - 1;
         }
-        
-        console.log("Above index = " + above_index + " below index = " + below_index);
-        console.log(y_data);
 
         let y_delta = y_data[above_index] - y_data[below_index];
         let x_delta = x_data[above_index] - x_data[below_index];
         let slope = y_delta / x_delta;
         let frac_y_dist = (sample_mean - y_data[below_index]) / y_delta;
         let guess = x_data[below_index] + frac_y_dist * x_delta;
-
-        console.log("Guess = " + guess + " actual size = " + size);
         return guess;
       }      
 
@@ -311,12 +305,14 @@
     let results = []
     let actualBytes = []
     let guessedBytes = []
+    let errorBytes = []
     for (let i = 0; i < numSamples; i++) {
       let bytes = Math.floor(Math.random() * 1024 * Math.pow(2, kMaxPow-1));
       let guess = await guessSize(bytes, x_data, y_data);
       let error = Math.abs(guess - bytes);
       actualBytes.push(bytes);
       guessedBytes.push(guess);
+      errorBytes.push(Math.abs(guess - bytes));
       results.push([bytes, guess, error])
     }
       
@@ -344,8 +340,14 @@
         , yaxis : {title : 'Predicted Bytes'}, title : 'Predicted Bytes vs Actual'
     });    
     
+      
+      
     console.log(results);
       
+    console.log("Mean error bytes = " + mean(errorBytes));
+    console.log("Stddev of error bytes = " + sampleStandardDeviation(errorBytes));
+    
+    
       
     })();
       
