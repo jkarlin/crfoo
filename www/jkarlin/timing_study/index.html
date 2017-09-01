@@ -153,7 +153,7 @@
 
       all_times = {}
       let x_data = []
-      for (let exp = 0; exp < kMaxPow; exp++) {
+      for (let exp = kMaxPow-1; exp >= 0; exp--) {
         let bytes = 1024 * Math.pow(2, exp);
         x_data.push(bytes)
         let times = [];
