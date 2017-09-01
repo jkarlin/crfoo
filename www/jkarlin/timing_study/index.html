@@ -173,7 +173,7 @@
         let d = stripOutliers(all_times[bytes])
         //let d = all_times[bytes]
         y_data.push(mean(d))
-        xy_data.push([key, mean(d)])
+        xy_data.push([bytes, mean(d)])
         y_error.push(sampleStandardError(d))
        }
 
