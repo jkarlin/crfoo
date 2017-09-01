@@ -178,7 +178,7 @@
         let x_delta = x_data[above_index] - x_data[below_index];
         let slope = y_delta / x_delta;
         let frac_y_dist = (sample_mean - y_data[below_index]) / y_delta;
-        let guess = frac_y_dist * x_delta;
+        let guess = x_data[below_index] + frac_y_dist * x_delta;
 
         console.log("Guess = " + guess + " actual size = " + size);
         return guess;
