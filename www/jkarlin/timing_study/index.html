@@ -74,6 +74,30 @@
         return Math.sqrt(sum_diffs / (values.length - 1))
       }      
       
+      // returns slope, intercept and r-square of the line
+      // from: http://bl.ocks.org/benvandyke/8459843
+      function leastSquares(xSeries, ySeries) {
+        var reduceSumFunc = function(prev, cur) { return prev + cur; };
+
+        var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
+        var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
+
+        var ssXX = xSeries.map(function(d) { return Math.pow(d - xBar, 2); })
+          .reduce(reduceSumFunc);
+
+        var ssYY = ySeries.map(function(d) { return Math.pow(d - yBar, 2); })
+          .reduce(reduceSumFunc);
+
+        var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
+          .reduce(reduceSumFunc);
+
+        var slope = ssXY / ssXX;
+        var intercept = yBar - (xBar * slope);
+        var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
+
+        return [slope, intercept, rSquare];
+      }      
+      
       function median(d) {
         return percentile(d, 0.5);
       }
@@ -157,11 +181,14 @@
 //         y_error.push(stderrOfMedian(d))
 //       }
 
-      console.log("xy_data " + xy_data);
-      let reg = regression('linear', xy_data);
-      let slope = reg.equation[0]
-      let y_intercept = reg.equation[1]
-      console.log("points = " + reg.points)
+      let fit = leastSquares(x_data, y_data)
+      let slope = fit[0]
+      let y_intercept = fit[1]
+//       console.log("xy_data " + xy_data);
+//       let reg = regression('linear', xy_data);
+//       let slope = reg.equation[0]
+//       let y_intercept = reg.equation[1]
+//       console.log("points = " + reg.points)
       // Plot the results
       let data =
         {
@@ -178,8 +205,8 @@
       console.log("y_intercept = " + y_intercept)
 
       let y_fit = []
-      for(val of x_data)
-        y_fit.push(slope*val + y_intercept);
+      for(i of x_data)
+        y_fit.push(slope*i + y_intercept);
 
       let fit =
         {
