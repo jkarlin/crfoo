@@ -13,12 +13,15 @@
     <div id="status">Gathering samples...</div>
     <div id="plot" style="width:900px;height:400px;"></div>
     <div id="guessPlot" style="width:900px;height:400px;"></div>
+    <p id="meanError"></p>
+    <p id="stdDev"></p>
     <div id="distPlot" style="width:900px;height:400px;"></div>
+    
     
     <script>
 
       const kMaxPow = 7;
-      const kSamplesPerSize = 40;
+      const kSamplesPerSize = 4;
       const kWarmUpCount = 20;
       const numSamples = 20;
       
@@ -355,8 +358,11 @@
     console.log("Mean error bytes = " + mean(errorBytes));
     console.log("Stddev of error bytes = " + sampleStandardDeviation(errorBytes));
     
+    let meanErrEle = document.getElementById('meanError');
+    meanErrEle.innerHTML = "Mean error = " + mean(errorBytes)  + " bytes";
     
-      
+    let stdDevEle = document.getElementById('stdDev');
+    stdDevEle.innerHTML = "Stddev of error = " + sampleStandardDeviation(errorBytes) + " bytes";
     })();
       
 </script>
