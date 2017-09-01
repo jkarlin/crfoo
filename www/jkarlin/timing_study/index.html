@@ -9,6 +9,7 @@
   <body>
     <p>This site downloads opaque resources of various sizes and plots the distributions of the time between resource start and end from the network. This gives us an idea of how accurate network timing attacks may be.</p>
 
+    
     <div id="status">Gathering samples...</div>
     <div id="plot" style="width:900px;height:400px;"></div>
 
@@ -232,9 +233,9 @@
       // }
 
       layout = {
-          title: '',
+          title: 'Sample means of network fetches',
           yaxis: {
-              title: 'Time',
+              title: 'Time in milliseconds',
 //               autorange: true,
 //               showgrid: true,
 //               zeroline: true,
