@@ -167,7 +167,11 @@
             above_index = i+1;
           }
         }
-       
+       if (below_index == -1) {
+         below_index = 0;
+         above_index = 1;
+       }
+        
         if (below_index == y_data.length-1) {
           above_index = y_data.length - 1;
         }
