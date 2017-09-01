@@ -167,7 +167,7 @@
       let xy_data = []
       let y_error = []
       for(var key in all_times) {
-      //   let d = stripOutliers(all_times[key])
+        let d = stripOutliers(all_times[key])
         let d = all_times[key]
         y_data.push(mean(d))
         xy_data.push([key, mean(d)])
