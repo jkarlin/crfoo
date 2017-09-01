@@ -58,6 +58,9 @@
         return stdDev;
       }
 
+      function sampleStandardError(values) {
+       return sampleStandardDeviation(values) / Math.sqrt(values.length) 
+      }
 
       function sampleStandardDeviation(values){
         let avg = mean(values);
@@ -144,7 +147,7 @@
         let d = all_times[key]
         y_data.push(mean(d))
         xy_data.push([key, mean(d)])
-        y_error.push(sampleStandardDeviation(d))
+        y_error.push(sampleStandardError(d))
        }
 
 //       for(var key in all_times) {
