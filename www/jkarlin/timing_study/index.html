@@ -312,7 +312,7 @@
       let error = Math.abs(guess - bytes);
       actualBytes.push(bytes);
       guessedBytes.push(guess);
-      errorBytes.push(Math.abs(guess - bytes));
+      errorBytes.push(error);
       results.push([bytes, guess, error])
     }
       
