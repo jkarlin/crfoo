@@ -163,7 +163,7 @@
         for(let i = 0; i < y_data.length-1; i++) {      
           if (sample_mean > y_data[i]) {
             below_index = i;
-            above_index = i;
+            above_index = i+1;
           }
         }
         if (above_index == -1) {
