@@ -315,8 +315,8 @@
       let bytes = Math.floor(Math.random() * 1024 * Math.pow(2, kMaxPow-1));
       let guess = await guessSize(bytes, x_data, y_data);
       let error = Math.abs(guess - bytes);
-      actual_bytes.push(bytes);
-      guessed_bytes.push(guess);
+      actualBytes.push(bytes);
+      guessedBytes.push(guess);
       results.push([bytes, guess, error])
     }
       
