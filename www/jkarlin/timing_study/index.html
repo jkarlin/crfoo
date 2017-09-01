@@ -18,8 +18,9 @@
       const kMaxPow = 7;
       const kSamplesPerSize = 40;
       const kWarmUpCount = 20;
-
-      performance.setResourceTimingBufferSize(kSamplesPerSize * (kMaxPow + 1) + kWarmUpCount );
+      let numSamples = 10;
+      
+      performance.setResourceTimingBufferSize(kSamplesPerSize * (kMaxPow + 1) + kWarmUpCount + numSamples * kSamplesPerSize);
 
       // Creates a link rel=prefetch and times how long the resource load takes.
       let resourceCount = 0;
@@ -295,7 +296,6 @@
 
       Plotly.newPlot('plot', [data], layout);
 
-    let numSamples = 10;
 
     let results = []
     for (let i = 0; i < numSamples; i++) {
