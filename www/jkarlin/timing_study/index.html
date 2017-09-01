@@ -146,6 +146,36 @@
       function stderrOfMedian(d) {
         return stderr(d) * 1.253
       }
+      
+      async function guessSize(size, x_data, y_data) {
+        let samples = []
+        for (let i = 0; i < kSamplesPerSize; i++) {
+           let time = await timeResourceLoad(size);
+           samples.push(time)
+        }
+        let sample_mean = mean(stripOutliers(samples));
+
+        // Find the highest value of y_data that this is above.
+        let above_index = -1;
+        let below_index = -1;
+        for(let i = 0; i < y_data.length-1; i++) {      
+          if (sample_mean > y_data[i]) {
+            below_index = i;
+            above_index = i;
+          }
+        }
+        if (above_index == -1) {
+          below_index = y_data.length-1
+          above_index = y_data.length-1
+        }
+
+        let y_delta = y_data[above_index] - y_data[below_index];
+        let x_delta = x_data[above_index] - x_data[below_index];
+        let slope = y_delta / x_delta;
+        let guess = x_data[below_index] + slope * sample_mean - y_data[below_index];
+
+        return guess;
+      }      
 
     (async function() {
       for(let i = 0; i < kWarmUpCount; i++)
@@ -265,40 +295,6 @@
 
       Plotly.newPlot('plot', [data], layout);
 
-
-    })();
-      
-  async function guessSize(size, x_data, y_data) {
-    let samples = []
-    for (let i = 0; i < kSamplesPerSize; i++) {
-       let time = await timeResourceLoad(size);
-       samples.push(time)
-    }
-    let sample_mean = mean(stripOutliers(samples));
-    
-    // Find the highest value of y_data that this is above.
-    let above_index = -1;
-    let below_index = -1;
-    for(let i = 0; i < y_data.length-1; i++) {      
-      if (sample_mean > y_data[i]) {
-        below_index = i;
-        above_index = i;
-      }
-    }
-    if (above_index == -1) {
-      below_index = y_data.length-1
-      above_index = y_data.length-1
-    }
-    
-    let y_delta = y_data[above_index] - y_data[below_index];
-    let x_delta = x_data[above_index] - x_data[below_index];
-    let slope = y_delta / x_delta;
-    let guess = x_data[below_index] + slope * sample_mean - y_data[below_index];
-    
-    return guess;
-  }
-      
-  (async function runExperiment(x_data, y_data) {
     let numSamples = 10;
 
     let results = []
@@ -310,9 +306,9 @@
     }
     
     console.log(results);
-  }
-   
-  guessSize(x_data, y_data);
+      
+      
+    })();
       
 </script>
 </body>
