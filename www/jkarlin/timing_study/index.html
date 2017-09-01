@@ -159,6 +159,7 @@
         // Find the highest value of y_data that this is above.
         let above_index = -1;
         let below_index = -1;
+        console.log("Sample mean = " + sample_mean);
         for(let i = 0; i < y_data.length-1; i++) {      
           if (sample_mean > y_data[i]) {
             below_index = i;
