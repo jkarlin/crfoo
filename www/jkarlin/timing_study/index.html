@@ -12,13 +12,15 @@
     
     <div id="status">Gathering samples...</div>
     <div id="plot" style="width:900px;height:400px;"></div>
-
+    <div id="guessPlot" style="width:900px;height:400px;"></div>
+    <div id="distPlot" style="width:900px;height:400px;"></div>
+    
     <script>
 
       const kMaxPow = 7;
-      const kSamplesPerSize = 40;
+      const kSamplesPerSize = 4;
       const kWarmUpCount = 20;
-      let numSamples = 10;
+      const numSamples = 20;
       
       performance.setResourceTimingBufferSize(kSamplesPerSize * (kMaxPow + 1) + kWarmUpCount + numSamples * kSamplesPerSize);
 
@@ -307,12 +309,40 @@
 
 
     let results = []
+    let actualBytes = []
+    let guessedBytes = []
     for (let i = 0; i < numSamples; i++) {
       let bytes = Math.floor(Math.random() * 1024 * Math.pow(2, kMaxPow-1));
       let guess = await guessSize(bytes, x_data, y_data);
       let error = Math.abs(guess - bytes);
+      actual_bytes.push(bytes);
+      guessed_bytes.push(guess);
       results.push([bytes, guess, error])
     }
+      
+    // Plot a scatter plot showing guessed vs actual
+    let plotDiv = document.getElementById('guessPlot');
+    let scatterGuess = {
+      x : actualBytes,
+      y : guessedBytes,
+      mode : 'markers',
+      type : 'scatter',
+      name : 'actual vs estimate'
+    };
+    let xEqualsY = {
+      x : actualBytes,
+      y : actualBytes,
+      mode : 'lines',
+      type : 'scatter',
+      name : 'x=y'
+    };
+    Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {
+      xaxis : {
+      title:
+        'Actual'
+      }
+        , yaxis : {title : 'Predicted bytes'}, title : 'Predictions'
+    });    
     
     console.log(results);
       
