@@ -180,6 +180,7 @@
         console.log(slope + " " + x_delta + " " + y_delta);
         let guess = x_data[below_index] + slope * (sample_mean - y_data[below_index]);
 
+        console.log("Guess = " + guess + " actual size = " + size);
         return guess;
       }      
 
