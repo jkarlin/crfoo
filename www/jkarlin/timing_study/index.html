@@ -21,7 +21,7 @@
     <script>
 
       const kMaxPow = 7;
-      const kSamplesPerSize = 10;
+      const kSamplesPerSize = 40;
       const kWarmUpCount = 20;
       const numSamples = 20;
 
@@ -174,18 +174,9 @@
         return stderr(d) * 1.253
       }
 
-      async function guessSize(size, x_data, y_data) {
-        let samples = []
-        for (let i = 0; i < kSamplesPerSize; i++) {
-           let time = await timeResourceLoad(size);
-           samples.push(time)
-        }
-
-        let sample_mean = mean(stripOutliers(samples));
-        //let sample_mean = median(stripOutliers(samples));
-
+      function guessSize(sample_mean, x_data, y_data) {
         // Find the highest value of y_data that this is above.
-        console.log("Sample mean = " + sample_mean)
+//        console.log("Sample mean = " + sample_mean)
         let above_index = -1;
         let below_index = -1;
         for(let i = 0; i < y_data.length; i++) {
@@ -203,45 +194,72 @@
         if (below_index == y_data.length-1) {
           above_index = y_data.length - 1;
         }
-        console.log("below: " + below_index + " above: " + above_index)
+  //      console.log("below: " + below_index + " above: " + above_index)
 
         let y_delta = y_data[above_index] - y_data[below_index];
         let x_delta = x_data[above_index] - x_data[below_index];
-        console.log("x delta = " + x_delta + " y_delta = " + y_delta)
+    //    console.log("x delta = " + x_delta + " y_delta = " + y_delta)
         if (x_delta == 0 || y_delta == 0) {
           return x_data[below_index];
         }
 
         let frac_y_dist = (sample_mean - y_data[below_index]) / y_delta;
-        console.log("frac_y_dist = " + frac_y_dist)
+//        console.log("frac_y_dist = " + frac_y_dist)
         let guess = x_data[below_index] + (frac_y_dist * x_delta);
-        console.log("guess = " + guess)
-        console.log("x_data[below_index] " + x_data[below_index] )
-        console.log("frac_y_dist * x_Delta = " + (frac_y_dist * x_delta) )
-        console.log("calc guess = " + x_data[below_index] + (frac_y_dist * x_delta))
+        // console.log("guess = " + guess)
+        // console.log("x_data[below_index] " + x_data[below_index] )
+        // console.log("frac_y_dist * x_Delta = " + (frac_y_dist * x_delta) )
+        // console.log("calc guess = " + x_data[below_index] + (frac_y_dist * x_delta))
         return guess;
       }
 
-    (async function() {
-      for(let i = 0; i < kWarmUpCount; i++)
+      (async function() {
+        for(let i = 0; i < kWarmUpCount; i++)
         await timeResourceLoad(1024 * 128); // warm up the network
 
       all_times = {}
 
       // Create an array of all of the samples that we want
       let sample_sizes = []
-      for(let exp = 0; exp <  kMaxPow; exp++)
-        for(let i = 0; i < kSamplesPerSize; i++)
-          sample_sizes.push(1024* Math.pow(2, exp));
+      for(let exp = 0; exp <  kMaxPow; exp++) {
+        let bytes =  1024* Math.pow(2, exp);
+        for(let i = 0; i < kSamplesPerSize; i++) {
+          sample_sizes.push([true,bytes])
+        }
+      }
+
+      // Add the samples for the experiment
+      for (let i = 0; i < numSamples; i++) {
+        let bytes = Math.floor(Math.random() * 1024 * Math.pow(2, kMaxPow-1));
+        for(let j = 0; j < kSamplesPerSize; j++)
+          sample_sizes.push([false, bytes])
+      }
 
       // Shuffle the sample order
       shuffle(sample_sizes)
 
-      let times = {}
-      for(bytes of sample_sizes) {
-        if (!(bytes in times))
-          times[bytes] = []
-        times[bytes].push(await timeResourceLoad(bytes));
+      let times = []
+      for (let i = 0; i < sample_sizes.length; i++) {
+        let bytes = sample_sizes[i][1]
+        times.push(await timeResourceLoad(bytes));
+      }
+
+      training_times = {}
+      estimate_times = {}
+      for (let i = 0; i < sample_sizes.length; i++) {
+        let training = sample_sizes[i][0];
+        let bytes = sample_sizes[i][1];
+        let time = times[i];
+
+        if (training) {
+          if (!(bytes in training_times))
+            training_times[bytes] = []
+          training_times[bytes].push(time)
+        } else {
+          if (!(bytes in estimate_times))
+            estimate_times[bytes] = []
+          estimate_times[bytes].push(time)
+        }
       }
 
       let x_data = []
@@ -249,9 +267,9 @@
       let xy_data = []
       let y_error = []
 
-      for(let size in times) {
+      for(let size in training_times) {
         size = parseInt(size)
-        let samples = stripOutliers(times[size])
+        let samples = stripOutliers(training_times[size])
         let y_value = mean(samples)
         x_data.push(size)
         y_data.push(y_value)
@@ -259,9 +277,24 @@
         y_error.push(sampleStandardError(samples))
       }
 
+      let estimate_x_data = []
+      let estimate_y_data = []
+      let estimate_error = []
+      for(let size in estimate_times) {
+        size = parseInt(size)
+        let samples = stripOutliers(estimate_times[size])
+        let sample_mean = mean(samples)
+        let guess = guessSize(sample_mean, x_data, y_data)
+        estimate_x_data.push(size)
+        estimate_y_data.push(guess)
+        estimate_error.push(Math.abs(size - guess))
+      }
+
       console.log("x-data = " + x_data)
       console.log("y-data = " + y_data)
-
+      console.log("estimate_x_data = " + estimate_x_data)
+      console.log("estimate_y_data = " + estimate_y_data)
+      console.log("estimate_error = " + estimate_error)
       let fitdata = leastSquares(x_data, y_data)
       let slope = fitdata[0]
       let y_intercept = fitdata[1]
@@ -272,16 +305,16 @@
 //       console.log("points = " + reg.points)
       // Plot the results
       let data =
-        {
-          x: x_data,
-          y: y_data,
-          error_y: {
-            type: 'data',
-            array: y_error,
-            visible: true
-          },
-          type: 'scatter'
-        }
+      {
+        x: x_data,
+        y: y_data,
+        error_y: {
+          type: 'data',
+          array: y_error,
+          visible: true
+        },
+        type: 'scatter'
+      }
       console.log("slope = " + slope);
       console.log("y_intercept = " + y_intercept)
 
@@ -290,114 +323,65 @@
         y_fit.push(slope*i + y_intercept);
 
       let fit =
-        {
-          x: x_data,
-          y: y_fit,
-          type: 'line',
-        }
-
-
-      // for(var i = 0; i < x_data.length; i++) {
-      //   bytes = x_data[i];
-      //   var result = {
-      //     type: 'scatter',
-      //     y: mean(all_times[bytes]),
-      //     name: x_data[i],
-      //     // boxpoints: 'false',
-      //     // jitter: 0.5,
-      //     // whiskerwidth: 0.6,
-      //     // fillcolor: 'cls',
-      //     // boxmean: 'sd',
-      //   }
-      //   data.push(result)
-      // }
+      {
+        x: x_data,
+        y: y_fit,
+        type: 'line',
+      }
 
       layout = {
-          title: 'Sample Mean Time of Network Fetches',
-          yaxis: {
-              title: 'Time in milliseconds',
-//               autorange: true,
-//               showgrid: true,
-//               zeroline: true,
-//               dtick: 5,
-//              gridcolor: 'rgb(255, 255, 255)',
-//               gridwidth: 1,
-//              zerolinecolor: 'rgb(255, 255, 255)',
-//               zerolinewidth: 2
-          },
-          xaxis: {
-            // type: 'log',
-            autorange: true,
-            title: 'Size in bytes'
-          },
-          // margin: {
-          //     l: 40,
-          //     r: 30,
-          //     b: 80,
-          //     t: 100
-          // },
-          paper_bgcolor: 'rgb(243, 243, 243)',
-          plot_bgcolor: 'rgb(243, 243, 243)',
-          showlegend: false
+        title: 'Sample Mean Time of Network Fetches',
+        yaxis: {
+          title: 'Time in milliseconds',
+
+        },
+        xaxis: {
+          autorange: true,
+          title: 'Size in bytes'
+        },
+        paper_bgcolor: 'rgb(243, 243, 243)',
+        plot_bgcolor: 'rgb(243, 243, 243)',
+        showlegend: false
       };
+
 
       Plotly.newPlot('plot', [data], layout);
 
 
-    let results = []
-    let actualBytes = []
-    let guessedBytes = []
-    let errorBytes = []
-
-
-    for (let i = 0; i < numSamples; i++) {
-      let bytes = Math.floor(Math.random() * 1024 * Math.pow(2, kMaxPow-1));
-      let guess = await guessSize(bytes, x_data, y_data);
-      let error = Math.abs(guess - bytes);
-      actualBytes.push(bytes);
-      guessedBytes.push(guess);
-      errorBytes.push(error);
-      results.push([bytes, guess, error])
-    }
-
     // Plot a scatter plot showing guessed vs actual
     let plotDiv = document.getElementById('guessPlot');
     let scatterGuess = {
-      x : actualBytes,
-      y : guessedBytes,
+      x : estimate_x_data,
+      y : estimate_y_data,
       mode : 'markers',
       type : 'scatter',
       name : 'actual vs estimate'
     };
     let xEqualsY = {
-      x : actualBytes,
-      y : actualBytes,
+      x : estimate_x_data,
+      y : estimate_x_data,
       mode : 'lines',
       type : 'scatter',
       name : 'x=y'
     };
     Plotly.plot(plotDiv, [scatterGuess, xEqualsY], {
       xaxis : {
-      title:
+        title:
         'Actual Bytes'
       }
-        , yaxis : {title : 'Predicted Bytes'}, title : 'Predicted Bytes vs Actual'
+      , yaxis : {title : 'Predicted Bytes'}, title : 'Predicted Bytes vs Actual'
     });
 
 
-
-    console.log(results);
-    console.log(errorBytes);
-
-    console.log("Mean error bytes = " + mean(errorBytes));
-    console.log("Stddev of error bytes = " + sampleStandardDeviation(errorBytes));
+    console.log("Mean error bytes = " + mean(estimate_error));
+    console.log("Stddev of error bytes = " + sampleStandardDeviation(estimate_error));
 
     let meanErrEle = document.getElementById('meanError');
-    meanErrEle.innerHTML = "Mean error = " + mean(errorBytes)  + " bytes";
+    meanErrEle.innerHTML = "Mean error = " + mean(estimate_error)  + " bytes";
 
     let stdDevEle = document.getElementById('stdDev');
-    stdDevEle.innerHTML = "Stddev of error = " + sampleStandardDeviation(errorBytes) + " bytes";
-    })();
+    stdDevEle.innerHTML = "Stddev of error = " + sampleStandardDeviation(estimate_error) + " bytes";
+  })();
 
 </script>
 </body>
