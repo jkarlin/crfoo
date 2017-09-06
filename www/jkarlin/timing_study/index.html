@@ -32,9 +32,9 @@
       async function timeResourceLoad(size) {
         var link = document.createElement('link');
         link.rel = "prefetch";
-
         return new Promise(function(resolve, reject) {
-          let url = "https://cr2.kungfoo.net/jkarlin/timing_study/size_" + size / 1024 + "kb?count=" + resourceCount++;
+          let url = "https://cr2.kungfoo.net/jkarlin/timing/size.php?size=" + size + '?count=' + resourceCount++;
+          //let url = "https://cr2.kungfoo.net/jkarlin/timing_study/size_" + size / 1024 + "kb?count=" + resourceCount++;
           link.onerror = function() {
             console.log("OnError");
             let perf_entry = window.performance.getEntriesByName(url, 'resource')[0];
@@ -43,6 +43,7 @@
           link.onload = function() {
             let perf_entry = window.performance.getEntriesByName(url, 'resource')[0];
             resolve(perf_entry.responseEnd - perf_entry.startTime);
+            //resolve(performance.now() - startTime);
           }
 
           link.href = url;
@@ -161,7 +162,7 @@
         }
 
         let sample_mean = mean(stripOutliers(samples));
-        //let sample_mean = median(samples)
+        //let sample_mean = median(stripOutliers(samples));
 
         // Find the highest value of y_data that this is above.
         let above_index = -1;
