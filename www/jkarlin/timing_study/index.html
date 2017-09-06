@@ -146,6 +146,26 @@
         return out;
       }
 
+      function shuffle(array) {
+        let counter = array.length;
+
+        // While there are elements in the array
+        while (counter > 0) {
+          // Pick a random index
+          let index = Math.floor(Math.random() * counter);
+
+          // Decrease counter by 1
+          counter--;
+
+          // And swap the last element with it
+          let temp = array[counter];
+          array[counter] = array[index];
+          array[index] = temp;
+        }
+
+        return array;
+      }
+
       function stderr(d) {
         return standardDeviation(d) / Math.sqrt(d.length);
       }
@@ -165,6 +185,7 @@
         //let sample_mean = median(stripOutliers(samples));
 
         // Find the highest value of y_data that this is above.
+        console.log("Sample mean = " + sample_mean)
         let above_index = -1;
         let below_index = -1;
         for(let i = 0; i < y_data.length; i++) {
@@ -173,6 +194,7 @@
             above_index = i+1;
           }
         }
+
        if (below_index == -1) {
          below_index = 0;
          above_index = 1;
@@ -181,15 +203,22 @@
         if (below_index == y_data.length-1) {
           above_index = y_data.length - 1;
         }
+        console.log("below: " + below_index + " above: " + above_index)
 
         let y_delta = y_data[above_index] - y_data[below_index];
         let x_delta = x_data[above_index] - x_data[below_index];
+        console.log("x delta = " + x_delta + " y_delta = " + y_delta)
         if (x_delta == 0 || y_delta == 0) {
           return x_data[below_index];
         }
-        let slope = y_delta / x_delta;
+
         let frac_y_dist = (sample_mean - y_data[below_index]) / y_delta;
-        let guess = x_data[below_index] + frac_y_dist * x_delta;
+        console.log("frac_y_dist = " + frac_y_dist)
+        let guess = x_data[below_index] + (frac_y_dist * x_delta);
+        console.log("guess = " + guess)
+        console.log("x_data[below_index] " + x_data[below_index] )
+        console.log("frac_y_dist * x_Delta = " + (frac_y_dist * x_delta) )
+        console.log("calc guess = " + x_data[below_index] + (frac_y_dist * x_delta))
         return guess;
       }
 
@@ -198,39 +227,40 @@
         await timeResourceLoad(1024 * 128); // warm up the network
 
       all_times = {}
-      let x_data = []
 
+      // Create an array of all of the samples that we want
+      let sample_sizes = []
+      for(let exp = 0; exp <  kMaxPow; exp++)
+        for(let i = 0; i < kSamplesPerSize; i++)
+          sample_sizes.push(1024* Math.pow(2, exp));
 
-      for (let exp = kMaxPow-1; exp >= 0; exp--) {
-        let bytes = 1024 * Math.pow(2, exp);
-        x_data.push(bytes)
-        let times = [];
-        for (let attempt = 0; attempt < kSamplesPerSize; attempt++) {
-          time = await timeResourceLoad(bytes);
-          times.push(time);
-        }
-        all_times[bytes] = times;
+      // Shuffle the sample order
+      shuffle(sample_sizes)
+
+      let times = {}
+      for(bytes of sample_sizes) {
+        if (!(bytes in times))
+          times[bytes] = []
+        times[bytes].push(await timeResourceLoad(bytes));
       }
 
-      // Flip the samples so that they're from low to high
-      x_data = x_data.reverse();
-
+      let x_data = []
       let y_data = []
       let xy_data = []
       let y_error = []
-      for(bytes of x_data) {
-        let d = stripOutliers(all_times[bytes])
-        y_data.push(mean(d))
-        xy_data.push([bytes, mean(d)])
-        y_error.push(sampleStandardError(d))
-       }
 
-      // for(bytes of x_data) {
-      //   let d = stripOutliers(all_times[bytes])
-      //   y_data.push(median(d))
-      //   xy_data.push([bytes, median(d)])
-      //   y_error.push(stderrOfMedian(d))
-      //  }
+      for(let size in times) {
+        size = parseInt(size)
+        let samples = stripOutliers(times[size])
+        let y_value = mean(samples)
+        x_data.push(size)
+        y_data.push(y_value)
+        xy_data.push([size, y_value])
+        y_error.push(sampleStandardError(samples))
+      }
+
+      console.log("x-data = " + x_data)
+      console.log("y-data = " + y_data)
 
       let fitdata = leastSquares(x_data, y_data)
       let slope = fitdata[0]
@@ -318,6 +348,8 @@
     let actualBytes = []
     let guessedBytes = []
     let errorBytes = []
+
+
     for (let i = 0; i < numSamples; i++) {
       let bytes = Math.floor(Math.random() * 1024 * Math.pow(2, kMaxPow-1));
       let guess = await guessSize(bytes, x_data, y_data);
