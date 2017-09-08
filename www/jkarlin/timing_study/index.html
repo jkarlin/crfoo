@@ -176,7 +176,6 @@
 
       function guessSize(sample_mean, x_data, y_data) {
         // Find the highest value of y_data that this is above.
-//        console.log("Sample mean = " + sample_mean)
         let above_index = -1;
         let below_index = -1;
         for(let i = 0; i < y_data.length; i++) {
@@ -194,22 +193,15 @@
         if (below_index == y_data.length-1) {
           above_index = y_data.length - 1;
         }
-  //      console.log("below: " + below_index + " above: " + above_index)
 
         let y_delta = y_data[above_index] - y_data[below_index];
         let x_delta = x_data[above_index] - x_data[below_index];
-    //    console.log("x delta = " + x_delta + " y_delta = " + y_delta)
         if (x_delta == 0 || y_delta == 0) {
           return x_data[below_index];
         }
 
         let frac_y_dist = (sample_mean - y_data[below_index]) / y_delta;
-//        console.log("frac_y_dist = " + frac_y_dist)
         let guess = x_data[below_index] + (frac_y_dist * x_delta);
-        // console.log("guess = " + guess)
-        // console.log("x_data[below_index] " + x_data[below_index] )
-        // console.log("frac_y_dist * x_Delta = " + (frac_y_dist * x_delta) )
-        // console.log("calc guess = " + x_data[below_index] + (frac_y_dist * x_delta))
         return guess;
       }
 
@@ -298,11 +290,7 @@
       let fitdata = leastSquares(x_data, y_data)
       let slope = fitdata[0]
       let y_intercept = fitdata[1]
-//       console.log("xy_data " + xy_data);
-//       let reg = regression('linear', xy_data);
-//       let slope = reg.equation[0]
-//       let y_intercept = reg.equation[1]
-//       console.log("points = " + reg.points)
+
       // Plot the results
       let data =
       {
