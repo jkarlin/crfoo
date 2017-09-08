@@ -1,19 +1,73 @@
 <head>
 </head>
 <body>
+
+<script>
+
+function AddFrame(id, src, description) {
+  let text = document.createElement('p');
+  text.id = "description_" + id;
+  text.innerHTML = description;
+
+  let iframe = document.createElement('iframe');
+  iframe.id = id;
+  iframe.src = src;
+  document.body.appendChild(text);
+  document.body.appendChild(iframe)
+  document.body.appendChild(document.createElement("br"));
+
+  let pause = document.createElement('button');
+  pause.appendChild(document.createTextNode("Pause"));
+  pause.onclick = function() {
+    iframe.pause();
+    iframe.style.filter = "grayscale(100%)";
+  }
+  document.body.appendChild(pause);
+
+  let resume = document.createElement('button');
+  resume.appendChild(document.createTextNode("Resume"));
+  resume.onclick = function() {
+    iframe.resume();
+    iframe.style.filter = "";
+  }
+  document.body.appendChild(resume);
+
+  let status = document.createElement('button');
+  let status_output = document.createElement('span');
+  status.appendChild(document.createTextNode("IsPaused"));
+  status.onclick = function() {
+    status_output.innerHTML = " " + iframe.paused;
+  }
+  document.body.appendChild(status);
+  document.body.appendChild(status_output);
+
+  document.body.appendChild(document.createElement('p'));
+}
+
+AddFrame("CounterFrame", "counter.html", "Loads an image and counts with setInterval");
+AddFrame("AnimationFrame", "request_animation_frame.html", "Loads an image and counts with requestAnimationFrame");
+AddFrame("VideoFrame", "video.html", "Loads a looped video fetched as a single resource");
+AddFrame("Animated", "animated.html", "Loads an animated gif in an infinite loop");
+AddFrame("Resources", "infinite_resources.html", "Keeps loading resources");
+AddFrame("CSSAnimation", "css_animation.html", "CSS Animation");
+AddFrame("CSSTransition", "css_transition.html", "CSS Transition");
+</script>
+
+
+<!--
   <p>A frame that loads an image and counts with setInterval.</p>
-<iframe name="google_ads_iframe" src="counter.html"></iframe>
-  
+<iframe id="counterFrame" src="counter.html"></iframe>
+
   <p>A frame that loads an image and counts with requestAnimationFrame</p>
-  <iframe name="google_ads_iframe" src="request_animation_frame.html"></iframe>
+  <iframe id="google_ads_iframe" src="request_animation_frame.html"></iframe>
 
   <p>A frame that loads a looped video fetched as a single resource</p>
 <iframe name="google_ads_iframe" src="video.html"></iframe>
-  
+
   <p>An animated gif in an infinite loop</p>
   <iframe name="google_ads_iframe" src="animated.html"></iframe>
-  
+
   <p>A frame that keeps loading resources</p>
   <iframe name="google_ads_iframe" src="infinite_resources.html"></iframe>
-  
+  -->
 </body>

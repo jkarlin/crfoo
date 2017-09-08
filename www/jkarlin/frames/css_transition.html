@@ -1,0 +1,21 @@
+<head>
+<style>
+
+#foo {
+  background-color: orange;
+  width: 300px;
+  transition: width 20s linear;
+}
+
+</style>
+</head>
+<body>
+<div id='foo'>&nbsp</div>
+
+<script>
+setRepeating(function() {
+  let d = document.getElementById('foo');
+  d.style.width='1px';
+}, 20000)
+</script>
+</body>
