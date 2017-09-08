@@ -372,6 +372,26 @@
       , yaxis : {title : 'Predicted Bytes'}, title : 'Predicted Bytes vs Actual'
     });
 
+    // Plot the CDF of deltas
+    plotDiv = document.getElementById('distPlot');
+    let cdfX = [];
+    let cdfY = [];
+    let curCount = 0;
+    let deltas = estimate_error.slice();
+
+    deltas.sort(function(a, b) {
+        return a - b
+    });
+
+    for (let delta of deltas) {
+      cdfX.push(delta);
+      cdfY.push((curCount + 1) / deltas.length);
+      curCount += 1;
+    }
+    let cdf = {x : cdfX, y : cdfY, type : 'scatter', mode : 'lines'};
+    Plotly.plot(plotDiv, [cdf], { xaxis : { title:'Bytes delta' }, yaxis : {title : 'CDF of abs(actual-predicted)'},
+              title : 'Prediction Delta CDF'
+    });
 
     console.log("Mean error bytes = " + mean(estimate_error));
     console.log("Stddev of error bytes = " + sampleStandardDeviation(estimate_error));
