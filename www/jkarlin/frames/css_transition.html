@@ -3,8 +3,8 @@
 
 #foo {
   background-color: orange;
-  width: 300px;
-  transition: width 20s linear;
+  width: 275px;
+  transition: width 5s linear;
 }
 
 </style>
@@ -13,9 +13,18 @@
 <div id='foo'>&nbsp</div>
 
 <script>
-setRepeating(function() {
+
+function animate() {
   let d = document.getElementById('foo');
-  d.style.width='1px';
-}, 20000)
+  if (d.style.width == '1px') {
+    d.style.width='275px';
+  } else {
+    d.style.width='1px';
+  }
+  setTimeout(animate, 5001);
+}
+
+setTimeout(animate, 500);
+
 </script>
 </body>

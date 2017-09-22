@@ -1,10 +1,34 @@
 <head>
+
+<style>
+table, td {
+  padding: 15px;
+}
+</style>
 </head>
 <body>
 
+<table id="table" style="width:90%; padding:5px">
+
+</table>
+
+
 <script>
 
+let table = document.getElementById('table');
+let curRow = document.createElement('tr');
+table.appendChild(curRow);
+let curColCount = 0;
+
 function AddFrame(id, src, description) {
+  if (++curColCount > 3) {
+    curColCount = 1;
+    curRow = document.createElement('tr');
+    table.appendChild(curRow);
+  }
+
+  let td = document.createElement('td');
+
   let text = document.createElement('p');
   text.id = "description_" + id;
   text.innerHTML = description;
@@ -12,9 +36,9 @@ function AddFrame(id, src, description) {
   let iframe = document.createElement('iframe');
   iframe.id = id;
   iframe.src = src;
-  document.body.appendChild(text);
-  document.body.appendChild(iframe)
-  document.body.appendChild(document.createElement("br"));
+  td.appendChild(text);
+  td.appendChild(iframe)
+  td.appendChild(document.createElement("br"));
 
   let pause = document.createElement('button');
   pause.appendChild(document.createTextNode("Pause"));
@@ -22,15 +46,15 @@ function AddFrame(id, src, description) {
     iframe.pause();
     iframe.style.filter = "grayscale(100%)";
   }
-  document.body.appendChild(pause);
+  td.appendChild(pause);
 
   let resume = document.createElement('button');
-  resume.appendChild(document.createTextNode("Resume"));
+  resume.appendChild(document.createTextNode("Unpause"));
   resume.onclick = function() {
-    iframe.resume();
+    iframe.unpause();
     iframe.style.filter = "";
   }
-  document.body.appendChild(resume);
+  td.appendChild(resume);
 
   let status = document.createElement('button');
   let status_output = document.createElement('span');
@@ -38,10 +62,11 @@ function AddFrame(id, src, description) {
   status.onclick = function() {
     status_output.innerHTML = " " + iframe.paused;
   }
-  document.body.appendChild(status);
-  document.body.appendChild(status_output);
+  td.appendChild(status);
+  td.appendChild(status_output);
 
-  document.body.appendChild(document.createElement('p'));
+  td.appendChild(document.createElement('p'));
+  curRow.appendChild(td);
 }
 
 AddFrame("CounterFrame", "counter.html", "Loads an image and counts with setInterval");
@@ -51,6 +76,7 @@ AddFrame("Animated", "animated.html", "Loads an animated gif in an infinite loop
 AddFrame("Resources", "infinite_resources.html", "Keeps loading resources");
 AddFrame("CSSAnimation", "css_animation.html", "CSS Animation");
 AddFrame("CSSTransition", "css_transition.html", "CSS Transition");
+AddFrame("MetaRefresh", "meta_refresh.html", "Meta Refresh");
 </script>
 
 
