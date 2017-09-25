@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<p>This site opens a popup and navigates this page automatically to a cross origin site.
+You can choose if you want to open the popup first, or navigate first.
+<br>
+<button onclick='windowOpenAndNavigate()'>Popup and then navigate!</button>
+<br>
+<button onclick='navigateAndWindowOpen()'>Navigate and then Popup!</button>
+<a href="https://www.google.com">google</a>
+<a href="/">Home</a>
+<script>
+function navigateAndWindowOpen() {
+  document.getElementsByTagName('a')[0].click();
+  window.open(location.href);
+}
+
+function windowOpenAndNavigate() {
+  var opened = !!window.open(location.href);
+  document.getElementsByTagName('a')[0].click();
+}
+</script>
+
