@@ -1,0 +1,13 @@
+<body>
+  <div id=clicker></div>
+
+<script>
+  let clicks = 0;
+  function clicked() {
+    clicker = document.getElementById('clicker');
+    clicker.innerHTML = "<font color=red>" + ++clicks + "</font>";
+  }
+
+  window.addEventListener("click", clicked)
+</script>
+</body>
