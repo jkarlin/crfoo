@@ -20,7 +20,7 @@ let curRow = document.createElement('tr');
 table.appendChild(curRow);
 let curColCount = 0;
 
-function AddFrame(id, src, description) {
+async function AddFrame(id, src, description) {
   if (++curColCount > 3) {
     curColCount = 1;
     curRow = document.createElement('tr');
@@ -42,17 +42,19 @@ function AddFrame(id, src, description) {
 
   let pause = document.createElement('button');
   pause.appendChild(document.createTextNode("Pause"));
-  pause.onclick = function() {
-    iframe.pause();
+  pause.onclick = async function() {
+    await iframe.pause();
     iframe.style.filter = "grayscale(100%)";
   }
   td.appendChild(pause);
 
   let resume = document.createElement('button');
   resume.appendChild(document.createTextNode("Unpause"));
-  resume.onclick = function() {
-    iframe.unpause();
-    iframe.style.filter = "";
+  resume.onclick = async function() {
+    await iframe.unpause();
+    if (!iframe.paused) {
+      iframe.style.filter = "";
+    }
   }
   td.appendChild(resume);
 
