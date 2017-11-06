@@ -40,13 +40,29 @@ async function AddFrame(id, src, description) {
   td.appendChild(iframe)
   td.appendChild(document.createElement("br"));
 
-  let pause = document.createElement('button');
-  pause.appendChild(document.createTextNode("Pause"));
-  pause.onclick = async function() {
-    await iframe.pause();
+  let pauseRendering = document.createElement('button');
+  pauseRendering.appendChild(document.createTextNode("Pause Rendering"));
+  pauseRendering.onclick = async function() {
+    await iframe.pause({rendering: true});
     iframe.style.filter = "grayscale(100%)";
   }
-  td.appendChild(pause);
+  td.appendChild(pauseRendering);
+
+  let pauseLoading = document.createElement('button');
+  pauseLoading.appendChild(document.createTextNode("Pause Loading"));
+  pauseLoading.onclick = async function() {
+    await iframe.pause({loading: true});
+    iframe.style.filter = "grayscale(100%)";
+  }
+  td.appendChild(pauseLoading);
+
+  let pauseScript = document.createElement('button');
+  pauseScript.appendChild(document.createTextNode("Pause Script"));
+  pauseScript.onclick = async function() {
+    await iframe.pause({script: true});
+    iframe.style.filter = "grayscale(100%)";
+  }
+  td.appendChild(pauseScript);
 
   let resume = document.createElement('button');
   resume.appendChild(document.createTextNode("Unpause"));

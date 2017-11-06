@@ -1,0 +1,25 @@
+<title>Transfer Size Demo</title>
+
+<script>
+  function onBigFrame(event) {
+    alert("Big frame");
+    let frame = document.getElementById("frame");
+    let shouldPause = document.getElementById("shouldPause").checked;
+    if ("pause" in frame && shouldPause) {
+      frame.pause({loading: true});
+    }
+  }
+
+  function onLoad(event) {
+    console.log("onload");
+  }
+
+</script>
+
+<iframe id=frame src=frame.html ontransferexceeded="onBigFrame(event)" transfersize=10></iframe>
+<p></p>
+<input id="shouldPause" type="checkbox">Pause after alert?</input>
+
+<script>
+document.getElementById("frame").addEventListener("transferexceeded", onBigFrame)
+</script>

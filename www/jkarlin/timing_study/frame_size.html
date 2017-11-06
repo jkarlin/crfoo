@@ -49,7 +49,14 @@
           }
           startTime = performance.now();
 
-          frame.srcdoc = "<head><script onerror=\"console.log('hi');\" src =" + url + "><<" + "/script>"
+          // Bad
+          frame.name = url
+          frame.src = "iframe.html"
+
+          // Works
+          //frame.srcdoc = "<head><script onerror=\"console.log('hi');\" src =" + url + "><<" + "/script>"
+
+          // Bad
           //frame.srcdoc = "<head><img onerror=\"console.log('image loaded at ' + (new Date()).getTime());\" src=" + url + "></img></head>"
           //frame.srcdoc = "<head><img src=" + url + "><\/script><\/head>"
           document.body.appendChild(frame);

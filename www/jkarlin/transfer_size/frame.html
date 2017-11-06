@@ -1,0 +1,17 @@
+<body>
+
+<script>
+  let loaded = 0;
+  async function LoadResource() {
+    resp = await fetch("https://cr.kungfoo.net/jkarlin/timing/size.php?size=4096", {mode:'no-cors'});
+    loaded += 4096;
+    document.getElementById("total").innerHTML = loaded / 1024 + "KB loaded by frame";
+    console.log("Fetched resource");
+  }
+
+</script>
+
+<div id="total">0 KB loaded by frame</div>
+<button onclick="LoadResource()">Download 4KB</button>
+
+</body>
