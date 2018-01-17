@@ -12,6 +12,6 @@ Your connection type is: <ins id=conn_type></ins>
   }
   
   UpdateType();
-  navigator.connection.ontypechange = UpdateType();
+  navigator.connection.addEventListener("typechange", UpdateType);
 </script>
 </body>
