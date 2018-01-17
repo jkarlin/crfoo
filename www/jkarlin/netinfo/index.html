@@ -2,11 +2,16 @@
 Your connection type is: <ins id=conn_type></ins>
 
 <script>
-  var ins = document.getElementById('conn_type');
-  if (!navigator.connection) {
-    ins.innerHTML = "navigator.connection unsupported on this platform of this browser";
-  } else {
-    ins.innerHTML = navigator.connection.type;
+  function UpdateType() {
+    var ins = document.getElementById('conn_type');
+    if (!navigator.connection) {
+      ins.innerHTML = "navigator.connection unsupported on this platform of this browser";
+    } else {
+      ins.innerHTML = navigator.connection.type;
+    }
   }
+  
+  UpdateType();
+  navigator.connection.ontypechange = UpdateType();
 </script>
 </body>
