@@ -1,0 +1,15 @@
+
+<button onclick="usbRequestPopup();">USB + popup</button>
+<button onclick="bluetoothRequestPopup();">Bluetooth + popup</button>
+<script>
+function usbRequestPopup () {
+  navigator.usb.requestDevice({filters:[]});
+  window.open();
+};
+function bluetoothRequestPopup() {
+  navigator.bluetooth.requestDevice({
+    acceptAllDevices:true
+  });
+  window.open();
+}
+</script>
