@@ -5,6 +5,11 @@ You can choose if you want to open the popup first, or navigate first.
 <button onclick='windowOpenAndNavigate()'>Popup and then navigate!</button>
 <br>
 <button onclick='navigateAndWindowOpen()'>Navigate and then Popup!</button>
+<br>
+<button onclick='ctrlNavigateAndWindowOpen()'>Ctrl Navigate and then Popup!</button>
+<button onclick='metaNavigateAndWindowOpen()'>Meta Navigate and then Popup!</button>
+<button onclick='shiftNavigateAndWindowOpen()'>Shift Navigate and then Popup!</button>
+
 <a href="https://www.google.com">google</a>
 <a href="/">Home</a>
 <script>
@@ -16,6 +21,31 @@ function navigateAndWindowOpen() {
 function windowOpenAndNavigate() {
   var opened = !!window.open(location.href);
   document.getElementsByTagName('a')[0].click();
+}
+
+function ctrlNavigateAndWindowOpen() {
+  var evt = new MouseEvent('click') {
+    view : window,
+    ctrlKey: true
+  });
+  document.getElementsByTagName()[0].dispatchEvent(evt);
+  window.open(location.href);
+}
+function metaNavigateAndWindowOpen() {
+  var evt = new MouseEvent('click') {
+    view : window,
+    metaKey: true
+  });
+  document.getElementsByTagName()[0].dispatchEvent(evt);
+  window.open(location.href);
+}
+function shiftNavigateAndWindowOpen() {
+  var evt = new MouseEvent('click') {
+    view : window,
+    shiftKey: true
+  });
+  document.getElementsByTagName()[0].dispatchEvent(evt);
+  window.open(location.href);
 }
 </script>
 
