@@ -24,7 +24,7 @@ function windowOpenAndNavigate() {
 }
 
 function ctrlNavigateAndWindowOpen() {
-  var evt = new MouseEvent('click') {
+  var evt = new MouseEvent('click', {
     view : window,
     ctrlKey: true
   });
@@ -32,7 +32,7 @@ function ctrlNavigateAndWindowOpen() {
   window.open(location.href);
 }
 function metaNavigateAndWindowOpen() {
-  var evt = new MouseEvent('click') {
+  var evt = new MouseEvent('click', {
     view : window,
     metaKey: true
   });
@@ -40,7 +40,7 @@ function metaNavigateAndWindowOpen() {
   window.open(location.href);
 }
 function shiftNavigateAndWindowOpen() {
-  var evt = new MouseEvent('click') {
+  var evt = new MouseEvent('click', {
     view : window,
     shiftKey: true
   });
