@@ -28,7 +28,7 @@ function ctrlNavigateAndWindowOpen() {
     view : window,
     ctrlKey: true
   });
-  document.getElementsByTagName()[0].dispatchEvent(evt);
+  document.getElementsByTagName('a')[0].dispatchEvent(evt);
   window.open(location.href);
 }
 function metaNavigateAndWindowOpen() {
@@ -36,7 +36,7 @@ function metaNavigateAndWindowOpen() {
     view : window,
     metaKey: true
   });
-  document.getElementsByTagName()[0].dispatchEvent(evt);
+  document.getElementsByTagName('a')[0].dispatchEvent(evt);
   window.open(location.href);
 }
 function shiftNavigateAndWindowOpen() {
@@ -44,7 +44,7 @@ function shiftNavigateAndWindowOpen() {
     view : window,
     shiftKey: true
   });
-  document.getElementsByTagName()[0].dispatchEvent(evt);
+  document.getElementsByTagName('a')[0].dispatchEvent(evt);
   window.open(location.href);
 }
 </script>
