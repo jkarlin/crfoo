@@ -6,12 +6,16 @@ You can choose if you want to open the popup first, or navigate first.
 <br>
 <button onclick='navigateAndWindowOpen()'>Navigate and then Popup!</button>
 <br>
-<button onclick='ctrlNavigateAndWindowOpen()'>Ctrl Navigate and then Popup!</button>
-<button onclick='metaNavigateAndWindowOpen()'>Meta Navigate and then Popup!</button>
-<button onclick='shiftNavigateAndWindowOpen()'>Shift Navigate and then Popup!</button>
+<button onclick='ctrlNavigateAndWindowOpen()'>Simulate Ctrl Navigate and then Popup!</button>
+<br>
+<button onclick='metaNavigateAndWindowOpen()'>Simulate Meta Navigate and then Popup!</button>
+<br>
+<button onclick='shiftNavigateAndWindowOpen()'>Simulate Shift Navigate and then Popup!</button>
+<br>
 
 <a href="https://www.google.com">google</a>
 <a href="/">Home</a>
+<a id="dispatcher" href="/">Home and dispatch a window.open in setTimeout</a>
 <script>
 function navigateAndWindowOpen() {
   document.getElementsByTagName('a')[0].click();
@@ -47,5 +51,10 @@ function shiftNavigateAndWindowOpen() {
   document.getElementsByTagName('a')[0].dispatchEvent(evt);
   window.open(location.href);
 }
+
+document.getElementById("dispatcher").addEventListener("click", (e) => {
+  setTimeout(() => window.open("/"), 0);
+});
+
 </script>
 
