@@ -3,10 +3,10 @@
 
 <script>
 function spamConfirm() {
-  while (true) { confirm('while(true) { confirm(...); }'); }
+  setInterval(() => confirm('setInterval(() => confirm('...'), 0);'), 0);
 }
 
 function spamAlert() {
-  while (true) { alert('while(true) { alert(...); }'); }
+  setInterval(() => alert('setInterval(() => alert('...'), 0);'), 0);
 }
 </script>
