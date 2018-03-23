@@ -1,0 +1,12 @@
+<button onclick='spamConfirm()'>spam confirm()</button>
+<button onclick='spamAlert()'>spam alert()</button>
+
+<script>
+function spamConfirm() {
+  while (true) { confirm('while(true) { confirm(...); }'); }
+}
+
+function spamAlert() {
+  while (true) { alert('while(true) { alert(...); }'); }
+}
+</script>
