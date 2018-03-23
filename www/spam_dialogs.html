@@ -1,12 +1,22 @@
-<button onclick='spamConfirm()'>spam confirm()</button>
-<button onclick='spamAlert()'>spam alert()</button>
+<button onclick='spamConfirmInterval()'>spam setInterval confirm()</button>
+<button onclick='spamAlertInterval()'>spam setInterval alert()</button>
+<button onclick='spamConfirmLoop()'>spam while(true) confirm()</button>
+<button onclick='spamAlertLoop()'>spam while(true) alert()</button>
 
 <script>
-function spamConfirm() {
+function spamConfirmInterval() {
   setInterval(() => confirm('setInterval(() => confirm("..."), 0);'), 0);
 }
 
-function spamAlert() {
+function spamAlertInterval() {
   setInterval(() => alert('setInterval(() => alert("..."), 0);'), 0);
+}
+
+function spamConfirmLoop() {
+  while (true) { confirm('while (true) { confirm(...); }'); }
+}
+
+function spamAlertLoop() {
+  while (true) { confirm('while (true) { confirm(...); }'); }
 }
 </script>
