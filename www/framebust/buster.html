@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <script>
 setTimeout(() => {
-window.top.location = "https://cr.kungfoo.net/";
+try {
+  window.top.location = "https://cr.kungfoo.net/";
+} catch(e) {
+  console.error("CAUGHT ERROR");
+  console.error(e);
+}
 }, 1000);
 </script>
