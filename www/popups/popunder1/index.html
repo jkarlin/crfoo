@@ -7,7 +7,8 @@
     window.popunder.addEventListener('mousedown', function() {
         // should create a popunder
         window.postMessage(1, document.location)
-        window.postMessage(2, document.location)
+setTimeout(() => {
+window.postMessage(2, document.location); }, 500);
     });
 
     window.popupblocker.addEventListener('mousedown', function() {

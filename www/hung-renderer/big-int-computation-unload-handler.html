@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Lets do tons of computation. Try to close a tab!</title>
+<p>Try to close the tab.
+<script>
+window.addEventListener('unload', function(e) {
+  console.log('unload handler');
+});
+let a = 1n;
+for (let i = 0; i < 1000000; i++) a <<= 10n;
+console.log("DONE!");
+</script>
