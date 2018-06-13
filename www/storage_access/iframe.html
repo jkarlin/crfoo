@@ -1,0 +1,15 @@
+<script>
+function makeRequestWithUserGesture() {
+  var promise = document.requestStorageAccess();
+  promise.then(
+    function () {
+      console.log("STORAGE ACCESS GRANTED");
+    },
+    function () {
+      console.log("STORAGE ACCESS DENIED");
+    }
+  );
+}
+</script>
+<button onclick="makeRequestWithUserGesture()">Play video</button>
+
