@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <p>This page immediately calls speechSynthesis.speak(new SpeechSynthesisUtterance("hello world"))
+<button onclick="speak();">Press to manually speak</button>
 <script>
-speechSynthesis.speak(new SpeechSynthesisUtterance("hello world"));
+function speak() {
+  speechSynthesis.speak(new SpeechSynthesisUtterance("hello world"));
+}
+speak();
 </script>
