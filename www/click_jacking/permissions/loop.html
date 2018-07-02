@@ -1,0 +1,12 @@
+<body>
+  <script>
+    var target = "cr2";
+    if (window.location.host.includes("cr2"))
+      tar = "cr";
+    target += ".kungfoo.net/click_jacking/permissions/loop.html";
+    Notification.requestPermission().then(function(result) {
+        if (result == "denied")
+          window.location.href = "http://" + target;
+    })
+  </script>
+</body>

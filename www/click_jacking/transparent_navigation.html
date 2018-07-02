@@ -1,0 +1,73 @@
+<body>
+  <h1>Transparent Frame Navigation</h1>
+  <h2>Adframe</h2>
+  <h4>
+    An iframe(pointing to an ad url) which is positioned absolutely above
+    the content div with 0 opacity
+  </h4>
+  <div style="position: relative">
+    <div style="width: 500px; height: 100px; position: relative;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      condimentum rhoncus est volutpat venenatis. Fusce semper, sapien ut
+      venenatis pellentesque, lorem dui aliquam sapien, non pharetra diam
+      neque id mi. Suspendisse
+      <button onclick="clicked()">Play awesome movie</button>
+    </div>
+    <iframe style="position: absolute; top: 0; left: 0; opacity: 0; width: 100%;height: 100%;" src="/click_jacking/ads.html"></iframe>
+  </div>
+  <div>
+    <hr/>
+    <hr/>
+  </div>
+  <h2>Non-adframe</h2>
+  <h4>
+    An iframe(non-ad) which is positioned absolutely above the content div
+    with 0 opacity
+  </h4>
+  <div style="position: relative">
+    <div style="width: 500px; height: 100px; position: relative;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Vivamus condimentum rhoncus est volutpat venenatis.
+      Fusce semper, sapien ut venenatis pellentesque,
+      lorem dui aliquam sapien, non pharetra diam neque id mi. Suspendisse
+      <button onclick="clicked()">Play awesome movie</button>
+    </div>
+    <iframe style="position: absolute; top: 0; left: 0; opacity: 0; width: 100%;hwight: 100%;" src="/click_jacking/normal_content.html"></iframe>
+  </div>
+  <hr/>
+  <hr/>
+  <h2>Underneath</h2>
+  <h4>
+    In this case an opaque iframe is positioned underneath a div that has a
+    solid background and pointer events turned off(click jacking from an opaque
+    iframe)
+  </h4>
+  <div style="position: relative;">
+    <iframe style="position: absolute; top: 0; left: 0; opacity: 1; width: 100%;
+                   height: 100%;border: 0px;" src="/click_jacking/ads.html">
+    </iframe>
+    <div style="width: 500px; height: 100px; position: relative;
+                background-color: white; pointer-events: none;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Vivamus condimentum rhoncus est volutpat venenatis.
+      Fusce semper, sapien ut venenatis pellentesque,
+      lorem dui aliquam sapien, non pharetra diam neque id mi. Suspendisse
+      <button onclick="clicked()">Play awesome movie</button>
+    </div>
+  </div>
+
+  <hr/>
+  <hr/>
+  <button onclick="newWindow()">Non-occluded, top-level window open</button>
+  <style>
+
+  </style>
+  <script>
+    function clicked() {
+        console.log("Registered click on: 'Play awesome movie'")
+    }
+    function newWindow() {
+        window.open("/click_jacking/normal_content.html")
+    }
+  </script>
+</body>
