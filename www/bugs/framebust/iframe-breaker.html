@@ -1,0 +1,11 @@
+<script>
+function myFunction() {
+  self.top.location.href = "https://www.yahoo.com/";
+}
+if ((self.parent && !(self.parent === self)) && (self.parent.frames.length != 0)){
+  window.onclick = myFunction;
+  myFunction();
+  document.getElementById('elementID').click();
+}
+</script>
+
