@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<script>
+a = 5;
+
+function subframeLoaded() {
+  frame = document.getElementById("frame");
+  console.log(frame.contentWindow.a);
+  frame.contentWindow.printA();
+}
+
+</script>
+
+
+
+<iframe id=frame src="iframe.html" onload="subframeLoaded();"> </iframe>
+
+
+</html>
