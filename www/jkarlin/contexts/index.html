@@ -4,8 +4,9 @@ a = 5;
 
 function subframeLoaded() {
   frame = document.getElementById("frame");
-  console.log(frame.contentWindow.a);
+  console.log("Top frame, reaching into frame, sees: " + frame.contentWindow.a);
   frame.contentWindow.printA();
+  console.log("Top frame's value: " + a);
 }
 
 </script>
