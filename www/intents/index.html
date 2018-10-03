@@ -10,6 +10,8 @@
 <a id="fallback" href="intent:#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT=https%3A%2F%2Fpaul.kinlan.me%2F;S.android.intent.extra.SUBJECT=Amazing;S.browser_fallback_url=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet;end">intent:#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT=https%3A%2F%2Fpaul.kinlan.me%2F;S.android.intent.extra.SUBJECT=Amazing;S.browser_fallback_url=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet;end</a>
 <br>
 <a id="youtube" href="https://youtube.com">youtube.com</a>
+<br>
+<a id="file" href="file:///">file URL</a>
 <script>
 function clickN(id, n) {
   var elt = document.getElementById(id);
@@ -18,7 +20,11 @@ function clickN(id, n) {
   }
 }
 </script>
+<br>
 <button onclick="clickN('fallback', 2);">Click fallback twice</button>
 <button onclick="clickN('fallback', 6);">Click fallback six times</button>
 <button onclick="clickN('fallback', 6);">Click fallback six times</button>
+<button onclick="clickN('file', 6);">Click file six times</button>
 <button onclick="clickN('youtube', 6);">Click youtube six times</button>
+<br>
+
