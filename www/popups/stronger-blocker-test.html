@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<style>
+a,button {
+  display: table;
+}
+</style>
+<script>
+google = "https://www.google.com/";
+</script>
+<a href="https://www.google.com/">Normal link to google</a>
+<a target="_blank" href="https://www.google.com/">target=_blank link to google</a>
+<button onclick="window.location = google;">Fake link to google (window.location)</button>
+<button onclick="window.open(google);">Fake link to google (window.open tab)</button>
+<button onclick="window.open(google, '', 'width=400,height=400');">Fake link to google (window.open window)</button>
