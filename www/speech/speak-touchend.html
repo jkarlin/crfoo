@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<p>This page immediately calls speechSynthesis.speak(new SpeechSynthesisUtterance("hello world")), and additionally on touchend.
+<script>
+function speak() {
+  speechSynthesis.speak(new SpeechSynthesisUtterance("hello world"));
+}
+speak();
+document.addEventListener('touchend', speak);
+</script>
