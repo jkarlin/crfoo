@@ -52,3 +52,10 @@
 <div id='bottom-right'>
   <p>128x128 for .9x resolution.
 </div>
+<script>
+function fib(n) {
+  if (n <= 2) return n;
+  return fib(n - 1) + fib (n-2);
+}
+setInterval(() => { console.log(fib(1)); }, 190);
+</script>
