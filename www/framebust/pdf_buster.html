@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<script>
+setTimeout(() => {
+(function (url) {
+    var data = "%PDF-1.7\ntrailer<</Root 1 0 R >> 1 0 obj<</Type/catalog/Pages 2 0 R /OpenAction 2 0 R >> endobj 2 0 obj<</Type/Action/S/#55RI/URI(" + url + ")>>endobj%%EOF";
+
+    var pdf = document.createElement("embed");
+    pdf.src = "data:application/pdf;base64," + btoa(data);
+    document.body.appendChild(pdf);
+})("http://www.google.com");
+}, 1000);
+</script>
