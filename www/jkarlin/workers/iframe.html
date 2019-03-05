@@ -1,0 +1,5 @@
+<script>
+  var myWorker = new SharedWorker('worker.js');
+  myWorker.port.start();
+  worker.port.postMessage("client");
+</script>
