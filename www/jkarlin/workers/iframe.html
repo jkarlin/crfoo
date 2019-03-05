@@ -1,10 +1,10 @@
 <output id="result"></output>
 
 <script>
-  var myWorker = new SharedWorker('worker.js');
+  var worker = new SharedWorker('worker.js');
   worker.port.addEventListener("message", function(e) {  
     document.getElementById('result').textContent += " | " + e.data;  
   }, false);  
-  myWorker.port.start();
+  worker.port.start();
   worker.port.postMessage("client");
 </script>
