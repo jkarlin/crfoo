@@ -1,7 +1,7 @@
 <output id="result"></output>
 
 <script>
-  var worker = new SharedWorker('worker.js');
+  var worker = new SharedWorker('https://cr.kungfoo.net/jkarlin/workers/worker.js');
   worker.port.addEventListener("message", function(e) {  
     document.getElementById('result').textContent += " | " + e.data;  
   }, false);  
