@@ -119,7 +119,7 @@ function ResetSetting(input_type,
 
 function ResetSubframe() {
   let iframe = document.getElementById(g_id_iframe_subframe);
-  let url = g_subframe_origin + "/yao/downloads/test_download_in_sandbox.html";
+  let url = g_subframe_origin + "/yao/downloads/test_subframe.html";
   url += "?target_url=" + g_target_url;
   if (iframe == null) {
     iframe = document.createElement("iframe");
