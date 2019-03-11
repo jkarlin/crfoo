@@ -15,26 +15,14 @@ button {
 <body></body>
 <script src="test_actions.js"></script>
 <script>
-// https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-let g_url_params;
-(window.onpopstate = function () {
-    let match,
-        pl     = /\+/g,  // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query  = window.location.search.substring(1);
+const g_url_params = new URLSearchParams(window.location.search);
 
-    g_url_params = {};
-    while (match = search.exec(query))
-       g_url_params[decode(match[1])] = decode(match[2]);
-})();
-
-if (g_url_params["delay_activation"] != undefined) {
+if (g_url_params.get("delay_activation") != null) {
   g_delay_activation = true;
 }
 
-if (g_url_params["target_url"] != undefined) {
-  g_target_url = g_url_params["target_url"];
+if (g_url_params.get("target_url") != null) {
+  g_target_url = g_url_params.get("target_url");
 }
 
 let header = document.createElement("h4");
