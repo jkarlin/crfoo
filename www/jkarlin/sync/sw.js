@@ -1,4 +1,5 @@
 self.addEventListener('sync', function(sync_event) {
+  console.log("Handling sync event");
   postErrorToClients("Pong!");
 });
 
