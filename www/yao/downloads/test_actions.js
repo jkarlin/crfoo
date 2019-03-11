@@ -1,4 +1,5 @@
-const g_timeout_seconds = 2;
+// threshold is 5: https://cs.chromium.org/chromium/src/third_party/blink/common/frame/user_activation_state.cc?q=kActivationLifespan
+const g_timeout_seconds = 6;
 const g_id_div_actions = "id_div_actions";
 
 let g_delay_activation = false;
