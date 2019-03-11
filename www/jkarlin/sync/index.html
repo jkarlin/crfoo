@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Background Sync Demonstration</title>
+
+<body>
+
+<button class="register">Register background sync</button>
+
+<div class="log"></div>
+<script>
+  var logEl = document.querySelector('.log');
+  function log(msg) {
+    var p = document.createElement('p');
+    p.textContent = msg;
+    logEl.appendChild(p);
+    console.log(msg);
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+    .catch(function(err) {
+      log('ServiceWorker failed to register. Are you visiting the HTTPS site?');
+      log(err.message);
+    });
+  }
+
+  function displayErrorFromWorker(message) {
+    log("Error: " + message);
+  }
+
+  window.addEventListener('message', displayErrorFromWorker);
+
+  async function onClick(event) {
+    reg = await navigator.serviceWorker.ready.sync.register("sync");
+    log("Sync registered");
+  }
+
+  document.querySelector('.register').addEventListener('click', onClick);
+</script>
+
+<br><br>
+<p>
+<small>
+    To use this site, run Chrome version >= 49
+</small>
+</p>
+
+</body>
+</html>
