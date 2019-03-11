@@ -1,0 +1,109 @@
+const g_timeout_seconds = 2;
+const g_id_div_actions = "id_div_actions";
+
+let g_delay_activation = false;
+let g_target_url = "test.zip";
+
+function ExecutePossiblyWithDelay(callback) {
+  if (g_delay_activation) {
+    setTimeout(callback, g_timeout_seconds * 1000);
+  } else {
+    callback();
+  }
+}
+
+function AddAnchor(node, has_download_attr) {
+  let e = document.createElement("a");
+  e.innerHTML = "&lt;a&gt; link with href=" + g_target_url + (has_download_attr ? " (with 'download' attribute)" : "");
+  e.setAttribute("href",g_target_url);
+  if (has_download_attr) {
+    e.download = "";
+  }
+  node.appendChild(e);
+  node.appendChild(document.createElement("br"));
+}
+
+function AddButton(node, text, onclick_callback) {
+  let e = document.createElement("button");
+  e.innerHTML = text;
+  e.onclick = function() {
+    ExecutePossiblyWithDelay(onclick_callback);
+  };
+  node.appendChild(e);
+  node.appendChild(document.createElement("br"));
+}
+
+function ResetDiv(id) {
+  let div = document.getElementById(id);
+  if (div == null) {
+    div = document.createElement("div");
+    div.setAttribute("id",id);
+  } else {
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+  }
+  return div;
+}
+
+function ResetTestActions() {
+  let is_top_frame = (self == top);
+  let div = ResetDiv(g_id_div_actions);
+
+  let header = document.createElement("h4");
+  header.innerHTML = "Test actions initiated from this " + (is_top_frame ? "top frame" : "subframe");
+  if (g_delay_activation) {
+    header.innerHTML +=  " (" + g_timeout_seconds + "s delay)";
+  }
+
+  div.appendChild(header);
+
+  AddAnchor(div, false);
+  AddButton(div, "click 1st link", function() {
+    document.getElementsByTagName('a')[0].click();
+  });
+  AddAnchor(div, true);
+  AddButton(div, "click 2nd link", function() {
+    document.getElementsByTagName('a')[1].click();
+  });
+  if (is_top_frame) {
+    AddButton(div, "navigate this <b>top</b> frame", function() {
+      window.location = g_target_url;
+    });
+    AddButton(div, "navigate <b>sub</b>frame", function() {
+      document.getElementById(g_id_iframe_subframe).src = g_target_url;
+    });
+  } else {
+    AddButton(div, "navigate this <b>sub</b>frame", function() {
+      window.location = g_target_url;
+    });
+    AddButton(div, "navigate <b>top</b> frame", function() {
+      top.location = g_target_url;
+    });
+  }
+  AddButton(div, "popup", function() {
+    window.open(g_target_url);
+  });
+  AddButton(div, "append child frame invisible", function() {
+    let f = document.createElement('iframe');
+    f.src = g_target_url;
+    f.style = "width:0;height:0;border:0;border:none;";
+    document.body.appendChild(f);
+  });
+  AddButton(div, "append child frame invisible/sandbox", function() {
+    let f = document.createElement('iframe');
+    f.src = g_target_url;
+    f.sandbox = "";
+    f.style = "width:0;height:0;border:0; border:none;";
+    document.body.appendChild(f);
+  });
+  AddButton(div, "append child frame invisible/sandbox/allow-downloads", function() {
+    let f = document.createElement('iframe');
+    f.src = g_target_url;
+    f.sandbox = "allow-downloads-without-user-activation";
+    f.style = "width:0;height:0;border:0; border:none;";
+    document.body.appendChild(f);
+  });
+
+  return div;
+}
