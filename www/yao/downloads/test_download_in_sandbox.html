@@ -1,0 +1,264 @@
+<style>
+* {
+  font-size: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+h1 {
+  font-size: 200%;
+}
+h4 {
+  margin-top: 10px;
+}
+iframe {
+  margin-top: 30px;
+}
+button {
+  margin-top: 5px;
+}
+div {
+  margin-top: 5px;
+}
+</style>
+
+<h1>Test download from/in sandbox</h1>
+<script src="test_actions.js"></script>
+<script>
+const g_origin_list =
+[
+"https://cr.kungfoo.net",
+"https://cr2.kungfoo.net",
+"http://cr.kungfoo.net",
+"http://cr2.kungfoo.net"
+];
+const g_sandbox_allow_attrs_all_list =
+[
+  "allow-same-origin",
+  "allow-forms",
+  "allow-scripts",
+  "allow-top-navigation",
+  "allow-popups",
+  "allow-pointer-lock",
+  "allow-orientation-lock",
+  "allow-popups-to-escape-sandbox",
+  "allow-modals",
+  "allow-presentation",
+  "allow-top-navigation-by-user-activation",
+  "allow-downloads-without-user-activation"
+];
+const g_target_url_list =
+[
+  "test.zip",
+  "http://www.africau.edu/images/default/sample.pdf",
+  "data:html/text;base64,SGVsbG8gV29ybGQh", // btoa('Hello World!')
+  "test_download_in_sandbox.html"
+];
+const g_id_div_subframe_origin_setting = "id_div_subframe_origin_setting";
+const g_id_div_subframe_sandbox_setting = "id_div_subframe_sandbox_setting";
+const g_id_div_sandbox_allow_token_setting = "id_div_sandbox_allow_token_setting";
+const g_id_div_activation_setting = "id_div_activation_setting";
+const g_id_div_target_url_setting = "id_div_target_url_setting";
+const g_id_iframe_subframe = "id_iframe_subframe";
+
+let g_subframe_origin = window.location.origin;
+let g_subframe_sandbox = false;
+let g_sandbox_allow_attrs_selected_list = g_sandbox_allow_attrs_all_list.filter(function(ele){
+   return ele != "allow-downloads-without-user-activation";
+});
+
+function ResetSetting(input_type,
+                      header_string,
+                      setting_id,
+                      values,
+                      get_label_text_callback,
+                      is_default_selected_callback,
+                      onclick_callback) {
+  let div = ResetDiv(setting_id);
+
+  let header;
+  if (header_string != undefined) {
+    header = document.createElement("h4");
+    header.innerHTML = header_string;
+  }
+
+  let form = document.createElement("form");
+
+  let i;
+  for (i = 0; i < values.length; i++) {
+    let value = values[i];
+    let input = document.createElement("input");
+    let id = setting_id + "_" + value;
+    input.setAttribute("id",id);
+    input.setAttribute("type",input_type);
+    input.setAttribute("name",setting_id + "_name");
+    input.setAttribute("value",id);
+    input.onclick = function() {
+      onclick_callback(value);
+    };
+    if (is_default_selected_callback(value)) {
+      input.setAttribute("checked","");
+    }
+    form.appendChild(input);
+
+    let label = document.createElement("label");
+    label.setAttribute("for",id);
+    label.innerHTML = get_label_text_callback(value);
+    form.appendChild(label);
+
+    let br = document.createElement("br");
+    form.appendChild(br);
+  }
+
+  if (header) {
+    div.appendChild(header);
+  }
+  div.appendChild(form);
+
+  return div;
+}
+
+function ResetSubframe() {
+  let iframe = document.getElementById(g_id_iframe_subframe);
+  let url = g_subframe_origin + "/yao/downloads/test_download_in_sandbox.html";
+  url += "?target_url=" + g_target_url;
+  if (iframe == null) {
+    iframe = document.createElement("iframe");
+    iframe.id = g_id_iframe_subframe;
+    iframe.width = "100%";
+    iframe.height = "100%";
+  } else {
+    if (g_subframe_sandbox) {
+      iframe.sandbox = g_sandbox_allow_attrs_selected_list.join(' ');
+    } else {
+      if (iframe.hasAttribute("sandbox")) {
+        iframe.removeAttribute("sandbox");
+      }
+    }
+    if (g_delay_activation) {
+      url += "&delay_activation";
+    }
+  }
+  iframe.src = url;
+  return iframe;
+}
+
+document.body.appendChild(ResetSetting(
+  "radio",
+  "Subframe Origin",
+  g_id_div_subframe_origin_setting,
+  g_origin_list,
+  function (origin) {
+    if (g_subframe_origin == origin) {
+      return origin + " (Same Origin)";
+    }
+    return origin + " (Cross Origin)";
+  },
+  function (origin) {
+    return origin == g_subframe_origin;
+  },
+  function (origin) {
+    if (g_subframe_origin != origin) {
+      g_subframe_origin = origin;
+      ResetSubframe();
+    }
+  }
+));
+
+document.body.appendChild(ResetSetting(
+  "radio",
+  "Subframe Sandbox",
+  g_id_div_subframe_sandbox_setting,
+  [false, true],
+  function (sandbox) {
+    if (sandbox) {
+      return "Sandboxed";
+    }
+    return "Not Sandboxed";
+  },
+  function (sandbox) {
+    return sandbox == g_subframe_sandbox;
+  },
+  function (sandbox) {
+    if (sandbox != g_subframe_sandbox) {
+      if (sandbox) {
+        document.getElementById(g_id_div_sandbox_allow_token_setting).style.display = "block";
+      } else {
+        document.getElementById(g_id_div_sandbox_allow_token_setting).style.display = "none";
+      }
+      g_subframe_sandbox = sandbox;
+      ResetSubframe();
+    }
+  }
+));
+
+document.body.appendChild(ResetSetting(
+  "checkbox",
+  undefined,
+  g_id_div_sandbox_allow_token_setting,
+  g_sandbox_allow_attrs_all_list,
+  function (token) {
+    return token;
+  },
+  function (token) {
+    return g_sandbox_allow_attrs_selected_list.includes(token);
+  },
+  function (token) {
+    if (g_sandbox_allow_attrs_selected_list.includes(token)) {
+      g_sandbox_allow_attrs_selected_list = g_sandbox_allow_attrs_selected_list.filter(function(ele){
+         return ele != token;
+      });
+    } else {
+      g_sandbox_allow_attrs_selected_list.push(token);
+    }
+    ResetSubframe();
+  }
+));
+document.getElementById(g_id_div_sandbox_allow_token_setting).setAttribute("style","padding-left: 15px; display: none");
+
+document.body.appendChild(ResetSetting(
+  "radio",
+  "Activation",
+  g_id_div_activation_setting,
+  [false, true],
+  function (delay_activation) {
+    if (!delay_activation) {
+      return "Clicking on a button will trigger the action immediately.";
+    }
+    return "Clicking on a button will trigger the action after " + g_timeout_seconds + " seconds.";
+  },
+  function (delay_activation) {
+    return delay_activation == g_delay_activation;
+  },
+  function (delay_activation) {
+    if (delay_activation != g_delay_activation) {
+      g_delay_activation = delay_activation;
+      ResetTestActions();
+      ResetSubframe();
+    }
+  }
+));
+
+document.body.appendChild(ResetSetting(
+  "radio",
+  "Target URL for navigations/links",
+  g_id_div_target_url_setting,
+  g_target_url_list,
+  function (target_url) {
+    return target_url;
+  },
+  function (target_url) {
+    return target_url == g_target_url;
+  },
+  function (target_url) {
+    if (target_url != g_target_url) {
+      g_target_url = target_url;
+      ResetTestActions();
+      ResetSubframe();
+    }
+  }
+));
+
+document.body.appendChild(ResetTestActions());
+
+document.body.appendChild(ResetSubframe());
+</script>
