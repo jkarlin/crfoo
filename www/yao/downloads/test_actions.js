@@ -4,6 +4,11 @@ const g_id_div_actions = "id_div_actions";
 
 let g_delay_activation = false;
 let g_target_url = "test.zip";
+let g_id_iframe_subframe = 0;
+
+function GetSubFrameId() {
+  return "id_iframe_subframe_" + g_id_iframe_subframe;
+}
 
 function ExecutePossiblyWithDelay(button, callback) {
   if (g_delay_activation) {
