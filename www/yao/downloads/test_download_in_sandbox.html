@@ -58,7 +58,6 @@ const g_id_div_subframe_sandbox_setting = "id_div_subframe_sandbox_setting";
 const g_id_div_sandbox_allow_token_setting = "id_div_sandbox_allow_token_setting";
 const g_id_div_activation_setting = "id_div_activation_setting";
 const g_id_div_target_url_setting = "id_div_target_url_setting";
-const g_id_iframe_subframe = "id_iframe_subframe";
 
 let g_subframe_origin = window.location.origin;
 let g_subframe_sandbox = false;
@@ -118,24 +117,25 @@ function ResetSetting(input_type,
 }
 
 function ResetSubframeAppendToBodyEnd() {
-  let iframe = document.getElementById(g_id_iframe_subframe);
-  if (iframe != null) {
-    iframe.parentNode.removeChild(iframe);
+  let old_frame = document.getElementById(GetSubFrameId());
+  if (old_frame != null) {
+    old_frame.parentNode.removeChild(old_frame);
   }
-  iframe = document.createElement("iframe");
-  iframe.id = g_id_iframe_subframe;
-  iframe.width = "100%";
-  iframe.height = "100%";
+  let new_frame = document.createElement("iframe");
+  g_id_iframe_subframe++;
+  new_frame.id = GetSubFrameId();
+  new_frame.width = "100%";
+  new_frame.height = "100%";
   let url = g_subframe_origin + "/yao/downloads/test_subframe.html";
   url += "?target_url=" + g_target_url;
   if (g_delay_activation) {
     url += "&delay_activation";
   }
   if (g_subframe_sandbox) {
-    iframe.sandbox = g_sandbox_allow_attrs_selected_list.join(' ');
+    new_frame.sandbox = g_sandbox_allow_attrs_selected_list.join(' ');
   }
-  iframe.src = url;
-  document.body.appendChild(iframe);
+  new_frame.src = url;
+  document.body.appendChild(new_frame);
 }
 
 document.body.appendChild(ResetSetting(
