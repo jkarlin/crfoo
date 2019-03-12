@@ -84,17 +84,20 @@ function ResetTestActions() {
     document.getElementsByTagName('a')[1].click();
   });
   if (is_top_frame) {
-    AddButton(div, "navigate this <b>top</b> frame", function() {
+    AddButton(div, "navigate this <b>top</b> frame (set location)", function() {
       window.location = g_target_url;
     });
-    AddButton(div, "navigate <b>sub</b>frame", function() {
+    AddButton(div, "navigate <b>sub</b>frame (set location)", function() {
+      document.getElementById(g_id_iframe_subframe).contentWindow.location = g_target_url;
+    });
+    AddButton(div, "navigate <b>sub</b>frame (set src)", function() {
       document.getElementById(g_id_iframe_subframe).src = g_target_url;
     });
   } else {
-    AddButton(div, "navigate this <b>sub</b>frame", function() {
+    AddButton(div, "navigate this <b>sub</b>frame (set location)", function() {
       window.location = g_target_url;
     });
-    AddButton(div, "navigate <b>top</b> frame", function() {
+    AddButton(div, "navigate <b>top</b> frame (set location)", function() {
       top.location = g_target_url;
     });
   }
