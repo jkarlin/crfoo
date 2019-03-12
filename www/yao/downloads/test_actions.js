@@ -1,13 +1,28 @@
-// threshold is 5: https://cs.chromium.org/chromium/src/third_party/blink/common/frame/user_activation_state.cc?q=kActivationLifespan
+// Threshold is 5: https://cs.chromium.org/chromium/src/third_party/blink/common/frame/user_activation_state.cc?q=kActivationLifespan
 const g_timeout_seconds = 6;
 const g_id_div_actions = "id_div_actions";
 
 let g_delay_activation = false;
 let g_target_url = "test.zip";
 
-function ExecutePossiblyWithDelay(callback) {
+function ExecutePossiblyWithDelay(button, callback) {
   if (g_delay_activation) {
     setTimeout(callback, g_timeout_seconds * 1000);
+
+    let p = document.createElement("p");
+    p.style.display = "inline";
+    button.parentNode.insertBefore(p, button.nextSibling);
+
+    let cur_seconds = g_timeout_seconds;
+    p.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;[" + cur_seconds.toFixed(1) + "]";
+    let fun = setInterval(function() {
+      cur_seconds = (cur_seconds - 0.1).toFixed(1);
+      p.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;[" + cur_seconds + "]";
+      if (cur_seconds <= 0) {
+          clearInterval(fun);
+          p.parentNode.removeChild(p);
+      }
+    }, 100);
   } else {
     callback();
   }
@@ -26,9 +41,10 @@ function AddAnchor(node, has_download_attr) {
 
 function AddButton(node, text, onclick_callback) {
   let e = document.createElement("button");
+  e.style.display = "inline";
   e.innerHTML = text;
   e.onclick = function() {
-    ExecutePossiblyWithDelay(onclick_callback);
+    ExecutePossiblyWithDelay(e, onclick_callback);
   };
   node.appendChild(e);
   node.appendChild(document.createElement("br"));
