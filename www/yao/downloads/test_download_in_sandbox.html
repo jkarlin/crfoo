@@ -117,29 +117,25 @@ function ResetSetting(input_type,
   return div;
 }
 
-function ResetSubframe() {
+function ResetSubframeAppendToBodyEnd() {
   let iframe = document.getElementById(g_id_iframe_subframe);
+  if (iframe != null) {
+    iframe.parentNode.removeChild(iframe);
+  }
+  iframe = document.createElement("iframe");
+  iframe.id = g_id_iframe_subframe;
+  iframe.width = "100%";
+  iframe.height = "100%";
   let url = g_subframe_origin + "/yao/downloads/test_subframe.html";
   url += "?target_url=" + g_target_url;
-  if (iframe == null) {
-    iframe = document.createElement("iframe");
-    iframe.id = g_id_iframe_subframe;
-    iframe.width = "100%";
-    iframe.height = "100%";
-  } else {
-    if (g_subframe_sandbox) {
-      iframe.sandbox = g_sandbox_allow_attrs_selected_list.join(' ');
-    } else {
-      if (iframe.hasAttribute("sandbox")) {
-        iframe.removeAttribute("sandbox");
-      }
-    }
-    if (g_delay_activation) {
-      url += "&delay_activation";
-    }
+  if (g_delay_activation) {
+    url += "&delay_activation";
+  }
+  if (g_subframe_sandbox) {
+    iframe.sandbox = g_sandbox_allow_attrs_selected_list.join(' ');
   }
   iframe.src = url;
-  return iframe;
+  document.body.appendChild(iframe);
 }
 
 document.body.appendChild(ResetSetting(
@@ -159,7 +155,7 @@ document.body.appendChild(ResetSetting(
   function (origin) {
     if (g_subframe_origin != origin) {
       g_subframe_origin = origin;
-      ResetSubframe();
+      ResetSubframeAppendToBodyEnd();
     }
   }
 ));
@@ -186,7 +182,7 @@ document.body.appendChild(ResetSetting(
         document.getElementById(g_id_div_sandbox_allow_token_setting).style.display = "none";
       }
       g_subframe_sandbox = sandbox;
-      ResetSubframe();
+      ResetSubframeAppendToBodyEnd();
     }
   }
 ));
@@ -210,7 +206,7 @@ document.body.appendChild(ResetSetting(
     } else {
       g_sandbox_allow_attrs_selected_list.push(token);
     }
-    ResetSubframe();
+    ResetSubframeAppendToBodyEnd();
   }
 ));
 document.getElementById(g_id_div_sandbox_allow_token_setting).setAttribute("style","padding-left: 15px; display: none");
@@ -233,7 +229,7 @@ document.body.appendChild(ResetSetting(
     if (delay_activation != g_delay_activation) {
       g_delay_activation = delay_activation;
       ResetTestActions();
-      ResetSubframe();
+      ResetSubframeAppendToBodyEnd();
     }
   }
 ));
@@ -253,12 +249,12 @@ document.body.appendChild(ResetSetting(
     if (target_url != g_target_url) {
       g_target_url = target_url;
       ResetTestActions();
-      ResetSubframe();
+      ResetSubframeAppendToBodyEnd();
     }
   }
 ));
 
 document.body.appendChild(ResetTestActions());
 
-document.body.appendChild(ResetSubframe());
+ResetSubframeAppendToBodyEnd();
 </script>
