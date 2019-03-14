@@ -1,4 +1,4 @@
-var NUM_PARALLEL_HASHERS = 6;
+var NUM_PARALLEL_HASHERS = 25;
 var seed = "starting seed for hash";
 function doHash() {
         seed = CryptoJS.MD5(seed);
