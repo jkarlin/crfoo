@@ -6,4 +6,4 @@ function doHash() {
         console.log(seed);
     setTimeout(doHash, 1);
 }
-setTimeout(doHash, 1);
+doHash();
