@@ -1,0 +1,15 @@
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+</head>
+<body>
+
+<h1> This frame is generating a large number of hashes, simulating a cryptominer.</h1>
+<script>  
+    var seed = "starting seed for hash";
+    
+    while (true) {
+      seed = CryptoJS.MD5(password);
+    }
+</script>
+
+</body>
