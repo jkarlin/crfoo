@@ -11,10 +11,9 @@
     function doHash() {
       seed = CryptoJS.MD5(seed);
       console.log(seed);
-      setTimeout(doHash(), 1);
     }
   
-    setTimeout(doHash(), 1);
+    setInterval(doHash(), 1);
 </script>
 
 </body>
