@@ -8,10 +8,13 @@
 <script>  
     var seed = "starting seed for hash";
     
-    while (true) {
+    function doHash() {
       seed = CryptoJS.MD5(seed);
       console.log(seed);
+      SetTimeout(doHash(), 1);
     }
+  
+    SetTimeout(doHash(), 1);
 </script>
 
 </body>
