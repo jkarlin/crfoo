@@ -6,6 +6,7 @@
 <p>Pressing back from here should skip b.html and go to a.html</p>
 <script>
   window.onpopstate = function() {
+    alert("Hi there");
   history.go(-2);
 };
 </script>
