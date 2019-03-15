@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
+<title>Page B: Users from C will not come back here</title>
+<html>
+<p>Pressing back from here should skip b.html and go to a.html</p>
+<script>
+  window.onpopstate = function() {
+  history.go(-2);
+};
+</script>
+</html>
