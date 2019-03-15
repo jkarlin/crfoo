@@ -3,8 +3,9 @@
 <!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
 <title>Page B: Users from C will not come back here</title>
 <html>
-<p>Pressing back from here should skip b.html and go to a.html</p>
+<p>Pressing back from here should skip the history entry, b.html and go to a.html</p>
 <script>
+  history.pushState({page: 1}, "title 1", "?page=1");
   window.onpopstate = function() {
     alert("Hi there");
   history.go(-2);
