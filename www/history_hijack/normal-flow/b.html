@@ -4,6 +4,7 @@
 <title>Page B: Users from C will not come back here</title>
 <html>
 <body>
+  <script> history.pushState({page: 1}, "title 1", "?page=1");</script>
   <p><a href="https://cr.kungfoo.net/history_hijack/normal-flow/c.html">Take me to page C</a></p>
 </body>
 </html>
