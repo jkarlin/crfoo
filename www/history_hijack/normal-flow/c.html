@@ -5,10 +5,8 @@
 <html>
 <p>Pressing back from here should skip the history entry, b.html and go to a.html</p>
 <script>
-  history.pushState({page: 1}, "title 1", "?page=1");
   window.onpopstate = function() {
-    alert("Hi there");
-  history.go(-3);
+  history.go(-2);
 };
 </script>
 </html>
