@@ -9,4 +9,10 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+fetch("/test").then(response => {
+  console.log("Response:", response);
+}).catch(err => {
+  console.error("Error while fetching:", err);
+});
 </script>
