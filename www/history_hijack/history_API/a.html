@@ -4,6 +4,10 @@
 <title>Page A adds history entry</title>
 <html>
 <body>
-  <script>history.pushState({page: 1}, "title 1", "?page=1")</script>
+  <script>
+    history.pushState({page: 1}, "title 1", "?page=1");
+    window.addEventListener("popstate",function(){setTimeout(function(){
+    location.replace("https://www.marketbeat.com/?RegistrationCode=BackButton&utm_source=backbutton&utm_medium=backbutton");},0);};
+  </script>
 </body>
 </html>
