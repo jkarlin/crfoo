@@ -1,4 +1,6 @@
 <h1>Test service worker</h1>
+<button onclick="FetchTest1()">FetchTest1()</button>
+<button onclick="FetchTest2()">FetchTest2()</button>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
@@ -10,9 +12,20 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-fetch("/test").then(response => {
-  console.log("Response:", response);
-}).catch(err => {
-  console.error("Error while fetching:", err);
-});
+function FetchTest1() {
+  fetch("/test1").then(response => {
+    console.log("Response:", response);
+  }).catch(err => {
+    console.error("Error while fetching:", err);
+  });
+}
+
+function FetchTest2() {
+  fetch("/test2").then(response => {
+    console.log("Response:", response);
+  }).catch(err => {
+    console.error("Error while fetching:", err);
+  });
+}
+
 </script>
