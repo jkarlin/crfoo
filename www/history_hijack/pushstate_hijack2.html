@@ -11,9 +11,8 @@ The code for this page is as follows:
 </p>
 <script id="mainscript" style="display:block; white-space:pre; font-family: monospace;">
 function click() {
-  history.replaceState(null, document.title, location.pathname+"#!/stealingyourhistory");
   for(i = 0; i < 50; i++) {
-    history.pushState(null, document.title, location.pathname);
+    history.replaceState(null, document.title, location.pathname+"#!/stealingyourhistory");
   }
 }
 
