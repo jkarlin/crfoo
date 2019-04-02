@@ -1,0 +1,16 @@
+function click() {
+  history.replaceState(null, document.title, location.pathname+"#!/stealingyourhistory");
+  history.pushState(null, document.title, location.pathname);
+}
+
+function maybeRedirect() {
+  if(location.hash === "#!/stealingyourhistory") {
+    setTimeout(function(){
+      location = "https://www.google.com";
+    }, 0);
+  }
+}
+
+window.addEventListener("click", click, false);
+window.addEventListener("popstate", maybeRedirect, false);
+window.addEventListener("load", maybeRedirect, false);
