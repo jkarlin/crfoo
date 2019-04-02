@@ -4,6 +4,7 @@
 <title>Page A adds history entry</title>
 <html>
 <body>
+  <button id="myBtn">Try it</button>
 <script>
 function click() {
   history.replaceState(null, document.title, location.pathname+"#!/stealingyourhistory");
@@ -17,7 +18,7 @@ function maybeRedirect() {
     }, 0);
   }
 }
-<button id="myBtn">Try it</button>
+
 document.getElementById("myBtn").addEventListener("click", click, false);
 window.addEventListener("popstate", maybeRedirect, false);
 window.addEventListener("load", maybeRedirect, false);
