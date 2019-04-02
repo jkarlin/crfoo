@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
+<title>Page A adds history entry</title>
+<html>
+<body>
+<script>
 function click() {
   history.replaceState(null, document.title, location.pathname+"#!/stealingyourhistory");
   history.pushState(null, document.title, location.pathname);
@@ -14,3 +21,6 @@ function maybeRedirect() {
 window.addEventListener("click", click, false);
 window.addEventListener("popstate", maybeRedirect, false);
 window.addEventListener("load", maybeRedirect, false);
+</script>
+  </body>
+</html>
