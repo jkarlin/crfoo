@@ -3,7 +3,7 @@ self.addEventListener("fetch", event => {
     var freshResource = fetch(event.request).then(function (response) {
         return response;
     });
-    if (requestURL.pathname.startsWith("/test1.html")) {
+    if (requestURL.pathname.startsWith("/yao/service_worker/test1.html")) {
       event.respondWith(freshResource);
     }
 });
