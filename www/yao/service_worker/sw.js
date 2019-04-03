@@ -3,5 +3,7 @@ self.addEventListener("fetch", event => {
     var freshResource = fetch(event.request).then(function (response) {
         return response;
     });
-    event.respondWith(freshResource);
+    if (url.pathname.startsWith("/test1.html")) {
+      event.respondWith(freshResource);
+    }
 });
