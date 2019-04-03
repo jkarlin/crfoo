@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator) {
 }
 
 function FetchTest1() {
-  fetch("/test1.html").then(response => {
+  fetch("/yao/service_worker/test1.html").then(response => {
     console.log("Response:", response);
   }).catch(err => {
     console.error("Error while fetching:", err);
@@ -21,7 +21,7 @@ function FetchTest1() {
 }
 
 function FetchTest2() {
-  fetch("/test2.html").then(response => {
+  fetch("/yao/service_worker/test2.html").then(response => {
     console.log("Response:", response);
   }).catch(err => {
     console.error("Error while fetching:", err);
