@@ -1,4 +1,6 @@
-<a href='test.zip'>anchor nav download</a>
+<a id='aid' href='test.zip'>anchor nav download</a>
 <script>
-console.log('can run script');
+setTimeout(function() {
+  document.getElementById('aid').click();
+}, 6000);
 </script>
