@@ -35,7 +35,6 @@ function AddAllowDownloadAttr() {
     g_sandbox_allow_attrs_list.push(allow_download_token);
   }
   frames['downloading'].sandbox = g_sandbox_allow_attrs_list.join(' ');
-  console.log(g_sandbox_allow_attrs_list.join(' '));
   document.getElementById("status").innerHTML = "Status: allow download";
 }
 
@@ -46,7 +45,6 @@ function RemoveAllowDownloadAttr() {
     });
   }
   frames['downloading'].sandbox = g_sandbox_allow_attrs_list.join(' ');
-  console.log(g_sandbox_allow_attrs_list.join(' '));
   document.getElementById("status").innerHTML = "Status: disallow download";
 }
 
