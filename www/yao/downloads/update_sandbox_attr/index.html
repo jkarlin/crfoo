@@ -3,7 +3,7 @@
 </br>
 <button onclick="RemoveAllowDownloadAttr()">Update sandbox: disallow download</button>
 
-<h1 id="status">allow download</h1>
+<h1 id="status">Status: allow download</h1>
 
 <h1>Downloading Frame</h1>
 <iframe name="downloading" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr/downloading.html" sandbox="allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation allow-downloads-without-user-activation"></iframe>
@@ -35,7 +35,8 @@ function AddAllowDownloadAttr() {
     g_sandbox_allow_attrs_list.push(allow_download_token);
   }
   frames['downloading'].sandbox = g_sandbox_allow_attrs_list.join(' ');
-  document.getElementById("status").innerHTML = "allow download";
+  console.log(g_sandbox_allow_attrs_list.join(' '));
+  document.getElementById("status").innerHTML = "Status: allow download";
 }
 
 function RemoveAllowDownloadAttr() {
@@ -45,7 +46,8 @@ function RemoveAllowDownloadAttr() {
     });
   }
   frames['downloading'].sandbox = g_sandbox_allow_attrs_list.join(' ');
-  document.getElementById("status").innerHTML = "disallow download";
+  console.log(g_sandbox_allow_attrs_list.join(' '));
+  document.getElementById("status").innerHTML = "Status: disallow download";
 }
 
 </script>
