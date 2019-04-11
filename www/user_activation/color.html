@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<p>This page should not be loaded over HTTPS
+<input type="color">
+<script>
+setTimeout(() => {
+document.getElementsByTagName("input")[0].click();
+}, 100);
+</script>
