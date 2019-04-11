@@ -1,0 +1,9 @@
+<button onclick="TriggerNavigationDownloadIn6Seconds()">Trigger navigation download in 6 seconds</button>
+
+<script>
+function TriggerNavigationDownloadIn6Seconds() {
+  setTimeout(function() { 
+    window.parent.frames['downloading'].location = "test.zip";
+  }, 6000);
+}
+</script>
