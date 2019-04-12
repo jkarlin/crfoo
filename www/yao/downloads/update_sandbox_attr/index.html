@@ -2,6 +2,9 @@
 </br>
 </br>
 <button onclick="RemoveAllowDownloadAttr()">Update sandbox: disallow download</button>
+</br>
+</br>
+<button onclick="TriggerNavigationDownloadIn6Seconds()">Trigger navigation download in 6 seconds</button>
 
 <h1 id="status">Status: allow download</h1>
 
@@ -46,6 +49,12 @@ function RemoveAllowDownloadAttr() {
   }
   document.getElementsByName("downloading")[0].sandbox = g_sandbox_allow_attrs_list.join(' ');
   document.getElementById("status").innerHTML = "Status: disallow download";
+}
+
+function TriggerNavigationDownloadIn6Seconds() {
+  setTimeout(function() { 
+    document.getElementsByName("downloading")[0].location = "test.zip";
+  }, 6000);
 }
 
 </script>
