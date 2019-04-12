@@ -34,7 +34,7 @@ function AddAllowDownloadAttr() {
   if (!g_sandbox_allow_attrs_list.includes(allow_download_token)) {
     g_sandbox_allow_attrs_list.push(allow_download_token);
   }
-  frames['downloading'].sandbox = g_sandbox_allow_attrs_list.join(' ');
+  document.getElementsByName("downloading")[0].sandbox = g_sandbox_allow_attrs_list.join(' ');
   document.getElementById("status").innerHTML = "Status: allow download";
 }
 
@@ -44,7 +44,7 @@ function RemoveAllowDownloadAttr() {
        return ele != allow_download_token;
     });
   }
-  frames['downloading'].sandbox = g_sandbox_allow_attrs_list.join(' ');
+  document.getElementsByName("downloading")[0].sandbox = g_sandbox_allow_attrs_list.join(' ');
   document.getElementById("status").innerHTML = "Status: disallow download";
 }
 
