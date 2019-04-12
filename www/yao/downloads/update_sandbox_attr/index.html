@@ -4,6 +4,12 @@
 <button onclick="RemoveAllowDownloadAttr()">Update sandbox: disallow download</button>
 </br>
 </br>
+<button onclick="AddAllowDownloadAttr2()">Update sandbox (remove/add): allow download</button>
+</br>
+</br>
+<button onclick="RemoveAllowDownloadAttr2()">Update sandbox (remove/add): disallow download</button>
+</br>
+</br>
 <button onclick="TriggerNavigationDownloadIn6Seconds()">Trigger navigation download in 6 seconds</button>
 
 <h1 id="status">Status: allow download</h1>
@@ -51,6 +57,28 @@ function RemoveAllowDownloadAttr() {
   document.getElementById("status").innerHTML = "Status: disallow download";
 }
 
+
+function AddAllowDownloadAttr2() {
+  if (!g_sandbox_allow_attrs_list.includes(allow_download_token)) {
+    g_sandbox_allow_attrs_list.push(allow_download_token);
+  }
+  document.getElementsByName("downloading")[0].removeAttribute("sandbox");
+  document.getElementsByName("downloading")[0].sandbox = g_sandbox_allow_attrs_list.join(' ');
+  document.getElementById("status").innerHTML = "Status: allow download";
+}
+
+
+function RemoveAllowDownloadAttr2() {
+  if (g_sandbox_allow_attrs_list.includes(allow_download_token)) {
+    g_sandbox_allow_attrs_list = g_sandbox_allow_attrs_list.filter(function(ele){
+       return ele != allow_download_token;
+    });
+  }
+  document.getElementsByName("downloading")[0].removeAttribute("sandbox");
+  document.getElementsByName("downloading")[0].sandbox = g_sandbox_allow_attrs_list.join(' ');
+  document.getElementById("status").innerHTML = "Status: disallow download";
+}
+  
 function TriggerNavigationDownloadIn6Seconds() {
   setTimeout(function() { 
     document.getElementsByName("downloading")[0].src = "test.zip";
