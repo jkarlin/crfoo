@@ -18,7 +18,7 @@ function AddSandboxDisallowPlugin() {
 }
 
 function RemoveSandboxAllowPlugin() {
-  document.getElementsByName("plugin")[0].sandbox = none;
+  document.getElementsByName("plugin")[0].removeAttribute("sandbox");
   document.getElementById("status").innerHTML = "Status: allow plugin";
 }
 
