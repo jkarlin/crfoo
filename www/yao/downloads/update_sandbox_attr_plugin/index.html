@@ -1,0 +1,25 @@
+<button onclick="AddSandboxDisallowPlugin()">Add sandbox: disallow plugin</button>
+</br>
+</br>
+<button onclick="RemoveSandboxAllowPlugin()">Remove sandbox: allow plugin</button>
+
+<h1 id="status">Status: allow plugin</h1>
+
+<h1>PDF Frame</h1>
+<iframe name="plugin" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr_plugin/plugin.html"></iframe>
+
+<h1>Initiator Frame</h1>
+<iframe name="initiator" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr_plugin/initiator.html"></iframe>
+
+<script>
+function AddSandboxDisallowPlugin() {
+  document.getElementsByName("plugin")[0].sandbox = "allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation allow-downloads-without-user-activation";
+  document.getElementById("status").innerHTML = "Status: disallow plugin";
+}
+
+function RemoveSandboxAllowPlugin() {
+  document.getElementsByName("plugin")[0].sandbox = none;
+  document.getElementById("status").innerHTML = "Status: allow plugin";
+}
+
+</script>
