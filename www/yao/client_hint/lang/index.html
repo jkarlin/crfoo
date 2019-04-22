@@ -1,2 +1,19 @@
 <h1>Test Lang Client Hint</h1>
+<meta http-equiv="Accept-CH" content="lang">
 <a href='index.html'>reload</a>
+<button onclick="fetchPDF()">fetch</button>
+<script>
+function fetchPDF() {
+  fetch('https://cr.kungfoo.net/yao/downloads/pdf_file.php')
+    .then(function(response) {
+        return response.text()
+    })
+    .then(function(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, "text/html");
+        console.log(doc);
+    })
+    .catch(function(err) {  
+        console.log('Failed to fetch page: ', err);  
+    });
+}
