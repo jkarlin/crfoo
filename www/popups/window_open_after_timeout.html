@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
+<title>window.open()</title>
+<script>
+let param = new URL(location).searchParams.get('delayms');
+var delayms = parseInt(param, 10);
+if (isNaN(delayms))
+  delayms = 0;
+
+setTimeout(() => {window.open("");}, delayms);
+</script>
+<p></p>
+
