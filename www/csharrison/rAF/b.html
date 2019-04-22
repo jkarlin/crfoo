@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+function raf() {
+  let start = performance.now();
+  while (performance.now() < start + 200) {}
+  window.requestAnimationFrame(raf);
+}
+raf();
+</script>
