@@ -5,6 +5,7 @@ function doHash() {
     console.log(seed);
     setTimeout(doHash, 0);
     document.getElementById("hashes").innerHTML = parseInt(document.getElementById("hashes").innerHTML) + 1;
+    document.getElementById("hash").innerHTML = seed;
 }
 
 for (var i = 0; i < NUM_PARALLEL_HASHERS; i++)
