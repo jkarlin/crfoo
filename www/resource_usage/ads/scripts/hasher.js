@@ -4,6 +4,7 @@ function doHash() {
     seed = CryptoJS.MD5(seed);
     console.log(seed);
     setTimeout(doHash, 0);
+    document.getElementById("hashes").innerHTML = parseInt(document.getElementById("hashes").innerHTML) + 1;
 }
 
 for (var i = 0; i < NUM_PARALLEL_HASHERS; i++)
