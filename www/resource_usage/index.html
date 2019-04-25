@@ -4,4 +4,7 @@
   <h2> This page loads a tagged ad iframe.</h2>
   <p>Load a specific frame using ?site="url"</p>
   <script src="ads/scripts/dfp.js"></script>
+  <script>
+    window.addEventListener("unload", function(event) {console.log("Main frame unload: " + event)});
+  </script>
 </body>
