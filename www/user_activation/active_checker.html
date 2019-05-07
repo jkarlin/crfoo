@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
+<title>Activation Checker</title>
+<script>
+setInterval(() => {
+  document.body.innerHTML = navigator.userActivation.isActive ? "active" : "not active";
+}, 10);
+</script>
