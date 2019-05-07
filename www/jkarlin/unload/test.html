@@ -2,12 +2,17 @@
 
 <script>
 
+first = True
+  
 window.onbeforeunload = function() {
+  if (!first)
+    return
   setTimeout(function(){ 
     window.open("popup.html", "_blank");   
     window.location.href = "/out.php"; 
   }, 0);
   
+  first = False;
   return "Are you sure you want to leave?";
 }
 
