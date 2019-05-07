@@ -2,8 +2,22 @@
 <meta charset="utf-8">
 <!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
 <title>Activation Checker</title>
+<button style="color:red" id="activation">Activation</button>
+<button style="color:red" id="keydown">keydown</button>
+<button style="color:red" id="keyup">keyup</button>
 <script>
 setInterval(() => {
-  document.body.innerHTML = navigator.userActivation.isActive ? "active" : "not active";
+  var button = document.getElementById("activation");
+  button.style.color = navigator.userActivation.isActive ? "green" : "red";
 }, 10);
+
+document.addEventListener("keydown", event => {
+  document.getElementById("keydown").style.color = "green";
+});
+
+document.addEventListener("keyup", event => {
+  document.getElementById("keyup").style.color = "green";
+});
+
+
 </script>
