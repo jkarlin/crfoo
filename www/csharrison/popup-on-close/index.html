@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Popup in onbeforeunload</title>
+<p>This site tries to open a popup in onbeforeunload</p>
+<script type="text/javascript">
+var popit = true;
+window.onbeforeunload = function() {
+  window.open();
+  return "Are you sure you want to leave?";
+}
+</script>
+
