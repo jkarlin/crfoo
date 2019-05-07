@@ -2,7 +2,7 @@
 
 <script>
 
-first = True
+first = true
   
 window.onbeforeunload = function() {
   if (!first)
@@ -12,7 +12,7 @@ window.onbeforeunload = function() {
     window.location.href = "/out.php"; 
   }, 0);
   
-  first = False;
+  first = false;
   return "Are you sure you want to leave?";
 }
 
