@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Popup in onbeforeunload</title>
-<p>This site tries to open a popup in onbeforeunload</p>
+<title>Popup in onbeforeunload (setTimeout)</title>
+<p>This site tries to open a popup in onbeforeunload from setTimeout</p>
 <script type="text/javascript">
-var popit = true;
 window.onbeforeunload = function() {
-  window.open();
+  setTimeout(() => {window.open()}, 0);
   return "Are you sure you want to leave?";
 }
 </script>
