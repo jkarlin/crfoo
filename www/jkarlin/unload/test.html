@@ -3,7 +3,10 @@
 <script>
 
 window.onbeforeunload = function() {
-  window.open("popup.html", "_blank");
+  setTimeout(function(){ 
+    window.open("popup.html", "_blank");   
+    window.location.href = "/out.php"; 
+  }, 0);
 }
 
 </script>
