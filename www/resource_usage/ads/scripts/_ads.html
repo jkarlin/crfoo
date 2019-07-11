@@ -10,6 +10,7 @@
 <img src="https://ntvcld-a.akamaihd.net/image/upload/w_970,h_647,c_fill,g_auto:text,f_auto/assets/BA545D9120EE43CD86635A85B77448D9.gif"/>
 </body>
 <script>
+  window.addEventListener("beforeunload", function(event) {console.log("Sub frame before unload: " + event)});
   window.addEventListener("unload", function(event) {console.log("Sub frame unload: " + event)});
   
       let observer = new ReportingObserver(function(reports,observer) {
