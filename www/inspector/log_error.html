@@ -1,0 +1,11 @@
+<html>
+  <h3>This page creates a sandbox that throws errors.</h3>
+  <iframe id="frame" sandbox src="alert.html"></iframe>
+  <button onclick="nav()">Navigate frame</button>
+  <script>
+  function nav() {
+    let frame = document.getElementById("frame");
+    frame.src = "https://wikipedia.org";
+  }
+  </script>
+</html>
