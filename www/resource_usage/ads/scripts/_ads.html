@@ -15,6 +15,6 @@
       let observer = new ReportingObserver(function(reports,observer) {
       console.log("SUBFRAME**************************");
       console.log(reports);
-    });
+    },{buffered: true});
   observer.observe();
 </script>
