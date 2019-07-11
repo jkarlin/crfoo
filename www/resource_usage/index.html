@@ -6,5 +6,10 @@
   <script src="ads/scripts/dfp.js"></script>
   <script>
     window.addEventListener("unload", function(event) {console.log("Main frame unload: " + event)});
+    
+    let observer = new ReportingObserver(function(reports,observer) {
+      console.log("RECEIVED REPORTS**************************");
+      console.log(reports);
+    });
   </script>
 </body>
