@@ -10,7 +10,7 @@
     let observer = new ReportingObserver(function(reports,observer) {
       console.log("RECEIVED REPORTS**************************");
       console.log(reports);
-    });
+    }, {buffered: true});
     observer.observe();
   </script>
 </body>
