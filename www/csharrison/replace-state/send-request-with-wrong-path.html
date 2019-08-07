@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<button onclick="fetchIt();">Click for request with wrong path</button>
+<script>
+function fetchIt() {
+  var oldUrl = window.location.href;
+  history.replaceState(history.state, document.title, "/fooled");
+  fetch("/blah");
+  history.replaceState(history.state, document.title, oldUrl);
+}
+</script>
