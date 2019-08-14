@@ -1,0 +1,35 @@
+
+.content {
+  height: 200vh;
+  width: 100vw;
+  text-align:center;
+  margin-top: auto;
+  padding-top: 30vh;
+}
+
+.large-ad-area-wide {
+  width:100vw;
+  height:31vh;
+  background-color: #ff0000;
+}
+
+.large-ad-area-tall {
+  width:31vw;
+  height:100vh;
+  background-color: #ff0000;
+}
+
+.pos-sticky-to-top {
+  position: sticky;
+  top: 0;
+}
+
+.pos-sticky-to-bottom {
+  position: sticky;
+  bottom: 1rem;
+}
+
+.sticky-top {
+  position: absolute;
+  top: 0;
+}
