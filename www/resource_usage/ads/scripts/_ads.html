@@ -11,18 +11,17 @@
 </body>
 <script>
   window.addEventListener("beforeunload", function(event) {console.log("Sub frame before unload: " + event)});
-  window.addEventListener("unload", function(event) {console.log("Sub frame unload: " + event)});
-  
-      let observer = new ReportingObserver(function(reports,observer) {
-      console.log("SUBFRAME**************************");
-      console.log(reports);
-      let x = 0;
+  window.addEventListener("unload", function(event) {console.log("Sub frame unload: " + event); let x = 0;
       while ( true) {
         if (x % 3 == 0)
           x += 1;
         x += 2;
       }
-      console.log(x);
+      console.log(x);});
+  
+      let observer = new ReportingObserver(function(reports,observer) {
+      console.log("SUBFRAME**************************");
+      console.log(reports);
     },{buffered: true});
   observer.observe();
   //window.navigator.vibrate(200);
