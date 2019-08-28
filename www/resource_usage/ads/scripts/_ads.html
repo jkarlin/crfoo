@@ -21,7 +21,7 @@
   window.addEventListener("unload", function(event) {
     console.log("Sub frame unload: " + event);
     let reports = observer.takeRecords();
-    if (reports.length() > 0)
+    if (reports.length > 0)
       console.log(observer.takeRecords()[0].body);
   });
   
