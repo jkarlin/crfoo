@@ -16,7 +16,7 @@
       let observer = new ReportingObserver(function(reports,observer) {
       console.log("SUBFRAME**************************");
       console.log(reports);
-      console.log(reports[0]);
+      console.log(reports[0].body);
     },{buffered: true});
   observer.observe();
   //window.navigator.vibrate(200);
