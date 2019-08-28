@@ -20,7 +20,9 @@
   window.addEventListener("beforeunload", function(event) {console.log("Sub frame before unload: " + event)});
   window.addEventListener("unload", function(event) {
     console.log("Sub frame unload: " + event);
-    console.log(observer.takeRecords()[0].body);
+    let reports = observer.takeRecords();
+    if (reports.length() > 0)
+      console.log(observer.takeRecords()[0].body);
   });
   
   //window.navigator.vibrate(200);
