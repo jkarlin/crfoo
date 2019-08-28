@@ -10,14 +10,18 @@
 <img src="output.dat"/>
 </body>
 <script>
-  window.addEventListener("beforeunload", function(event) {console.log("Sub frame before unload: " + event)});
-  window.addEventListener("unload", function(event) {console.log("Sub frame unload: " + event);});
-  
-      let observer = new ReportingObserver(function(reports,observer) {
+  let observer = new ReportingObserver(function(reports,observer) {
       console.log("SUBFRAME**************************");
-      console.log(reports);
+      //console.log(reports);
       console.log(reports[0].body);
     },{buffered: true});
   observer.observe();
+  
+  window.addEventListener("beforeunload", function(event) {console.log("Sub frame before unload: " + event)});
+  window.addEventListener("unload", function(event) {
+    console.log("Sub frame unload: " + event);
+    console.log(observer.takeRecords()[0].body);
+  });
+  
   //window.navigator.vibrate(200);
 </script>
