@@ -7,16 +7,23 @@
 <p> This frame is generating a large number of hashes</p>
 <p> Hashes generated: <span style="font-weight: 700; color: black" id="hashes">0</span></p>
 <p> Recent hash: <span id="hash"></span></p>
-<img src="https://ntvcld-a.akamaihd.net/image/upload/w_970,h_647,c_fill,g_auto:text,f_auto/assets/BA545D9120EE43CD86635A85B77448D9.gif"/>
+<img src="output.dat"/>
 </body>
 <script>
-  window.addEventListener("beforeunload", function(event) {console.log("Sub frame before unload: " + event)});
-  window.addEventListener("unload", function(event) {console.log("Sub frame unload: " + event)});
-  
-      let observer = new ReportingObserver(function(reports,observer) {
+  let observer = new ReportingObserver(function(reports,observer) {
       console.log("SUBFRAME**************************");
-      console.log(reports);
+      //console.log(reports);
+      console.log(reports[0].body);
     },{buffered: true});
   observer.observe();
-  window.navigator.vibrate(200);
+  
+  window.addEventListener("beforeunload", function(event) {console.log("Sub frame before unload: " + event)});
+  window.addEventListener("unload", function(event) {
+    console.log("Sub frame unload: " + event);
+    let reports = observer.takeRecords();
+    if (reports.length > 0)
+      console.log(observer.takeRecords()[0].body);
+  });
+  
+  //window.navigator.vibrate(200);
 </script>
