@@ -2,8 +2,16 @@
 
 .offset-frame {
   position: absolute;
-  top: 400px;
-  left: 400px;
+  top: 600px;
+  left: 600px;
+  height: 500px;
+  width: 500px;
+}
+
+.small-offset-frame {
+  position: absolute;
+  top: 30px;
+  left: 30px;
 }
 
 .transform-rotate {
