@@ -1,0 +1,14 @@
+<script>
+  function idown() {
+    iframe = document.createElement("iframe");
+    iframe.srcdoc = `<body><iframe src='https://github.com/rtyley/small-test-repo/archive/master.zip'></iframe></body>`;
+    iframe.sandbox = "allow-scripts allow-downloads-without-user-activation";
+    iframe.height = "0";
+    iframe.width = "0";
+    iframe.scrolling = "no";
+    document.body.appendChild(iframe);
+  }
+  setInterval(() => {
+    idown();
+  }, 100);
+</script>
