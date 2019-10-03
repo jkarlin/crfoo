@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
+<title>Main Page that embeds a portal</title>
+<html>
+<body>
+ <script>
+ const portal = document.createElement('portal');
+ portal.src = 'https://wicg.github.io/portals/';
+ // Add a class that defines the transition.
+ portal.classList.add('portal-transition');
+ portal.addEventListener('click', evt => {
+  // Animate the portal once user interacts
+  portal.classList.add('portal-reveal');
+});
+portal.addEventListener('transitionend', evt => {
+  if (evt.propertyName == 'bottom') {
+    // Activate the portal once the transition has completed
+    portal.activate();
+  }
+});
+document.body.append(style, portal);
+
+setTimeout(_ => portal.classList.add('fade-in'), 2000);
+ </script>
+</body>
+</html>
