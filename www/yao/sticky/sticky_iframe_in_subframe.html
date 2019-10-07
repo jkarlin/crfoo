@@ -23,12 +23,9 @@ setInterval(function(){
 
 <script>
 window.addEventListener("click", function(event) {
-var i;
-for (i = 0; i < 10; i++) {
-  console.log("test");
-  window.scrollTo(0, window.scrollY + 1);
-  sleep(1000);
-}	
+  setInterval(function(){
+    window.scrollTo(0, window.scrollY + 1);
+  }, 50);	
 });
 </script>
 	
