@@ -7,7 +7,7 @@
   window.onload = function(){
     navigator.serviceWorker.register('empty.js').then(function(registration) {
       console.log('Service worker registration succeeded:', registration);
-      document.getElementById ("fid").contentDocument.write('<?php echo include_once "redirect.php";?>');
+      document.getElementById ("fid").contentDocument.innerHTML = '<object type="text/html" data="redirect.php" ></object>';
     }, /*catch*/ function(error) {
       console.log('Service worker registration failed:', error);
     });
