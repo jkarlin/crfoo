@@ -1,13 +1,13 @@
   <body>
-  <iframe id='fid'></iframe>
   </body>
   
-  <script>
-  
+  <script>  
   window.onload = function(){
     navigator.serviceWorker.register('empty.js').then(function(registration) {
       console.log('Service worker registration succeeded:', registration);
-      document.getElementById ("fid").contentDocument.innerHTML = '<object type="text/html" data="redirect.php" ></object>';
+      var iframe = document.createElement('iframe');
+      document.body.appendChild(iframe);
+      // document.getElementById ("fid").contentDocument.innerHTML = '<object type="text/html" data="redirect.php" ></object>';
     }, /*catch*/ function(error) {
       console.log('Service worker registration failed:', error);
     });
