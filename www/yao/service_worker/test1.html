@@ -6,7 +6,7 @@
   window.onload = function(){
     navigator.serviceWorker.register('empty.js').then(function(registration) {
       console.log('Service worker registration succeeded:', registration);
-      document.write("<iframe src='https://cr.kungfoo.net/yao/service_worker/redirect.php'></iframe>");
+      document.write("<iframe src='http://cr2.kungfoo.net/yao/service_worker/redirect.php'></iframe>");
     }, /*catch*/ function(error) {
       console.log('Service worker registration failed:', error);
     });
