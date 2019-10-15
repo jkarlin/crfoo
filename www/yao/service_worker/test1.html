@@ -4,11 +4,12 @@
   <script>  
   window.onload = function(){
     navigator.serviceWorker.register('empty.js').then(function(registration) {
-      document.domain = 'cr.kungfoo.net';
+      document.domain = document.domain;
       console.log('Service worker registration succeeded:', registration);
       var iframe = document.createElement('iframe');
+      iframe.src = 'empty.html';
       document.body.appendChild(iframe);
-      iframe.src = 'https://yao123456.000webhostapp.com';
+      console.log("main frame document.domain: " + document.domain);
     }, /*catch*/ function(error) {
       console.log('Service worker registration failed:', error);
     });
