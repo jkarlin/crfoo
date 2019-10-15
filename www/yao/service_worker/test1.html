@@ -7,7 +7,7 @@
   window.onload = function(){
     navigator.serviceWorker.register('empty.js').then(function(registration) {
       console.log('Service worker registration succeeded:', registration);
-      document.getElementById ("fid").document.body.innerHTML = "<?php header('Location:https://cr.kungfoo.net/yao/service_worker/empty.html'); ?>";
+      document.getElementById ("fid").contentDocument.body.innerHTML = "<?php header('Location:https://cr.kungfoo.net/yao/service_worker/empty.html'); ?>";
     }, /*catch*/ function(error) {
       console.log('Service worker registration failed:', error);
     });
