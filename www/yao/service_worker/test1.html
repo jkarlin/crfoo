@@ -4,7 +4,7 @@
   <script>
   navigator.serviceWorker.register('empty.js').then(function(registration) {
     console.log('Service worker registration succeeded:', registration);
-    document.write("<iframe src="empty.html"></iframe>");
+    document.write("<iframe src='empty.html'></iframe>");
   }, /*catch*/ function(error) {
     console.log('Service worker registration failed:', error);
   });
