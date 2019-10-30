@@ -1,7 +1,7 @@
 .offset-frame {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 300px;
+  left: 300px;
   height: 500px;
   width: 500px;
 }
@@ -12,8 +12,4 @@
   left: 700px;
   height: 100px;
   width: 100px;
-  max-height: 100px;
-  max-width: 100px;
-  min-height: 100px;
-  min-width: 100px;
 }
