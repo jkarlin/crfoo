@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
+<title>Main Page that embeds a portal</title>
+<html>
+<body>
+ <script>
+  // Adding some styles with transitions
+const style = document.createElement('style');
+const initialScale = 0.4;
+style.innerHTML = `
+  portal {
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    box-shadow: 0 0 20px 10px #999;
+    transform: scale(${initialScale});
+    bottom: calc(20px + 50% * ${initialScale} - 50%);
+    left: calc(20px + 50% * ${initialScale} - 50%);
+    z-index: 10000;
+  }
+  .portal-transition {
+    transition:
+      transform 0.4s,
+      bottom 0.7s,
+      left 0.7s,
+      opacity 1.0s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .portal-transition {
+      transition: all 0.001s;
+    }
+  }
+  .portal-reveal {
+    transform: scale(1.0);
+    bottom: 0px;
+    left: 0px;
+  }
+  .fade-in {
+    opacity: 1.0;
+  }
+`;
+ const portal = document.createElement('portal');
+ portal.src = 'https://wicg.github.io/portals/';
+ // Add a class that defines the transition.
+ portal.classList.add('portal-transition');
+ portal.addEventListener('click', evt => {
+  // Animate the portal once user interacts
+  portal.classList.add('portal-reveal');
+});
+portal.addEventListener('transitionend', evt => {
+  if (evt.propertyName == 'bottom') {
+    // Activate the portal once the transition has completed
+    portal.activate();
+  }
+});
+document.body.append(style, portal);
+
+setTimeout(_ => portal.classList.add('fade-in'), 2000);
+ </script>
+</body>
+</html>

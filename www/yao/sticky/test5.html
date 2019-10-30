@@ -1,0 +1,12 @@
+<body>
+<iframe src="empty.html"></iframe>
+</body>
+
+<script>
+setInterval(function(){
+  let p = document.createElement("P");
+  let t = document.createTextNode("abc");
+  p.appendChild(t);
+  document.body.appendChild(p);
+}, 100);
+</script>
