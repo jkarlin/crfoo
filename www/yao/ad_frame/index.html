@@ -1,0 +1,27 @@
+<body>
+<script>
+function NavigateToHttpEmpty() {
+document.getElementById('fid').src="http://cr.kungfoo.net/yao/ad_frame/empty.html";
+}
+
+function NavigateToHttpsEmpty() {
+document.getElementById('fid').src="https://cr.kungfoo.net/yao/ad_frame/empty.html";
+}
+
+function NavigateToHttpAd() {
+document.getElementById('fid').src="http://cr.kungfoo.net/yao/ad_frame/ad1.png";
+}
+
+function NavigateToHttpsAd() {
+document.getElementById('fid').src="https://cr.kungfoo.net/yao/ad_frame/ad1.png";
+}
+</script>
+
+<iframe id='fid' src="empty.html"></iframe>
+<br></br>
+<button onclick="NavigateToHttpEmpty()">Navigate to: http://cr.kungfoo.net/yao/ad_frame/empty.html</button>
+<button onclick="NavigateToHttpsEmpty()">Navigate to: https://cr.kungfoo.net/yao/ad_frame/empty.html</button>
+<button onclick="NavigateToHttpAd()">Navigate to: http://cr.kungfoo.net/yao/ad_frame/ad1.png</button>
+<button onclick="NavigateToHttpsAd()">Navigate to: https://cr.kungfoo.net/yao/ad_frame/ad1.png</button>
+</body>
+
