@@ -12,6 +12,14 @@ document.getElementById('fid').src="http://cr.kungfoo.net/yao/interstitial/ad1.p
 function NavigateToHttpsAd() {
 document.getElementById('fid').src="https://cr.kungfoo.net/yao/interstitial/ad1.png";
 }
+function NavigateToHttpAd2() {
+document.getElementById('fid').src="http://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foo";
+}
+function NavigateToHttpsAd2() {
+document.getElementById('fid').src="https://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foo";
+}
+  
+  
 </script>
 
 <iframe id='fid' style="display:block" src="empty.html"></iframe><br></br>
@@ -19,4 +27,8 @@ document.getElementById('fid').src="https://cr.kungfoo.net/yao/interstitial/ad1.
 <button onclick="NavigateToHttpsEmpty()">Navigate to: https://cr.kungfoo.net/yao/ad_frame/empty.html</button><br></br>
 <button onclick="NavigateToHttpAd()">Navigate to: http://cr.kungfoo.net/yao/interstitial/ad1.png</button><br></br>
 <button onclick="NavigateToHttpsAd()">Navigate to: https://cr.kungfoo.net/yao/interstitial/ad1.png</button><br></br>
+<button onclick="NavigateToHttpAd2()">Navigate to: http://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foo</button><br></br>
+<button onclick="NavigateToHttpsAd2()">Navigate to: https://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foog</button><br></br>
+
+
 </body>
