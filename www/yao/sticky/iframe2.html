@@ -3,8 +3,8 @@
 <script>
 setInterval(function(){ 
   var f = document.getElementById('fid');
-  rect = f.getBoundingClientRect();
-  f.style.left = f.style.left + 1 + 'px';
+  var rect = f.getBoundingClientRect();
+  f.style.left = rect.style.left + 1 + 'px';
   console.log(f.style.left);
 }, 50);
 </script>
