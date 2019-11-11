@@ -5,7 +5,7 @@
 setInterval(function(){ 
   var f = document.getElementById('fid');
   var rect = f.getBoundingClientRect();
-  console.log(rect);
+  console.log(rect.left);
   f.style.left = rect.left + 1 + 'px';
   console.log(f.style.left);
 }, 50);
