@@ -8,13 +8,17 @@ var urlParams = new URLSearchParams(window.location.search);
 var site = urlParams.get('site')
 console.log(site);
 if (site.substr(site.length - 3) == "mp4") {
-  doc = frame.document;
+  document.body.appendChild(frame);
+  doc = frame.contentDocument;
   let v = doc.createElementById("video");
   video.src = site;
   doc.body.append(v);
   v.play();
-} else if (site)
+} else if (site) {
   frame.src = site;
-else
+  document.body.appendChild(frame);
+}
+else {
   frame.src = "ads/scripts/_ads.html";
-document.body.appendChild(frame);
+  document.body.appendChild(frame);
+}
