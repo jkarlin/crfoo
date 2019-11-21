@@ -2,6 +2,7 @@ let frame = document.createElement("iframe");
 frame.width = 400;
 frame.height = 400;
 frame.setAttribute("autoplay", "");
+frame.setAttribute("allow", "autoplay");
 var urlParams = new URLSearchParams(window.location.search);
 var site = urlParams.get('site')
 console.log(site);
