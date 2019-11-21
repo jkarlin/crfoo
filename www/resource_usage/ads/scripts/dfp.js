@@ -10,7 +10,7 @@ if (site.substr(site.length - 3) == "mp4") {
   doc = frame.contentDocument || frame.contentWindow.document;
   let v = doc.createElement("video");
     v.setAttribute("controls", "");
-  v.setAttribute("muted", "");
+  v.setAttribute("muted", "muted");
   v.setAttribute("autoplay", "");
   v.src = site;
   v.width=400;
