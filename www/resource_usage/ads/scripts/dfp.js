@@ -16,6 +16,7 @@ if (site.substr(site.length - 3) == "mp4") {
   v.width=400;
   v.height=400;
   doc.body.append(v);
+  v.play();
 } else if (site) {
   frame.src = site;
   document.body.appendChild(frame);
