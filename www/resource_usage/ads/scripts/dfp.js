@@ -7,7 +7,7 @@ frame.setAttribute("allow", "autoplay");
 var urlParams = new URLSearchParams(window.location.search);
 var site = urlParams.get('site')
 console.log(site);
-if (site.sustr(site.length - 3) == "mp4") {
+if (site.substr(site.length - 3) == "mp4") {
   doc = frame.contentDocument;
   let v = doc.createElementById("video");
   video.src = site;
