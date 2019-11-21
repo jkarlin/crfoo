@@ -10,8 +10,10 @@ console.log(site);
 if (site.substr(site.length - 3) == "mp4") {
   document.body.appendChild(frame);
   doc = frame.contentDocument || frame.contentWindow.document;
-  let v = doc.createElementById("video");
+  let v = doc.createElement("video");
   video.src = site;
+  v.width=400;
+  v.height=400;
   doc.body.append(v);
   v.play();
 } else if (site) {
