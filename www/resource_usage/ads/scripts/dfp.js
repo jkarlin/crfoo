@@ -13,6 +13,7 @@ if (site.substr(site.length - 3) == "mp4") {
   let v = doc.createElement("video");
   v.setAttribute("muted", "");
   v.setAttribute("autoplay", "");
+  v.setAttribute("controls", "");
   v.src = site;
   v.width=400;
   v.height=400;
