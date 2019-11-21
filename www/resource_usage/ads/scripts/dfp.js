@@ -11,12 +11,12 @@ if (site.substr(site.length - 3) == "mp4") {
   let v = doc.createElement("video");
     v.setAttribute("controls", "");
   v.setAttribute("muted", "muted");
-  v.setAttribute("autoplay", "");
+  v.setAttribute("autoplay", "true");
   v.src = site;
   v.width=400;
   v.height=400;
   doc.body.append(v);
-  v.play();
+  //v.play();
 } else if (site) {
   frame.src = site;
   document.body.appendChild(frame);
