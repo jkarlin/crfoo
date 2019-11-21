@@ -9,7 +9,7 @@ var site = urlParams.get('site')
 console.log(site);
 if (site.substr(site.length - 3) == "mp4") {
   document.body.appendChild(frame);
-  doc = frame.contentDocument;
+  doc = frame.contentDocument || frame.contentWindow.document;
   let v = doc.createElementById("video");
   video.src = site;
   doc.body.append(v);
