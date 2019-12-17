@@ -1,9 +1,7 @@
-<button onclick="TriggerNavigationDownloadIn6Seconds()">Navigate "Downloading Frame" to a download in 6 seconds</button>
+<button onclick="TriggerNavigationDownload()">Navigate "Downloading Frame" to a download</button>
 
 <script>
-function TriggerNavigationDownloadIn6Seconds() {
-  setTimeout(function() { 
+function TriggerNavigationDownload() {
     window.parent.frames['downloading'].location = "test.zip";
-  }, 6000);
 }
 </script>
