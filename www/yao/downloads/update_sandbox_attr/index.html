@@ -4,7 +4,7 @@
 <button onclick="RemoveAllowDownloadAttr()">Update sandbox: disallow download</button>
 </br>
 </br>
-<button onclick="TriggerNavigationDownloadIn6Seconds()">Navigate "Downloading Frame" to a download in 6 seconds</button>
+<button onclick="TriggerNavigationDownload()">Navigate "Downloading Frame" to a download</button>
 
 <h1 id="status">Status: allow download</h1>
 
@@ -28,10 +28,10 @@ let g_sandbox_allow_attrs_list =
   "allow-modals",
   "allow-presentation",
   "allow-top-navigation-by-user-activation",
-  "allow-downloads-without-user-activation"
+  "allow-downloads"
 ];
 
-const allow_download_token = "allow-downloads-without-user-activation";
+const allow_download_token = "allow-downloads";
 
 function AddAllowDownloadAttr() {
   if (!g_sandbox_allow_attrs_list.includes(allow_download_token)) {
@@ -51,10 +51,8 @@ function RemoveAllowDownloadAttr() {
   document.getElementById("status").innerHTML = "Status: disallow download";
 }
   
-function TriggerNavigationDownloadIn6Seconds() {
-  setTimeout(function() { 
-    document.getElementsByName("downloading")[0].src = "test.zip";
-  }, 6000);
+function TriggerNavigationDownload() {
+  document.getElementsByName("downloading")[0].src = "test.zip";
 }
 
 </script>
