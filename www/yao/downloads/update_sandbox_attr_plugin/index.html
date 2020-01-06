@@ -3,22 +3,27 @@
 </br>
 <button onclick="RemoveSandboxAllowPlugin()">Remove sandbox: allow plugin</button>
 
-<h1 id="status">Status: allow plugin</h1>
+<h1>Frame 1 plugin disallowed, sandbox unsettable</h1>
+<button onclick="document.getElementsByName("f1")[0].location = 'pdf_file.php';">Navigation to a PDF</button>
+<iframe name="f1" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr_plugin/empty.html" sandbox="allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation allow-downloads"></iframe>
 
-<h1>PDF Frame</h1>
-<iframe name="plugin" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr_plugin/empty.html"></iframe>
+<h1>Frame 2 plugin allowed, sandbox unsettable</h1>
+<button onclick="document.getElementsByName("f2")[0].location = 'pdf_file.php';">Navigation to a PDF</button>
+<iframe name="f2" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr_plugin/empty.html"></iframe>
 
-<h1>Initiator Frame</h1>
-<iframe name="initiator" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr_plugin/initiator.html"></iframe>
+<h1>Frame 3, sandbox settable</h1>
+<h1 id="status">Sandbox status: allow plugin</h1>
+<button onclick="document.getElementsByName("f3")[0].location = 'pdf_file.php';">Navigation to a PDF</button>
+<iframe name="f3" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr_plugin/empty.html"></iframe>
 
 <script>
 function AddSandboxDisallowPlugin() {
-  document.getElementsByName("plugin")[0].sandbox = "allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation allow-downloads";
+  document.getElementsByName("f3")[0].sandbox = "allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation allow-downloads";
   document.getElementById("status").innerHTML = "Status: disallow plugin";
 }
 
 function RemoveSandboxAllowPlugin() {
-  document.getElementsByName("plugin")[0].removeAttribute("sandbox");
+  document.getElementsByName("f3")[0].removeAttribute("sandbox");
   document.getElementById("status").innerHTML = "Status: allow plugin";
 }
 
