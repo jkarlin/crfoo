@@ -1,58 +1,27 @@
-<button onclick="AddAllowDownloadAttr()">Update sandbox: allow download</button>
-</br>
-</br>
-<button onclick="RemoveAllowDownloadAttr()">Update sandbox: disallow download</button>
-</br>
-</br>
-<button onclick="TriggerNavigationDownload()">Navigate "Downloading Frame" to a download</button>
+<h1>RemoteFrame 1 download disallowed, sandbox unsettable</h1>
+<button onclick="document.getElementsByName('f1')[0].src = 'test.zip';">Navigation to a download</button><br></br>
+<iframe name="f1" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr/empty.html" sandbox="allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation"></iframe>
 
+<h1>RemoteFrame 2 download allowed, sandbox unsettable</h1>
+<button onclick="document.getElementsByName('f2')[0].src = 'test.zip';">Navigation to a download</button><br></br>
+<iframe name="f2" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr/empty.html"></iframe>
+
+<h1>RemoteFrame 3, sandbox settable</h1>
 <h1 id="status">Status: allow download</h1>
-
-<h1>Downloading Frame</h1>
-<iframe name="downloading" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr/downloading.html" sandbox="allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation allow-downloads"></iframe>
-
-<h1>Initiator Frame</h1>
-<iframe name="initiator" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr/initiator.html"></iframe>
+<button onclick="SwitchToDisallow()">Add sandbox: disallow download</button><br></br>
+<button onclick="SwitchToAllow()">Remove sandbox: allow download</button><br></br>
+<button onclick="document.getElementsByName('f3')[0].src = 'test.zip';">Navigation to a download</button><br></br>
+<iframe name="f3" src="https://cr.kungfoo.net/yao/downloads/update_sandbox_attr/empty.html"></iframe>
 
 <script>
-let g_sandbox_allow_attrs_list =
-[
-  "allow-same-origin",
-  "allow-forms",
-  "allow-scripts",
-  "allow-top-navigation",
-  "allow-popups",
-  "allow-pointer-lock",
-  "allow-orientation-lock",
-  "allow-popups-to-escape-sandbox",
-  "allow-modals",
-  "allow-presentation",
-  "allow-top-navigation-by-user-activation",
-  "allow-downloads"
-];
-
-const allow_download_token = "allow-downloads";
-
-function AddAllowDownloadAttr() {
-  if (!g_sandbox_allow_attrs_list.includes(allow_download_token)) {
-    g_sandbox_allow_attrs_list.push(allow_download_token);
-  }
-  document.getElementsByName("downloading")[0].sandbox = g_sandbox_allow_attrs_list.join(' ');
-  document.getElementById("status").innerHTML = "Status: allow download";
-}
-
-function RemoveAllowDownloadAttr() {
-  if (g_sandbox_allow_attrs_list.includes(allow_download_token)) {
-    g_sandbox_allow_attrs_list = g_sandbox_allow_attrs_list.filter(function(ele){
-       return ele != allow_download_token;
-    });
-  }
-  document.getElementsByName("downloading")[0].sandbox = g_sandbox_allow_attrs_list.join(' ');
+function SwitchToDisallow() {
+  document.getElementsByName("f3")[0].sandbox = "allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation";
   document.getElementById("status").innerHTML = "Status: disallow download";
 }
-  
-function TriggerNavigationDownload() {
-  document.getElementsByName("downloading")[0].src = "test.zip";
+
+function SwitchToAllow() {
+  document.getElementsByName("f3")[0].sandbox = "allow-same-origin allow-forms allow-scripts allow-top-navigation allow-popups allow-pointer-lock allow-orientation-lock allow-popups-to-escape-sandbox allow-modals allow-presentation allow-top-navigation-by-user-activation allow-downloads";
+  document.getElementById("status").innerHTML = "Status: allow download";
 }
 
 </script>
