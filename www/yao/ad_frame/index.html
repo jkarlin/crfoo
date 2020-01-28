@@ -18,6 +18,17 @@ document.getElementById('fid').src="http://testsafebrowsing.appspot.com/s/social
 function NavigateToHttpsAd2() {
 document.getElementById('fid').src="https://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foo";
 }
+function DocWrite() {
+let doc = document.getElementById('fid').contentDocument;
+doc.open();
+doc.write('<html>Rewritten.</html>');
+doc.close();  
+}
+function CreateDefaultFrame() {
+var iframe = document.createElement('iframe');
+iframe.id = 'fid';
+document.body.appendChild(iframe);
+}
 function CreateDefaultFrame() {
 var iframe = document.createElement('iframe');
 iframe.src = 'empty.html';
@@ -37,7 +48,7 @@ iframe.id = 'fid';
 document.body.appendChild(iframe);
 }
 </script>
-
+<button onclick='CreateFrameNoSrc()'>Create frame no src</button><br></br>
 <button onclick='CreateDefaultFrame()'>Create frame: empty.html</button><br></br>
 <button onclick='CreateHttpAdFrame()'>Create frame: http://cr.kungfoo.net/yao/interstitial/ad1.png</button><br></br>
 <button onclick='CreateHttpsAdFrame()'>Create frame: https://cr.kungfoo.net/yao/interstitial/ad1.png</button><br></br>
@@ -46,7 +57,6 @@ document.body.appendChild(iframe);
 <button onclick="NavigateToHttpAd()">Navigate to: http://cr.kungfoo.net/yao/interstitial/ad1.png</button><br></br>
 <button onclick="NavigateToHttpsAd()">Navigate to: https://cr.kungfoo.net/yao/interstitial/ad1.png</button><br></br>
 <button onclick="NavigateToHttpAd2()">Navigate to: http://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foo</button><br></br>
-<button onclick="NavigateToHttpsAd2()">Navigate to: https://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foog</button><br></br>
-
-
+<button onclick="NavigateToHttpsAd2()">Navigate to: https://testsafebrowsing.appspot.com/s/social-engineering-ad2.png?&adsafe=foo</button><br></br>
+<button onclick="DocWrite()">DocWrite</button><br></br>
 </body>
