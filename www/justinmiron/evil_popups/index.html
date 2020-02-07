@@ -17,11 +17,6 @@
   <input type="radio" name="content_dest" value="current" checked> Current
   <input type="radio" name="content_dest" value="popup"> Popup
   <br>
-
-  <h3>Ordering</h3>
-  <input type="radio" name="navigate_first" value="yes" checked> Navigate then Pop-up
-  <input type="radio" name="navigate_first" value="no"> Pop-up then navigate
-  <br>
 </form>
 
 <h3>Press the Buttons</h3>
@@ -49,30 +44,22 @@ function parseSettingsOpenPopups(activation) {
   var popup_type_value = getRadioButtonValue("popup_type");
   var is_ad_value = getRadioButtonValue("is_ad");
   var content_dest = getRadioButtonValue("content_dest");
-  var ordering = getRadioButtonValue("navigate_first");
 
   var url = is_ad_value == "yes" ? "https://www.site-with-no-engagement-score.com" : "https://www.site-with-no-engagement-score.com";
   var in_window = popup_type_value == "window";
   var popup_url = content_dest == "current" ? url : window.location.href;
   var current_url = content_dest == "popup" ? url : window.location.href;
-  var popup_first = ordering == "no";
 
   if(activation) {
-  	openPopupAndNavigate(popup_url, current_url, "window", in_window, popup_first);
+  	openPopupAndNavigate(popup_url, current_url, "window", in_window);
   } else {
   	openPopupWithNoActivation(url, in_window);
   }
 }
 
-function openPopupAndNavigate(popup_url, current_url, window_name, in_window, popup_first) {
-  var w;
-  if(popup_first) {
-    w = openPopup(popup_url, window_name, in_window); // open popup
-    window.location.href = current_url; // navigate the current page.
-  } else {
-    window.location.href = current_url;
-    w = openPopup(popup_url, window_name, in_window); // open popup
-  }
+function openPopupAndNavigate(popup_url, current_url, window_name, in_window) {
+  var w = openPopup(popup_url, window_name, in_window); // open popup
+  window.location.href = current_url; // navigate the current page.
   return w;
 }
 
