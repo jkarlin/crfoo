@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<p>This site opens pop-ups to a cross-origin site.</p>
+
+<form id="user_opt">
+	<h3>Popup Type</h3>
+	<input type="radio" name="popup_type" value="window" checked> Window
+	<input type="radio" name="popup_type" value="tab"> Tab<br>
+
+	<h3>Is Popup Ad</h3>
+	<input type="radio" name="is_ad" value="yes" checked> Yes
+	<input type="radio" name="is_ad" value="no"> No<br>
+</form>
+
+<h3>Press the Buttons</h3>
+
+<!-- Generates a pop-up with activation -->
+<button onclick="parseSettingsOpenPopups(true)">Pop-up now.</button>
+
+<!-- Generates a pop-up, consumes the user activation, and then opens a pop-up. -->
+<button onclick="parseSettingsOpenPopups(false)">Pop-up + Pop-up with no activation.</button>
+
+
+<script>
+function getRadioButtonValue(name) {
+  var radios = document.getElementsByName(name);
+
+  var popup_type_value;
+  for (i = 0; i < radios.length; i++) {
+  	if(radios[i].checked) {
+  		return radios[i].value;
+  	}
+  }
+}
+
+function parseSettingsOpenPopups(activation) {
+  var popup_type_value = getRadioButtonValue("popup_type");
+  var is_ad_value = getRadioButtonValue("is_ad");
+
+  var url = is_ad_value == "yes" ? "https://www.site-with-no-engagement-score.com" : "https://www.site-with-no-engagement-score.com";
+  var in_window = popup_type_value == "window";
+
+  if(activation) {
+  	openPopup(url, "window", in_window);
+  } else {
+  	openPopupWithNoActivation(url, in_window);
+  }
+}
+
+// Opens a pop-up to a cross origin site. Returns the window element.	
+function openPopup(url, window_name, in_window) {
+  if(in_window) {
+    return window.open(url, window_name, 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+  } else {
+    return window.open(url, window_name);
+  }
+}
+
+// Opens a pop-up.
+function openPopupWithNoActivation(url, in_window) {
+  openPopup(url, "window_1", in_window);
+  openPopup(url, "window_2", in_window);
+}
+
+</script>
