@@ -22,12 +22,15 @@
 <h3>Press the Buttons</h3>
 
 <!-- Generates a pop-up with activation -->
-<button onclick="parseSettingsOpenPopups(true)">Pop-up now.</button>
+<button onclick="parseSettingsOpenPopups(true, 'https://www.site-with-no-engagement-score.com')">Pop-up now.</button>
 
 <hr>
 
 <!-- Generates a pop-up, consumes the user activation, and then opens a pop-up. -->
-<button onclick="parseSettingsOpenPopups(false)">Pop-up + Pop-up with no activation.</button>
+<button onclick="parseSettingsOpenPopups(false, 'https://www.site-with-no-engagement-score.com')">Pop-up + Pop-up with no activation.</button>
+
+<!-- Generates a pop-up, consumes the user activation, and then opens a pop-up. -->
+<button onclick="parseSettingsOpenPopups(true, 'https://testsafebrowsing.appspot.com/s/phishing.html')">Pop-up to safe browsing site</button>
 
 <hr>
 
@@ -43,13 +46,13 @@ function getRadioButtonValue(name) {
   }
 }
 
-function parseSettingsOpenPopups(activation) {
+function parseSettingsOpenPopups(activation, site) {
   var popup_type_value = getRadioButtonValue("popup_type");
   var is_ad_value = getRadioButtonValue("is_ad");
   var content_dest = getRadioButtonValue("content_dest");
   var ordering = getRadioButtonValue("navigate_first");
 
-  var url = is_ad_value == "yes" ? "https://www.site-with-no-engagement-score.com" : "https://www.site-with-no-engagement-score.com";
+  var url = is_ad_value == "yes" ? site : site;
   var in_window = popup_type_value == "window";
   var popup_url = content_dest == "current" ? url : window.location.href;
   var current_url = content_dest == "popup" ? url : window.location.href;
