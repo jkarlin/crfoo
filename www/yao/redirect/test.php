@@ -1,1 +1,1 @@
-< ?php header("Location: https://cr.kungfoo.net/yao/notification/"); ?>
+<?php header("Location: https://cr.kungfoo.net/yao/notification/"); ?>
