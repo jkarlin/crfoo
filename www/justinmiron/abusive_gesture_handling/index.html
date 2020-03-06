@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<p>This site contains various clickable regions that each generate pop-ups.</p>
+
+<hr>
+
+<div class="clickable-region">
+  <p>OnClickHandler on image.</p>
+  <img src="tux.png" onclick="openPopup('http://www.google.com', 'new_window', 'true')">
+</div>
+
+<div class="clickable-region">
+  <p>OnClickHandler on hidden div behind image with pointer-events:none.</p>
+  <div onclick="openPopup('http://www.google.com', 'new_window', 'true')">
+    <img src="tux.png" style="pointer-events:none">
+  </div>
+</div>
+
+<div class="clickable-region">
+<div class="hidden" onclick="openPopup('http://www.google.com', 'new_window', 'true')">
+<p>OnClickHandler on invisible div over entire region.</p>
+<img src="tux.png">
+</div>
+
+<script>
+// Opens a pop-up to a cross origin site. Returns the window element.
+function openPopup(url, window_name, in_window) {
+  if(in_window) {
+    return window.open(url, window_name, 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+  } else {
+    return window.open(url, window_name);
+  }
+}
+
+</script>

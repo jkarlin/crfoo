@@ -1,0 +1,9 @@
+.clickable-region{
+  background-color: #8AB4F8;
+  top: 300px;
+  left: 300px;
+  height: 500px;
+  width: 500px;
+  margin: 10px;
+  padding-left: 5px;
+}
