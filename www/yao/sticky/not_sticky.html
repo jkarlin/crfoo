@@ -17,11 +17,13 @@ function appendLargeParagraph() {
   }
 }
 
-appendLargeParagraph();
-let f = document.createElement("iframe");
-f.src = "https://cr2.kungfoo.net/yao/sticky/iframe1.html";
-document.body.appendChild(f);
-appendLargeParagraph();
+setTimeout(function(){
+  appendLargeParagraph();
+  let f = document.createElement("iframe");
+  f.src = "https://cr2.kungfoo.net/yao/sticky/iframe1.html";
+  document.body.appendChild(f);
+  appendLargeParagraph(); 
+}, 500);
 
 </script>
   
