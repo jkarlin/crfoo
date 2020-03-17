@@ -8,7 +8,9 @@
 setInterval(function(){
   let f = document.getElementsByTagName("iframe")[0];
   f.style.display = "none";
-  f.style.display = "block";
+  setTimeout(function(){
+    f.style.display = "block";
+  }, 20);
 }, 1000);
 
 </script>
