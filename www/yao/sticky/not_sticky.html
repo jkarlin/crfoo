@@ -12,7 +12,7 @@ function appendSmallParagraph() {
 }
 
 function appendLargeParagraph() {
-  for (let i = 0; i < 50; ++i) {
+  for (let i = 0; i < 25; ++i) {
     appendSmallParagraph();
   }
 }
@@ -23,7 +23,7 @@ f.src = "https://cr2.kungfoo.net/yao/sticky/iframe1.html";
 document.body.appendChild(f);
 appendLargeParagraph();
 
-window.scrollTo(0, 50);
+window.scrollTo(0, 500);
 
 var initial_y = f.getBoundingClientRect().top;
   
