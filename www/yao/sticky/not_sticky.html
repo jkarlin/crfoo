@@ -18,13 +18,23 @@ function appendLargeParagraph() {
 }
 
 appendLargeParagraph();
+let f = document.createElement("iframe");
+f.src = "https://cr2.kungfoo.net/yao/sticky/iframe1.html";
+document.body.appendChild(f);
+appendLargeParagraph();
+
+window.scrollTo(0, 50);
+
+var initial_y = f.getBoundingClientRect().top;
+  
 setTimeout(function(){
-  let f = document.createElement("iframe");
-  f.src = "https://cr2.kungfoo.net/yao/sticky/iframe1.html";
-  document.body.appendChild(f);
-  appendLargeParagraph(); 
+  document.body.prepend('This text!');
+  var y = f.getBoundingClientRect().top;
+  window.scrollTo(0, window.scrollY + y - initial_y);
 }, 500);
 
+  
+  
 </script>
   
 </html>
