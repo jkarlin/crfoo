@@ -12,7 +12,7 @@ function appendSmallParagraph() {
 }
 
 function appendLargeParagraph() {
-  for (let i = 0; i < 25; ++i) {
+  for (let i = 0; i < 20; ++i) {
     appendSmallParagraph();
   }
 }
@@ -23,13 +23,12 @@ f.src = "https://cr2.kungfoo.net/yao/sticky/iframe1.html";
 document.body.appendChild(f);
 appendLargeParagraph();
 
-window.scrollTo(0, 500);
+window.scrollTo(0, 400);
 
 var initial_y = f.getBoundingClientRect().top;
   
 setTimeout(function(){
-  let f2 = document.createElement("iframe");
-  document.body.prepend(f2);
+  document.body.prepend("New Content!");
   var y = f.getBoundingClientRect().top;
   window.scrollTo(0, window.scrollY + y - initial_y);
 }, 500);
