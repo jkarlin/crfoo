@@ -28,9 +28,8 @@ window.scrollTo(0, 500);
 var initial_y = f.getBoundingClientRect().top;
   
 setTimeout(function(){
-  document.body.prepend('New Content!');
-  document.body.prepend('New Content!');
-  document.body.prepend('New Content!');
+  let f2 = document.createElement("iframe");
+  document.body.prepend(f2);
   var y = f.getBoundingClientRect().top;
   window.scrollTo(0, window.scrollY + y - initial_y);
 }, 500);
