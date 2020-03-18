@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+</body>
+<script>
+function appendSmallParagraph() {
+  let p = document.createElement("P");
+  let t = document.createTextNode("abc");
+  p.appendChild(t);
+  document.body.appendChild(p);
+}
+
+function appendLargeParagraph() {
+  for (let i = 0; i < 20; ++i) {
+    appendSmallParagraph();
+  }
+}
+
+appendLargeParagraph();
+let f = document.createElement("iframe");
+f.src = "https://cr2.kungfoo.net/yao/sticky/iframe3.html";
+f.width="400px";
+f.height="400px";
+document.body.appendChild(f);
+appendLargeParagraph();
+  
+  
+</script>
+  
+</html>
