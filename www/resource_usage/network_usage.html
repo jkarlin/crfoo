@@ -1,6 +1,6 @@
 <html>
   <script>
-    let request = Request("http://cr.kungfoo.net/jkarlin/timing/size.php?size=10000000");
+    let request = new Request("http://cr.kungfoo.net/jkarlin/timing/size.php?size=10000000");
     fetch(request).then((response) => {
        console.log("Request resource"); 
     });
