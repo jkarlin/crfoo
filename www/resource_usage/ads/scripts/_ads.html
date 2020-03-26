@@ -1,6 +1,7 @@
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.min.js"></script>
+  <script src="hasher.js">/script>
 </head>
 <body style="background-color: #e1e1e1; padding: 16px; font-size: 14px; font-family: Roboto, Arial, sans-serif; color: #777">
   <div style="text-align: center; width: 100%; font-size: 18px;">Advertisement</div>
@@ -11,9 +12,7 @@
 </body>
 <script>
   let observer = new ReportingObserver(function(reports,observer) {
-      console.log("SUBFRAME**************************");
-      //console.log(reports);
-      console.log(reports[0].body);
+      console.log(reports);
     },{buffered: true});
   observer.observe();
   
@@ -24,6 +23,4 @@
     if (reports.length > 0)
       console.log(observer.takeRecords()[0].body);
   });
-  
-  //window.navigator.vibrate(200);
 </script>
