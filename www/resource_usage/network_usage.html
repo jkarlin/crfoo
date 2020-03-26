@@ -1,3 +1,8 @@
 <html>
-  <iframe style="display: none" src="http://cr.kungfoo.net/jkarlin/timing/size.php?size=10000000"></iframe>
+  <script>
+    let request = Request("http://cr.kungfoo.net/jkarlin/timing/size.php?size=10000000");
+    fetch(request).then((response) => {
+       console.log("Request resource"); 
+    });
+  </script>
 </html
