@@ -2,15 +2,9 @@
 </head>
 <body>
   <h2> This page loads a tagged ad iframe.</h2>
-  <p>Load a specific frame using ?site="url"</p>
+  <p>Load a specific frame by adding a ?site="url" query param</p>
+  <p> To ensure that the Heavy Ad Intervention is enabled, navigate to chrome://flags and enable #enable-heavy-ad-intervention and #heavy-ad-privacy-mitigations-opt-out.
   <script src="ads/scripts/gpt.js"></script>
   <script>
-    window.addEventListener("unload", function(event) {console.log("Main frame unload: " + event)});
-    
-    let observer = new ReportingObserver(function(reports,observer) {
-      console.log("RECEIVED REPORTS**************************");
-      console.log(reports);
-    }, {buffered: true});
-    observer.observe();
   </script>
 </body>
