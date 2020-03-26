@@ -1,8 +1,14 @@
 <html>
   <script>
     let request = new Request("http://cr.kungfoo.net/jkarlin/timing/size.php?size=10000000");
-    fetch(request).then((response) => {
-       console.log("Request resource"); 
+    fetch(request).then(function(response) {
+      if (!response.ok) {
+       throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.blob();
+    })
+    .then(function(response) {
+      let objectURL = URL.createObjectURL(response);
     });
   </script>
 </html
