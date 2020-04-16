@@ -4,5 +4,13 @@
 </head>
 <body>
   <h2> You have arrived </h2>
+  <button onclick="convert()"> Convert! </button>
+  <script>
+    function convert() {
+       let img = document.createElement("img");
+       img.src="redirect.php";
+       document.body.append(img);
+    }
+  </script>
 </body>
 </html>
