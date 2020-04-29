@@ -20,9 +20,10 @@ if (site.substr(site.length - 3) == "mp4") {
   v.play();
 } else if (site) {
   frame.src = site;
-  document.body.appendChild(frame);
+  
+  document.getElementById("frame-insert").appendChild(frame);
 }
 else {
   frame.src = "ads/scripts/_ads.html";
-  document.body.appendChild(frame);
+  document.getElementById("frame-insert").appendChild(frame);
 }
