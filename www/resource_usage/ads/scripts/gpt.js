@@ -1,6 +1,6 @@
 let frame = document.createElement("iframe");
-frame.width = 400;
-frame.height = 400;
+frame.width = 600;
+frame.height = 800;
 frame.className = "frame-style";
 frame.setAttribute("allow", "autoplay");
 var urlParams = new URLSearchParams(window.location.search);
