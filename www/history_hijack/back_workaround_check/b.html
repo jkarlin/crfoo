@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
+<title>Page B: I am going to just redirect to page C</title>
+<html> 
+ <script> 
+ history.pushState(null, null, location.href);
+ history.back();
+ history.forward();
+ window.onpopstate = function () { history.go(1); };
+ </script>
+
+ </body>
+</html>
