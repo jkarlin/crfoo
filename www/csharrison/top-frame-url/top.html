@@ -1,0 +1,12 @@
+<body>
+  <p>I'm the top frame! My URL is <span id="url"></span>
+  <iframe src="https://cr2.kungfoo.net/csharrison/top-frame-url/inner-frame.html"></iframe>
+<script>
+document.getElementById("url").textContent = window.location.href;
+window.addEventListener("message", (e) => {
+  if (e.data === "top-frame-url") {
+    e.source.postMessage(window.location.href, e.origin);
+  }
+});
+</script>
+</body>

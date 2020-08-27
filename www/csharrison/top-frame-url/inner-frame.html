@@ -1,0 +1,13 @@
+<body>
+  <p>I'm the inner frame. My parents URL is <span id="url">?</span>
+<script>
+document.getElementById("url").textContent = window.location.href;
+window.top.postMessage("top-frame-url", window.top.origin);
+window.addEventListener("message", (e) => {
+  if (e.origin === window.top.origin) {
+    document.getElementById("url").textContent = e.data;
+  }
+});
+</script>
+</body>
+
