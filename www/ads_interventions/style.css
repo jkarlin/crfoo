@@ -6,6 +6,9 @@ td {
 }
 
 
+body {
+	height: 200vh;
+}
 
 .large-ad-frame {
   height: 80%;
