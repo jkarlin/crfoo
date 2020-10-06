@@ -1,0 +1,13 @@
+<br>
+1. <a href="html-redirect-to-malicious-page.html">redirect to a malicious page</a>
+<br><br>
+2. <a href="live-example-explicit.html">live example (explicit)</a>
+
+<br><br>
+<button onclick="a()">Try it</button>
+
+<script>
+function a() {
+  alert(document.cookie.split(';').join(';\r\n'));
+}
+</script>

@@ -1,16 +1,60 @@
 <head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<style>
+body {
+    font-family: 'Roboto';font-size: 12px;
+}
+  
+p {
+  line-height: 1.6;
+  }
+  
+.frame-style {
+  border: 0px;
+  width: 80%;
+  height: 500px;
+}
+</style>
 </head>
-<body>
+<body style="">
   <h2> This page loads a tagged ad iframe.</h2>
-  <p>Load a specific frame using ?site="url"</p>
+  <p>Load a specific frame by adding a ?site="url" query param</p>
+  <p> To ensure that the Heavy Ad Intervention is enabled, navigate to chrome://flags and enable #enable-heavy-ad-intervention and #heavy-ad-privacy-mitigations-opt-out.
+  <div style = "margin: 20px; padding: 60px;">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum rhoncus est volutpat venenatis. Fusce semper, sapien ut venenatis pellentesque, lorem dui aliquam sapien, non pharetra diam neque id mi. Suspendisse sollicitudin, metus ut gravida semper, nunc ipsum ullamcorper nunc, ut maximus nulla nunc dignissim justo. Duis nec nisi leo. Proin tristique massa mi, imperdiet tempus nibh vulputate quis. Morbi sagittis eget neque sagittis egestas. Quisque viverra arcu a cursus dignissim.
+    </p>
+    <p>
+In aliquam, mi ut laoreet varius, ex ante posuere justo, eget aliquam magna metus id purus. Aenean convallis sem ac purus bibendum, sit amet mattis augue fermentum. Quisque cursus posuere mi, vitae vestibulum purus egestas eget. Nunc eu sagittis est, at elementum leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla interdum lacus a turpis maximus, scelerisque aliquam magna ultricies. Aliquam erat volutpat. Mauris eget tellus sed velit aliquet venenatis ut nec eros. Nulla facilisi. Sed posuere nisi quis felis varius, ut maximus elit placerat. Sed vulputate quam augue, ac lacinia diam ullamcorper at.
+</p>
+    <p>
+Fusce efficitur fermentum mi, sed imperdiet ipsum dignissim eu. Nam semper quis ex eget iaculis. In a diam dolor. Integer fermentum in arcu commodo tempus. Phasellus ultricies gravida ante ac tristique. Vestibulum volutpat id neque a porttitor. Donec ullamcorper sed augue eget efficitur. Ut vitae aliquet lorem, quis ultrices neque. Fusce blandit ac mauris vel porttitor. Pellentesque eget ultrices augue. Pellentesque tempor maximus nunc sit amet ullamcorper.
+</p>
+    <p>
+Nulla non vehicula magna. In eget condimentum nisi, sit amet auctor purus. Proin venenatis lorem non mattis interdum. Aenean metus leo, lobortis non auctor eget, bibendum at mi. Aenean mauris est, convallis efficitur molestie et, suscipit in dolor. Duis eget volutpat est. Fusce id maximus arcu, et tincidunt purus. In efficitur volutpat est nec eleifend. Proin malesuada pharetra mattis.
+</p>
+    <p>
+Donec sed arcu sit amet nisi vulputate ornare. Integer accumsan ullamcorper mauris, eget semper ipsum. Suspendisse sagittis pellentesque molestie. Duis at venenatis erat. Quisque congue turpis id erat egestas pellentesque. Nulla fermentum ac massa nec sollicitudin. Fusce sed ultrices tellus.
+  </p>
+  <div id="frame-insert" style="width: 100%; text-align: center;">
+  </div>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum rhoncus est volutpat venenatis. Fusce semper, sapien ut venenatis pellentesque, lorem dui aliquam sapien, non pharetra diam neque id mi. Suspendisse sollicitudin, metus ut gravida semper, nunc ipsum ullamcorper nunc, ut maximus nulla nunc dignissim justo. Duis nec nisi leo. Proin tristique massa mi, imperdiet tempus nibh vulputate quis. Morbi sagittis eget neque sagittis egestas. Quisque viverra arcu a cursus dignissim.
+</p>
+    <p>
+In aliquam, mi ut laoreet varius, ex ante posuere justo, eget aliquam magna metus id purus. Aenean convallis sem ac purus bibendum, sit amet mattis augue fermentum. Quisque cursus posuere mi, vitae vestibulum purus egestas eget. Nunc eu sagittis est, at elementum leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla interdum lacus a turpis maximus, scelerisque aliquam magna ultricies. Aliquam erat volutpat. Mauris eget tellus sed velit aliquet venenatis ut nec eros. Nulla facilisi. Sed posuere nisi quis felis varius, ut maximus elit placerat. Sed vulputate quam augue, ac lacinia diam ullamcorper at.
+</p>
+    <p>
+Fusce efficitur fermentum mi, sed imperdiet ipsum dignissim eu. Nam semper quis ex eget iaculis. In a diam dolor. Integer fermentum in arcu commodo tempus. Phasellus ultricies gravida ante ac tristique. Vestibulum volutpat id neque a porttitor. Donec ullamcorper sed augue eget efficitur. Ut vitae aliquet lorem, quis ultrices neque. Fusce blandit ac mauris vel porttitor. Pellentesque eget ultrices augue. Pellentesque tempor maximus nunc sit amet ullamcorper.
+</p>
+    <p>
+Nulla non vehicula magna. In eget condimentum nisi, sit amet auctor purus. Proin venenatis lorem non mattis interdum. Aenean metus leo, lobortis non auctor eget, bibendum at mi. Aenean mauris est, convallis efficitur molestie et, suscipit in dolor. Duis eget volutpat est. Fusce id maximus arcu, et tincidunt purus. In efficitur volutpat est nec eleifend. Proin malesuada pharetra mattis.
+</p>
+    <p>
+Donec sed arcu sit amet nisi vulputate ornare. Integer accumsan ullamcorper mauris, eget semper ipsum. Suspendisse sagittis pellentesque molestie. Duis at venenatis erat. Quisque congue turpis id erat egestas pellentesque. Nulla fermentum ac massa nec sollicitudin. Fusce sed ultrices tellus.
+  </p>  
+  </div>
   <script src="ads/scripts/gpt.js"></script>
   <script>
-    window.addEventListener("unload", function(event) {console.log("Main frame unload: " + event)});
-    
-    let observer = new ReportingObserver(function(reports,observer) {
-      console.log("RECEIVED REPORTS**************************");
-      console.log(reports);
-    }, {buffered: true});
-    observer.observe();
   </script>
 </body>
