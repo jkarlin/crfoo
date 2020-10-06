@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'TestFont';
+  src: url('https://fonts.gstatic.com/s/coiny/v5/gyByhwU1K989PUwKGFWfOw.woff2');
+}
+
+.image-background {
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/9/95/Test_image.jpg');
+}

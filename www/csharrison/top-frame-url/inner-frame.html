@@ -1,0 +1,11 @@
+<body>
+  <p>I'm the inner frame. My parents URL is <span id="url">?</span>
+  <iframe src="https://www.cr2.kungfoo.net/csharrison/top-frame-url/inner-frame.html"></iframe>
+<script>
+window.top.postMessage("top-frame-url", "https://cr.kungfoo.net/");
+window.addEventListener("message", (e) => {
+  document.getElementById("url").textContent = e.data;
+});
+</script>
+</body>
+

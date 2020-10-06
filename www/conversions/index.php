@@ -1,3 +1,7 @@
+<?php
+header('Origin-Trial: AmX3D5P8Ld2EjZjSheW0+iX1v6xXneIQ2r6z3+Fpt1fGXIef0GarW6GnpkzgsIyEdO4SyC4AzAZXZITSC5p41AoAAABdeyJvcmlnaW4iOiJodHRwczovL2NyLmt1bmdmb28ubmV0OjQ0MyIsImZlYXR1cmUiOiJDb252ZXJzaW9uTWVhc3VyZW1lbnQiLCJleHBpcnkiOjE2MDQ5NDQ5ODZ9');
+?>
+
 <html>
 <head>
   <title> Conversions test </title>

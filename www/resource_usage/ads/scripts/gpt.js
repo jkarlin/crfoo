@@ -1,6 +1,5 @@
 let frame = document.createElement("iframe");
-frame.width = 400;
-frame.height = 400;
+frame.className = "frame-style";
 frame.setAttribute("allow", "autoplay");
 var urlParams = new URLSearchParams(window.location.search);
 var site = urlParams.get('site')
@@ -20,9 +19,10 @@ if (site.substr(site.length - 3) == "mp4") {
   v.play();
 } else if (site) {
   frame.src = site;
-  document.body.appendChild(frame);
+  
+  document.getElementById("frame-insert").appendChild(frame);
 }
 else {
   frame.src = "ads/scripts/_ads.html";
-  document.body.appendChild(frame);
+  document.getElementById("frame-insert").appendChild(frame);
 }
