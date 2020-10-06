@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<!-- Make navigation and actions easy from this list -->
+<table>
+	<tr>
+		<td>	
+			<form action="index.html">
+			    <input type="submit" value="Back" />
+			</form>
+		</td>
+		<td>
+			<button onClick="history.go(0);">Refresh Page</button>
+		</td>
+		<td>
+			<p>Current Time: <span id="datetime"></span></p>
+		</td>
+	</tr>
+</table>
+
+<script>
+var dt = new Date();
+document.getElementById("datetime").innerHTML = dt.toLocaleString();
+</script>
+
+<iframe class="large-ad-frame" src="social-engineering-ad1.png?&adurl=foo"></iframe>
