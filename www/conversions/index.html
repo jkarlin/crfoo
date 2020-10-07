@@ -1,12 +1,17 @@
 <html>
 <head>
   <title> Conversions test </title>
-  <meta http-equiv="origin-trial" content="AmX3D5P8Ld2EjZjSheW0+iX1v6xXneIQ2r6z3+Fpt1fGXIef0GarW6GnpkzgsIyEdO4SyC4AzAZXZITSC5p41AoAAABdeyJvcmlnaW4iOiJodHRwczovL2NyLmt1bmdmb28ubmV0OjQ0MyIsImZlYXR1cmUiOiJDb252ZXJzaW9uTWVhc3VyZW1lbnQiLCJleHBpcnkiOjE2MDQ5NDQ5ODZ9">
 </head>
 <body>
   <h2> Test page for stuff </h2>
 </body>
 <script>
+  let meta = document.createElement("meta");
+  meta.httpEquiv = "origin-trial";
+  meta.content = "AmX3D5P8Ld2EjZjSheW0+iX1v6xXneIQ2r6z3+Fpt1fGXIef0GarW6GnpkzgsIyEdO4SyC4AzAZXZITSC5p41AoAAABdeyJvcmlnaW4iOiJodHRwczovL2NyLmt1bmdmb28ubmV0OjQ0MyIsImZlYXR1cmUiOiJDb252ZXJzaW9uTWVhc3VyZW1lbnQiLCJleHBpcnkiOjE2MDQ5NDQ5ODZ9";
+  document.getElementsByTagName('head')[0].appendChild(meta);
+  console.log(document.featurePolicy().features());
+  
   var adLink = document.createElement("a");
   adLink.target = "_blank";
   adLink.href = "https://cr2.kungfoo.net/conversions/target.html";
