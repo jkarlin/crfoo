@@ -1,6 +1,6 @@
 <script>
 let savedTop = top;
 frameElement.remove();
-document.interestCohort().then(floc => console.log(floc)).catch(error => console.log(error));
-savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi'));
+document.interestCohort().then(floc => console.log(floc)).catch(error => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi')));
+
 </script>
