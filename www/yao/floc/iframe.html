@@ -1,11 +1,21 @@
 <script>
+async function foo() {
+  return 1;
+}
+
+function appendTextToPage(savedTop, content) {
+  savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode(content));
+}
+
 let savedTop = top;
-savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before frameElement.remove()'));
+
+appendTextToPage(savedTop, 'before frameElement.remove()');
 frameElement.remove();
-savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before api 1'));
-savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before api 2'));
+appendTextToPage(savedTop, 'before api foo');
+foo().then(x => appendTextToPage(savedTop, 'foo resolved'));
+appendTextToPage(savedTop, 'before api floc');
 document.interestCohort()
-  .then(floc => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi resolved')))
-  .catch(error => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi rejected')));
-savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('after api'));
+  .then(floc => appendTextToPage(savedTop, 'floc resolved'))
+  .catch(error => appendTextToPage(savedTop, 'floc rejected'));
+appendTextToPage(savedTop, 'finish')
 </script>
