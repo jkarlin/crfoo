@@ -1,7 +1,9 @@
 <script>
 let savedTop = top;
-// frameElement.remove();
+frameElement.remove();
+savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before api'));
 document.interestCohort()
-  .then(floc => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi resolved')) )
+  .then(floc => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi resolved')))
   .catch(error => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi rejected')));
+savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('after api'));
 </script>
