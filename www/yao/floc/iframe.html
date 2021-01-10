@@ -1,7 +1,9 @@
 <script>
 let savedTop = top;
+savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before frameElement.remove()'));
 frameElement.remove();
-savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before api'));
+savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before api 1'));
+savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('before api 2'));
 document.interestCohort()
   .then(floc => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi resolved')))
   .catch(error => savedTop.document.body.appendChild(document.createElement('div')).appendChild(document.createTextNode('hi rejected')));
