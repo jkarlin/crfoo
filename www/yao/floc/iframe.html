@@ -14,6 +14,7 @@ appendTextToPage(savedTop, 'before frameElement.remove()');
 appendTextToPage(savedTop, 'before api foo');
 foo().then(x => appendTextToPage(savedTop, 'foo resolved'));
 appendTextToPage(savedTop, 'before api floc');
+appendTextToPage(savedTop, document.contentType);
 document.interestCohort()
   .then(floc => appendTextToPage(savedTop, 'floc resolved'))
   .catch(error => appendTextToPage(savedTop, 'floc rejected'));
