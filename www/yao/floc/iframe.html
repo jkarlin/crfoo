@@ -18,7 +18,7 @@ appendTextToPage(savedTop, document.contentType);
 fetch("https://cr.kungfoo.net/yao/floc/test.html").then();
 appendTextToPage(savedTop, 'after fetch');
 document.interestCohort()
-  .then(floc => appendTextToPage(savedTop, 'floc resolved'))
-  .catch(error => appendTextToPage(savedTop, 'floc rejected'));
+  .then(floc => appendTextToPage(savedTop, floc))
+  .catch(error => appendTextToPage(savedTop, error));
 appendTextToPage(savedTop, 'finish');
 </script>
