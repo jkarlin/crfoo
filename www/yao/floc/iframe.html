@@ -10,7 +10,7 @@ function appendTextToPage(savedTop, content) {
 let savedTop = top;
 
 appendTextToPage(savedTop, 'before frameElement.remove()');
-frameElement.remove();
+// frameElement.remove();
 appendTextToPage(savedTop, 'before api foo');
 foo().then(x => appendTextToPage(savedTop, 'foo resolved'));
 appendTextToPage(savedTop, 'before api floc');
