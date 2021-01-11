@@ -20,6 +20,6 @@ appendTextToPage(savedTop, document.contentType);
 //   .catch(error => appendTextToPage(savedTop, 'floc rejected'));
 fetch("https://cr.kungfoo.net/yao/floc/test.html").then();
 appendTextToPage(savedTop, 'after fetch');
-document.interestCohort().then(floc => appendTextToPage(savedTop, 'floc resolved'));
+document.interestCohort().then();
 appendTextToPage(savedTop, 'finish');
 </script>
