@@ -1,2 +1,8 @@
-Test pdf download in iframe
-<iframe src="https://cr.kungfoo.net/yao/downloads/pdf_file.php"></iframe>
+<script>
+var ifrm = document.createElement('iframe');  
+ifrm.id='pdfview';
+ifrm.style.width = '100%';
+ifrm.style.height = '100%';
+document.body.appendChild(ifrm);
+ifrm.contentDocument.location.href = 'https://cr.kungfoo.net/yao/downloads/pdf_file.php';
+</script>
