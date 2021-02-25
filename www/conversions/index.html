@@ -22,7 +22,7 @@
   window.crypto.getRandomValues(randomNums);
 
   // TODO: This should move away from setAttribute (crbug.com/1097144)
-  adLink.setAttribute("impressiondata",  randomNums[0].toString(16) + randomNums[1].toString(16));
+  adLink.setAttribute("impressiondata",  randomNums[0].toString(10) + randomNums[1].toString(10));
   adLink.setAttribute("conversiondestination", "https://cr2.kungfoo.net");
 
   document.body.appendChild(adLink);
