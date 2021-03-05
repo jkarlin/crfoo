@@ -1,5 +1,6 @@
 <?php
 header("Cross-Origin-Resource-Policy: cross-origin");
+header("Cross-Origin-Embedder-Policy: require-corp");
 ?>
 
 
