@@ -4,12 +4,20 @@
 </head>
 <body>
   <h2> Test page for stuff </h2>
+  <p id="abc"></p>
 </body>
 <script>
   let meta = document.createElement("meta");
   meta.httpEquiv = "origin-trial";
   meta.content = "AhLiKoJIb0AwsL4F4D36xJ7UmaUc/85N1Yk5yjDLxPAoI/TTSQ2jDYaPXeGhU4dt3Kp1doeVRZkbVzEiIsVQcQMAAABdeyJvcmlnaW4iOiJodHRwczovL2NyLmt1bmdmb28ubmV0OjQ0MyIsImZlYXR1cmUiOiJDb252ZXJzaW9uTWVhc3VyZW1lbnQiLCJleHBpcnkiOjE2MjYyMjA3OTl9";
   document.getElementsByTagName('head')[0].appendChild(meta);
+  
+  let p = document.getElementById("abc");
+  if (document.featurePolicy.features().includes("conversion-measurement")) {
+    p.innerText = "policy available";
+  } else {
+    p.innerText = "policy NOT available"; 
+  }
   console.log(document.featurePolicy.features());
   
   var adLink = document.createElement("a");
