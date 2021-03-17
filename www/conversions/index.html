@@ -13,7 +13,7 @@
   document.getElementsByTagName('head')[0].appendChild(meta);
   
   let p = document.getElementById("abc");
-  if (document.featurePolicy.features().includes("conversion-measurement")) {
+  if (document.featurePolicy.allowsFeature("conversion-measurement")) {
     p.innerText = "policy available";
   } else {
     p.innerText = "policy NOT available"; 
