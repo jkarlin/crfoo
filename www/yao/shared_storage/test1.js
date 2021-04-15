@@ -1,5 +1,5 @@
 class TestTestTest {
-  async function run(urls) {
+  run(urls) {
   }
 }
 
