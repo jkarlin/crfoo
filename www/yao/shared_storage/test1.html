@@ -2,8 +2,8 @@
 <script>
 window.sharedStorage.worklet.addModule("test1.js");
 window.addEventListener("click", function(event) {
-  console.log("runURLSelectionOperation");
-  runURLSelectionOperation("test-operation", "input_urls");
+  console.log("window.sharedStorage.runURLSelectionOperation");
+  window.sharedStorage.runURLSelectionOperation("test-operation", "input_urls");
 });
 </script>
 </body>
