@@ -1,5 +1,6 @@
 class TestTestTest {
-  run(urls) {
+  async run(urls) {
+    return 2;
   }
 }
 
