@@ -4,7 +4,11 @@ window.sharedStorage.worklet.addModule("test1.js");
 window.addEventListener("click", function(event) {
   console.log("window.sharedStorage.runURLSelectionOperation");
   const urls = ['url0', 'url1', 'url2'];
-  window.sharedStorage.runURLSelectionOperation("test-operation", urls);
+  window.sharedStorage.runURLSelectionOperation("test-operation", urls).then((value) => {
+    var paragraph = document.getElementById("p");
+    var textNode = document.createTextNode(value);
+    paragraph.appendChild(textNode);
+  });
 });
 </script>
 </body>
