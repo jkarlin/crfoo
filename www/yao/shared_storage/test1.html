@@ -3,7 +3,8 @@
 window.sharedStorage.worklet.addModule("test1.js");
 window.addEventListener("click", function(event) {
   console.log("window.sharedStorage.runURLSelectionOperation");
-  window.sharedStorage.runURLSelectionOperation("test-operation", "input_urls");
+  const urls = ['url0', 'url1', 'url2'];
+  window.sharedStorage.runURLSelectionOperation("test-operation", urls);
 });
 </script>
 </body>
