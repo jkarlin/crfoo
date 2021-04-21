@@ -8,7 +8,7 @@ window.addEventListener("click", function(event) {
   window.sharedStorage.runURLSelectionOperation("test-operation", urls).then((value) => {
     var para = document.createElement("p");
     para.innerText = value;
-    document.body.appendChild(node);
+    document.body.appendChild(para);
   });
 });
 </script>
