@@ -6,8 +6,10 @@ window.addEventListener("click", function(event) {
   console.log("window.sharedStorage.runURLSelectionOperation");
   const urls = ['url0', 'url1', 'url2'];
   window.sharedStorage.runURLSelectionOperation("test-operation", urls).then((value) => {
-    document.write("<br>");
-    document.write(value);
+    var node = document.createElement("p");
+    var textnode = document.createTextNode(value);
+    node.appendChild(textnode);
+    document.appendChild(node);
   });
 });
 </script>
