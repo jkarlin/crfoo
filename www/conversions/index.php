@@ -20,8 +20,8 @@ header('Origin-Trial: AmX3D5P8Ld2EjZjSheW0+iX1v6xXneIQ2r6z3+Fpt1fGXIef0GarW6Gnpk
   window.crypto.getRandomValues(randomNums);
 
   // TODO: This should move away from setAttribute (crbug.com/1097144)
-  adLink.setAttribute("impressiondata",  randomNums[0].toString(16) + randomNums[1].toString(16));
-  adLink.setAttribute("conversiondestination", "https://cr2.kungfoo.net");
+  adLink.setAttribute("attributionsourceeventid",  randomNums[0].toString(16) + randomNums[1].toString(16));
+  adLink.setAttribute("attributiondestination", "https://cr2.kungfoo.net");
 
   document.body.appendChild(adLink);
 </script>

@@ -13,7 +13,7 @@
   document.getElementsByTagName('head')[0].appendChild(meta);
   
   let p = document.getElementById("abc");
-  if (document.featurePolicy.allowsFeature("conversion-measurement")) {
+  if (document.featurePolicy.allowsFeature("attribution-reporting")) {
     p.innerText = "policy available";
   } else {
     p.innerText = "policy NOT available"; 
@@ -31,8 +31,8 @@
   window.crypto.getRandomValues(randomNums);
 
   // TODO: This should move away from setAttribute (crbug.com/1097144)
-  adLink.setAttribute("impressiondata",  randomNums[0].toString(10) + randomNums[1].toString(10));
-  adLink.setAttribute("conversiondestination", "https://cr2.kungfoo.net");
+  adLink.setAttribute("attributionsourceeventid",  randomNums[0].toString(10) + randomNums[1].toString(10));
+  adLink.setAttribute("attributiondestination", "https://cr2.kungfoo.net");
 
   document.body.appendChild(adLink);
   
@@ -46,8 +46,8 @@
   window.crypto.getRandomValues(randomNums);
 
   // TODO: This should move away from setAttribute (crbug.com/1097144)
-  adLink.setAttribute("impressiondata",  randomNums[0].toString(10) + randomNums[1].toString(10));
-  adLink.setAttribute("conversiondestination", "https://cr2.kungfoo.net");
+  adLink.setAttribute("attributionsourceeventid",  randomNums[0].toString(10) + randomNums[1].toString(10));
+  adLink.setAttribute("attributiondestination", "https://cr2.kungfoo.net");
 
   document.body.appendChild(adLink);
 </script>
