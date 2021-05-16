@@ -1,10 +1,5 @@
 <body>
-<p id="p">Click to call runURLSelectionOperation</p>
 <script>
-window.sharedStorage.worklet.addModule("test5.js");
-window.addEventListener("click", function(event) {
-  const urls = [];
-  window.sharedStorage.runURLSelectionOperation("test-operation", urls);
-});
+window.sharedStorage.append("testkey","testvalue");
 </script>
 </body>
