@@ -1,5 +1,6 @@
 class TestTestTest {
-  run(urls) {
+  async run(urls) {
+    sharedStorage.append("testkey", "testvalue");
     return 2;
   }
 }
