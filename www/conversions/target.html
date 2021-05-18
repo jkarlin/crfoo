@@ -5,8 +5,15 @@
 <body>
   <h2> You have arrived </h2>
   <button onclick="convert()"> Convert! </button>
+  <button onclick="convertWithScript()"> Convert with script tag! </button>
   <script>
     function convert() {
+       let img = document.createElement("img");
+       img.src="https://cr.kungfoo.net/conversions/redirect.php";
+       document.body.append(img);
+    }
+    
+    function convertWithScript() {
        let img = document.createElement("img");
        img.src="https://cr.kungfoo.net/conversions/redirect.php";
        document.body.append(img);
