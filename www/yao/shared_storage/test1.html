@@ -5,7 +5,7 @@ window.sharedStorage.worklet.addModule("test1.js");
 window.addEventListener("click", function(event) {
   console.log("window.sharedStorage.runURLSelectionOperation");
   const urls = ['url0', 'url1', 'url2'];
-  window.sharedStorage.runURLSelectionOperation("test-operation", urls, {data:}).then((value) => {
+  window.sharedStorage.runURLSelectionOperation("test-operation", urls, {data:{name:"experimentA"}}).then((value) => {
     var para = document.createElement("p");
     para.innerText = value;
     document.body.appendChild(para);
