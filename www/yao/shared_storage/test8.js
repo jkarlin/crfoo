@@ -4,6 +4,4 @@ class TestTestTest {
   }
 }
 
-sharedStorage.get("123");
-
 registerOperation("test-operation", TestTestTest);
