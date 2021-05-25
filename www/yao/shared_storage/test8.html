@@ -1,0 +1,11 @@
+<body>
+<p id="p">Click to call runOperation</p>
+<script>
+window.sharedStorage.worklet.addModule("test8.js");
+window.addEventListener("click", function(event) {
+  console.log("window.sharedStorage.runURLSelectionOperation");
+  window.sharedStorage.runURLSelectionOperation("test-operation", {name: "experimentA"}).then(() => {
+  });
+});
+</script>
+</body>
