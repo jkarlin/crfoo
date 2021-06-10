@@ -8,6 +8,6 @@ class TestTestTest {
   }
 }
 
-registerURLSelectionOperation("test-operation", TestTestTest);
-
 sharedStorage.set("key", "value");
+
+registerURLSelectionOperation("test-operation", TestTestTest);
