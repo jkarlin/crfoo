@@ -2,6 +2,7 @@ class TestTestTest {
   async run(urls, options) {
 //     return 1;
     return new Promise(function(resolve) {
+        sleep(500);
         resolve(1);
     });
 //     if (options.name == "experimentA") {
