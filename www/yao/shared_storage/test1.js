@@ -2,7 +2,7 @@ class TestTestTest {
   async run(urls, options) {
 //     return 1;
     return new Promise(function(resolve) {
-        setTimeout(() => resolve(1), 500);
+        resolve(1);
     });
 //     if (options.name == "experimentA") {
 //       return 1;
