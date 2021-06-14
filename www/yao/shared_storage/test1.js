@@ -1,10 +1,7 @@
 class TestTestTest {
   async run(urls, options) {
 //     return 1;
-    return new Promise(function(resolve) {
-        sleep(500);
-        resolve(1);
-    });
+    return sharedStorage.set("key", "value");
 //     if (options.name == "experimentA") {
 //       return 1;
 //     } else {
