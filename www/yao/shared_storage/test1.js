@@ -23,4 +23,6 @@ class TestTestTest {
   }
 }
 
+sharedStorage.set("key999", "value999");
+
 registerURLSelectionOperation("test-operation", TestTestTest);
