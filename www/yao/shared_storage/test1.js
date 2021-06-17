@@ -4,7 +4,7 @@ class TestTestTest {
     
 //     return sharedStorage.set("key333", "value333");
     
-    if (data.name == "experimentA") {
+    if (data.name == "experimentB") {
       return 1;
     } else {
       return 2; 
