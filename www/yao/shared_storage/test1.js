@@ -6,7 +6,12 @@ class TestTestTest {
     
     sharedStorage.set("key444", "value444");
 
-    sharedStorage.set("key555");
+    try {
+      sharedStorage.set("key555");
+    } catch(err) {
+      console.log(err);
+      sharedStorage.set("key666", "value666");
+    }
     
     if (data.name == "experimentA") {
       return 1;
