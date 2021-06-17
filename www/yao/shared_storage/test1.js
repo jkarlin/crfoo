@@ -13,6 +13,8 @@ class TestTestTest {
       sharedStorage.set("key666", "value666");
     }
     
+    sharedStorage.set("key777");
+    
     if (data.name == "experimentA") {
       return 1;
     } else {
