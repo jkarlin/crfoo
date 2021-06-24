@@ -1,3 +1,5 @@
+aaa.bbb;
+
 class TestTestTest {
   async run(urls, data) {
     aaa.bbb;
