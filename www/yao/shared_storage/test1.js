@@ -1,6 +1,7 @@
 class TestTestTest {
   async run(urls, data) {
-    aaa.bbb;
+//     aaa.bbb;
+
 //     return sharedStorage.get("testtest");
     sharedStorage.set("key333", "value333", {});
     
