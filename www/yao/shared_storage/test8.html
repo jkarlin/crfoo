@@ -4,7 +4,7 @@
 window.sharedStorage.worklet.addModule("test8.js");
 window.addEventListener("click", function(event) {
   console.log("window.sharedStorage.runOperation");
-  window.sharedStorage.runOperation("test-operation", {name: "experimentA"}).then(() => {
+  window.sharedStorage.runOperation("test-operation", {data: {'name': 'experimentA'}}).then(() => {
   });
 });
 </script>
