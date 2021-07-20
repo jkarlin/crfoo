@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<button id="set-cookie">Set cookie (SameSite=None)</button>
+<button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
+<script>
+  for (const [id, endpoint] of [
+    ['set-cookie', 'samesitenone'],
+    ['set-partitioned-cookie', 'partitioned'],
+  ]) {
+    document.getElementById(id).addEventListener(
+      'click', () => fetch(`/cookies/${endpoint}.php`));
+  }
+</script>
