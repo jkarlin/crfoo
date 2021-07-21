@@ -4,7 +4,6 @@ class TestTestTest {
     let value = await sharedStorage.get("kkk");
     console.log(value);
     console.log(options.name);
-    return sharedStorage.get(options.name);
   }
 }
 
