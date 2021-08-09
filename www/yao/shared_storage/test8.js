@@ -6,7 +6,7 @@ class TestTestTest {
     let value = await sharedStorage.get("kkk");
     console.log(value);
     console.log(options.name);
-    for(var name in globals()) { names += name + ","; }
+    for(var name in this) { names += name + ","; }
     console.log(names);
   }
 }
