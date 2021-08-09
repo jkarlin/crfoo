@@ -5,7 +5,7 @@ class TestTestTest {
     console.log(value);
     console.log(options.name);
     let names = '';
-    for(var name in this) { names += name + ","; }
+    for(var name in globalThis) { names += name + ","; }
     console.log(names);
   }
 }
