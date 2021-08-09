@@ -4,7 +4,7 @@ class TestTestTest {
     let value = await sharedStorage.get("kkk");
     console.log(value);
     console.log(options.name);
-    setTimeout(function(){ alert("Hello"); }, 0);
+    alert("Hello");
   }
 }
 
