@@ -4,6 +4,7 @@ class TestTestTest {
     let value = await sharedStorage.get("kkk");
     console.log(value);
     console.log(options.name);
+    let names = '';
     for(var name in this) { names += name + ","; }
     console.log(names);
   }
