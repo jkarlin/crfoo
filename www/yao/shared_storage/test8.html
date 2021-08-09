@@ -1,11 +1,14 @@
 <body>
-<p id="p">Click to call runOperation</p>
 <script>
 window.sharedStorage.worklet.addModule("test8.js");
-window.addEventListener("click", function(event) {
+
+function runOperation() {
   console.log("window.sharedStorage.runOperation");
   window.sharedStorage.runOperation("test-operation", {data: {'name': 'experimentA'}}).then(() => {
   });
-});
+}
 </script>
+<button onclick="window.open('?')">Popup</button>
+<button onclick="runOperation()">runOperation</button>
+
 </body>
