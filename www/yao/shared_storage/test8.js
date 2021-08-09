@@ -4,6 +4,7 @@ class TestTestTest {
     let value = await sharedStorage.get("kkk");
     console.log(value);
     console.log(options.name);
+    console.log(Object.getOwnPropertyNames(globalThis));
     console.log(WorkletGlobalScope);
     return new Promise((resolve,reject) => {
        resolve();
