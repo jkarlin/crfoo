@@ -4,9 +4,8 @@ class TestTestTest {
     let value = await sharedStorage.get("kkk");
     console.log(value);
     console.log(options.name);
-    let names = '';
-    for(var name in globalThis) { names += name + ","; }
-    console.log(names);
+    console.log(Object.getOwnPropertyNames(globalThis));
+
   }
 }
 
