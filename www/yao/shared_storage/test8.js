@@ -1,6 +1,4 @@
 class TestTestTest {
-  function globals() { return this; }
-  
   async run(options) {
     sharedStorage.set("kkk", "vvv");
     let value = await sharedStorage.get("kkk");
