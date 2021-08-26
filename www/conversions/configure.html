@@ -36,6 +36,7 @@ fieldset > div {
         <label for="triggerdata">Trigger Data:</label><input type="number" id="triggerdata" value="1">
         <label for="eventsourcetriggerdata">Event-Source Trigger Data:</label><input type="number" id="eventsourcetriggerdata" value="2">
         <label for="triggerpriority">Priority:</label><input type="number" id="triggerpriority" value="0">
+        <label for="dedupkey">Dedup Key:</label><input type="number" id="dedupkey">
       </div>
       <button id="convert" type="button">Convert</button>
     </fieldset>
@@ -74,6 +75,7 @@ fieldset > div {
     triggerParams.set('trigger-data', document.getElementById('triggerdata').value);
     triggerParams.set('event-source-trigger-data', document.getElementById('eventsourcetriggerdata').value);
     triggerParams.set('priority', document.getElementById('triggerpriority').value);
+    triggerParams.set('dedup-key', document.getElementById('dedupkey').value);
 
     const img = document.createElement('img');
     img.src = 'https://cr.kungfoo.net/conversions/configure_convert.php?' + triggerParams.toString();
