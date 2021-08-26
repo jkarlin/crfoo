@@ -4,53 +4,61 @@
   <meta charset="utf-8">
   <title>Configurable Attribution</title>
   <meta http-equiv="origin-trial" content="AhLiKoJIb0AwsL4F4D36xJ7UmaUc/85N1Yk5yjDLxPAoI/TTSQ2jDYaPXeGhU4dt3Kp1doeVRZkbVzEiIsVQcQMAAABdeyJvcmlnaW4iOiJodHRwczovL2NyLmt1bmdmb28ubmV0OjQ0MyIsImZlYXR1cmUiOiJDb252ZXJzaW9uTWVhc3VyZW1lbnQiLCJleHBpcnkiOjE2MjYyMjA3OTl9">
+<style>
+body {
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+}
+fieldset > div {
+  padding: 1em;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+#imgs {
+  display: none;
+}
+</style>
 </head>
 <body>
   <form>
     <fieldset>
       <legend>Source</legend>
-      <label>Event ID: <input name="sourceeventid" type="number"></label>
-      <br>
-      <label>Priority: <input name="sourcepriority" type="number" value="0"></label>
+      <div>
+        <label for="sourceeventid">Event ID:</label><input id="sourceeventid" type="number">
+        <label for="sourcepriority">Priority:</label><input id="sourcepriority" type="number" value="0">
+      </div>
+      <button id="add-anchor" type="button">Add Anchor</button>
     </fieldset>
     <fieldset>
       <legend>Trigger</legend>
-      <label>Trigger Data: <input type="number" name="triggerdata" value="1"></label>
-      <br>
-      <label>Event-Source Trigger Data: <input type="number" name="eventsourcetriggerdata" value="2"></label>
-      <br>
-      <label>Priority: <input type="number" name="triggerpriority" value="0"></label>
+      <div>
+        <label for="triggerdata">Trigger Data:</label><input type="number" id="triggerdata" value="1">
+        <label for="eventsourcetriggerdata">Event-Source Trigger Data:</label><input type="number" id="eventsourcetriggerdata" value="2">
+        <label for="triggerpriority">Priority:</label><input type="number" id="triggerpriority" value="0">
+      </div>
+      <button id="convert" type="button">Convert</button>
     </fieldset>
-    <button id="add-anchor" type="button">Add Anchor</button>
   </form>
   <ol id="anchors"></ol>
+  <div id="imgs"></div>
 </body>
 <script>
-  const form = document.forms[0];
-
   const vals = new Uint32Array(1);
   window.crypto.getRandomValues(vals);
-  form.sourceeventid.value = vals[0];
+  document.getElementById('sourceeventid').value = vals[0];
 
   document.getElementById('add-anchor').addEventListener('click', (e) => {
     const params = {
-      'sourceeventid': form.sourceeventid.value,
-      'sourcepriority': form.sourcepriority.value,
-      'triggerdata': form.triggerdata.value,
-      'eventsourcetriggerdata': form.eventsourcetriggerdata.value,
-      'triggerpriority': form.triggerpriority.value,
+      'sourceeventid': document.getElementById('sourceeventid').sourceeventid.value,
+      'sourcepriority': document.getElementById('sourcepriority').sourcepriority.value,
     };
-
-    const triggerParams = new URLSearchParams();
-    triggerParams.set('trigger-data', params.triggerdata);
-    triggerParams.set('event-source-trigger-data', params.eventsourcetriggerdata);
-    triggerParams.set('priority', params.triggerpriority);
 
     const a = document.createElement('a');
     a.target = '_blank';
-    a.href = 'https://cr.kungfoo.net/conversions/configure_convert.php?' + triggerParams.toString();
+    a.href = 'https://cr.kungfoo.net/';
     a.rel = 'opener';
-    a.innerText = JSON.stringify(params);
+    a.innerText = 'Register source with ' + JSON.stringify(params);
 
     a.setAttribute('attributionsourceeventid',  params.sourceeventid);
     a.setAttribute('attributionsourcepriority', params.sourcepriority);
@@ -59,6 +67,17 @@
     const li = document.createElement('li');
     li.appendChild(a);
     document.getElementById('anchors').appendChild(li);
+  });
+
+  document.getElementById('convert').addEventListener('click', (e) => {
+    const triggerParams = new URLSearchParams();
+    triggerParams.set('trigger-data', document.getElementById('triggerdata').value);
+    triggerParams.set('event-source-trigger-data', document.getElementById('eventsourcetriggerdata').value);
+    triggerParams.set('priority', document.getElementById('triggerpriority').value);
+
+    const img = document.createElement('img');
+    img.src = 'https://cr.kungfoo.net/conversions/configure_convert.php?' + triggerParams.toString();
+    document.getElementById('imgs').appendChild(img);
   });
 </script>
 </html>
