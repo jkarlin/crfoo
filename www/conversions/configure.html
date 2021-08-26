@@ -27,6 +27,7 @@ fieldset > div {
       <div>
         <label for="sourceeventid">Event ID:</label><input id="sourceeventid" type="number">
         <label for="sourcepriority">Priority:</label><input id="sourcepriority" type="number" value="0">
+        <label for="sourceexpiry">Expiry (days):</label><input id="sourceexpiry" type="number">
         <label><input id="registerattributionsource" type="checkbox">Register on View</label>
       </div>
       <button id="add-anchor" type="button">Add Anchor</button>
@@ -55,6 +56,7 @@ fieldset > div {
     const params = {
       'sourceeventid': document.getElementById('sourceeventid').value,
       'sourcepriority': document.getElementById('sourcepriority').value,
+      'sourceexpiry': document.getElementById('sourceexpiry').value,
       'registerattributionsource': document.getElementById('registerattributionsource').checked,
     };
 
@@ -67,6 +69,11 @@ fieldset > div {
     a.setAttribute('attributionsourceeventid',  params.sourceeventid);
     a.setAttribute('attributionsourcepriority', params.sourcepriority);
     a.setAttribute('attributiondestination', 'https://cr.kungfoo.net');
+
+    if (params.sourceexpiry !== '') {
+      // Convert to milliseconds.
+      a.setAttribute('attributionexpiry', params.sourceexpiry * 24 * 60 * 60 * 1000);
+    }
 
     if (params.registerattributionsource) {
       a.setAttribute('registerattributionsource', '');
