@@ -27,6 +27,7 @@ fieldset > div {
       <div>
         <label for="sourceeventid">Event ID:</label><input id="sourceeventid" type="number">
         <label for="sourcepriority">Priority:</label><input id="sourcepriority" type="number" value="0">
+        <label><input id="registerattributionsource" type="checkbox">Register on View</label>
       </div>
       <button id="add-anchor" type="button">Add Anchor</button>
     </fieldset>
@@ -41,6 +42,7 @@ fieldset > div {
       <button id="convert" type="button">Convert</button>
     </fieldset>
   </form>
+  <h2>Anchors</h2>
   <ol id="anchors"></ol>
   <div id="imgs"></div>
 </body>
@@ -53,6 +55,7 @@ fieldset > div {
     const params = {
       'sourceeventid': document.getElementById('sourceeventid').value,
       'sourcepriority': document.getElementById('sourcepriority').value,
+      'registerattributionsource': document.getElementById('registerattributionsource').checked,
     };
 
     const a = document.createElement('a');
@@ -64,6 +67,10 @@ fieldset > div {
     a.setAttribute('attributionsourceeventid',  params.sourceeventid);
     a.setAttribute('attributionsourcepriority', params.sourcepriority);
     a.setAttribute('attributiondestination', 'https://cr.kungfoo.net');
+
+    if (params.registerattributionsource) {
+      a.setAttribute('registerattributionsource', '');
+    }
 
     const li = document.createElement('li');
     li.appendChild(a);
