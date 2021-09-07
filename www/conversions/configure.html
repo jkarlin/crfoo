@@ -63,13 +63,13 @@ fieldset > div {
 
     const a = document.createElement('a');
     a.target = '_blank';
-    a.href = 'https://cr.kungfoo.net/';
+    a.href = window.location.origin;
     a.rel = 'opener';
     a.innerText = 'Register source with ' + JSON.stringify(params);
 
     a.setAttribute('attributionsourceeventid',  params.sourceeventid);
     a.setAttribute('attributionsourcepriority', params.sourcepriority);
-    a.setAttribute('attributiondestination', 'https://cr.kungfoo.net');
+    a.setAttribute('attributiondestination', window.location.origin);
 
     if (params.sourceexpiry !== '') {
       // Convert to milliseconds.
@@ -91,7 +91,7 @@ fieldset > div {
     triggerParams.set('event-source-trigger-data', document.getElementById('eventsourcetriggerdata').value);
     triggerParams.set('priority', document.getElementById('triggerpriority').value);
     triggerParams.set('dedup-key', document.getElementById('dedupkey').value);
-    const url = 'https://cr.kungfoo.net/conversions/configure_convert.php?' + triggerParams.toString();
+    const url = 'conversions/configure_convert.php?' + triggerParams.toString();
 
     if (document.getElementById('fetch').checked) {
       window.fetch(url).then(console.log);
