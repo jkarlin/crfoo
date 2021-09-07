@@ -6,6 +6,6 @@ $query = http_build_query(array(
   'dedup-key' => $_GET['dedup-key'],
 ));
 
-header('Location: https://cr.kungfoo.net/.well-known/attribution-reporting/trigger-attribution?' . $query);
+header('Location: /.well-known/attribution-reporting/trigger-attribution?' . $query);
 exit;
 ?>
