@@ -91,7 +91,7 @@ fieldset > div {
     triggerParams.set('event-source-trigger-data', document.getElementById('eventsourcetriggerdata').value);
     triggerParams.set('priority', document.getElementById('triggerpriority').value);
     triggerParams.set('dedup-key', document.getElementById('dedupkey').value);
-    const url = 'conversions/configure_convert.php?' + triggerParams.toString();
+    const url = 'configure_convert.php?' + triggerParams.toString();
 
     if (document.getElementById('fetch').checked) {
       window.fetch(url).then(console.log);
