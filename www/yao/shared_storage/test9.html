@@ -1,0 +1,9 @@
+<body>
+<script>
+function addModuleAndNavigateAway() {
+  window.sharedStorage.worklet.addModule("test8.js");
+  window.location = 'https://google.com';
+}
+</script>
+<button onclick="addModuleAndNavigateAway()">AddModule and navigate away</button>
+</body>
