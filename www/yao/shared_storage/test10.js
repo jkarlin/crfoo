@@ -6,4 +6,4 @@ class TestOperation {
   }
 }
 
-registerOperation("test-operation", TestOperation);
+registerURLSelectionOperation("test-operation", TestOperation);
