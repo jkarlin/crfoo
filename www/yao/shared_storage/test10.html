@@ -3,7 +3,7 @@
 window.sharedStorage.worklet.addModule("test10.js");
 
 function runURLSelectionOperation() {
-  window.sharedStorage.runURLSelectionOperation("test-operation", ["https://www.google.com/", "https://www.youtube.com/"] {data: {'name': 'experimentA'}}).then((opaque_url) => {
+  window.sharedStorage.runURLSelectionOperation("test-operation", ["https://www.google.com/", "https://www.youtube.com/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     document.getElementById("frame1").src = opaque_url;
   });
 }
