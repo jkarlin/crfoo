@@ -9,7 +9,15 @@ function runURLSelectionOperation() {
   });
 }
 
+function runURLSelectionOperationFail() {
+  window.sharedStorage.runURLSelectionOperation("test-operation-fail", ["https://www.google.com/", "https://www.youtube.com/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+    console.log(opaque_url);
+    document.getElementById("frame1").src = opaque_url;
+  });
+}
+  
 </script>
-<button onclick="runURLSelectionOperation()">runURLSelectionOperation and navigate fencedframe</button>
+<button onclick="runURLSelectionOperation()">runURLSelectionOperation (worklet success) and navigate fencedframe</button>
+<button onclick="runURLSelectionOperationFail()">runURLSelectionOperation (worklet error) and navigate fencedframe</button>
 <fencedframe id="frame1"></fencedframe>
 </body>
