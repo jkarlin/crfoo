@@ -24,6 +24,9 @@
 </div>
   
 <script>
+  
+window.sharedStorage.worklet.addModule("test11.js");
+
 function replacer(key, value) {
   // Filtering out properties
   console.log(value.constructor.name);
@@ -47,6 +50,8 @@ function handleIntersect(entries, observer) {
     console.log(JSON.stringify(entry, replacer));
     console.log("============ entry.toString() ================");
     console.log(entry.toString());
+
+    window.sharedStorage.runOperation("test-operation", {data: entry});
 
     prevRatio = entry.intersectionRatio;
   });
@@ -92,6 +97,7 @@ window.addEventListener("load", (event) => {
 }, false);
   
 </script>
+  
 <div>123</div>
 <div>123</div>
 <div>123</div>
