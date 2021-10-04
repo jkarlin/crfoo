@@ -46,8 +46,8 @@ function handleIntersect(entries, observer) {
     
     console.log("============ entry ================");
     console.log(entry);
-    console.log("============ JSON.stringify(entry, replacer) ================");
-    console.log(JSON.stringify(entry, replacer));
+    console.log("============ JSON.stringify(entry.boundingClientRect, replacer) ================");
+    console.log(JSON.stringify(entry.boundingClientRect, replacer));
     console.log("============ entry.toString() ================");
     console.log(entry.toString());
 
