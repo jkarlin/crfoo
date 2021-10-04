@@ -24,6 +24,15 @@
 </div>
   
 <script>
+function replacer(key, value) {
+  // Filtering out properties
+  if (key == 'target') {
+    return undefined;
+  }
+  return value;
+}
+  
+  
 function handleIntersect(entries, observer) {
   entries.forEach((entry) => {
     if (entry.intersectionRatio > prevRatio) {
@@ -34,12 +43,8 @@ function handleIntersect(entries, observer) {
     
     console.log("============ entry ================");
     console.log(entry);
-    console.log("============ JSON.stringify(entry) ================");
-    console.log(JSON.stringify(entry));
-    console.log("============ JSON.stringify(entry.intersectionRect) ================");
-    console.log(JSON.stringify(entry.intersectionRect));
-    console.log("============ JSON.stringify(entry.target) ================");
-    console.log(JSON.stringify(entry.target));
+    console.log("============ JSON.stringify(entry, replacer) ================");
+    console.log(JSON.stringify(entry, replacer));
     console.log("============ entry.toString() ================");
     console.log(entry.toString());
 
