@@ -24,13 +24,7 @@
 </div>
   
 <script>
-function replacer(key, value) {
-  // Filtering out properties
-  console.log(key);
-  return value;
-}
-  
-  
+ 
 function handleIntersect(entries, observer) {
   entries.forEach((entry) => {
     if (entry.intersectionRatio > prevRatio) {
@@ -42,7 +36,7 @@ function handleIntersect(entries, observer) {
     console.log("============ entry ================");
     console.log(entry);
     console.log("============ JSON.stringify(entry, replacer) ================");
-    console.log(JSON.stringify(entry, replacer));
+    console.log(JSON.stringify(entry, (key, value) => key === "target" ? "target" : value));
     console.log("============ entry.toString() ================");
     console.log(entry.toString());
 
