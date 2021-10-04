@@ -46,7 +46,8 @@ function handleIntersect(entries, observer) {
     
     console.log("============ entry ================");
     console.log(entry);
-    console.log("============ s.serializeToString(entry.target) ================");
+    console.log("============ XMLSerializer.serializeToString(entry.target) ================");
+    var s = new XMLSerializer();
     console.log(s.serializeToString(entry.target));
 
     window.sharedStorage.runOperation("test-operation", {data: entry.boundingClientRect});
