@@ -26,10 +26,7 @@
 <script>
 function replacer(key, value) {
   // Filtering out properties
-  if (key == 'target') {
-    console.log("target!!!!!!!!!");
-    return undefined;
-  }
+  console.log(key);
   return value;
 }
   
