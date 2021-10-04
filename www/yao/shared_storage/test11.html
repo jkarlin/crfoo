@@ -26,8 +26,7 @@
 <script>
 function replacer(key, value) {
   // Filtering out properties
-  console.log(key);
-  console.log(typeof value);
+  console.log(value.constructor.name);
   if (typeof value === 'string') {
     return undefined;
   }
