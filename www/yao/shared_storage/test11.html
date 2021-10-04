@@ -31,6 +31,12 @@ function handleIntersect(entries, observer) {
     } else {
       entry.target.style.backgroundColor = decreasingColor.replace("ratio", entry.intersectionRatio);
     }
+    
+    console.log("============================");
+    console.log(entry);
+    console.log("============================");
+    console.log(JSON.stringify(entry));
+    console.log("============================");
 
     prevRatio = entry.intersectionRatio;
   });
