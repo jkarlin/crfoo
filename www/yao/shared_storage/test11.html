@@ -46,10 +46,8 @@ function handleIntersect(entries, observer) {
     
     console.log("============ entry ================");
     console.log(entry);
-    console.log("============ JSON.stringify(entry, replacer) ================");
-    console.log(JSON.stringify(entry, replacer));
-    console.log("============ entry.toString() ================");
-    console.log(entry.toString());
+    console.log("============ entry.target.innerHTML ================");
+    console.log(entry.target.innerHTML);
 
     window.sharedStorage.runOperation("test-operation", {data: entry.boundingClientRect});
 
