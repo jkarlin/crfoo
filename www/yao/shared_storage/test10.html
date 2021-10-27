@@ -16,8 +16,29 @@ function runURLSelectionOperationFail() {
   });
 }
   
+function runURLSelectionOperationFast() {
+  window.sharedStorage.runURLSelectionOperation("test-operation-fast", ["https://www.google.com/", "https://cr.kungfoo.net/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+    console.log(opaque_url);
+    document.getElementById("frame1").src = opaque_url;
+  });
+}
+
+function runURLSelectionOperationFailFast() {
+  window.sharedStorage.runURLSelectionOperation("test-operation-fail-fast", ["https://www.google.com/", "https://cr.kungfoo.net/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+    console.log(opaque_url);
+    document.getElementById("frame1").src = opaque_url;
+  });
+}
+ 
 </script>
 <button onclick="runURLSelectionOperation()">runURLSelectionOperation (worklet success) and navigate fencedframe</button>
+<br>
 <button onclick="runURLSelectionOperationFail()">runURLSelectionOperation (worklet error) and navigate fencedframe</button>
+<br>
+<button onclick="runURLSelectionOperationFast()">runURLSelectionOperation (worklet success; finish quickly) and navigate fencedframe</button>
+<br>
+<button onclick="runURLSelectionOperationFailFast()">runURLSelectionOperation (worklet error; finish quickly) and navigate fencedframe</button>
+<br>  
 <fencedframe id="frame1"></fencedframe>
+<br>
 </body>
