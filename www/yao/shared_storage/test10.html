@@ -3,28 +3,28 @@
 window.sharedStorage.worklet.addModule("test10.js");
 
 function runURLSelectionOperation() {
-  window.sharedStorage.runURLSelectionOperation("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+  window.sharedStorage.runURLSelectionOperation("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     console.log(opaque_url);
     document.getElementById("frame1").src = opaque_url;
   });
 }
 
 function runURLSelectionOperationFail() {
-  window.sharedStorage.runURLSelectionOperation("test-operation-fail", ["https://www.google.com/", "https://cr.kungfoo.net/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+  window.sharedStorage.runURLSelectionOperation("test-operation-fail", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     console.log(opaque_url);
     document.getElementById("frame1").src = opaque_url;
   });
 }
   
 function runURLSelectionOperationFast() {
-  window.sharedStorage.runURLSelectionOperation("test-operation-fast", ["https://www.google.com/", "https://cr.kungfoo.net/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+  window.sharedStorage.runURLSelectionOperation("test-operation-fast", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     console.log(opaque_url);
     document.getElementById("frame1").src = opaque_url;
   });
 }
 
 function runURLSelectionOperationFailFast() {
-  window.sharedStorage.runURLSelectionOperation("test-operation-fail-fast", ["https://www.google.com/", "https://cr.kungfoo.net/"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+  window.sharedStorage.runURLSelectionOperation("test-operation-fail-fast", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     console.log(opaque_url);
     document.getElementById("frame1").src = opaque_url;
   });
