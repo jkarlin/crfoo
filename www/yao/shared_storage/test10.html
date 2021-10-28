@@ -29,6 +29,10 @@ function runURLSelectionOperationFailFast() {
     document.getElementById("frame1").src = opaque_url;
   });
 }
+  
+function navigateToFail() {
+  document.getElementById("frame1").src = "urn:uuid:12345678987654321";
+}
  
 </script>
 <button onclick="runURLSelectionOperation()">runURLSelectionOperation (worklet success) and navigate fencedframe</button>
@@ -38,6 +42,8 @@ function runURLSelectionOperationFailFast() {
 <button onclick="runURLSelectionOperationFast()">runURLSelectionOperation (worklet success; finish quickly) and navigate fencedframe</button>
 <br>
 <button onclick="runURLSelectionOperationFailFast()">runURLSelectionOperation (worklet error; finish quickly) and navigate fencedframe</button>
+<br>
+<button onclick="navigateToFail()">navigate fencedframe to non-existent urn:uuid</button>
 <br>  
 <fencedframe id="frame1"></fencedframe>
 <br>
