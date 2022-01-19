@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <button id="set-cookie">Set cookie (SameSite=None)</button>
 <button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
+<div>document.cookie is <span id="document-cookie"></span></div>
 <script>
   for (const [id, endpoint] of [
     ['set-cookie', 'samesitenone'],
@@ -10,4 +11,8 @@
     document.getElementById(id).addEventListener(
       'click', () => fetch(`/cookies/${endpoint}.php`));
   }
+
+  setInterval(() => {
+    document.getElementById('document-cookie').textContent = document.cookie;
+  }, 100);
 </script>
