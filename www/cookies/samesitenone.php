@@ -1,3 +1,3 @@
 <?php
-header('Set-Cookie: foo=bar; Secure; Path=/; SameSite=None; Max-Age=86400');
+header('Set-Cookie: unpartitioned=foobar; Secure; Path=/; SameSite=None; Max-Age=86400');
 ?>
