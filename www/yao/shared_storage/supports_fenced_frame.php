@@ -11,4 +11,6 @@ Hi there, this document is served with a 'Supports-Loading-Mode: fenced-frame' h
 echo time();
 ?>
 </p>
+  
+<script>document.browsingTopics();</script>
 </body>
