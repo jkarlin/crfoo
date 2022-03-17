@@ -8,7 +8,7 @@ for (const [id, endpoint] of [
   ['set-partitioned-cookie', partitionedCookieEndpoint],
 ]) {
   document.getElementById(id).addEventListener(
-      'click', () => fetch(`/cookies/${endpoint}.php`));
+      'click', () => fetch(`/cookies/${endpoint}.php`).catch(console.error));
 }
 
 setInterval(() => {
@@ -16,7 +16,5 @@ setInterval(() => {
 }, 100);
 
 document.getElementById('clear-cookies').addEventListener('click', () => {
-  const endpoint =
-      `/cookies/clear-cookies-${isThirdPartyContext ? 3 : 1}p.php`;
-  fetch(endpoint);
+  fetch('/cookies/clear-site-data.php').catch(console.error);
 });
