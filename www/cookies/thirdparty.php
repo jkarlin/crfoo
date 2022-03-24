@@ -9,4 +9,22 @@ header('Accept-CH: Sec-CH-Partitioned-Cookies');
 <button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
 <div>document.cookie is <span id="document-cookie"></span></div>
 <button id="clear-cookies">Clear cookies</button>
-<script src="./main.js"></script>
+<script>
+
+for (const [id, endpoint] of [
+  ['set-cookie', 'samesitenone-3p'],
+  ['set-partitioned-cookie', 'partitioned-3p'],
+]) {
+  document.getElementById(id).addEventListener(
+      'click', () => fetch(`/cookies/${endpoint}.php`).catch(console.error));
+}
+
+setInterval(() => {
+  document.getElementById('document-cookie').textContent = document.cookie;
+}, 100);
+
+document.getElementById('clear-cookies').addEventListener('click', () => {
+  fetch('/cookies/clear-site-data-3p.php').catch(console.error);
+});
+
+</script>
