@@ -2,6 +2,24 @@
 Test Topics API
 
 <script>
-document.browsingTopics();
+if (!(document.browsingTopics instanceof Function)) {
+  'not a function';
+  document.body.innerHTML += " Not a function";
+} else {
+  document.browsingTopics()
+  .then(topics => {
+    let result = "[";
+    for (const topic of topics) {
+      result += JSON.stringify(topic, Object.keys(topic).sort()) + ";"
+    }
+    result += "]";
+    document.body.innerHTML += (" " + result);
+    return result;
+  })
+  .catch(error => {
+    document.body.innerHTML += (" " + error.message);
+  });
+}
+  
 </script>
 </body>
