@@ -11,5 +11,11 @@
   <body>
     <a id="link" href="#text">Go Down</a>
     <p id="text">Some text</p>
+    <script>
+      var new_iframe = document.createElement('iframe');
+      new_iframe.src = 'http://baidu.com';
+      new_iframe.setAttribute('style', 'position:absolute; top:50px; right:50px; width:500px; height:500px;');
+      document.body.appendChild(new_iframe);
+    </script>
   </body>
 </html>
