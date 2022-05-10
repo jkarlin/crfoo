@@ -12,6 +12,12 @@ echo time();
 ?>
 </p>
   
-<button onclick="function() { window.top.location = 'https://google.com'}">Navigate top</button>
+<button onclick="myFunction()">Navigate top</button>
+
+<script>
+function myFunction() {
+  window.top.location = 'https://google.com';
+}
+</script>
   
 </body>
