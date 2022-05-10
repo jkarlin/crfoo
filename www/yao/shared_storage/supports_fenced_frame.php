@@ -12,5 +12,4 @@ echo time();
 ?>
 </p>
   
-<script>document.browsingTopics();</script>
 </body>
