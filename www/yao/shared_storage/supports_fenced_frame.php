@@ -13,10 +13,15 @@ echo time();
 </p>
   
 <button onclick="myFunction()">Navigate top</button>
+<button onclick="myFunction2()">Popup</button>
 
 <script>
 function myFunction() {
   window.open("https://baidu.com", "_unfencedTop")
+}
+  
+function myFunction2() {
+  window.open("https://baidu.com")
 }
 </script>
   
