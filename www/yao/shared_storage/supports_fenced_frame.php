@@ -16,7 +16,7 @@ echo time();
 
 <script>
 function myFunction() {
-  window.top.location = 'https://google.com';
+  window.top.location = 'https://baidu.com';
 }
 </script>
   
