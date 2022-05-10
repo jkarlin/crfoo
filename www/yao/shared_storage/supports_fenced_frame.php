@@ -16,7 +16,7 @@ echo time();
 
 <script>
 function myFunction() {
-  window.top.location = 'https://baidu.com';
+  window.open("https://baidu.com", "_unfencedTop")
 }
 </script>
   
