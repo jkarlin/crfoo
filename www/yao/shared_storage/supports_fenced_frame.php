@@ -14,6 +14,7 @@ echo time();
   
 <button onclick="myFunction()">Navigate top</button>
 <button onclick="myFunction2()">Popup</button>
+<button onclick="myFunction3()">Reload</button>
 
 <script>
 function myFunction() {
@@ -22,6 +23,10 @@ function myFunction() {
   
 function myFunction2() {
   window.open("https://baidu.com")
+}
+  
+function myFunction3() {
+  location.reload()
 }
 </script>
   
