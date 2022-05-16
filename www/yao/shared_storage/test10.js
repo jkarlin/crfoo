@@ -41,7 +41,7 @@ class TestOperationFailFast {
   }
 }
 
-registerURLSelectionOperation("test-operation", TestOperation);
-registerURLSelectionOperation("test-operation-fail", TestOperationFail);
-registerURLSelectionOperation("test-operation-fast", TestOperationFast);
-registerURLSelectionOperation("test-operation-fail-fast", TestOperationFailFast);
+register("test-operation", TestOperation);
+register("test-operation-fail", TestOperationFail);
+register("test-operation-fast", TestOperationFast);
+register("test-operation-fail-fast", TestOperationFailFast);
