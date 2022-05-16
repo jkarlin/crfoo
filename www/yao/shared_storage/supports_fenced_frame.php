@@ -15,18 +15,31 @@ echo time();
 <button onclick="myFunction()">Navigate top</button>
 <button onclick="myFunction2()">Popup</button>
 <button onclick="myFunction3()">Reload</button>
+<button onclick="myFunction4()">Navigate self and then popup</button>
+<button onclick="myFunction5()">Popup and then navigate self</button>
+
 
 <script>
 function myFunction() {
-  window.open("https://baidu.com", "_unfencedTop")
+  window.open("https://baidu.com", "_unfencedTop");
 }
   
 function myFunction2() {
-  window.open("https://baidu.com")
+  window.open("https://baidu.com");
 }
   
 function myFunction3() {
-  location.reload()
+  location.reload();
+}
+  
+function myFunction4() {
+  window.location.href = 'https://example.com/';
+  window.open("https://baidu.com");
+}
+  
+function myFunction5() {
+  window.open("https://baidu.com");
+  window.location.href = 'https://example.com/';
 }
 </script>
   
