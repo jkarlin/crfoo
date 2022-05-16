@@ -33,13 +33,13 @@ function myFunction3() {
 }
   
 function myFunction4() {
-  window.location.href = 'https://example.com/';
+  window.location.href = 'supports_fenced_frame2.php';
   window.open("https://baidu.com");
 }
   
 function myFunction5() {
   window.open("https://baidu.com");
-  window.location.href = 'https://example.com/';
+  window.location.href = 'supports_fenced_frame2.php';
 }
 </script>
   
