@@ -2,9 +2,6 @@
 header("Supports-Loading-Mode: fenced-frame");
 ?>
 <body>
-
-Hi there, this document is served with a 'Supports-Loading-Mode: fenced-frame' header.
-
 <p>The server time is: 
 
 <?php
@@ -21,6 +18,8 @@ echo time();
 <button onclick="myFunction6()">Cross-site navigation, and then popup</button><br>
 <input type="text" id="popup-delay" value="50"><br>
 <fencedframe id="frame1" mode="opaque-ads" src="supports_fenced_frame.php"></fencedframe>
+
+<iframe id="iframe1" src="iframe.html"><iframe>
   
 <script>
 function myFunction() {
