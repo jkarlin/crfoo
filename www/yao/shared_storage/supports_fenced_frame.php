@@ -20,7 +20,7 @@ echo time();
 <button onclick="myFunction5()">Same-site navigation, and then popup</button><br>
 <button onclick="myFunction6()">Cross-site navigation, and then popup</button><br>
 <input type="text" id="popup-delay" value="50"><br>
-
+<fencedframe id="frame1" mode="opaque-ads" src="supports_fenced_frame.php"></fencedframe>
   
 <script>
 function myFunction() {
