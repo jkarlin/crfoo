@@ -1,0 +1,28 @@
+<body>
+<button onclick="myFunction()">Navigate top</button><br>
+<button onclick="myFunction2()">Popup</button><br>
+<button onclick="myFunction3()">Reload</button><br>
+<button onclick="myFunction4()">Navigate parent</button><br>
+
+
+  
+<script>
+function myFunction() {
+  window.open("https://google.com", "_unfencedTop");
+}
+  
+function myFunction2() {
+  window.open("https://google.com");
+}
+  
+function myFunction3() {
+  location.reload();
+}
+  
+function myFunction4() {
+  window.parent.location = 'https://baidu.com';
+}
+  
+</script>
+  
+</body>
