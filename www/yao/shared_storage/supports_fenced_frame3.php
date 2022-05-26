@@ -9,7 +9,7 @@ echo time();
 ?>
 </p>
   
-<button onclick="myFunction()">Navigate top</button><br>
+<button onclick="myFunction()">Get top url</button><br>
 
 <script>
   
