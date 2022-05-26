@@ -6,6 +6,7 @@ function selectURL() {
   window.sharedStorage.selectURL("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame3.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     console.log(opaque_url);
     document.getElementById("frame1").src = opaque_url;
+    document.getElementById("iframe1").src = 'https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame3.php';
   });
 }
 
@@ -13,6 +14,7 @@ function selectURL2() {
   window.sharedStorage.selectURL("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame3.php#2"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     console.log(opaque_url);
     document.getElementById("frame1").src = opaque_url;
+    document.getElementById("iframe1").src = 'https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame3.php';
   });
 }
 
@@ -20,6 +22,7 @@ function selectURL3() {
   window.sharedStorage.selectURL("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame3.php#3"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
     console.log(opaque_url);
     document.getElementById("frame1").src = opaque_url;
+    document.getElementById("iframe1").src = 'https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame3.php';
   });
 }
   
@@ -31,5 +34,6 @@ function selectURL3() {
 <button onclick="selectURL()">selectURL and navigate fencedframe#3</button>
 <br>
 <fencedframe id="frame1" mode="opaque-ads" style="width: 100%"></fencedframe>
+<iframe id="iframe1" style="width: 100%"></iframe>
 <br>
 </body>
