@@ -1,0 +1,35 @@
+<body>
+<script>
+window.sharedStorage.worklet.addModule("test10.js");
+
+function selectURL() {
+  window.sharedStorage.selectURL("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+    console.log(opaque_url);
+    document.getElementById("frame1").src = opaque_url;
+  });
+}
+
+function selectURL2() {
+  window.sharedStorage.selectURL("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php#2"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+    console.log(opaque_url);
+    document.getElementById("frame1").src = opaque_url;
+  });
+}
+
+function selectURL3() {
+  window.sharedStorage.selectURL("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php#3"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
+    console.log(opaque_url);
+    document.getElementById("frame1").src = opaque_url;
+  });
+}
+  
+</script>
+<button onclick="selectURL()">selectURL and navigate fencedframe</button>
+<br>
+<button onclick="selectURL()">selectURL and navigate fencedframe#2</button>
+<br>
+<button onclick="selectURL()">selectURL and navigate fencedframe#3</button>
+<br>
+<fencedframe id="frame1" mode="opaque-ads" style="width: 100%"></fencedframe>
+<br>
+</body>
