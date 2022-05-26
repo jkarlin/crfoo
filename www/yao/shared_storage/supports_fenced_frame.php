@@ -53,11 +53,11 @@ function myFunction5() {
 }
 
 function myFunction6() {
-  window.location.href = 'https://baidu.com';
-  let delay = Number(document.getElementById("popup-delay").value);
-  window.setTimeout(() => {
+  window.addEventListener('beforeunload', (event) => {
     window.open("https://google.com");
-  }, delay);
+  });
+  
+  window.location.href = 'https://baidu.com';
 }
   
 </script>
