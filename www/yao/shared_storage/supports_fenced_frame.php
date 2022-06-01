@@ -17,6 +17,7 @@ echo time();
 <button onclick="myFunction5()">Same-site navigation, and then popup</button><br>
 <button onclick="myFunction6()">Cross-site navigation, and then popup</button><br>
 <input type="text" id="popup-delay" value="50"><br>
+<iframe src="iframe.html"></iframe>
   
 <script>
 function myFunction() {
