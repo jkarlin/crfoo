@@ -18,6 +18,7 @@ echo time();
 <button onclick="myFunction6()">Cross-site navigation, and then popup</button><br>
 <input type="text" id="popup-delay" value="50"><br>
 <iframe src="iframe.html"></iframe>
+<iframe src="https://test-fenced-frame.glitch.me"></iframe>
   
 <script>
 function myFunction() {
