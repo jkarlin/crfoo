@@ -26,7 +26,8 @@ function myFunction() {
 }
   
 function myFunction2() {
-  window.open("https://google.com");
+  let aaa = window.open("https://cr.kungfoo.net/yao/shared_storage/test10.html");
+  aaa.location.reload();
 }
   
 function myFunction3() {
