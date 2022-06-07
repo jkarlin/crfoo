@@ -5,11 +5,13 @@
 <button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
 <div>document.cookie is <span id="document-cookie"></span></div>
 <button id="clear-cookies">Clear cookies</button>
+<button id="opt-out">Opt-out of partitioned cookies</button>
 <script>
 
 for (const [id, endpoint] of [
   ['set-cookie', 'samesitenone'],
   ['set-partitioned-cookie', 'partitioned-1p'],
+  ['opt-out', 'opt-out'],
 ]) {
   document.getElementById(id).addEventListener(
       'click', () => fetch(`/cookies/${endpoint}.php`).catch(console.error));
