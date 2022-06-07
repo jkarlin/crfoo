@@ -12,6 +12,7 @@ for (const [id, endpoint] of [
   ['set-cookie', 'samesitenone'],
   ['set-partitioned-cookie', 'partitioned-1p'],
   ['opt-out', 'opt-out'],
+  ['clear-cookies', 'clear-site-data'],
 ]) {
   document.getElementById(id).addEventListener(
       'click', () => fetch(`/cookies/v2/${endpoint}.php`).catch(console.error));
@@ -20,9 +21,5 @@ for (const [id, endpoint] of [
 setInterval(() => {
   document.getElementById('document-cookie').textContent = document.cookie;
 }, 100);
-
-document.getElementById('clear-cookies').addEventListener('click', () => {
-  fetch('/cookies/clear-site-data-1p.php').catch(console.error);
-});
 
 </script>
