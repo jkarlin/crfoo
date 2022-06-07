@@ -14,7 +14,7 @@ for (const [id, endpoint] of [
   ['opt-out', 'opt-out'],
 ]) {
   document.getElementById(id).addEventListener(
-      'click', () => fetch(`/cookies/${endpoint}.php`).catch(console.error));
+      'click', () => fetch(`/cookies/v2/${endpoint}.php`).catch(console.error));
 }
 
 setInterval(() => {
