@@ -1,10 +1,18 @@
 <body>
     
-<link href="https://gum.criteo.com/syncframe" rel=prerender crossorigin="use-credentials">
-<link href="iframe.html" rel=prerender crossorigin="use-credentials">
+<script type="speculationrules">
+{
+  "prerender":[{"source": "list", "urls": ["https://gum.criteo.com/syncframe"]}]
+}
+</script>
     
-<script>
-  
+<script type="speculationrules">
+{
+  "prerender":[{"source": "list", "urls": ["iframe.html"]}]
+}
+</script>   
+
+<script>    
 window.addEventListener('unload', function(event) {
   console.log('unload');
   document.browsingTopics();
