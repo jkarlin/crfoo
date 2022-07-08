@@ -1,8 +1,13 @@
 <body>  
 <script>
+  
+window.addEventListener('unload', function(event) {
+  console.log('unload');
+  document.browsingTopics();
+});
+  
 function Unload() {
   window.location = "https://google.com";
-  document.browsingTopics();
 }
 </script>
   
