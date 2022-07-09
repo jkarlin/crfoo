@@ -1,27 +1,7 @@
 <body>
-    
 <script type="speculationrules">
 {
-  "prerender":[{"source": "list", "urls": ["https://gum.criteo.com/syncframe"]}]
-}
-</script>
-    
-<script type="speculationrules">
-{
-  "prerender":[{"source": "list", "urls": ["iframe.html"]}]
+  "prerender":[{"source": "list", "urls": ["iframe2.html"]}]
 }
 </script>   
-
-<script>    
-window.addEventListener('unload', function(event) {
-  console.log('unload');
-  document.browsingTopics();
-});
-  
-function Unload() {
-  window.location = "https://google.com";
-}
-</script>
-  
-<button onclick="Unload()">Unload</button>
 </body>
