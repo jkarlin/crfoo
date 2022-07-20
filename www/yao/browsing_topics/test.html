@@ -2,24 +2,8 @@
 Test Topics API
 
 <script>
-if (!(document.browsingTopics instanceof Function)) {
-  'not a function';
-  document.body.innerHTML += " Not a function";
-} else {
-  document.browsingTopics()
-  .then(topics => {
-    let result = "[";
-    for (const topic of topics) {
-      result += JSON.stringify(topic, Object.keys(topic).sort()) + ";"
-    }
-    result += "]";
-    document.body.innerHTML += (" " + result);
-    return result;
-  })
-  .catch(error => {
-    document.body.innerHTML += (" " + error.message);
-  });
-}
-  
+fetch('https://cr.kungfoo.net/yao/browsing_topics/iframe.html')
+  .then(response => console.log(response.json()))
+  .then(data => console.log(data));
 </script>
 </body>
