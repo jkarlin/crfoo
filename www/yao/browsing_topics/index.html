@@ -29,11 +29,25 @@ function function4() {
   document.body.appendChild(iframe);
 }
 
+function function5() {
+  fetch('https://cr.kungfoo.net/yao/browsing_topics/observe_browsing_topics.php', {
+    browsingTopics: true
+  })
+  .then((response) => response.json())
+  .then((result) => {
+    console.log('Success:', result);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  }); 
+}
+  
 </script>
 
 <button onclick="function1()">Append frame default</button><br>
 <button onclick="function2()">Append frame allow topics</button><br>
 <button onclick="function3()">Append frame allow topics none</button><br>
 <button onclick="function4()">Append frame allow topics different origin</button><br>
+<button onclick="function5()">Fetch</button><br>
 
 </body>
