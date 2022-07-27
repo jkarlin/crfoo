@@ -1,14 +1,15 @@
 <body>
+
 <script>
 function function1() {
   var iframe = document.createElement('iframe');
-  iframe.src = 'observe_browsing_topics.php';
+  iframe.src = 'https://cr.kungfoo.net/yao/browsing_topics/observe_browsing_topics.php';
   document.body.appendChild(iframe);
 }
 
 function function2() {
   var iframe = document.createElement('iframe');
-  iframe.src = 'observe_browsing_topics.php';
+  iframe.src = 'https://cr.kungfoo.net/yao/browsing_topics/observe_browsing_topics.php';
   iframe.allow = 'browsing-topics';
   document.body.appendChild(iframe);
 }
@@ -16,13 +17,23 @@ function function2() {
   
 function function3() {
   var iframe = document.createElement('iframe');
-  iframe.src = 'observe_browsing_topics.php';
-  iframe.allow = 'browsing-topics https://a.com';
+  iframe.src = 'https://cr.kungfoo.net/yao/browsing_topics/observe_browsing_topics.php';
+  iframe.allow = "browsing-topics 'none'";
   document.body.appendChild(iframe);
 }
+
+function function4() {
+  var iframe = document.createElement('iframe');
+  iframe.src = 'https://cr.kungfoo.net/yao/browsing_topics/observe_browsing_topics.php';
+  iframe.allow = "browsing-topics https://abc.com";
+  document.body.appendChild(iframe);
+}
+
 </script>
 
 <button onclick="function1()">Append frame default</button><br>
 <button onclick="function2()">Append frame allow topics</button><br>
-<button onclick="function3()">Append frame allow topics different origin</button><br>
+<button onclick="function3()">Append frame allow topics none</button><br>
+<button onclick="function4()">Append frame allow topics different origin</button><br>
+
 </body>
