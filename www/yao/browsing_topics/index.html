@@ -1,7 +1,28 @@
 <body>
-<script type="speculationrules">
-{
-  "prerender":[{"source": "list", "urls": ["iframe2.html"]}]
+<script>
+function function1() {
+  var iframe = document.createElement('iframe');
+  iframe.src = 'observe_browsing_topics.php';
+  document.body.appendChild(iframe);
 }
-</script>   
+
+function function2() {
+  var iframe = document.createElement('iframe');
+  iframe.src = 'observe_browsing_topics.php';
+  iframe.allow = 'browsing-topics';
+  document.body.appendChild(iframe);
+}
+
+  
+function function3() {
+  var iframe = document.createElement('iframe');
+  iframe.src = 'observe_browsing_topics.php';
+  iframe.allow = 'browsing-topics https://a.com';
+  document.body.appendChild(iframe);
+}
+</script>
+
+<button onclick="function1()">Append frame default</button><br>
+<button onclick="function2()">Append frame allow topics</button><br>
+<button onclick="function3()">Append frame allow topics different origin</button><br>
 </body>
