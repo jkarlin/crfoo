@@ -6,6 +6,7 @@ header("Observe-Browsing-Topics: 1");
 
 <?php
 echo time();
+print_r($_SERVER);
 ?>
 </p>
 
