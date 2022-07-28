@@ -33,7 +33,6 @@ function function5() {
   fetch('https://cr.kungfoo.net/yao/browsing_topics/observe_browsing_topics.php', {
     browsingTopics: true
   })
-  .then((response) => response.json())
   .then((result) => {
     console.log('Success:', result);
   })
