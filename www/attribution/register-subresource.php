@@ -1,5 +1,5 @@
 <?php
 header("Attribution-Reporting-Register-Trigger: {}");
-header("Access-Control-Allow-Origin: *");
+header("Set-Cookie: ar_debug=1; SameSite=None; Secure; HttpOnly");
 ?>
 Something
