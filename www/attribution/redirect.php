@@ -1,1 +1,1 @@
-header("Location: register-subresource.php");
+header("Location: /register-subresource.php");
