@@ -1,3 +1,3 @@
 <?php
-header("Location: /register-subresource.php");
+header("Location: /attribution/register-subresource.php");
 ?>
