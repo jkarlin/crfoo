@@ -5,4 +5,3 @@ header("Cross-Origin-Resource-Policy: cross-origin");
 header("Content-Security-Policy: script-src 'none'; object-src 'none'");
 //header("Access-Control-Expose-headers: Attribution-Reporting-Register-Trigger");
 ?>
-Something
