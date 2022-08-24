@@ -2,13 +2,13 @@
   <p>Attribution Reporting permission policy is: <span id="attr"></span></p>
   <p>Interest Group permission policy is: <span id="ig"></span></p>
   <script>
-    let attr = document.getElementByID("attr");
+    let attr = document.getElementById("attr");
     if (document.featurePolicy.allowsFeature("attribution-reporting"))
       attr.textContent = "true";
     else
       attr.textContent = "false";
     
-    let attr = document.getElementByID("attr");
+    let attr = document.getElementById("ig");
     if (document.featurePolicy.allowsFeature("join-ad-interest-group"))
       attr.textContent = "true";
     else
