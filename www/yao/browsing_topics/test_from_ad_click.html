@@ -1,0 +1,42 @@
+
+<body>
+  <script>
+    function navigateTop() {
+      window.location.href = "https://www.google.com";
+    }
+    function navigateTopAfter2s() {
+      setTimeout(() => {
+        window.location.href = "https://www.google.com";
+      }, 2000);
+    }
+    function navigateSameSiteIframe() {
+      const f = document.getElementById('f1');
+      f.src = "https://www.google.com";
+    }
+    function navigateTopAfter2s() {
+      setTimeout(() => {
+        const f = document.getElementById('f1');
+        f.src = "https://www.google.com";
+      }, 2000);
+    }
+    function navigateSameSiteIframe() {
+      const f = document.getElementById('f2');
+      f.src = "https://www.google.com";
+    }
+    function navigateTopAfter2s() {
+      setTimeout(() => {
+        const f = document.getElementById('f2');
+        f.src = "https://www.google.com";
+      }, 2000);
+    }
+  </script>
+  
+  <button onclick="navigateTop()">Navigate top</button><br/>
+  <button onclick="navigateTopAfter2s()">Navigate top after 2s</button><br/>
+  <button onclick="navigateSameSiteIframe()">Navigate same-site iframe</button><br/>
+  <button onclick="navigateSameSiteIframeAfter2s()">Navigate same-site iframe after 2s</button><br/>
+  <button onclick="navigateCrossSiteIframe()">Navigate cross-site iframe</button><br/>
+  <button onclick="navigateCrossSiteIframeAfter2s()">Navigate cross-site iframe after 2s</button><br/>
+  <iframe id="f1" src="http://cr.kungfoo.net/yao/browsing_topics/test_from_ad_click_iframe.html"></iframe><br/>
+  <iframe id="f2" src="https://cr.kungfoo.net/yao/browsing_topics/test_from_ad_click_iframe.html"></iframe><br/>
+</body>
