@@ -8,8 +8,19 @@ test_from_ad_click_iframe
     function windowOpenCrfoo() {
       window.open("https://cr.kungfoo.net/yao/browsing_topics/empty.html");
     }
+
+    function setTopGlitch() {
+      top.location.href = "https://pinto-capable-casquette.glitch.me/";
+    }
+
+    function setTopCrfoo() {
+      top.location.href = "https://cr.kungfoo.net/yao/browsing_topics/empty.html";
+    }
+    
   </script>
   
   <button onclick="windowOpenGlitch()">window open glitch</button><br/>
   <button onclick="windowOpenCrfoo()">window open crfoo</button><br/>
+  <button onclick="setTopGlitch()">set top glitch</button><br/>
+  <button onclick="setTopCrfoo()">set top crfoo</button><br/>
 </body>
