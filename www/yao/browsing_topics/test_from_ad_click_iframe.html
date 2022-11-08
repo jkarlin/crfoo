@@ -1,1 +1,15 @@
+<body>
 test_from_ad_click_iframe
+  <script>
+    function windowOpenGlitch() {
+      window.open("https://pinto-capable-casquette.glitch.me/");
+    }
+    
+    function windowOpenCrfoo() {
+      window.open("https://cr.kungfoo.net/yao/browsing_topics/empty.html");
+    }
+  </script>
+  
+  <button onclick="windowOpenGlitch()">window open glitch</button><br/>
+  <button onclick="windowOpenCrfoo()">window open crfoo</button><br/>
+</body>
