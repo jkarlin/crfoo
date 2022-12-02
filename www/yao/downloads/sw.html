@@ -7,11 +7,11 @@
 		<script>
 			if ("serviceWorker" in navigator) {
 				addEventListener("load", async () => {
-					const registration = await navigator.serviceWorker.register("sw.js");
+					const registration = await navigator.serviceWorker.register("https://cr.kungfoo.net/yao/downloads/sw.js");
 					if (registration.installing) {
 						location.reload();
 					} else {
-						location = "iframe.html";
+						location = "https://cr.kungfoo.net/yao/downloads/iframe.html";
 					}
 				});
 			}
