@@ -1,9 +1,9 @@
 <IfModule mod_headers.c>
   <Files subframe.html>
-    Header append  Permissions-Policy: autoplay=self
+    Header append  Permissions-Policy: geolocation=self
   </Files>
 
   <Files index.html>
-    Header append  Permissions-Policy: autoplay=self
+    Header append  Permissions-Policy: geolocation=self
   </Files>
 </IfModule>
