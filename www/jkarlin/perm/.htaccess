@@ -1,6 +1,6 @@
 <IfModule mod_headers.c>
   <Files subframe.html>
-    Header append  Permissions-Policy: geolocation=self
+    Header append  Permissions-Policy: geolocation=self,https://cr2.kungfoo.net
   </Files>
 
   <Files index.html>
