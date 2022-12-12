@@ -1,0 +1,5 @@
+<IfModule mod_headers.c>
+  <FilesMatch "subframe.html">
+    Header append  Permissions-Policy: autoplay=self
+  </FilesMatch>
+</IfModule>
