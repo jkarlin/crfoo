@@ -1,5 +1,9 @@
 <IfModule mod_headers.c>
   <Files subframe.html>
-    Header append  Permissions-Policy: autoplay=()
+    Header append  Permissions-Policy: autoplay=self
+  </Files>
+
+  <Files index.html>
+    Header append  Permissions-Policy: autoplay=self
   </Files>
 </IfModule>
