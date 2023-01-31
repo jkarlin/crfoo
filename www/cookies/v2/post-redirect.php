@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin', '*');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   header(
       'Location', $_POST['location'] . '?cookie=' . getallheaders()['Cookie']);
