@@ -5,6 +5,8 @@
 <div>document.cookie is <span id="document-cookie"></span></div>
 <button id="clear-cookies">Clear cookies</button>
 <button id="opt-out">Opt-out of partitioned cookies</button>
+<br>
+<button id="cookie-latching">Test cookie latching</button>
 <script>
 
 // Third-party participants must add the token via JS.
@@ -18,6 +20,7 @@ for (const [id, endpoint] of [
     ['set-partitioned-cookie', 'partitioned-3p'],
     ['opt-out', 'opt-out'],
     ['clear-cookies', 'clear-site-data'],
+    ['cookie-latching', 'test-cookie-latching'],
 ]) {
   document.getElementById(id).addEventListener(
     'click', () => fetch(`/cookies/v2/${endpoint}.php`).catch(console.error));
