@@ -1,3 +1,2 @@
-function test() { };
-test.prototype = 123;
-register("test-url-selection-operation", test);
+let aaa = Object.getOwnPropertyNames(globalThis);
+throw JSON.stringify(aaa, Object.keys(aaa).sort())
