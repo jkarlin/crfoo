@@ -7,6 +7,8 @@ const root = document.getElementById('service-worker-root');
 const statusDiv = document.getElementById('service-worker-status');
 const registerBtn = document.getElementById('register-service-worker');
 const unregisterBtn = document.getElementById('unregister-service-worker');
+const queryCountBtn = document.getElementById('service-worker-query-count');
+const countDisplay = document.getElementById('service-worker-count');
 
 setInterval(async () => {
   const reg = await navigator.serviceWorker.getRegistration();
@@ -20,12 +22,23 @@ setInterval(async () => {
 registerBtn.addEventListener('click', async () => {
   await navigator.serviceWorker.register(
       '/cookies/v2/service-worker.js', {scope: '/cookies/v2/'});
-  const reg = await navigator.serviceWorker.ready;
-  console.log(reg);
+  await navigator.serviceWorker.ready;
 });
 
 unregisterBtn.addEventListener('click', async () => {
   const reg = await navigator.serviceWorker.getRegistration();
   if (!reg) return;
   await reg.unregister();
+});
+
+let channel;
+
+queryCountBtn.addEventListener('click', async () => {
+  channel = new MessageChannel();
+  await navigator.serviceWorker.ready;
+  navigator.serviceWorker.controller.postMessage({}, [channel.port2]);
+
+  channel.port1.onmessage = event => {
+    countDisplay.textContent = event.data.payload;
+  };
 });
