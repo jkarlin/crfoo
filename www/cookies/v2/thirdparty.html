@@ -4,7 +4,11 @@
 <button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
 <div>document.cookie is <span id="document-cookie"></span></div>
 <button id="clear-cookies">Clear cookies</button>
-<br>
+<div id="service-worker-root">
+  <div id="service-worker-status"></div>
+  <button id="register-service-worker">Register Service Worker</button>
+  <button id="unregister-service-worker">Unregister Service Worker</button>
+</div>
 <script>
 
 for (const [id, endpoint] of [
@@ -21,3 +25,4 @@ setInterval(() => {
 }, 100);
 
 </script>
+<script src="/cookies/v2/service-worker-dom.js"></script>
