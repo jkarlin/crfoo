@@ -20,7 +20,8 @@ self.addEventListener('activate', event => {
 
 let curChangeCount = 0;
 
-self.addEventListener('cookiechange', ev => {
+self.addEventListener('cookiechange', () => {
+  console.log('Cookie change event received');
   ++curChangeCount;
 });
 
