@@ -18,11 +18,14 @@ self.addEventListener('activate', event => {
   })());
 });
 
-let curChangeCount = 0;
+let cookieChangeEventCount = 0;
+let mostRecentChanges;
 
-self.addEventListener('cookiechange', () => {
-  console.log('Cookie change event received');
-  ++curChangeCount;
+const orEmptyArr = obj => (obj || []);
+
+self.addEventListener('cookiechange', ev => {
+  ++cookieChangeEventCount;
+  mostRecentChanges = [...orEmptyArr(ev.changed), ...orEmptyArr(ev.deleted)];
 });
 
 let port;
@@ -31,6 +34,8 @@ self.addEventListener('message', event => {
   if (!port) {
     port = event.ports[0];
   }
-  port.postMessage({payload: curChangeCount});
-  curChangeCount = 0;
+  port.postMessage({
+    cookieChangeEventCount,
+    mostRecentChanges: mostRecentChanges ? JSON.stringify(mostRecentChanges) : '[]',
+  });
 });

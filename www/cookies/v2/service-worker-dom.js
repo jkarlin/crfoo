@@ -9,6 +9,7 @@ const registerBtn = document.getElementById('register-service-worker');
 const unregisterBtn = document.getElementById('unregister-service-worker');
 const queryCountBtn = document.getElementById('service-worker-query-count');
 const countDisplay = document.getElementById('service-worker-count');
+const lastChange = document.getElementById('service-worker-change');
 
 setInterval(async () => {
   const reg = await navigator.serviceWorker.getRegistration();
@@ -39,6 +40,7 @@ queryCountBtn.addEventListener('click', async () => {
   navigator.serviceWorker.controller.postMessage({}, [channel.port2]);
 
   channel.port1.onmessage = event => {
-    countDisplay.textContent = event.data.payload;
+    countDisplay.textContent = event.data.cookieChangeEventCount;
+    lastChange.textContent = event.data.mostRecentChanges;
   };
 });
