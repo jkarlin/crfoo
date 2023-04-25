@@ -1,3 +1,3 @@
 <?php
-header('Clear-Site-Data: "cookies"');
+header('Clear-Site-Data: "cookies", "storage"');
 ?>
