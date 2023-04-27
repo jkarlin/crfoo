@@ -4,6 +4,8 @@
 <button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
 <div>document.cookie is <span id="document-cookie"></span></div>
 <button id="clear-cookies">Clear cookies</button>
+<button id="clear-storage">Clear storage</button>
+<button id="clear-both">Clear both</button>
 <div id="service-worker-root">
   <div id="service-worker-status"></div>
   <button id="register-service-worker">Register Service Worker</button>
@@ -16,9 +18,11 @@
 <script>
 
 for (const [id, endpoint] of [
-  ['set-cookie', 'samesitenone'],
-  ['set-partitioned-cookie', 'partitioned-1p'],
-  ['clear-cookies', 'clear-site-data'],
+    ['set-cookie', 'samesitenone'],
+    ['set-partitioned-cookie', 'partitioned-1p'],
+    ['clear-both', 'clear-site-data'],
+    ['clear-cookies', 'clear-site-data-cookies'],
+    ['clear-storage', 'clear-site-data-storage'],
 ]) {
   document.getElementById(id).addEventListener(
       'click', () => fetch(`/cookies/v2/${endpoint}.php`).catch(console.error));
