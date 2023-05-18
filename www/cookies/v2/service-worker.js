@@ -2,6 +2,8 @@
  * Service worker script executes in the worker.
  */
 
+importScripts('./service-worker-import-script.js');
+
 self.addEventListener('install', event => {
   event.waitUntil(self.skipWaiting()); // Activate worker immediately
 });
