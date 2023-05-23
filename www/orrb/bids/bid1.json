@@ -2,15 +2,15 @@
   'negativeInterestGroup': 'c123_neg_ig',
   'buyerAndSellerReportingId': 'campaign_123',
   'buyerReportingId': 'campaign_123',
-  'interestGroupName': 'contextualBid123',
-  'biddingLogicURL': 'https://cr.kungfoo.net/orrb/contextualbids/logic.js',
+  'interestGroupName': 'bid123',
+  'biddingLogicURL': 'https://cr.kungfoo.net/orrb/bids/logic.js',
   'ad': {
     'metadata': "[\"729966\",\"897723\",\"984409\"]"
   },
   'adCost': 2.99,
   'bid': 1.99,
   'bidCurrency': 'USD',
-  'render': 'https://cr.kungfoo.net/orrb/contextualbids/render.webp',
+  'render': 'https://cr.kungfoo.net/orrb/bids/render.webp',
   'allowComponentAuction': true,
   'modelingSignals': 2741
 }
