@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<button id="request-storage-access"></button>
 <button id="set-cookie">Set cookie (SameSite=None)</button>
 <button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
 <div>document.cookie is <span id="document-cookie"></span></div>
@@ -27,6 +28,12 @@ for (const [id, endpoint] of [
   document.getElementById(id).addEventListener(
       'click', () => fetch(`/cookies/v2/${endpoint}.php`).catch(console.error));
 }
+
+document.getElementById('request-storage-access').addEventListener('click', () => {
+  document.requestStorageAccess()
+      .then(() => console.log('Storage access granted for ' + location.origin))
+      .catch(console.error);
+});
 
 setInterval(() => {
   document.getElementById('document-cookie').textContent = document.cookie;
