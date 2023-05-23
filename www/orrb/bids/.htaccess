@@ -1,2 +1,2 @@
-AddType application/signed-exchange;v=b3 sxg
-AddType application/cert-chain+cbor cbor
+AddType application/signed-exchange;v=b3 .sxg
+AddType application/cert-chain+cbor .cbor
