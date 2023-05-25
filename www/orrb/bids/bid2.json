@@ -1,0 +1,16 @@
+{
+  "negativeInterestGroup": "c234_neg_ig",
+  "buyerAndSellerReportingId": "campaign_234",
+  "buyerReportingId": "campaign_234",
+  "interestGroupName": "bid234",
+  "biddingLogicURL": "https://cr.kungfoo.net/orrb/bids/logic.js",
+  "ad": {
+    "metadata": "[\"299667\",\"977238\",\"844099\"]"
+  },
+  "adCost": 2.89,
+  "bid": 1.89,
+  "bidCurrency": "USD",
+  "render": "https://cr.kungfoo.net/orrb/bids/render.webp",
+  "allowComponentAuction": true,
+  "modelingSignals": 2742
+}

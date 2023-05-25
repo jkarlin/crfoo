@@ -1,0 +1,16 @@
+{
+  "negativeInterestGroup": "c345_neg_ig",
+  "buyerAndSellerReportingId": "campaign_345",
+  "buyerReportingId": "campaign_345",
+  "interestGroupName": "bid345",
+  "biddingLogicURL": "https://cr.kungfoo.net/orrb/bids/logic.js",
+  "ad": {
+    "metadata": "[\"996672\",\"772389\",\"440998\"]"
+  },
+  "adCost": 2.79,
+  "bid": 1.79,
+  "bidCurrency": "USD",
+  "render": "https://cr.kungfoo.net/orrb/bids/render.webp",
+  "allowComponentAuction": true,
+  "modelingSignals": 2743
+}
