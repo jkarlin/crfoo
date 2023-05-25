@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Reference for injecting contextual bids into auction<title>
+    <script>
+      // Given a JSON object of base64 encoded bids, this returns an Array of
+      // contextual bid signed exchanges, each encoded in its own Uint8Array.
+      function getArrayOfSXGs(json) {
+        let sxgs = [];
+        json["base64_encoded_bids"].forEach((sxg) => {
+          sxgs.push(Uint8Array.from(atob(sxg), c => c.charCodeAt(0)));
+        });
+        return sxgs;
+      }
+
+      // Simulates the new Javascript API of the same name, which will inject
+      // each of the signed exchanges provided into the
+      // PrefetchedSignedExchangeCache, and returns an Array of strings,
+      // each a URL that can be used to later fetch the signed exchange.
+      async function injectSignedExchanges(signedExchanges) {
+        let urls = [];
+        signedExchanges.forEach((sxg) => {
+          urls.push(new TextDecoder().decode(sxg).split("\0")[2].slice(1));
+        });
+        return urls;
+      }
+
+      function fetchContextualBids() {
+        return new Promise((resolve, reject) => {
+          fetch("https://cr.kungfoo.net/orrb/bids/bids.json")
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error code, ${response.status}`);
+                }
+                return response.json();
+              })
+              .then((json) => {
+                return getArrayOfSXGs(json);
+              })
+              .then((arrayOfSXGs) => {
+                return injectSignedExchanges(arrayOfSXGs);
+              })
+              .then((urls) => {
+                resolve(urls);
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          });
+
+        function getPromiseAndDisplayResult() {
+          let promise = fetchContextualBids();
+          promise
+            .then((array_of_urls) => {
+              document.getElementById("result").innerText = JSON.stringify(array_of_urls, null, 2);
+            })
+            .catch((error) => {
+              document.getElementById("result").innerText = `Caught the following error: ${error}`;
+            });
+          }
+        }
+      </script>
+    </head>
+    <body>
+      <button onclick="getPromiseAndDisplayResult()">Fetch Contextual Bids</button>
+      <div id="result"></div>
+    </body>
+  </html>
