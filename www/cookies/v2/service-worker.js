@@ -41,7 +41,3 @@ self.addEventListener('message', event => {
     mostRecentChanges: mostRecentChanges ? JSON.stringify(mostRecentChanges) : '[]',
   });
 });
-
-self.addEventListener('fetch', event => {
-  console.log(`Fetch to url ${event.request.url} Cookie header:`, event.request.headers.get('cookie') || '');
-});
