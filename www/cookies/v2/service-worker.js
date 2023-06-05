@@ -43,5 +43,5 @@ self.addEventListener('message', event => {
 });
 
 self.addEventListener('fetch', event => {
-  console.log('Fetch event', event);
+  console.log(`Fetch to url ${event.request.url} Cookie header:`, event.request.headers.get('cookie') || '');
 });
