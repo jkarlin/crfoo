@@ -41,3 +41,7 @@ self.addEventListener('message', event => {
     mostRecentChanges: mostRecentChanges ? JSON.stringify(mostRecentChanges) : '[]',
   });
 });
+
+self.addEventListener('fetch', event => {
+  console.log('Fetch event', event);
+});
