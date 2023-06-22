@@ -1,3 +1,12 @@
-<a href="" attributionsrc="register-source.php">Click me</a>
+<a href="" attributionsrc="register-source.php" class="ignore-click">Click me</a>
 
 <img width=500 height=3000 src="https://cr.kungfoo.net/ads_interventions/social-engineering-ad1.png"></img>
+
+<script>
+        for (var i = 0; i < document.getElementsByClassName("ignore-click").length; i++) {
+            document.getElementsByClassName("ignore-click")[i].addEventListener('click', function (event) {
+                event.preventDefault();
+                return false;
+            });
+        }
+</script>
