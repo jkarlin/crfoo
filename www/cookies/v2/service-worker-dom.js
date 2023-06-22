@@ -11,36 +11,40 @@ const queryCountBtn = document.getElementById('service-worker-query-count');
 const countDisplay = document.getElementById('service-worker-count');
 const lastChange = document.getElementById('service-worker-change');
 
-setInterval(async () => {
-  const reg = await navigator.serviceWorker.getRegistration();
-  if (reg) {
-    statusDiv.textContent = 'Service worker registered';
-  } else {
-    statusDiv.textContent = 'No service worker';
-  }
-}, 100);
+if (navigator.serviceWorker) {
+  setInterval(async () => {
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (reg) {
+      statusDiv.textContent = 'Service worker registered';
+    } else {
+      statusDiv.textContent = 'No service worker';
+    }
+  }, 100);
 
-registerBtn.addEventListener('click', async () => {
-  await navigator.serviceWorker.register(
-      '/cookies/v2/service-worker.js', {scope: '/cookies/v2/'});
-  await navigator.serviceWorker.ready;
-});
+  registerBtn.addEventListener('click', async () => {
+    await navigator.serviceWorker.register(
+        '/cookies/v2/service-worker.js', {scope: '/cookies/v2/'});
+    await navigator.serviceWorker.ready;
+  });
 
-unregisterBtn.addEventListener('click', async () => {
-  const reg = await navigator.serviceWorker.getRegistration();
-  if (!reg) return;
-  await reg.unregister();
-});
+  unregisterBtn.addEventListener('click', async () => {
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (!reg) return;
+    await reg.unregister();
+  });
 
-let channel;
+  let channel;
 
-queryCountBtn.addEventListener('click', async () => {
-  channel = new MessageChannel();
-  await navigator.serviceWorker.ready;
-  navigator.serviceWorker.controller.postMessage({}, [channel.port2]);
+  queryCountBtn.addEventListener('click', async () => {
+    channel = new MessageChannel();
+    await navigator.serviceWorker.ready;
+    navigator.serviceWorker.controller.postMessage({}, [channel.port2]);
 
-  channel.port1.onmessage = event => {
-    countDisplay.textContent = event.data.cookieChangeEventCount;
-    lastChange.textContent = event.data.mostRecentChanges;
-  };
-});
+    channel.port1.onmessage = event => {
+      countDisplay.textContent = event.data.cookieChangeEventCount;
+      lastChange.textContent = event.data.mostRecentChanges;
+    };
+  });
+} else {
+  statusDiv.textContent = 'No service worker support';
+}
