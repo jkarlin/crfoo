@@ -2,46 +2,28 @@
 <script>
 window.sharedStorage.worklet.addModule("test10.js");
 
-function selectURL() {
-  window.sharedStorage.selectURL("test-operation", 
+function selectURLWithOperationName(operation_name) {
+  window.sharedStorage.selectURL(operation_name, 
                                  [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
-                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
-    document.getElementById("frame1").config = opaque_url;
-  });
-}
-
-function selectURLFail() {
-  window.sharedStorage.selectURL("test-operation-fail", 
-                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
-                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
-    document.getElementById("frame1").config = opaque_url;
-  });
-}
-  
-function selectURLFast() {
-  window.sharedStorage.selectURL("test-operation-fast", 
-                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
-                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
-    document.getElementById("frame1").config = opaque_url;
-  });
-}
-
-function selectURLFailFast() {
-  window.sharedStorage.selectURL("test-operation-fail-fast", 
-                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
-                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
-    document.getElementById("frame1").config = opaque_url;
+                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((target) => {
+    let fenced_frame = document.getElementById("frame1");
+    if (target instanceof FencedFrameConfig) {
+      fenced_frame.config = target;
+    } else {
+      const config = new FencedFrameConfig(target);
+      fenced_frame.config = config;
+    }
   });
 }
  
 </script>
-<button onclick="selectURL()">selectURL (worklet success) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName("test-operation")">selectURL (worklet success) and navigate fencedframe</button>
 <br>
-<button onclick="selectURLFail()">selectURL (worklet error) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName("test-operation-fail")">selectURL (worklet error) and navigate fencedframe</button>
 <br>
-<button onclick="selectURLFast()">selectURL (worklet success; finish quickly) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName("test-operation-fast")">selectURL (worklet success; finish quickly) and navigate fencedframe</button>
 <br>
-<button onclick="selectURLFailFast()">selectURL (worklet error; finish quickly) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName("test-operation-fail-fast")">selectURL (worklet error; finish quickly) and navigate fencedframe</button>
 <br>
 <fencedframe id="frame1" mode="opaque-ads" style="width: 100%"></fencedframe>
 <br>
