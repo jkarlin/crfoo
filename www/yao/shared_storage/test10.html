@@ -17,13 +17,13 @@ function selectURLWithOperationName(operation_name) {
 }
  
 </script>
-<button onclick="selectURLWithOperationName("test-operation")">selectURL (worklet success) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName('test-operation')">selectURL (worklet success; slow) and navigate fencedframe</button>
 <br>
-<button onclick="selectURLWithOperationName("test-operation-fail")">selectURL (worklet error) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName('test-operation-fail')">selectURL (worklet error; slow) and navigate fencedframe</button>
 <br>
-<button onclick="selectURLWithOperationName("test-operation-fast")">selectURL (worklet success; finish quickly) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName('test-operation-fast')">selectURL (worklet success; fast) and navigate fencedframe</button>
 <br>
-<button onclick="selectURLWithOperationName("test-operation-fail-fast")">selectURL (worklet error; finish quickly) and navigate fencedframe</button>
+<button onclick="selectURLWithOperationName('test-operation-fail-fast')">selectURL (worklet error; fast) and navigate fencedframe</button>
 <br>
 <fencedframe id="frame1" mode="opaque-ads" style="width: 100%"></fencedframe>
 <br>
