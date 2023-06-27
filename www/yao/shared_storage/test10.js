@@ -2,8 +2,8 @@ class TestOperation {
   async run(urls, data) {
     console.log("====== run started =====");
     console.log(urls);
-    for (let i = 0; i < 10000000; i++) {
-      if (i % 1000000 == 0) {
+    for (let i = 0; i < 100000000; i++) {
+      if (i % 10000000 == 0) {
         console.log(i);
       }
     }
@@ -17,8 +17,8 @@ class TestOperationFail {
   async run(urls, data) {
     console.log("====== run started =====");
     console.log(urls);
-    for (let i = 0; i < 10000000; i++) {
-      if (i % 1000000 == 0) {
+    for (let i = 0; i < 100000000; i++) {
+      if (i % 10000000 == 0) {
         console.log(i);
       }
     }
