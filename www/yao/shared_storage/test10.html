@@ -4,7 +4,7 @@ window.sharedStorage.worklet.addModule("test10.js");
 
 function selectURL() {
   window.sharedStorage.selectURL("test-operation", 
-                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
                                  {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
     document.getElementById("frame1").config = opaque_url;
   });
@@ -12,7 +12,7 @@ function selectURL() {
 
 function selectURLFail() {
   window.sharedStorage.selectURL("test-operation-fail", 
-                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
                                  {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
     document.getElementById("frame1").config = opaque_url;
   });
@@ -20,7 +20,7 @@ function selectURLFail() {
   
 function selectURLFast() {
   window.sharedStorage.selectURL("test-operation-fast", 
-                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
                                  {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
     document.getElementById("frame1").config = opaque_url;
   });
@@ -28,7 +28,7 @@ function selectURLFast() {
 
 function selectURLFailFast() {
   window.sharedStorage.selectURL("test-operation-fail-fast", 
-                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
                                  {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
     document.getElementById("frame1").config = opaque_url;
   });
