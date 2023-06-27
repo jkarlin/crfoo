@@ -3,35 +3,35 @@
 window.sharedStorage.worklet.addModule("test10.js");
 
 function selectURL() {
-  window.sharedStorage.selectURL("test-operation", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
-    console.log(opaque_url);
-    document.getElementById("frame1").src = opaque_url;
+  window.sharedStorage.selectURL("test-operation", 
+                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
+    document.getElementById("frame1").config = opaque_url;
   });
 }
 
 function selectURLFail() {
-  window.sharedStorage.selectURL("test-operation-fail", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
-    console.log(opaque_url);
-    document.getElementById("frame1").src = opaque_url;
+  window.sharedStorage.selectURL("test-operation-fail", 
+                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
+    document.getElementById("frame1").config = opaque_url;
   });
 }
   
 function selectURLFast() {
-  window.sharedStorage.selectURL("test-operation-fast", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
-    console.log(opaque_url);
-    document.getElementById("frame1").src = opaque_url;
+  window.sharedStorage.selectURL("test-operation-fast", 
+                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
+    document.getElementById("frame1").config = opaque_url;
   });
 }
 
 function selectURLFailFast() {
-  window.sharedStorage.selectURL("test-operation-fail-fast", ["https://www.google.com/", "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"], {data: {'name': 'experimentA'}}).then((opaque_url) => {
-    console.log(opaque_url);
-    document.getElementById("frame1").src = opaque_url;
+  window.sharedStorage.selectURL("test-operation-fail-fast", 
+                                 [[{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}]], 
+                                 {data: {'name': 'experimentA'}, keepAlive: true}).then((opaque_url) => {
+    document.getElementById("frame1").config = opaque_url;
   });
-}
-  
-function navigateToFail() {
-  document.getElementById("frame1").src = "urn:uuid:12345678987654321";
 }
  
 </script>
@@ -43,8 +43,6 @@ function navigateToFail() {
 <br>
 <button onclick="selectURLFailFast()">selectURL (worklet error; finish quickly) and navigate fencedframe</button>
 <br>
-<button onclick="navigateToFail()">navigate fencedframe to non-existent urn:uuid</button>
-<br>  
 <fencedframe id="frame1" mode="opaque-ads" style="width: 100%"></fencedframe>
 <br>
 </body>
