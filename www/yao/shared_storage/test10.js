@@ -1,12 +1,21 @@
+function wait(seconds) {
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + seconds * 1000) {
+     end = new Date().getTime();
+  }
+}
+
 class TestOperation {
   async run(urls, data) {
     console.log("====== run started =====");
     console.log(urls);
-    for (let i = 0; i < 10000000000; i++) {
-      if (i % 1000000000 == 0) {
-        console.log(i);
-      }
-    }
+    wait(5);
+    // for (let i = 0; i < 10000000000; i++) {
+    //   if (i % 1000000000 == 0) {
+    //     console.log(i);
+    //   }
+    // }
     console.log("====== run finished =====");
 
     return 1;
@@ -17,11 +26,12 @@ class TestOperationFail {
   async run(urls, data) {
     console.log("====== run started =====");
     console.log(urls);
-    for (let i = 0; i < 10000000000; i++) {
-      if (i % 1000000000 == 0) {
-        console.log(i);
-      }
-    }
+    wait(5);
+    // for (let i = 0; i < 10000000000; i++) {
+    //   if (i % 1000000000 == 0) {
+    //     console.log(i);
+    //   }
+    // }
     console.log("====== run finished =====");
   }
 }
