@@ -3,12 +3,15 @@ function wait(seconds) {
    var end = start;
    while(end < start + seconds * 1000) {
      end = new Date().getTime();
-  }
+   }
 }
 
 class TestOperation {
   async run(urls, data) {
     console.log("====== run started =====");
+
+    await sharedStorage.set('kkk', 'vvv'); 
+     
     console.log(urls);
     wait(5);
     // for (let i = 0; i < 10000000000; i++) {
