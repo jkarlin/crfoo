@@ -4,7 +4,7 @@ window.sharedStorage.worklet.addModule("test10.js");
 
 function selectURLWithOperationName(operation_name) {
   window.sharedStorage.selectURL(operation_name, 
-                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame.php"}], 
+                                 [{url: "https://www.google.com/"}, {url: "https://cr.kungfoo.net/yao/shared_storage/supports_fenced_frame2.php"}], 
                                  {data: {'name': 'experimentA'}, keepAlive: true}).then((target) => {
     let fenced_frame = document.getElementById("frame1");
     if (target instanceof FencedFrameConfig) {
