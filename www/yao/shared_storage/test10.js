@@ -3,8 +3,9 @@ class TestOperation {
     console.log("====== run started =====");
     console.log(urls);
     for (let i = 0; i < 10000000; i++) {
-      if (i % 10000000 == 0)
-      console.log(i);
+      if (i % 1000000 == 0) {
+        console.log(i);
+      }
     }
     console.log("====== run finished =====");
 
@@ -17,8 +18,9 @@ class TestOperationFail {
     console.log("====== run started =====");
     console.log(urls);
     for (let i = 0; i < 10000000; i++) {
-      if (i % 1000000 == 0)
-      console.log(i);
+      if (i % 1000000 == 0) {
+        console.log(i);
+      }
     }
     console.log("====== run finished =====");
   }
