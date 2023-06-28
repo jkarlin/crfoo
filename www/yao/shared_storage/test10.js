@@ -10,7 +10,7 @@ class TestOperation {
   async run(urls, data) {
     console.log("====== run started =====");
     privateAggregation.enableDebugMode();
-    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
+    privateAggregation.contributeToHistogram({bucket: 1n, value: 2});
      
     console.log(urls);
     wait(5);
@@ -29,7 +29,7 @@ class TestOperationFail {
   async run(urls, data) {
     console.log("====== run started =====");
     privateAggregation.enableDebugMode();
-    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
+    privateAggregation.contributeToHistogram({bucket: 1n, value: 2});
     console.log(urls);
     wait(5);
     // for (let i = 0; i < 10000000000; i++) {
@@ -45,7 +45,7 @@ class TestOperationFast {
   async run(urls, data) {
     console.log("====== run started =====");
     privateAggregation.enableDebugMode();
-    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
+    privateAggregation.contributeToHistogram({bucket: 1n, value: 2});
     console.log(urls);
     console.log("====== run finished =====");
     return 1;
@@ -56,7 +56,7 @@ class TestOperationFailFast {
   async run(urls, data) {
     console.log("====== run started =====");
     privateAggregation.enableDebugMode();
-    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
+    privateAggregation.contributeToHistogram({bucket: 1n, value: 2});
     console.log(urls);
     console.log("====== run finished =====");
   }
