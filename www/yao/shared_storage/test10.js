@@ -9,8 +9,8 @@ function wait(seconds) {
 class TestOperation {
   async run(urls, data) {
     console.log("====== run started =====");
-
-    await sharedStorage.set('kkk', 'vvv'); 
+    privateAggregation.enableDebugMode();
+    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
      
     console.log(urls);
     wait(5);
@@ -28,6 +28,8 @@ class TestOperation {
 class TestOperationFail {
   async run(urls, data) {
     console.log("====== run started =====");
+    privateAggregation.enableDebugMode();
+    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
     console.log(urls);
     wait(5);
     // for (let i = 0; i < 10000000000; i++) {
@@ -42,6 +44,8 @@ class TestOperationFail {
 class TestOperationFast {
   async run(urls, data) {
     console.log("====== run started =====");
+    privateAggregation.enableDebugMode();
+    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
     console.log(urls);
     console.log("====== run finished =====");
     return 1;
@@ -51,6 +55,8 @@ class TestOperationFast {
 class TestOperationFailFast {
   async run(urls, data) {
     console.log("====== run started =====");
+    privateAggregation.enableDebugMode();
+    privateAggregation.contributeToHistogram([{bucket: 1n, value: 2}]);
     console.log(urls);
     console.log("====== run finished =====");
   }
