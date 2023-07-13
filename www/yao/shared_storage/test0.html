@@ -1,5 +1,8 @@
 <body>
 <script>
-  window.sharedStorage.worklet.addModule("test0.js");
+  // window.sharedStorage.worklet.addModule("test0.js");
+  var code = console.log('Blob!!!')
+  var blob = new Blob([code], {type : 'text/javascript'});
+  window.sharedStorage.worklet.addModule(URL.createObjectURL(blob));
 </script>
 </body>
