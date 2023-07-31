@@ -1,0 +1,14 @@
+<body>
+<script>
+window.sharedStorage.worklet.addModule("test1.js");
+
+function runOperation(operation_name) {
+  window.sharedStorage.run(operation_name, {keepAlive: true});
+}
+ 
+</script>
+<button onclick="runOperation('test-set-operation')">Test sharedStorage.set() in worklet</button>
+<br>
+<button onclick="runOperation('test-get-operation')">Test sharedStorage.get() in worklet</button>
+<br>
+</body>
