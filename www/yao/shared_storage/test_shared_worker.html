@@ -1,0 +1,19 @@
+<body>
+<script>
+
+function sendMessageToSharedWorker() {
+  worker.port.postMessage(['message1']);
+}
+  
+var worker = new SharedWorker('shared_worker.js');
+worker.port.start();
+
+worker.port.addEventListener('message', message => {
+  console.log('Received message from shared worker: ', message);
+});
+</script>
+
+<button onclick="sendMessageToSharedWorker()">Send message to shared worker</button>
+<br>
+
+</body>
