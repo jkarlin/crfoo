@@ -1,3 +1,5 @@
+debugger;
+
 const allPorts = [];
 
 onconnect = function(e) {
