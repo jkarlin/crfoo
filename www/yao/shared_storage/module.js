@@ -9,6 +9,7 @@ class TestSetOperation {
 
 class TestGetOperation {
   async run(data) {
+    debugger;
     console.log("====== TestGetOperation started =====");
     let v = await sharedStorage.get('key0');
     console.log(v);
