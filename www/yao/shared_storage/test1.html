@@ -1,7 +1,13 @@
 <body>
 <script>
-window.sharedStorage.worklet.addModule("test1.js");
-
+function addModule() {
+  window.sharedStorage.worklet.addModule("module.js");
+}
+  
+function addModuleWithBreakpoint() {
+  window.sharedStorage.worklet.addModule("module_with_breakpoint.js");
+}
+  
 function runOperation(operation_name) {
   window.sharedStorage.run(operation_name, {keepAlive: true});
 }
@@ -11,6 +17,10 @@ function setInWindow() {
 }
  
 </script>
+<button onclick="addModule()">addModule</button>
+<br>
+<button onclick="addModuleWithBreakpoint()">addModule with breakpoint</button>
+<br>
 <button onclick="setInWindow()">Test sharedStorage.set() in window</button>
 <br>
 <button onclick="runOperation('test-set-operation')">Test sharedStorage.set() in worklet</button>
