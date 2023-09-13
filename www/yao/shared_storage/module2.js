@@ -1,3 +1,5 @@
+debugger;
+
 class TestSetOperation {
   async run(data) {
     console.log("====== TestSetOperation started =====");
