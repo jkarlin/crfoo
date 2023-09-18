@@ -13,11 +13,15 @@ const lastChange = document.getElementById('service-worker-change');
 
 if (navigator.serviceWorker) {
   setInterval(async () => {
-    const reg = await navigator.serviceWorker.getRegistration();
-    if (reg) {
-      statusDiv.textContent = 'Service worker registered';
-    } else {
-      statusDiv.textContent = 'No service worker';
+    try {
+      const reg = await navigator.serviceWorker.getRegistration();
+      if (reg) {
+        statusDiv.textContent = 'Service worker registered';
+      } else {
+        statusDiv.textContent = 'No service worker';
+      }
+    } catch (ok) {
+      statusDiv.textContent = 'Service workers not supported or blocked';
     }
   }, 100);
 
