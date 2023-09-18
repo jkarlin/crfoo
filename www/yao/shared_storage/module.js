@@ -1,4 +1,4 @@
-abc = 1;
+class {}
 
 class TestSetOperation {
   async run(data) {
