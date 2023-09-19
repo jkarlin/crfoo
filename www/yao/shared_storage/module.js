@@ -7,6 +7,8 @@ class TestSetOperation {
   }
 }
 
+let a = 0;
+
 class TestGetOperation {
   async run(data) {
     debugger;
@@ -16,8 +18,6 @@ class TestGetOperation {
     console.log("====== TestGetOperation finished =====");
   }
 }
-
-class
 
 register("test-set-operation", TestSetOperation);
 register("test-get-operation", TestGetOperation);
