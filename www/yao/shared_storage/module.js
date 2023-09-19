@@ -17,4 +17,5 @@ class TestGetOperation {
   }
 }
 
-
+register("test-set-operation", TestSetOperation);
+register("test-get-operation", TestGetOperation);
