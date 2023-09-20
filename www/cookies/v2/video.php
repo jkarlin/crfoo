@@ -1,6 +1,6 @@
 <?php
 
-$file = "./static/bananas.mp4"
+$file = "static/bananas.mp4"
 
 if (file_exists($file)) {
     header("Content-Description: File Transfer");
