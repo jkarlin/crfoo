@@ -7,7 +7,7 @@ try {
     $file = 'bananas.mp4';
     $cookie_name = 'unpartitioned';
     if (!isset($_COOKIE[$cookie_name])) {
-        http_status_code(401);
+        http_response_code(401);
         echo 'No cookie!\n';
     } elseif (file_exists($file)) {
         header('Content-Length: ' . filesize($file));
