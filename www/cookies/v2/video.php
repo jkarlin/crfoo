@@ -9,6 +9,8 @@ if (file_exists($file)) {
     header("Content-Security-Policy: sandbox");
     readfile($file);
     exit;  
+} else {
+    http_response_code(404);
 }
 
 ?>
