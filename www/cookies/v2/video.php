@@ -6,7 +6,7 @@ try {
         header('Content-Type: video/mp4');
         header('Content-Length: ' . filesize($file));
         header('Content-Security-Policy: sandbox allow-scripts');
-        header('Cache-Control: no-cache, must-revalidate')
+        header('Cache-Control: no-cache, must-revalidate');
         http_response_code(200);
         readfile($file);
     } else {
