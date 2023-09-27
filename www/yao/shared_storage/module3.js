@@ -4,7 +4,7 @@ function add(a, b) {
 
 let sum = 0;
 
-for (let i = 0; i < 1000; ++i) {
+for (let i = 0; i < 100000; ++i) {
   sum += add(i, i+1)
 }
 
