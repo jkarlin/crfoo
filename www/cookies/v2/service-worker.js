@@ -31,7 +31,7 @@ self.addEventListener('cookiechange', ev => {
 });
 
 self.addEventListener('message', async event => {
-  const [port] = event.ports[0];
+  const [port] = event.ports;
   if (event.data?.type == 'cookiechange') {
     port.postMessage({
       cookieChangeEventCount,
