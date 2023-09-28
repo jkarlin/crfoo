@@ -45,7 +45,6 @@ self.addEventListener('message', async event => {
       const {cookies} = await res.json();
       msg.ok = true;
       msg.cookies = cookies;
-      msg.count = count++;
     } catch (error) {
       msg.ok = false;
     } finally {
