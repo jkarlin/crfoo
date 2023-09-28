@@ -42,11 +42,25 @@ if (navigator.serviceWorker) {
   queryCountBtn.addEventListener('click', async () => {
     channel = new MessageChannel();
     await navigator.serviceWorker.ready;
-    navigator.serviceWorker.controller.postMessage({}, [channel.port2]);
+    navigator.serviceWorker.controller.postMessage({type: 'cookiechange'}, [channel.port2]);
 
     channel.port1.onmessage = event => {
       countDisplay.textContent = event.data.cookieChangeEventCount;
       lastChange.textContent = event.data.mostRecentChanges;
+    };
+  });
+
+  checkCookieBtn.addEventListener('click', async () => {
+    channel = new MessageChannel();
+    await navigator.serviceWorker.ready;
+    navigator.serviceWorker.controller.postMessage({type: 'testfetch'}, [channel.port2]);
+
+    channel.port1.onmessage = event => {
+      if (event.data?.ok) {
+        console.log(event.data);
+      } else {
+        console.log('Failed to check service worker cookies');
+      }
     };
   });
 } else {

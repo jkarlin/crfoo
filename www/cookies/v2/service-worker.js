@@ -30,14 +30,26 @@ self.addEventListener('cookiechange', ev => {
   mostRecentChanges = [...orEmptyArr(ev.changed), ...orEmptyArr(ev.deleted)];
 });
 
-let port;
-
-self.addEventListener('message', event => {
-  if (!port) {
-    port = event.ports[0];
+self.addEventListener('message', async event => {
+  const [port] = event.ports[0];
+  if (event.data?.type == 'cookiechange') {
+    port.postMessage({
+      cookieChangeEventCount,
+      mostRecentChanges: mostRecentChanges ? JSON.stringify(mostRecentChanges) : '[]',
+    });
   }
-  port.postMessage({
-    cookieChangeEventCount,
-    mostRecentChanges: mostRecentChanges ? JSON.stringify(mostRecentChanges) : '[]',
-  });
+  if (event.data?.type == 'testfetch') {
+    const msg = {};
+    try {
+      const res = await fetch('/cookies/v2/echo-cookies.php');
+      const {cookies} = await res.json();
+      msg.ok = true;
+      msg.cookies = cookies;
+      msg.count = count++;
+    } catch (error) {
+      msg.ok = false;
+    } finally {
+      port.postMessage(msg);
+    }
+  }
 });
