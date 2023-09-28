@@ -8,6 +8,7 @@ const statusDiv = document.getElementById('service-worker-status');
 const registerBtn = document.getElementById('register-service-worker');
 const unregisterBtn = document.getElementById('unregister-service-worker');
 const queryCountBtn = document.getElementById('service-worker-query-count');
+const checkCookieBtn = document.getElementById('check-service-worker-cookies');
 const countDisplay = document.getElementById('service-worker-count');
 const lastChange = document.getElementById('service-worker-change');
 
