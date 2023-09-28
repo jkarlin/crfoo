@@ -8,7 +8,7 @@ const checkCookieBtn = document.getElementById('check-shared-worker-cookies');
 let worker;
 
 addWorkerBtn.addEventListener('click', () => {
-  const worker = new SharedWorker('/cookies/v2/shared-worker.js');
+  worker = new SharedWorker('/cookies/v2/shared-worker.js');
   worker.port.onmessage = event => {
     console.log(event.data);
   };
