@@ -10,7 +10,11 @@ let worker;
 addWorkerBtn.addEventListener('click', () => {
   worker = new SharedWorker('/cookies/v2/shared-worker.js');
   worker.port.onmessage = event => {
-    console.log(event.data);
+    if (!event.data?.ok) {
+      console.log('Something went wrong!');
+    } else {
+      console.log(event.data);
+    }
   };
   worker.port.start();
 });

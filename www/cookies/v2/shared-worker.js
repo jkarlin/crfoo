@@ -10,7 +10,7 @@ self.onconnect = ev => {
     const msg = {};
     try {
       const res = await fetch('/cookies/v2/echo-cookies.php');
-      const cookies = await res.json();
+      const {cookies} = await res.json();
       msg.ok = true;
       msg.cookies = cookies;
     } catch (error) {
