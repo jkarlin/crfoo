@@ -2,6 +2,8 @@
  * Script executes in DOM and creates a SharedWorker.
  */
 
+{
+
 const addWorkerBtn = document.getElementById('add-shared-worker');
 const checkCookieBtn = document.getElementById('check-shared-worker-cookies');
 
@@ -26,3 +28,5 @@ checkCookieBtn.addEventListener('click', () => {
   }
   worker.port.postMessage({});
 });
+
+}

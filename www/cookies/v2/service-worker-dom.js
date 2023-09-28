@@ -3,7 +3,8 @@
  * Handles message passing with worker and updating DOM with results.
  */
 
-const root = document.getElementById('service-worker-root');
+{
+
 const statusDiv = document.getElementById('service-worker-status');
 const registerBtn = document.getElementById('register-service-worker');
 const unregisterBtn = document.getElementById('unregister-service-worker');
@@ -66,4 +67,6 @@ if (navigator.serviceWorker) {
   });
 } else {
   statusDiv.textContent = 'No service worker support';
+}
+
 }
