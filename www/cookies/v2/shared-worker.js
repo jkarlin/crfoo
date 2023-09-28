@@ -2,7 +2,9 @@
  * SharedWorker script executes in the worker.
  */
 
-importScripts('./worker-import-script.js')
+importScripts('./worker-import-script.js');
+
+let count = 0;
 
 self.onconnect = ev => {
   const [port] = ev.ports;
@@ -13,6 +15,7 @@ self.onconnect = ev => {
       const {cookies} = await res.json();
       msg.ok = true;
       msg.cookies = cookies;
+      msg.count = count++;
     } catch (error) {
       msg.ok = false;
     } finally {
