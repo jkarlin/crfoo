@@ -58,11 +58,7 @@ if (navigator.serviceWorker) {
     navigator.serviceWorker.controller.postMessage({type: 'testfetch'}, [channel.port2]);
 
     channel.port1.onmessage = event => {
-      if (event.data?.ok) {
-        console.log(event.data);
-      } else {
-        console.log('Failed to check service worker cookies');
-      }
+      console.log(event.data);
     };
   });
 } else {
