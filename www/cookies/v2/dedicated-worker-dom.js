@@ -5,7 +5,7 @@
 {
 
 const addWorkerBtn = document.getElementById('add-dedicated-worker');
-const checkCookieBtn = document.getElementById('check-shared-dedicated-cookies');
+const checkCookieBtn = document.getElementById('check-dedicated-worker-cookies');
 
 let worker;
 
