@@ -18,7 +18,6 @@ addWorkerBtn.addEventListener('click', () => {
       console.log(event.data);
     }
   };
-  worker.port.start();
 });
 
 checkCookieBtn.addEventListener('click', () => {
