@@ -1,0 +1,30 @@
+<javascript>
+
+if (navigator.userAgentData) {
+  console.log('navigator.userAgentData');
+  if (navigator.userAgentData.getHighEntropyValues) {
+    console.log('navigator.userAgentData.getHighEntropyValues');
+
+    navigator.userAgentData
+      .getHighEntropyValues(['fullVersionList'])
+      .then((ua) => {
+        for (const brandAndVersion of ua.fullVersionList) {
+          if (brandAndVersion.brand === 'Google Chrome') {
+            const versionList = brandAndVersion.version.split('.').map(Number);
+     const version = versionList[0];
+     const branch = versionList[2];
+     const patch = versionList[3];
+    
+            if ((version == 117 && branch == 5938 && patch >= 149) || (version == 118 && branch == 5993 && patch >= 32) || version >= 119) {
+              console.log(brandAndVersion.version);
+            }
+     break;
+          }
+        }
+      });
+    
+  }
+}
+  
+
+</javascript>
