@@ -7,8 +7,6 @@ class TestSetOperation {
   }
 }
 
-asdfgh;
-
 class TestGetOperation {
   async run(data) {
     debugger;
