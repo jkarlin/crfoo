@@ -4,10 +4,15 @@ function runOperation(operation_name, keep_alive) {
   window.sharedStorage.run(operation_name, {keepAlive: keep_alive});
 }
 
+function runExceptionOperation(operation_name, keep_alive) {
+  window.sharedStorage.run(operation_name, {keepAlive: true});
+}
+  
 window.sharedStorage.worklet.addModule("module.js");
 
 </script>
 <button onclick="runOperation('test-set-operation', true)">Run operation (keep-alive)</button>
 <button onclick="runOperation('test-set-operation', false)">Run operation (no keep-alive)</button>
+<button onclick="runExceptionOperation('test-exception-operation')">Run operation that throws an exception</button>
 <br>
 </body>
