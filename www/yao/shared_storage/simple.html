@@ -1,12 +1,13 @@
 <body>
 <script>
-function runOperation(operation_name) {
-  window.sharedStorage.run(operation_name, {keepAlive: true});
+function runOperation(operation_name, keep_alive) {
+  window.sharedStorage.run(operation_name, {keepAlive: keep_alive});
 }
 
 window.sharedStorage.worklet.addModule("module.js");
 
 </script>
-<button onclick="runOperation('test-set-operation')">Test sharedStorage.set() in worklet</button>
+<button onclick="runOperation('test-set-operation', true)">Run operation (keep-alive)</button>
+<button onclick="runOperation('test-set-operation', false)">Run operation (no keep-alive)</button>
 <br>
 </body>
