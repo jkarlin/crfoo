@@ -17,5 +17,16 @@ class TestGetOperation {
   }
 }
 
+class TestExceptionOperation {
+  async run(data) {
+    console.log("====== TestExceptionOperation started =====");
+    await sharedStorage.set('key0', 'value0');
+    abc;
+    console.log("====== TestExceptionOperation finished =====");
+    return 1;
+  }
+}
+
 register("test-set-operation", TestSetOperation);
 register("test-get-operation", TestGetOperation);
+register("test-exception-operation", TestExceptionOperation);
