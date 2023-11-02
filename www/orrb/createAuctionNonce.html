@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>createAuctionNonce test</title>
+<script>
+function displayNewAuctionNonce() {
+  document.getElementById("auction-nonce").innerText =
+      navigator.createAuctionNonce();
+}
+</script>
+<button onclick="createAndDisplayAuctionNonce()">New Auction Nonce</button>
+<div id="auction-nonce"></div>
