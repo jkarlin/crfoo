@@ -1,5 +1,7 @@
 <?php
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin', 'chrome-extension://bknnlbamapndemiekhkcnmdclnkijlhb');
+header('Access-Control-Allow-Credentials', 'true');
 $data = ['cookies' => getallheaders()['Cookie']];
 $json = json_encode($data);
 if ($json === false) {
