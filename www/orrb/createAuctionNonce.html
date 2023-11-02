@@ -2,9 +2,19 @@
 <meta charset="utf-8">
 <title>createAuctionNonce test</title>
 <script>
-function displayNewAuctionNonce() {
-  document.getElementById("auction-nonce").innerText =
-      navigator.createAuctionNonce();
+function createAndDisplayAuctionNonce() {
+  if (typeof navigator.createAuctionNonce === "function") {
+    try {
+      document.getElementById("auction-nonce").innerText =
+          navigator.createAuctionNonce();
+    } catch (e) {
+      document.getElementById("auction-nonce").innerText =
+          "Got an error while calling navigator.createAuctionNonce(): " + e;
+    }
+  } else {
+    document.getElementById("auction-nonce").innerText =
+      "navigator.createAuctionNonce() is not available on this browser.";
+  }
 }
 </script>
 <button onclick="createAndDisplayAuctionNonce()">New Auction Nonce</button>
