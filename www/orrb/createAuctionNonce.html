@@ -5,6 +5,15 @@
 function createAndDisplayAuctionNonce() {
   if (typeof navigator.createAuctionNonce === "function") {
     try {
+      navigator.createAuctionNonce()
+      .then((nonce) => {
+        document.getElementById("auction-nonce").innerText =
+            "Retrieved nonce: " + nonce;
+      })
+      .catch((error) => {
+        document.getElementById("auction-nonce").innerText =
+            "Error from retrived Promise: " + error;
+      });
       document.getElementById("auction-nonce").innerText =
           navigator.createAuctionNonce();
     } catch (e) {
