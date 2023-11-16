@@ -21,6 +21,8 @@
   <br>
   <button id="add-dedicated-worker">Add Worker</button>
   <button id="check-dedicated-worker-cookies">Check Worker cookies</button>
+  <br>
+  <button id="basic-auth">HTTP Basic Auth</button>
 </div>
 <script>
 
@@ -30,6 +32,7 @@ for (const [id, endpoint] of [
     ['clear-both', 'clear-site-data'],
     ['clear-cookies', 'clear-site-data-cookies'],
     ['clear-storage', 'clear-site-data-storage'],
+    ['basic-auth', 'basic-auth'],
 ]) {
   document.getElementById(id).addEventListener(
       'click', () => fetch(`/cookies/v2/${endpoint}.php`).catch(console.error));
