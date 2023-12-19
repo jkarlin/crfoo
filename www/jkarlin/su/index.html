@@ -9,7 +9,7 @@
   <script type=module>
     await sharedStorage.worklet.addModule("worklet.js");
     await sharedStorage.set("foo", "bar");
-    let out = await sharedStorage.selectUrl('foo', [{url: "https://a.com/foo"}, {url:"https://b.com/foo"}]);
+    let out = await sharedStorage.selectURL('foo', [{url: "https://a.com/foo"}, {url:"https://b.com/foo"}]);
     let frame = document.querySelector("#output");
     frame.src = out;
   </script>
