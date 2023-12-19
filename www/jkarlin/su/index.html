@@ -6,7 +6,7 @@
 <body>
 
   <iframe id=output></iframe>
-  <script>
+  <script type=module>
     await sharedStorage.worklet.addModule("worklet.js");
     await sharedStorage.set("foo", "bar");
     let out = await sharedStorage.selectUrl('foo', [{url: "https://a.com/foo"}, {url:"https://b.com/foo"}]);
