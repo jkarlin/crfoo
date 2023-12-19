@@ -1,0 +1,21 @@
+<html>
+<head>
+  
+</head>
+
+<body>
+
+  <iframe id=output></iframe>
+  <script>
+    await sharedStorage.worklet.addModule("worklet.js");
+    await sharedStorage.set("foo", "bar");
+    let out = await sharedStorage.selectUrl("https://a.com/foo", "https://b.com/foo");
+    let frame = document.querySelector("#output");
+    frame.src = out;
+  </script>
+
+
+  
+</body>
+  
+</html>
