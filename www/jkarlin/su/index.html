@@ -18,13 +18,14 @@
       frame.src = "create_worklet.html";
       document.body.appendChild(frame);     
 
-     setTimeout(window.gc, 50);
     }
 
     
-    for(let i = 0; i < 200; i++) {
+    for(let i = 0; i < 10; i++) {
      // createFrame();
-     setTimeout(createFrame, getRandomInt(1, 30000));
+     setTimeout(createFrame, getRandomInt(1, 10000));
+  
+     setTimeout(window.gc, 15000);
     }
   </script>
 </body>
