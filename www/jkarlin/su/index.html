@@ -17,8 +17,10 @@
       frame.src = "create_worklet.html";
       document.body.appendChild(frame);     
     }
+
+    
     for(let i = 0; i < 100; i++) {
-      setTimeout(createFrame, getRandomInt(1, 1000));
+      setTimeout(createFrame, getRandomInt(1, 30000));
     }
   </script>
 </body>
