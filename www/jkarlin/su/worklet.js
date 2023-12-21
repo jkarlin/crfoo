@@ -6,8 +6,8 @@ class SendReport {
     //}
 
     let val = await sharedStorage.get("foo");
-    let val = await sharedStorage.get("foo");    
-    let val = await sharedStorage.get("foo");    
+    let val2 = await sharedStorage.get("foo");    
+    let val3 = await sharedStorage.get("foo");    
     
     // The user agent will send the report to a default endpoint after a delay.
     privateAggregation.contributeToHistogram({
