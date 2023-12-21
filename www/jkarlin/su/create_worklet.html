@@ -3,8 +3,8 @@
   <script type=module>
     await sharedStorage.worklet.addModule("worklet.js");
     await sharedStorage.set("foo", "bar");
-    await sharedStorage.run('SendReport');
-    await sharedStorage.run('SendReport');
+    await sharedStorage.run('foo');
+    await sharedStorage.run('foo');
   </script>
 
   </html>
