@@ -10,6 +10,7 @@ class SendReport {
       bucket: BigInt(0),
       value: 128, // A predetermined fixed value; see Private Aggregation API explainer: Scaling values.
     });
+    console.log("Sent report");
   }
 }
 
