@@ -1,9 +1,9 @@
 class SendReport {
   async run(urls, data) {
-    let j = 0;
-    for(let i = 0; i < 10000000; i++) {
-      j += 1;
-    }
+    //let j = 0;
+    //for(let i = 0; i < 10000000; i++) {
+    //  j += 1;
+    //}
 
     // The user agent will send the report to a default endpoint after a delay.
     privateAggregation.contributeToHistogram({
