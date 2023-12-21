@@ -17,13 +17,14 @@
       let frame = document.createElement('iframe');
       frame.src = "create_worklet.html";
       document.body.appendChild(frame);     
+
+     setTimeout(window.gc, 50);
     }
 
     
     for(let i = 0; i < 200; i++) {
      // createFrame();
      setTimeout(createFrame, getRandomInt(1, 30000));
-     setTimeout(window.gc, getRandomInt(1, 30000));
     }
   </script>
 </body>
