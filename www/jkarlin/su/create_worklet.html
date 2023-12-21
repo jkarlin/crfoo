@@ -3,7 +3,7 @@
   <script type=module>
     await sharedStorage.worklet.addModule("worklet.js");
     await sharedStorage.set("foo", "bar");
-    await sharedStorage.run('foo', {'keepAlive': true);
+    await sharedStorage.run('foo', {'keepAlive': true});
     window.gc();
     await sharedStorage.run('foo');
     window.gc();
