@@ -6,10 +6,19 @@
 <body>
   <iframe src="create_worklet.html"></iframe>
   <script>   
-    for(let i = 0; i < 100; i++) {
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+    }
+    
+    function createFrame() {
       let frame = document.createElement('iframe');
       frame.src = "create_worklet.html";
       document.body.appendChild(frame);     
+    }
+    for(let i = 0; i < 100; i++) {
+      setTimeout(createFrame, getRandomInt(1, 1000));
     }
   </script>
 </body>
