@@ -6,7 +6,7 @@ class SendReport {
     }
 
     // The user agent will send the report to a default endpoint after a delay.
-    privateAggregation.sendHistogramReport({
+    privateAggregation.contributeToHistogram({
       bucket: 0,
       value: 128, // A predetermined fixed value; see Private Aggregation API explainer: Scaling values.
     });
