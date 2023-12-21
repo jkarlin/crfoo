@@ -16,6 +16,48 @@
   </script>
 
 
+  <iframe id=output2></iframe>
+  <script type=module>
+    await sharedStorage.worklet.addModule("worklet.js");
+    await sharedStorage.set("foo", "bar");
+    let out = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);
+    let frame = document.querySelector("#output2");
+    frame.src = out;
+    let out2 = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);    
+  </script>
+
+    <iframe id=output3></iframe>
+  <script type=module>
+    await sharedStorage.worklet.addModule("worklet.js");
+    await sharedStorage.set("foo", "bar");
+    let out = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);
+    let frame = document.querySelector("#output3");
+    frame.src = out;
+    let out2 = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);    
+  </script>
+
+
+    <iframe id=output4></iframe>
+  <script type=module>
+    await sharedStorage.worklet.addModule("worklet.js");
+    await sharedStorage.set("foo", "bar");
+    let out = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);
+    let frame = document.querySelector("#output4");
+    frame.src = out;
+    let out2 = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);    
+  </script>
+
+
+    <iframe id=output5></iframe>
+  <script type=module>
+    await sharedStorage.worklet.addModule("worklet.js");
+    await sharedStorage.set("foo", "bar");
+    let out = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);
+    let frame = document.querySelector("#output5");
+    frame.src = out;
+    let out2 = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);    
+  </script>
+  
   
 </body>
   
