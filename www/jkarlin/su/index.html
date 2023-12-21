@@ -4,7 +4,6 @@
 </head>
 
 <body>
-  <iframe src="create_worklet.html"></iframe>
   <script>   
     function getRandomInt(min, max) {
       min = Math.ceil(min);
@@ -19,7 +18,7 @@
     }
 
     
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < 100; i++) {
       setTimeout(createFrame, getRandomInt(1, 30000));
     }
   </script>
