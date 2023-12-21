@@ -12,6 +12,7 @@
     let out = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);
     let frame = document.querySelector("#output");
     frame.src = out;
+    let out2 = await sharedStorage.selectURL('foo', [{url: "https://cr.kungfoo.net/jkarlin/su/a.html"}, {url:"https://cr.kungfoo.net/jkarlin/su/b.html"}]);    
   </script>
 
 
