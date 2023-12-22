@@ -2,14 +2,17 @@
   <iframe id=output></iframe>
   <script type=module>
 
-    window.addEventListener("message", async (event) {
-    await sharedStorage.worklet.addModule("worklet.js");
-    await sharedStorage.set("foo", "bar");
-    await sharedStorage.run('foo');
-//    window.gc();
-    await sharedStorage.run('foo');
-  //  window.gc();      
-    });
+    async function run() {
+      await sharedStorage.worklet.addModule("worklet.js");
+      await sharedStorage.set("foo", "bar");
+      await sharedStorage.run('foo');
+  //    window.gc();
+      await sharedStorage.run('foo');
+    //  window.gc();      
+
+    }
+    
+    window.addEventListener("message", () => run());
   </script>
 
   </html>
