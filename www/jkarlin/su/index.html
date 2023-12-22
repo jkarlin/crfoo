@@ -20,13 +20,23 @@
 
     }
 
-    
+
+    let frames = [];
     for(let i = 0; i < 50; i++) {
       createFrame();
-     //setTimeout(createFrame, getRandomInt(1, 30000));
-  
+      let frame = document.createElement('iframe');
+      frame.src = 'wait_worklet.html';
+      document.body.appendChild(frame);
+      frames.push(frame);
+     //setTimeout(createFrame, getRandomInt(1, 30000)); 
      //setTimeout(window.gc, getRandomInt(1, 50000));
     }
+
+    setTimeout(function () {
+      for(frame in frames) {
+        frame.contentWindow.postMessage('start');
+      }
+    }, 5000);
   </script>
 </body>
   
