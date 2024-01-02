@@ -4,6 +4,7 @@
 
     async function run() {
       await sharedStorage.worklet.addModule("worklet.js");
+      await sharedStorage.worklet.addModule("worklet.js");
       await sharedStorage.set("foo", "bar");
       await sharedStorage.run('foo');
   //    window.gc();
