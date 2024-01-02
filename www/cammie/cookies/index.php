@@ -22,6 +22,6 @@ document.getElementById('clear-cookies').addEventListener('click', () => {
 
 setInterval(() => {
   document.getElementById('document-cookie').textContent = document.cookie;
-}, 100);
+}, 30);
 
 </script>
