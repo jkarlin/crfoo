@@ -17,7 +17,7 @@ document.getElementById('set-cookie').addEventListener('click', () =>
 document.getElementById('set-cookie-from-cache').addEventListener('click', () => 
   fetch('set-cookie.php', {cache: 'only-if-cached', mode: 'same-origin'}).catch(console.error));
 document.getElementById('clear-cookies').addEventListener('click', () => {
-  fetch('clear-site-data.php').catch(console.error);
+  fetch('clear-site-data-cookies.php').catch(console.error);
 });
 document.getElementById('clear-cache').addEventListener('click', () => {
   fetch('clear-site-data-cache.php').catch(console.error);
