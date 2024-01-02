@@ -13,11 +13,11 @@ header("Access-Control-Allow-Origin: *");
 <script>
   
 document.getElementById('set-cookie').addEventListener('click', () => 
-  fetch(`cammie/cookies/set-cookie.php`).catch(console.error));
+  fetch(`set-cookie.php`).catch(console.error));
 document.getElementById('set-cookie-from-cache').addEventListener('click', () => 
-  fetch(`cammie/cookies/set-cookie.php`, {cache: 'only-if-cached'}).catch(console.error));
+  fetch(`set-cookie.php`, {cache: 'only-if-cached'}).catch(console.error));
 document.getElementById('clear-cookies').addEventListener('click', () => {
-  fetch('cammie/cookies/clear-site-data.php').catch(console.error);
+  fetch('clear-site-data.php').catch(console.error);
 });
 
 setInterval(() => {
