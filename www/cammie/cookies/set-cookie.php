@@ -1,4 +1,5 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-header('Set-Cookie: abc=foobar; SameSite=None; Max-Age=100');
+header('Cache-Control: max-age=3600');
+header('Set-Cookie: abc=foobar; SameSite=None; Max-Age=120');
 ?>
