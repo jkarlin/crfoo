@@ -2,7 +2,7 @@ class TestSetOperation {
   async run(data) {
     console.log("====== TestSetOperation started =====");
     let a = await sharedStorage.set('key0', 'value0');
-    let b = await sharedStorage.set('key0', 'value0');
+    let b = await sharedStorage.append('key0', 'value0');
     console.log("====== TestSetOperation finished =====", a);
     return 1;
   }
