@@ -1,8 +1,8 @@
 <html>
   <iframe id=output></iframe>
   <script type=module>
-    await sharedStorage.worklet.addModule("worklet.js");
-    await sharedStorage.set("foo", "bar");
+    sharedStorage.worklet.addModule("worklet.js");
+    sharedStorage.set("foo", "bar");
     for(let i = 0; i < 100; i++) {
       sharedStorage.run('foo');
     }
