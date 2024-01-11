@@ -3,7 +3,7 @@
   <script type=module>
     await sharedStorage.worklet.addModule("worklet.js");
     await sharedStorage.set("foo", "bar");
-    for(i = 0; i < 100; i++) {
+    for(let i = 0; i < 100; i++) {
       sharedStorage.run('foo');
     }
   </script>
