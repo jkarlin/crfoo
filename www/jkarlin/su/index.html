@@ -17,17 +17,17 @@
       let frame = document.createElement('iframe');
       frame.src = "create_worklet.html";
       document.body.appendChild(frame);     
-
+      retirm frame;
     }
 
 
     let frames = [];
-    for(let i = 0; i < 50; i++) {
-      createFrame();
-      let frame = document.createElement('iframe');
-      frame.src = 'wait_worklet.html';
-      document.body.appendChild(frame);
-      frames.push(frame);
+    for(let i = 0; i < 5; i++) {
+      let frame = createFrame();
+      //let frame = document.createElement('iframe');
+      //frame.src = 'wait_worklet.html';
+      //document.body.appendChild(frame);
+      //frames.push(frame);
      //setTimeout(createFrame, getRandomInt(1, 30000)); 
      //setTimeout(window.gc, getRandomInt(1, 50000));
     }
