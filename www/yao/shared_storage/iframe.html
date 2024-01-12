@@ -1,5 +1,8 @@
 <body>
 <script>
-sharedStorage.worklet.addModule('module.js').then((val) => { sharedStorage.run("abc") });
+sharedStorage.worklet.addModule('module.js').then((val) => { 
+  sharedStorage.run("abc");
+  location = 'https://cr.kungfoo.net/';
+});
 </script>
 </body>
