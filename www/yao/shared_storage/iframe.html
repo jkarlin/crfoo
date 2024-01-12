@@ -1,6 +1,5 @@
 <body>
 <script>
-sharedStorage.worklet.addModule('module.js');
-sharedStorage.run("test-set-operation");
+sharedStorage.worklet.addModule('module.js').then((val) => sharedStorage.run("abc"););
 </script>
 </body>
