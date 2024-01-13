@@ -1,3 +1,28 @@
+function wait(seconds) {
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + seconds * 1000) {
+     end = new Date().getTime();
+   }
+}
+
+class TestFastOperation {
+  async run(data) {
+  }
+}
+
+class TestSlowOperation {
+  async run(data) {
+    wait(1);
+  }
+}
+
+class TestVerySlowOperation {
+  async run(data) {
+    wait(5);
+  }
+}
+
 class TestSetOperation {
   async run(data) {
     console.log("====== TestSetOperation started =====");
@@ -31,3 +56,6 @@ class TestExceptionOperation {
 register("test-set-operation", TestSetOperation);
 register("test-get-operation", TestGetOperation);
 register("test-exception-operation", TestExceptionOperation);
+register("test-fast-operation", TestFastOperation);
+register("test-slow-operation", TestSlowOperation);
+register("test-very-slow-operation", TestVerySlowOperation);
