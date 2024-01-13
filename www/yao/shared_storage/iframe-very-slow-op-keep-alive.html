@@ -1,0 +1,7 @@
+<body>
+<script>
+sharedStorage.worklet.addModule('module.js').then((val) => { 
+  sharedStorage.run('test-very-slow-operation', {keepAlive: true});
+});
+</script>
+</body>
