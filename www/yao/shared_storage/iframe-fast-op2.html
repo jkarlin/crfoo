@@ -1,0 +1,8 @@
+<body>
+<script>
+sharedStorage.worklet.addModule('module.js').then((val) => { 
+  sharedStorage.run('test-fast-operation');
+  sharedStorage.run('test-fast-operation');
+});
+</script>
+</body>
