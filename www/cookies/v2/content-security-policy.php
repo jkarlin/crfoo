@@ -43,11 +43,15 @@ for (const [id, endpoint] of [
     ['same-site-cookie', 'samesitelax'],
 ]) {
   document.getElementById(id).addEventListener(
-      'click', () => fetch(`/cookies/v2/${endpoint}.php`).catch(console.error));
+      'click', () => fetch(`/cookies/v2/${endpoint}.php`, {credentials: 'include'}).catch(console.error));
 }
 
-setInterval(() => {
-  document.getElementById('document-cookie').textContent = document.cookie;
+const id = setInterval(() => {
+  try {
+    document.getElementById('document-cookie').textContent = document.cookie;
+  } catch (err) {
+    clearInterval(id);
+  }
 }, 100);
 
 </script>
