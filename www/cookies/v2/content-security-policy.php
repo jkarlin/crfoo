@@ -35,7 +35,7 @@ header('Content-Security-Policy: sandbox allow-scripts');
 
 for (const [id, endpoint] of [
     ['set-cookie', 'samesitenone'],
-    ['set-partitioned-cookie', 'partitioned-1p'],
+    ['set-partitioned-cookie', 'partitioned-3p'],
     ['clear-both', 'clear-site-data'],
     ['clear-cookies', 'clear-site-data-cookies'],
     ['clear-storage', 'clear-site-data-storage'],
