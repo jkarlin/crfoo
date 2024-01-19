@@ -13,6 +13,6 @@ function fakeRequest(url) {
 
 self.addEventListener('fetch', function(e) {
   if (e.request.url.endsWith("?sw")) {
-    e.respondWith(fakeRequest("../social-engineering-ad1.png?from_sw"));
+    e.respondWith(fakeRequest("../social-engineering-ad1.png?from_sw&/adservices."));
   }
 });
