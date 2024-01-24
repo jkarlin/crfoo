@@ -1,7 +1,9 @@
 <body>
 <script>
-sharedStorage.worklet.addModule('module.js').then((val) => { 
-  sharedStorage.run('test-fast-operation', {keepAlive: true});
+sharedStorage.worklet.addModule('module.js').then((val) => {
+  setInterval(() => {
+    sharedStorage.run('test-fast-operation', {keepAlive: true});
+  }, 500);
 });
 </script>
 </body>
