@@ -18,6 +18,8 @@ class TestSlowOperation {
     const a = 0;
     const b = a + 1;
     wait(1);
+    const c = 0;
+    const d = c + 1;
   }
 }
 
@@ -26,6 +28,8 @@ class TestVerySlowOperation {
     const a = 0;
     const b = a + 1;
     wait(5);
+    const c = 0;
+    const d = c + 1;
   }
 }
 
