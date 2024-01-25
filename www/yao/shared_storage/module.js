@@ -8,18 +8,22 @@ function wait(seconds) {
 
 class TestFastOperation {
   async run(data) {
+     console.log("====== TestFastOperation started =====");
      const a = 0;
      const b = a + 1;
+     console.log("====== TestFastOperation finished =====");
   }
 }
 
 class TestSlowOperation {
   async run(data) {
+    console.log("====== TestSlowOperation started =====");
     const a = 0;
     const b = a + 1;
     wait(1);
     const c = 0;
     const d = c + 1;
+    console.log("====== TestSlowOperation finished =====");
   }
 }
 
