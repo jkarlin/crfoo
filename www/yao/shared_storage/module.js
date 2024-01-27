@@ -18,11 +18,9 @@ class TestFastOperation {
 class TestSlowOperation {
   async run(data) {
     console.log("====== TestSlowOperation started =====");
-    const a = 0;
-    const b = a + 1;
-    wait(1);
-    const c = 0;
-    const d = c + 1;
+    for (let i = 0; i < 100; i++) {
+      await sharedStorage.set(new Date().getTime(), new Date().getTime())
+    }
     console.log("====== TestSlowOperation finished =====");
   }
 }
