@@ -27,7 +27,7 @@ header('Cross-Origin-Embedder-Policy: require-corp');
     <button onclick="createWorklet('https://ss-create-worklet.glitch.me/module.js')">createWorklet() cross-origin</button><br>
     <button onclick="appendIframe('https://ss-create-worklet.glitch.me/iframe.html')">appendChild() cross-origin</button><br>
     
-    <button onclick="registerServiceWorker('https://cr.kungfoo.net/yao/shared_storage/sw.js')">registerServiceWorker()</button><br>
+    <button onclick="registerServiceWorker('https://cr.kungfoo.net/yao/shared_storage/sw.php')">registerServiceWorker()</button><br>
 
   </body>
 </html>
