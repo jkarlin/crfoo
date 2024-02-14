@@ -1,6 +1,5 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-header('Cross-Origin-Embedder-Policy: require-corp');
 header('Cross-Origin-Opener-Policy: same-origin');
 ?>
 <!DOCTYPE html>
