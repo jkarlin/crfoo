@@ -20,7 +20,7 @@ header('Cross-Origin-Opener-Policy: same-origin');
     <button onclick="createWorklet('https://cr.kungfoo.net/yao/shared_storage/module.js')">createWorklet() same-origin</button><br>
     <button onclick="appendIframe('https://cr.kungfoo.net/yao/shared_storage/iframe.html')">appendChild() same-origin</button><br>
     <button onclick="createWorklet('https://ss-create-worklet.glitch.me/module.js')">createWorklet() cross-origin</button><br>
-    <button onclick="appendIframe('https://ss-create-worklet.glitch.me/empty.html')">appendChild() cross-origin</button><br>
+    <button onclick="appendIframe('https://ss-create-worklet.glitch.me/iframe.html')">appendChild() cross-origin</button><br>
 
   </body>
 </html>
