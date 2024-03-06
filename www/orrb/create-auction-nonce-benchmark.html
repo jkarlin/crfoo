@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nonce Benchmark</title>
+</head>
+<body>
+  <div id="count">Waiting to Start</div>
+  <div id="message">Waiting to Start</div>
+  <script>
+    let counter = 0;
+
+    function busyLoop() {
+      for (let j = 0; j < 100000; ++j) {
+        document.getElementById('count').innerHTML = ++counter;
+      }
+      setTimeout(busyLoop, 1);
+    }
+
+    function manyBusyLoops() {
+      for (let i = 0; i < 20; ++i) {
+        setTimeout(busyLoop, 1);
+      }
+    }
+
+    async function timeNonce() {
+      document.getElementById('message').innerHTML = "Running ...";
+      var startTime = (new Date()).getTime();
+      await navigator.createAuctionNonce();
+      document.getElementById('message').innerHTML = new Date().getTime() - startTime;
+    }
+
+    async function runTest() {
+      manyBusyLoops();
+      setTimeout(timeNonce, 1000);
+    }
+    runTest();
+  </script>
+</body>
+</html>
+
