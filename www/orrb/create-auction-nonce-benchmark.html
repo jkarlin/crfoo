@@ -2,16 +2,63 @@
 <html>
 <head>
 <title>Nonce Benchmark</title>
+<style>
+body {
+  background-color: #555;
+}
+.flex-container {
+  display: flex; /* Activate Flexbox */
+  flex-direction: column;
+  background-color: #222;
+
+  /* Optional Styling */
+  width: 500px;      /* Adjust width as needed */
+  margin: 20px auto; /* Centers the container  */
+  padding: 20px;
+}
+
+.flex-container p, .flex-container pre {
+  color: #f0f0f0; /* Light text for contrast */
+  margin-bottom: 10px;
+}
+</style>
+
 </head>
 <body>
-  <div id="count">Waiting to Start</div>
-  <div id="message">Waiting to Start</div>
+  <div class="flex-container">
+  <p id="explanation">
+      This benchmark measures the time it takes for the Promise
+      returned by one call to navigator.createAuctionNonce()
+      to be resolved. Effectively, this just measures the time
+      it takes for the following line of code to run:
+  </p>
+  <pre>await navigator.createAuctionNonce();</pre>
+  <p>
+
+      Note that this benchmark also starts 20 setTimeout loops
+      each firing every millisecond, so as to saturate the event
+      loop. If the Promise returned by navigator.createAuctionNonce()
+      is immediately fulfilled, it should be scheduled as a
+      microtask and executed in the same turn of the event loop
+      as the function that called it, and the time should be close
+      to zero. If not, it will be scheduled at the end of the
+      event loop, and the time may be much higher.
+  </p>
+  <p id="count">--</p>
+  <p id="message">Waiting to Start</p>
   <script>
     let counter = 0;
+    let running = true;
 
     function busyLoop() {
-      for (let j = 0; j < 100000; ++j) {
-        document.getElementById('count').innerHTML = ++counter;
+      if (!running) {
+        return;
+      }
+      for (let j = 0; j < 4*20000 + 1; ++j) {
+        document.getElementById('count').innerHTML =
+            counter % 4 == 0 ? "\\" : counter % 4 == 1 ? "|" :
+            counter % 4 == 2 ? "/" : "--";
+        counter++;
       }
       setTimeout(busyLoop, 1);
     }
@@ -24,17 +71,19 @@
 
     async function timeNonce() {
       document.getElementById('message').innerHTML = "Running ...";
-      var startTime = (new Date()).getTime();
-      await navigator.createAuctionNonce();
-      document.getElementById('message').innerHTML = new Date().getTime() - startTime;
+      var startTime = new Date().getTime();
+      nonce = await navigator.createAuctionNonce();
+      var endTime = new Date().getTime();
+      var latency = endTime - startTime;
+      console.log(`Got auction nonce, ${nonce}, in ${latency} ms.`);
+      document.getElementById('message').innerHTML =
+          `Time to resolve: ${latency} ms`;
+      running = false;
+      document.getElementById('count').innerHTML = "--";
     }
 
-    async function runTest() {
-      manyBusyLoops();
-      setTimeout(timeNonce, 1000);
-    }
-    runTest();
+    manyBusyLoops();
+    setTimeout(timeNonce, 1000);
   </script>
 </body>
 </html>
-
