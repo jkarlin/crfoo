@@ -1,4 +1,5 @@
 <?php
 Header('Content-Type: application/javascript');
-$path = 'module.js';
-readfile($path);
+Header("HTTP/1.0 304 Not Modified");
+exit();
+
