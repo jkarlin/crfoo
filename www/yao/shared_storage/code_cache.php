@@ -1,5 +1,4 @@
 <?php
-Header('Content-Type: application/javascript');
-Header("HTTP/1.0 304 Not Modified");
-exit();
-
+header('Content-Type: application/javascript');
+header("Cache-Control: max-age=2592000");
+?>
