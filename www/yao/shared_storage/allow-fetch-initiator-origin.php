@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: https://cors-fetch-in-sandbox-iframe.glitch.me");
+header("Access-Control-Allow-Origin: null");
 ?>
 <body>
 123456
