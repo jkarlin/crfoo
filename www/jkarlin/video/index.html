@@ -1,0 +1,17 @@
+<html>
+  <button id='button' type="button">Load Frame</button>
+  <iframe id='frame'></iframe>
+  <script>
+
+    let button = document.getElementById("button");
+    button.addEventListener('click', loadWorklet());
+
+      function loadWorklet() {
+      await sharedStorage.addModule("worklet.js");
+      const urn = sharedStorage.selectURL("select", [{url: "https://cr2.kungfoo.net/video.html"}]);
+      let frame = document.getElementById('frame');
+      frame.url = urn;    
+    }
+
+  </script>
+</html>
