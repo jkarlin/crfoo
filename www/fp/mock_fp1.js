@@ -4,5 +4,5 @@
   const y = history.length;
   const z = navigator.doNotTrack;
   const fp = x + y + z;
-  console.log('FP is', fp);
+  document.getElementById('fp1').textContent = 'FP#1 is ' + fp;
 })();
