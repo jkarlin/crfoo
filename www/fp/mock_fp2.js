@@ -1,4 +1,5 @@
 // Mock FP script.
+eval(`
 (() => {
 const x = navigator.deviceMemory;
   const y = navigator.languages;
@@ -6,3 +7,4 @@ const x = navigator.deviceMemory;
   const fp = x + y + z;
   document.getElementById('fp2').textContent = 'FP#2 is ' + fp;
 })();
+`);
