@@ -1,4 +1,6 @@
 // Mock FP script.
+(() => {
+
 let fp;
 if (URLSearchParams(location.search).get('a') == '0') {
   const x = navigator.language;
@@ -12,3 +14,5 @@ if (URLSearchParams(location.search).get('a') == '0') {
   fp = x + y + z;
 }
 console.log('FP is', fp);
+
+})();
