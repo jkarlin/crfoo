@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bounce Chain</title>
+  </head>
+  <body>
+    <p>This one goes through a chain of 301 and 302 redirects. Some try to set ETag headers.</p>
+    <p>There's definitely some caching going on, but I can't discern the pattern. But no ETags seem to be sent in the request.</p>
+    <p>Is the browser just transparently caching and skipping requests? From the server logs that seems to be the case.</p>
+    <br />
+    <p><a href="/chain_bounce_a.php">Try again.</a></p>
+    <p><a href="/">Back to home page.</a></p>
+  </body>
+</html>

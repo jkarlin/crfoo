@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>More AJAX Tracking</title>
+  </head>
+  <body>
+    <p>Look! This is a different page. And the ETag below should match what you just saw in the previous page!</p>
+    <p id="replaceme">This paragraph should be replaced by an ETag! If you're reading this, something's wrong.</p>
+    <br />
+    <p><a href="/client_ajax_tracking.html">Try again.</a></p>
+    <p><a href="/">Back to home page.</a></p>
+    <script>
+      fetch('/ajax.php')
+        .then(res => res.text())
+        .then(body => {
+          document.getElementById("replaceme").innerHTML = body;
+        });
+    </script>
+  </body>
+</html>
