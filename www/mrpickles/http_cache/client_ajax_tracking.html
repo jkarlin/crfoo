@@ -7,9 +7,9 @@
     <p>AJAX requests should also make use of ETags. So with some client-side finagling, we can use create and preserve ETags.</p>
     <p id="replaceme">This paragraph should be replaced by an ETag! If you're reading this, something's wrong.</p>
     <p>The special part here is that multiple different pages will be able to make use of the same ETag.</p>
-    <p><a href="/client_ajax_tracking_other.html">Visit this other page to see an example.</a></p>
+    <p><a href="client_ajax_tracking_other.html">Visit this other page to see an example.</a></p>
     <br />
-    <p><a href="/">Back to home page.</a></p>
+    <p><a href="index.html">Back to home page.</a></p>
     <script>
       fetch('/ajax.php')
         .then(res => res.text())

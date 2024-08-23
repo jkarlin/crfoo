@@ -14,7 +14,7 @@ header("ETag: $etag");
     <p>Hence it will always have a cache hit (within the TTL), even if the file changes.</p>
     <p>The ETag is <code><?php echo $etag; ?></code>.</p>
     <br />
-    <p><a href="/etag_static.php">Try again.</a></p>
-    <p><a href="/">Back to home page.</a></p>
+    <p><a href="etag_static.php">Try again.</a></p>
+    <p><a href="index.html">Back to home page.</a></p>
   </body>
 </html>

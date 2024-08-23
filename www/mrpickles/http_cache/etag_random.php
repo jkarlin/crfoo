@@ -14,7 +14,7 @@ header("ETag: $etag");
     <p>It will always have a cache hit within the TTL. And then it will get a new ETag.</p>
     <p>The ETag is <code><?php echo $etag; ?></code>.</p>
     <br />
-    <p><a href="/etag_random.php">Try again.</a></p>
-    <p><a href="/">Back to home page.</a></p>
+    <p><a href="etag_random.php">Try again.</a></p>
+    <p><a href="index.html">Back to home page.</a></p>
   </body>
 </html>

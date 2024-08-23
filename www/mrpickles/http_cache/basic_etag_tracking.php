@@ -26,7 +26,7 @@ header("ETag: $etag");
     <p>This page was generated at <code><?php echo $render_time; ?></code>.</p>
     <p>If you inspect the headers, you'll notice that caching is actually disabled. But the ETag gets passed anyway!</p>
     <br />
-    <p><a href="/basic_etag_tracking.php">Try again.</a></p>
-    <p><a href="/">Back to home page.</a></p>
+    <p><a href="basic_etag_tracking.php">Try again.</a></p>
+    <p><a href="index.html">Back to home page.</a></p>
   </body>
 </html>
