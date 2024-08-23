@@ -11,7 +11,7 @@
     <br />
     <p><a href="index.html">Back to home page.</a></p>
     <script>
-      fetch('/ajax.php')
+      fetch('ajax.php')
         .then(res => res.text())
         .then(body => {
           document.getElementById("replaceme").innerHTML = body;
