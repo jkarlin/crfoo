@@ -7,6 +7,7 @@ if (!empty($preexisting_etag)) {
   $res_code = 304;
   header("Location: res_304_with_200_first.html", TRUE, $res_code);
 }
+header("Cache-Control: no-cache");
 header("ETag: $etag");
 ?>
 <!DOCTYPE html>

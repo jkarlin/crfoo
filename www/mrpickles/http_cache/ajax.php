@@ -7,6 +7,7 @@ if (empty($etag)) {
   $etag = base64_encode($render_time);
 }
 
+header("Access-Control-Allow-Origin: *");
 header("Cache-Control: no-cache");
 header("ETag: $etag");
 
