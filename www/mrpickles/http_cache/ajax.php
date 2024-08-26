@@ -4,7 +4,7 @@ $render_time = date("M-j-Y g:i:s A", time());
 
 $etag = $preexisting_etag;
 if (empty($etag)) {
-  $etag = base64_encode($render_time);
+  $etag = base64_encode(rand() . " :: " . $render_time);
 }
 
 header("Access-Control-Allow-Origin: *");
