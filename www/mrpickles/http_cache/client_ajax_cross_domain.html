@@ -6,17 +6,28 @@
   <body>
     <p>You can exfiltrate ETag data by making AJAX requests to/from different domains.</p>
     <p>Visit this page from different domains. All of the fetched AJAX Etags should be the same.</p>
+    <p><b>EDIT: This seems to only be true within the same eTLD+1. Hmm...</b></p>
     <p>Here are some places where this page is probably hosted:</p>
     <ul>
+      <li><a href="http://localhost:8080/client_ajax_cross_domain.html">localhost</a></li>
       <li><a href="https://cr.kungfoo.net/mrpickles/http_cache/client_ajax_cross_domain.html">cr.kungfoo.net</a></li>
       <li><a href="https://cr2.kungfoo.net/mrpickles/http_cache/client_ajax_cross_domain.html">cr2.kungfoo.net</a></li>
     </ul>
     <p>Here are the ETags from fetching across different domains:</p>
-    <ul>
-      <li>Local ETag: <code id="local">This should be replaced by the local ETag. Any minute now...</code></li>
-      <li>CR ETag: <code id="cr">This should be replaced by the ETag from the cr subdomain. Any minute now...</code></li>
-      <li>CR2 ETag: <code id="cr2">This should be replaced by the ETag from the cr2 subdomain. Any minute now...</code></li>
-    </ul>
+    <table>
+      <tr>
+        <td>Local ETag:</td>
+        <td><code id="local">This should be replaced by the local ETag. Any minute now...</code></td>
+      </tr>
+      <tr>
+        <td>CR ETag:</td>
+        <td><code id="cr">This should be replaced by the ETag from the cr subdomain. Any minute now...</code></td>
+      </tr>
+      <tr>
+        <td>CR2 ETag:</td>
+        <td><code id="cr2">This should be replaced by the ETag from the cr2 subdomain. Any minute now...</code></td>
+      </tr>
+    </table>
     <br />
     <p><a href="client_ajax_cross_domain.html">Try again.</a></p>
     <p><a href="index.html">Back to home page.</a></p>
