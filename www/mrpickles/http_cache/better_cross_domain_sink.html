@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Better AJAX Cross-Domain Tracking</title>
+  </head>
+  <body>
+    <p>If all goes as expected, the tracking ID and tracking host should have a 1:1 mapping across a browser.</p>
+    <p>This should be the case regardless of the host that initiated the bounce.</p>
+    <p>To verify this, you probably want to run this demo from various different origins.</p>
+    <table>
+      <tr>
+        <td>Bounce host:</td>
+        <td><code id="bounce_host"></code></td>
+      </tr>
+      <tr>
+        <td>Tracking host:</td>
+        <td><code id="tracking_host"></code></td>
+      </tr>
+      <tr>
+        <td>Tracking ID:</td>
+        <td><code id="tracking_id"></code></td>
+      </tr>
+    </table>
+    <br />
+    <p><a href="better_cross_domain.html">Try again.</a></p>
+    <p><a href="index.html">Back to home page.</a></p>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('bounce_host').innerHTML = params.get('bounce_host');
+      document.getElementById('tracking_host').innerHTML = params.get('tracking_host');
+      document.getElementById('tracking_id').innerHTML = params.get('tracking_id');
+    </script>
+  </body>
+</html>
