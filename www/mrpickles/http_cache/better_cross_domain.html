@@ -30,6 +30,10 @@
       setHrefs('localhost', `http://localhost:8080/ajax_bouncer.php`);
       setHrefs('cr', `https://cr.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php`);
       setHrefs('cr2', `https://cr2.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php`);
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('tracking_id') && params.has('tracking_host') && params.has('bounce_host')) {
+        window.location.replace(`better_cross_domain_sink.html?tracking_id=${params.get('tracking_id')}&tracking_host=${params.get('tracking_host')}&bounce_host=${params.get('bounce_host')}`);
+      }
     </script>
   </body>
 </html>

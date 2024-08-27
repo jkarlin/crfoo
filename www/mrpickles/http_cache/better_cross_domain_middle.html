@@ -9,11 +9,7 @@
     <p><a href="index.html">Back to home page.</a></p>
     <script>
       const params = new URLSearchParams(window.location.search);
-      if (params.has('tracking_id') && params.has('tracking_host') && params.has('bounce_host')) {
-        window.location.replace(`better_cross_domain_sink.html?tracking_id=${params.get('tracking_id')}&tracking_host=${params.get('tracking_host')}&bounce_host=${params.get('bounce_host')}`);
-      } else {
-        window.location.replace(`${params.get('ajax_endpoint')}?bounce_host=${params.get('bounce_host')}`);
-      }
+      window.location.replace(`${params.get('ajax_endpoint')}?bounce_host=${params.get('bounce_host')}`);
     </script>
   </body>
 </html>
