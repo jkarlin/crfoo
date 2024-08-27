@@ -24,14 +24,12 @@
     <br />
     <p><a href="index.html">Back to home page.</a></p>
     <script>
-      const params = new URLSearchParams(window.location.search);
-      if (params.has('tracking_id') && params.has('tracking_host') && params.has('bounce_host')) {
-        window.location.replace(`better_cross_domain_sink.html?tracking_id=${params.get('tracking_id')}&tracking_host=${params.get('tracking_host')}&bounce_host=${params.get('bounce_host')}`);
-      } else {
-        document.getElementById('localhost').setAttribute('href', `http://localhost:8080/ajax_bouncer.php?bounce_host=${window.location.href}`);
-        document.getElementById('cr').setAttribute('href', `https://cr.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php?bounce_host=${window.location.href}`);
-        document.getElementById('cr2').setAttribute('href', `https://cr2.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php?bounce_host=${window.location.href}`);
+      function setHrefs(id, endpoint) {
+        document.getElementById(id).setAttribute('href', `better_cross_domain_middle.html?bounce_host=${window.location.href}&ajax_endpoint=${endpoint}`);
       }
+      setHrefs('localhost', `http://localhost:8080/ajax_bouncer.php`);
+      setHrefs('cr', `https://cr.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php`);
+      setHrefs('cr2', `https://cr2.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php`);
     </script>
   </body>
 </html>
