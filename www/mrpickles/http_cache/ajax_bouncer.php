@@ -1,5 +1,5 @@
 <?php
-$referer = $_SERVER["HTTP_REFERER"] ?? $_GET["bounce_host"] ?? "";
+$referer = $_GET["bounce_host"] ?? $_SERVER["HTTP_REFERER"] ?? "";
 $referer = "'" . addslashes($referer) . "'"
 ?>
 <!DOCTYPE html>
