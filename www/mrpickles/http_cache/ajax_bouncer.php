@@ -1,5 +1,5 @@
 <?php
-$referer = $_SERVER["HTTP_REFERER"] ?? "";
+$referer = $_SERVER["HTTP_REFERER"] ?? $_GET["bounce_host"] ?? "";
 $referer = "'" . addslashes($referer) . "'"
 ?>
 <!DOCTYPE html>
@@ -20,6 +20,7 @@ $referer = "'" . addslashes($referer) . "'"
           const url = new URL(referer);
           url.searchParams.set('tracking_id', body);
           url.searchParams.set('tracking_host', window.location.host);
+          url.searchParams.set('bounce_host', referer);
           window.location.replace(url.toString());
         });
     </script>

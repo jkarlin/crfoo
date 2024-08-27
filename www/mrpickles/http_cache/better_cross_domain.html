@@ -13,19 +13,24 @@
       <li>The tracking site uses the <code>referer</code> header to bounce back to this page.</li>
       <li>When bouncing back, it transfers the tracking ID. In this demo, it's included as a query param.</li>
     </ol>
+    <p><b>EDIT: The referer header only gets passed if navigating within the same domain. But we can just manually pass it via URL param.</b></p>
     <p>Here are some tracking sites. They are from different domains. You can pick one and see what tracking ID it returns.</p>
     <p>The returned tracking ID should be consistent, even if you're calling the site from a different origin.</p>
     <ul>
-      <li><a href="http://localhost:8080/ajax_bouncer.php">localhost</a></li>
-      <li><a href="https://cr.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php">cr.kungfoo.net</a></li>
-      <li><a href="https://cr2.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php">cr2.kungfoo.net</a></li>
+      <li><a id="localhost">localhost</a></li>
+      <li><a id="cr">cr.kungfoo.net</a></li>
+      <li><a id="cr2">cr2.kungfoo.net</a></li>
     </ul>
     <br />
     <p><a href="index.html">Back to home page.</a></p>
     <script>
       const params = new URLSearchParams(window.location.search);
-      if (params.has('tracking_id') && params.has('tracking_host')) {
-        window.location.replace(`better_cross_domain_sink.html?tracking_id=${params.get('tracking_id')}&tracking_host=${params.get('tracking_host')}&bounce_host=${window.location.host}`);
+      if (params.has('tracking_id') && params.has('tracking_host') && params.has('bounce_host')) {
+        window.location.replace(`better_cross_domain_sink.html?tracking_id=${params.get('tracking_id')}&tracking_host=${params.get('tracking_host')}&bounce_host=${params.get('bounce_host')}`);
+      } else {
+        document.getElementById('localhost').setAttribute('href', `http://localhost:8080/ajax_bouncer.php?bounce_host=${window.location.href}`);
+        document.getElementById('cr').setAttribute('href', `https://cr.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php?bounce_host=${window.location.href}`);
+        document.getElementById('cr2').setAttribute('href', `https://cr2.kungfoo.net/mrpickles/http_cache/ajax_bouncer.php?bounce_host=${window.location.href}`);
       }
     </script>
   </body>
