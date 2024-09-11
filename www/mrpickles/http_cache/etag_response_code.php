@@ -2,9 +2,14 @@
 $preexisting_etag = $_SERVER["HTTP_IF_NONE_MATCH"] ?? "";
 $render_time = date("M j Y g:i:s A", time());
 $status_code = $_GET["status"] ?? "";
+$status_codes = $_GET["statuses"] ?? "";
 
 if (empty($status_code)) {
-  $response_codes = array(200, 206, 301, 302, 404);
+  $response_codes = explode(',', $status_codes);
+  // Resort to a hard-coded list if there are fewer than 2 possible status codes.
+  if (count($response_codes) < 2) {
+    $response_codes = array(200, 206, 301, 302, 404);
+  }
   $status_code = $response_codes[array_rand($response_codes)];
 }
 
@@ -46,6 +51,9 @@ http_response_code($status_code);
       <li><a href="etag_response_code.php?status=404">418</a></li>
       <li><a href="etag_response_code.php?status=500">500</a></li>
     </ul>
+    <br />
+    <p>You can alternatively specify the <code>statuses</code> query parameter to control the possible status codes (and their distribution). The server will randomly select from the list. (E.g. <code>?statuses=200,200,200,202,400,401,401,500</code>.)</p>
+    <p>If you use that the above parameter, please include at least two or more items.</p>
     <br />
     <p><a href="etag_response_code.php">Try again (without query params).</a></p>
     <p><a href="index.html">Back to home page.</a></p>
