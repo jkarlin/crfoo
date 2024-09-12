@@ -54,5 +54,5 @@ self.addEventListener('message', async event => {
 });
 
 self.addEventListener('fetch', ev => {
-  console.log(`Service worker intercepted request for ${ev.request.fetch}`);
+  console.log(`Service worker intercepted request for ${ev.request.url}`);
 });
