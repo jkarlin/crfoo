@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookieless Bounce Tracking</title>
+  </head>
+  <body>
+    <p>You shouldn't see this page. It only serves to redirect, such that the user doesn't interact with any specific tracking site.</p>
+    <br />
+    <p><a href="../index.html">Back to home page.</a></p>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      window.location.replace(`${params.get('ajax_endpoint')}?bounce_host=${params.get('bounce_host')}`);
+    </script>
+  </body>
+</html>

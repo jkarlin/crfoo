@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookieless Bounce Tracking</title>
+  </head>
+  <body>
+    <p>Here's what this demo does:</p>
+    <ol>
+      <li>Click on the link. It will redirect to some tracking site (possibly on a different domain.)</li>
+      <li>That tracking site does an AJAX request to fetch a tracking ID.</li>
+      <li>The AJAX request responds with an ETag.</li>
+      <li>The tracking site uses the <code>referer</code> header to bounce back to this page.</li>
+      <li>When bouncing back, it transfers the tracking ID. In this demo, it's included as a query param.</li>
+    </ol>
+    <p>Here are some tracking sites. They are from different domains. You can pick one and see what tracking ID it returns.</p>
+    <p>The returned tracking ID should be consistent, even if you're calling the site from a different origin.</p>
+    <ul>
+      <li><a id="localhost">localhost</a></li>
+      <li><a id="cr">cr.kungfoo.net</a></li>
+      <li><a id="cr2">cr2.kungfoo.net</a></li>
+    </ul>
+    <br />
+    <p><a href="../index.html">Back to home page.</a></p>
+    <script>
+      function setHrefs(id, endpoint) {
+        document.getElementById(id).setAttribute('href', `bounce.html?bounce_host=${window.location.href}&ajax_endpoint=${endpoint}`);
+      }
+      setHrefs('localhost', `http://localhost:8080/explainer/tracker/index.php`);
+      setHrefs('cr', `https://cr.kungfoo.net/mrpickles/http_cache/explainer/tracker/index.php`);
+      setHrefs('cr2', `https://cr2.kungfoo.net/mrpickles/http_cache/explainer/tracker/index.php`);
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('tracking_id') && params.has('tracking_host') && params.has('bounce_host')) {
+        window.location.replace(`sink.html?tracking_id=${params.get('tracking_id')}&tracking_host=${params.get('tracking_host')}&bounce_host=${params.get('bounce_host')}`);
+      }
+    </script>
+  </body>
+</html>

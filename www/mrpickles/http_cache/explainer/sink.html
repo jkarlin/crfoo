@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookieless Bounce Tracking</title>
+  </head>
+  <body>
+    <p>If all goes as expected, the tracking ID and tracking host should have a 1:1 mapping across a browser.</p>
+    <p>This should be the case regardless of the host that initiated the bounce.</p>
+    <p>To verify this, you probably want to run this demo from various different origins.</p>
+    <table>
+      <tr>
+        <td>Referer:</td>
+        <td><code id="bounce_host"></code></td>
+      </tr>
+      <tr>
+        <td>Tracker host:</td>
+        <td><code id="tracking_host"></code></td>
+      </tr>
+      <tr>
+        <td>Tracking ID:</td>
+        <td><code id="tracking_id"></code></td>
+      </tr>
+    </table>
+    <br />
+    <p>Try running this demo from different origins! You'll notice that the tracking ID will be the same per tracking host. Here are some sites that host this demo:</p>
+    <ul>
+      <li><a href="https://cr.kungfoo.net/mrpickles/http_cache/explainer/index.html">cr.kungfoo.net</a></li>
+      <li><a href="https://cr2.kungfoo.net/mrpickles/http_cache/explainer/index.html">cr2.kungfoo.net</a></li>
+    </ul>
+    <br />
+    <p><a href="index.html">Try again.</a></p>
+    <p><a href="../index.html">Back to home page.</a></p>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('bounce_host').innerHTML = params.get('bounce_host');
+      document.getElementById('tracking_host').innerHTML = params.get('tracking_host');
+      document.getElementById('tracking_id').innerHTML = params.get('tracking_id');
+    </script>
+  </body>
+</html>
