@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: text/html');
 header('Cache-Control: no-cache, must-revalidate');
-header('Content-Security-Policy: sandbox allow-scripts allow-same-site-none-cookies');
 ?>
 <!DOCTYPE html>
 <!-- Copy of index.html at 6c341af0dc2d7cee8bab654ef4248ac6171444bc -->
@@ -30,6 +29,7 @@ header('Content-Security-Policy: sandbox allow-scripts allow-same-site-none-cook
   <button id="check-dedicated-worker-cookies">Check Worker cookies</button>
   <br>
   <button id="basic-auth">HTTP Basic Auth</button>
+  <iframe id="sandboxed-iframe" src="/third_party.html" sandbox="allow-scripts allow-same-site-none-cookies"></iframe>
 </div>
 <script>
 
