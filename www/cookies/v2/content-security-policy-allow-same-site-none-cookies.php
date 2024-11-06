@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: text/html');
 header('Cache-Control: no-cache, must-revalidate');
+header('Set-Cookie: unpartitioned=foobar; Secure; Path=/; SameSite=None; Max-Age=86400');
 ?>
 <!DOCTYPE html>
 <!-- Copy of index.html at 6c341af0dc2d7cee8bab654ef4248ac6171444bc -->
@@ -29,7 +30,7 @@ header('Cache-Control: no-cache, must-revalidate');
   <button id="check-dedicated-worker-cookies">Check Worker cookies</button>
   <br>
   <button id="basic-auth">HTTP Basic Auth</button>
-  <iframe id="sandboxed-iframe" src="/third_party.html" sandbox="allow-scripts allow-same-site-none-cookies"></iframe>
+  <iframe id="sandboxed-iframe" src="/cookies/v2/csp-page.php" sandbox="allow-scripts allow-same-site-none-cookies"></iframe>
 </div>
 <script>
 
