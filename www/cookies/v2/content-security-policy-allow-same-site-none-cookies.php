@@ -1,7 +1,9 @@
 <?php
 header('Content-Type: text/html');
 header('Cache-Control: no-cache, must-revalidate');
-header('Set-Cookie: unpartitioned=foobar; Secure; Path=/; SameSite=None; Max-Age=86400');
+// header('Set-Cookie: unpartitioned=foobar; Secure; Path=/; SameSite=None; Max-Age=86400');
+header('Content-Security-Policy: sandbox allow-scripts allow-same-site-none-cookies');
+
 ?>
 <!DOCTYPE html>
 <!-- Copy of index.html at 6c341af0dc2d7cee8bab654ef4248ac6171444bc -->
