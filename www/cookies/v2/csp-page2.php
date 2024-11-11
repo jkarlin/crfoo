@@ -2,7 +2,7 @@
 ?>
 <!DOCTYPE html>
 <meta charset="utf-8">
-<video autoplay src="./video.php" width="500px"></video>
+<video autoplay src="./video2.php" width="500px"></video>
 <br>
 The video will when the "unpartitioned" cookie is available and will not load if the cookie is blocked.
 <br>
