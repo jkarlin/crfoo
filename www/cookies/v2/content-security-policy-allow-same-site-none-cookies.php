@@ -32,6 +32,8 @@ header('Content-Security-Policy: sandbox allow-scripts allow-same-site-none-cook
   <br>
   <button id="basic-auth">HTTP Basic Auth</button>
   <iframe id="sandboxed-iframe" src="/cookies/v2/csp-page2.php" sandbox="allow-scripts allow-same-site-none-cookies"></iframe>
+  <iframe id="sandboxed-iframe2" src="/cookies/v2/csp-page2.php"></iframe>
+
 </div>
 <script>
 
