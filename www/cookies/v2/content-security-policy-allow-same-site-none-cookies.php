@@ -8,32 +8,19 @@ header('Content-Security-Policy: sandbox allow-scripts allow-same-site-none-cook
 <!-- Copy of index.html at 6c341af0dc2d7cee8bab654ef4248ac6171444bc -->
 <meta charset="utf-8">
 <button id="set-cookie">Set cookie (SameSite=None)</button>
-<button id="same-site-cookie">Set SameSite cookie (SameSite=Lax)</button>
+<button id="same-site-cookie">[Sandboxed, Filtered out in NetworkService] Set SameSite cookie (SameSite=Lax)</button>
 <button id="set-partitioned-cookie">Set partitioned cookie (SameSite=None; Partitioned)</button>
-<div>document.cookie is <span id="document-cookie"></span></div>
-<button id="clear-cookies">Clear cookies</button>
-<button id="clear-storage">Clear storage</button>
-<button id="clear-both">Clear both</button>
-<div id="service-worker-root">
-  <div id="service-worker-status"></div>
-  <button id="register-service-worker">Register Service Worker</button>
-  <button id="unregister-service-worker">Unregister Service Worker</button>
-  <button id="check-service-worker-cookies">Check Service Worker cookies</button>
-  <br><br>
-  <button id="service-worker-query-count">Get number of change events</button>
-  <div><span id="service-worker-count">0</span> cookie change events.</div>
-  <div>Last change: <span id="service-worker-change"></span></div>
-  <br>
-  <button id="add-shared-worker">Add SharedWorker</button>
-  <button id="check-shared-worker-cookies">Check SharedWorker cookies</button>
-  <br>
-  <button id="add-dedicated-worker">Add Worker</button>
-  <button id="check-dedicated-worker-cookies">Check Worker cookies</button>
-  <br>
-  <button id="basic-auth">HTTP Basic Auth</button>
-  <iframe id="sandboxed-iframe" src="/cookies/v2/csp-page2.php" sandbox="allow-scripts allow-same-site-none-cookies"></iframe>
-  <iframe id="sandboxed-iframe2" src="/cookies/v2/csp-page2.php"></iframe>
-
+<div>[Sandboxed, Not indicative of cookie inclusion, check DevTools] document.cookie is <span id="document-cookie"></span></div>
+  <button id="clear-cookies">Clear cookies</button>
+  <button id="clear-storage">Clear storage</button>
+  <button id="clear-both">Clear both</button>
+</div>
+<div> Iframes for testing:
+  <ol>
+      <li> sandboxed with the allow-same-site-none-cookies value directly, <iframe id="sandboxed-iframe" src="/cookies/v2/csp-page2.php" sandbox="allow-scripts allow-same-site-none-cookies"></iframe> </li>
+      <li> not directly sandboxed, should inherit parent policy, <iframe id="sandboxed-iframe2" src="/cookies/v2/csp-page2.php"></iframe> </li>
+      <li> cross-site iframe that should not inherit the sandboxing allow <iframe id="cross-site-iframe" src="https://wobbly-violet-heaven.glitch.me/"></iframe> </li>
+  </ol>
 </div>
 <script>
 
