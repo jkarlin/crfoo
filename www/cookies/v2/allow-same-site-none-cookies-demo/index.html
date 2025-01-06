@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>sandbox-allow-same-site-none-cookies-demo</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- this is the start of content -->
+    <h1>
+      sandbox `allow-same-site-none-cookies` Demo
+    </h1>
+    <p class="subheader"> * For this demo to be accurate, third-party cookies must currently be blocked in your browser and the Finch feature <a href= "https://chromestatus.com/feature/5090336588955648" >`AllowSameSiteNoneCookiesInSandbox`</a> must be enabled * </p>
+    <p> Additionally please make sure you are accessing the mirror on <a href="https://cr2.kungfoo.net/cookies/v2/sandbox-allow-same-site-none-cookies-demo/index.html">https://cr2.kungfoo.net/</a> (so the cross-site frames function as intended)</p>
+      <ol>
+        <li> Set a cookie on the top-level domain by clicking this button! 
+            <button id="set-cookie">Set cookie (SameSite=None)</button> </li>
+        <li> Verify the cookie was set on the top-level. 
+            <p>document.cookie is "<span class="cookie" id="document-cookie">....</span>" on domain <span id="domain">....</span></p></li>
+      </ol>
+    
+    <p class="frame"> Default sandboxing policy: Content-Security-Policy: sandbox
+      <iframe src="./csp-page.php"> </iframe>
+      <text> If the Content-Security-Policy header *contains a sandboxing policy* but *does not contain the `allow-same-site-none-cookies` value*, we would expect that cookies were not sent in the request</text> </p>
+  
+    <p class="frame"> Content-Security-Policy: sandbox allow-same-site-none-cookies
+        <iframe src="./csp-page-sandboxed.php"> </iframe>
+        <text>If the Content-Security-Policy header *contains a sandboxing policy with the `allow-same-site-none-cookies` value*, we would expect that cookies are sent in the request</text> </p>
+    
+    <p class="frame"> &lt;/iframe sandbox="allow-same-site-none-cookies"&gt;
+        <iframe src="./csp-page.php" sandbox="allow-scripts allow-same-site-none-cookies"> </iframe>
+        <text>If the iframe sandbox attribute *contains a sandboxing policy with the `allow-same-site-none-cookies` value*, we would expect that cookies are sent in the request</text></p>
+    
+    <p class="frame"> Cross-site frame on https://cr.kungfoo.net/
+        <iframe src="https://cr.kungfoo.net/cookies/v2/sandbox-allow-same-site-none-cookies-demo/csp-page-sandboxed.php"> </iframe>
+        <text>If the frame is not same-site with the top-level, we would expect that cookies were not sent in the request</text></p>
+    
+    <p class="frame"> Cross-site ancestor
+        <iframe src="https://cr.kungfoo.net/cookies/v2/sandbox-allow-same-site-none-cookies-demo/cross-site-iframe.html" sandbox="allow-scripts allow-same-site-none-cookies"> </iframe>
+        <text>If the frame is same-site with the top-level but has a cross-site ancestor, we would expect that cookies were not sent in the request</text></p>
+  
+  </body>
+<script>
+  document.getElementById("set-cookie").addEventListener('click', () => {
+    document.cookie = "same-site-none=foobar; Secure; SameSite=None; Max-Age=86400; Path=/;"; 
+  });
+
+  const id = setInterval(() => {
+    try {
+      document.getElementById('document-cookie').textContent = document.cookie;
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      document.getElementById('domain').textContent = window.location.hostname;
+    } catch (err) {
+      console.log(err);
+    }
+  }, 1000);
+</script>
+</html>

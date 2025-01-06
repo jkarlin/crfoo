@@ -17,8 +17,8 @@ header('Content-Security-Policy: sandbox allow-scripts allow-same-site-none-cook
 </div>
 <div> Iframes for testing:
   <ol>
-      <li> sandboxed with the allow-same-site-none-cookies value directly, <iframe id="sandboxed-iframe" src="/cookies/v2/csp-page2.php" sandbox="allow-scripts allow-same-site-none-cookies"></iframe> </li>
-      <li> not directly sandboxed, should inherit parent policy, <iframe id="sandboxed-iframe2" src="/cookies/v2/csp-page2.php"></iframe> </li>
+      <li> sandboxed with the allow-same-site-none-cookies value directly, <iframe id="sandboxed-iframe" src="/cookies/v2/allow-same-site-none-cookies-demo/csp-page.php" sandbox="allow-scripts allow-same-site-none-cookies"></iframe> </li>
+      <li> not directly sandboxed, should inherit parent policy, <iframe id="sandboxed-iframe2" src="/cookies/v2/allow-same-site-none-cookies-demo/csp-page.php"></iframe> </li>
       <li> cross-site iframe that should not inherit the sandboxing allow <iframe id="cross-site-iframe" src="https://organized-hypnotic-bongo.glitch.me/"></iframe> </li>
   </ol>
 </div>
