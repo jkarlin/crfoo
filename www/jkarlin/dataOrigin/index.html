@@ -2,7 +2,7 @@
 
 <script>
   async function run() {
-    let worklet = await sharedStorage.createWorklet("https://cr2.kungfoo.net/jkarlin/dataOrigin/worklet.js", {dataOrigin: "script-origin"});
+    let worklet = await sharedStorage.createWorklet("https://cr2.kungfoo.net/jkarlin/dataOrigin/worklet.js", {dataOrigin: "https://cr.kungfoo/net/"});
     worklet.run("write");
   }
   run();
