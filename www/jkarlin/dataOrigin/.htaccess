@@ -1,0 +1,3 @@
+<Files "worklet.js">
+  Header set Shared-Storage-Cross-Origin-Worklet-Allowed "?1"
+</Files>
