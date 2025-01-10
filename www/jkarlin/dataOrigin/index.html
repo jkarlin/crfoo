@@ -1,7 +1,7 @@
 <html>
 
 <script>
-  function run() async {
+  async function run() {
     let worklet = await sharedStorage.createWorklet("https://cr2.kungfoo.net/jkarlin/dataOrigin/worklet.js", {dataOrigin: "script-origin"});
     worklet.run("write");
   }
