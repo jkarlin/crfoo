@@ -1,4 +1,4 @@
 <Files "worklet.js">
-#  Header set Shared-Storage-Cross-Origin-Worklet-Allowed "?1"
-#  Header set Access-Control-Allow-Origin "*" 
+  Header set Shared-Storage-Cross-Origin-Worklet-Allowed "?1"
+  Header set Access-Control-Allow-Origin "*" 
 </Files>
