@@ -12,10 +12,10 @@
       {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/8.html'},
     ];
     
-    await worklet.selectURL('choose', urls);
-    await worklet.selectURL('choose', urls);
-    await worklet.selectURL('choose', urls);
-    await worklet.selectURL('choose', urls);
+    await worklet.selectURL('choose', urls, {keepAlive: true});
+    await worklet.selectURL('choose', urls, {keepAlive: true});
+    await worklet.selectURL('choose', urls, {keepAlive: true});
+    await worklet.selectURL('choose', urls, {keepAlive: false});
   }
 foo();
   
