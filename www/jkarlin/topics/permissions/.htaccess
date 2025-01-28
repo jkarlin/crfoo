@@ -1,6 +1,6 @@
 <FilesMatch "index\.html$">
   <IfModule mod_headers.c>
-#    Header set Permissions-Policy "browsing-topics=(self)"
+    Header set Permissions-Policy "browsing-topics=(self)"
   </IfModule>
 </FilesMatch>
 
