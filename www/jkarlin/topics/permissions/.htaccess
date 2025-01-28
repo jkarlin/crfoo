@@ -1,6 +1,11 @@
 <FilesMatch "index\.html$">
   <IfModule mod_headers.c>
     Header set Permissions-Policy "browsing-topics=(self)"
+  </IfModule>
+</FilesMatch>
+
+<FilesMatch "sendTopics\.php$">
+  <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "*"
   </IfModule>
 </FilesMatch>
