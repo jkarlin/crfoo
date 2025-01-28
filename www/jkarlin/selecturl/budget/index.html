@@ -1,0 +1,22 @@
+<script>
+  async function foo() {
+    let worklet = await sharedStorage.createWorklet("https://cr.kungfoo.net/jkarlin/selecturl/budget/worklet.js");
+    urls = [
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/1.html'},
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/2.html'},
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/3.html'},
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/4.html'},
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/5.html'},
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/6.html'},
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/7.html'},
+      {url: 'https://cr.kungfoo.net/jkarlin/selecturl/budget/8.html'},
+    ];
+    
+    await worklet.selectURL('choose', urls);
+    await worklet.selectURL('choose', urls);
+    await worklet.selectURL('choose', urls);
+    await worklet.selectURL('choose', urls);
+  }
+foo();
+  
+</script>
