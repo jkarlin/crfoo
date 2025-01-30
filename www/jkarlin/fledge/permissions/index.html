@@ -3,12 +3,5 @@ Hello there, this is a document which is set to "self" via header.
 It attempts to joinAdInterestGroup for a x-site origin. 
 
 <script>
-  const interestGroup = {
-    name: 'running-shoes',
-    owner: 'https://cr.kungfoo.net',
-  };
-
-  console.log("Calling joinAdIG");
-
-  navigator.joinAdInterestGroup(interestGroup);
+  navigator.joinAdInterestGroup({name: 'foobar', owner: 'https://cr.kungfoo.net'}, 500);
 </script>
