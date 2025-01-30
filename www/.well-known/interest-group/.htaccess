@@ -1,5 +1,4 @@
 <FilesMatch "permissions$">
-  <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-  </IfModule>
+AddType application/javascript json
+Header set Access-Control-Allow-Origin "*"
 </FilesMatch>
