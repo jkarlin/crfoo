@@ -1,5 +1,5 @@
 <FilesMatch "index\.html$">
   <IfModule mod_headers.c>
-    Header set Permissions-Policy "join-ad-interest-group=(self)"
+#    Header set Permissions-Policy "join-ad-interest-group=(self)"
   </IfModule>
 </FilesMatch>
