@@ -1,4 +1,5 @@
 <FilesMatch "permissions$">
+  ForceType application/json
   <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "*"
   </IfModule>
