@@ -15,7 +15,7 @@ async function createAndRunWorklets() {
     try {
 
 
-      let worklet = sharedStorage.createWorklet("https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js").then((worklet) => { worklet.run('go'); });
+      let worklet = sharedStorage.createWorklet("https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js").then((worklet) => { worklet.run('go', {keepAlive: true}); });
 
     } catch (error) {
       console.error(`Error creating worklet ${i}:`, error);
