@@ -9,9 +9,8 @@ async function createAndRunWorklets() {
     try {
 
 
-      const worklet = await sharedStorage.createWorklet(workletURL);
+      const worklet = await sharedStorage.createWorklet("https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js");
 
-      URL.revokeObjectURL("https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js"); // Clean up the Blob URL
     } catch (error) {
       console.error(`Error creating worklet ${i}:`, error);
     }
