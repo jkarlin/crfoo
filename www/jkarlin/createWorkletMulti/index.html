@@ -1,7 +1,7 @@
 <script>
 
 async function createAndRunWorklets() {
-  if (!navigator.sharedStorage) {
+  if (!sharedStorage) {
     console.error("Shared Storage API is not supported in this browser.");
     return;
   }
@@ -20,7 +20,7 @@ async function createAndRunWorklets() {
     try {
 
 
-      const worklet = await navigator.sharedStorage.createWorklet(workletURL);
+      const worklet = await sharedStorage.createWorklet(workletURL);
 
       URL.revokeObjectURL(workletURL); // Clean up the Blob URL
     } catch (error) {
