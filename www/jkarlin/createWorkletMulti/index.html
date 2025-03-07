@@ -5,7 +5,13 @@ async function createAndRunWorklets() {
     console.error("Shared Storage API is not supported in this browser.");
     return;
   }
-  for (let i = 0; i < 200; i++) {
+  const urlString = window.location.search; // Gets the query string part of the URL
+  const searchParams = new URLSearchParams(urlString);
+  let count = 10;
+  if (searchParams.has('count')) {
+    count = searchParams.get('count');
+  }
+  for (let i = 0; i < count; i++) {
     try {
 
 
