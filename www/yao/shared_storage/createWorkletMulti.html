@@ -4,6 +4,8 @@
 
 <a href="https://google.com">Go to google.com</a>
 
+<button id="createWorkletButton">Create and Run Worklet</button>
+
 <script>
 
 let numWorkletsCreated = 0;
@@ -41,6 +43,11 @@ for (let i = 0; i < count; i++) {
   createAndRunWorklet(url);
 }
 
+document.getElementById("createWorkletButton").addEventListener("click", function() {
+  let url = "https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js";
+  createAndRunWorklet(url);
+});
+  
 // function refreshPage() {
 //   setTimeout(function() {
 //     location.reload();
