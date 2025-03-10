@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<iframe id="myIframe" src="https://cr.kungfoo.net/yao/shared_storage/createWorkletMulti.html?count=20"></iframe>
+
+<br>
+
+<button onclick="reloadIframe()">Reload Iframe</button>
+
+<script>
+function reloadIframe() {
+  var iframe = document.getElementById('myIframe');
+  iframe.src = iframe.src;
+}
+</script>
+
+</body>
+</html>
