@@ -13,8 +13,8 @@ function incrementNumWorkletsCreated() {
 }
 
 function incrementNumErrors() {
-  incrementNumErrors++;
-  document.getElementById("incrementNumErrors").textContent = incrementNumErrors;
+  numErrors++;
+  document.getElementById("numErrors").textContent = numErrors;
 }
   
 async function createAndRunWorklet(url) {
