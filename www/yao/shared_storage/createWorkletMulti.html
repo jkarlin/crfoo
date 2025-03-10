@@ -1,21 +1,29 @@
 
 <p>Number of Worklets Created: <span id="numWorkletsCreated">0</span></p>
+<p>Number of Errors: <span id="numErrors">0</span></p>
 
 <script>
 
 let numWorkletsCreated = 0;
+let numErrors = 0;
 
 function incrementNumWorkletsCreated() {
   numWorkletsCreated++;
   document.getElementById("numWorkletsCreated").textContent = numWorkletsCreated;
 }
 
+function incrementNumErrors() {
+  incrementNumErrors++;
+  document.getElementById("incrementNumErrors").textContent = incrementNumErrors;
+}
+  
 async function createAndRunWorklet(url) {
   try {
     let worklet = await sharedStorage.createWorklet(url, {dataOrigin: "script-origin"});
     incrementNumWorkletsCreated();
     worklet.run('go', {keepAlive: true});
   } catch (error) {
+    incrementNumErrors();
   }
 }
 
