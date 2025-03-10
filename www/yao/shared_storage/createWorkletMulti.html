@@ -39,4 +39,12 @@ for (let i = 0; i < count; i++) {
   createAndRunWorklet(url);
 }
 
+function refreshPage() {
+  setTimeout(function() {
+    location.reload();
+  }, 100);
+}
+
+window.onload = refreshPage();
+  
 </script>
