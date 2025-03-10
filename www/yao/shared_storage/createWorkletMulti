@@ -1,0 +1,34 @@
+
+<p>Number of Worklets Created: <span id="numWorkletsCreated">0</span></p>
+
+<script>
+
+let numWorkletsCreated = 0;
+
+function incrementNumWorkletsCreated() {
+  numWorkletsCreated++;
+  document.getElementById("numWorkletsCreated").textContent = numWorkletsCreated;
+}
+
+async function createAndRunWorklet(url) {
+  try {
+    let worklet = await sharedStorage.createWorklet(url, {dataOrigin: "script-origin"});
+    incrementNumWorkletsCreated();
+    worklet.run('go', {keepAlive: true});
+  } catch (error) {
+  }
+}
+
+const urlString = window.location.search; // Gets the query string part of the URL
+const searchParams = new URLSearchParams(urlString);
+let count = 10;
+if (searchParams.has('count')) {
+  count = searchParams.get('count');
+}
+
+for (let i = 0; i < count; i++) {
+  let url = "https://" + (i % 2 == 0 ? "cr" : "cr2") + ".kungfoo.net/jkarlin/createWorkletMulti/worklet.js";
+  createAndRunWorklet(url);
+}
+
+</script>
