@@ -6,6 +6,9 @@
 <br>
 <br>
 <button id="createWorkletButton">Create and Run Worklet</button>
+<br>
+<br>
+<button id="reloadButton">Reload</button>
 
 <script>
 
@@ -48,7 +51,29 @@ document.getElementById("createWorkletButton").addEventListener("click", functio
   let url = "https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js";
   createAndRunWorklet(url);
 });
+
+document.getElementById("reloadButton").addEventListener("click", function() {
+  location.reload();
+});
+
+window.addEventListener('beforeunload', function (event) {
+  // event.preventDefault();
+
+  console.log('beforeunload event fired');
   
+  let url = "https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js";
+  createAndRunWorklet(url);
+
+  // event.returnValue = '';
+});
+
+window.addEventListener('unload', function (event) {
+  console.log('unload event fired');
+  
+  let url = "https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js";
+  createAndRunWorklet(url);
+});
+
 // function refreshPage() {
 //   setTimeout(function() {
 //     location.reload();
