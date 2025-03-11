@@ -57,7 +57,7 @@ document.getElementById("reloadButton").addEventListener("click", function() {
 });
 
 window.addEventListener('beforeunload', function (event) {
-  // event.preventDefault();
+  event.preventDefault();
 
   console.log('beforeunload event fired');
   
