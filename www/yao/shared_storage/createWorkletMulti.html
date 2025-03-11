@@ -64,7 +64,7 @@ window.addEventListener('beforeunload', function (event) {
   let url = "https://cr.kungfoo.net/jkarlin/createWorkletMulti/worklet.js";
   createAndRunWorklet(url);
 
-  // event.returnValue = '';
+  event.returnValue = '';
 });
 
 window.addEventListener('unload', function (event) {
