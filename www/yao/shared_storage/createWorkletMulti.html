@@ -53,7 +53,7 @@ document.getElementById("createWorkletButton").addEventListener("click", functio
 });
 
 document.getElementById("reloadButton").addEventListener("click", function() {
-  location.reload();
+  location.assign(location.href);
 });
 
 window.addEventListener('beforeunload', function (event) {
