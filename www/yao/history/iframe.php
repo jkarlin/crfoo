@@ -28,6 +28,9 @@ header('Access-Control-Allow-Origin: *');
   <button onclick="pushState3()">PushState3</button>
   <button onclick="replaceState2()">ReplaceState2</button>
   <button onclick="replaceState3()">ReplaceState3</button>
+  <button onclick="historyLength()">Length</button>
+
+  <span>History Length:&nbsp;</span><span id="history-length"></span>
 
   <script>
     function goBack() {
@@ -52,6 +55,11 @@ header('Access-Control-Allow-Origin: *');
 
     function replaceState3() {
       window.history.replaceState('', '', 'state3.html');
+    }
+
+    function historyLength() {
+      let length = history.length;
+      document.getElementById("history-length").textContent = length;
     }
   </script>
 
