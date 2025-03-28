@@ -5,7 +5,7 @@ try {
     header('Cache-Control: no-cache, must-revalidate');
     header('Content-Security-Policy: sandbox allow-scripts');
     $file = 'bananas.mp4';
-    $partitioned_cookie_name = '__Host-1P_partitioned';
+    $partitioned_cookie_name = '__Host-3P_partitioned';
     if (!isset($_COOKIE[$partitioned_cookie_name])) {
         http_response_code(401);
         echo 'No cookie!\n';

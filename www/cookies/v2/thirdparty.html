@@ -27,6 +27,8 @@
   <button id="basic-auth">HTTP Basic Auth</button>
   <br>
   <a href="./video-partitioned.php" download="video.mp4">Download</a>
+  <br>
+  <button id="save-to-blob">Save download to blob</button>
 </div>
 <script>
 
@@ -46,6 +48,18 @@ document.getElementById('request-storage-access').addEventListener('click', () =
   document.requestStorageAccess()
       .then(() => console.log('Storage access granted for ' + location.origin))
       .catch(console.error);
+});
+
+document.getElementById('save-to-blob', async () => {
+  try {
+    const resp = await fetch('./video-partitioned.php')
+    const blob = await resp.blob();
+    const picker = await window.showSaveFilePicker();
+    const writeable = await picker.createWriteable();
+    await writeable.write(blob);
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 setInterval(() => {
