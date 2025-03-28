@@ -50,7 +50,7 @@ document.getElementById('request-storage-access').addEventListener('click', () =
       .catch(console.error);
 });
 
-document.getElementById('save-to-blob', async () => {
+document.getElementById('save-to-blob').addEventListener('click', async () => {
   try {
     const resp = await fetch('./video-partitioned.php')
     const blob = await resp.blob();
