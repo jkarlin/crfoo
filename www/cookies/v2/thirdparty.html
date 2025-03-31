@@ -52,7 +52,7 @@ document.getElementById('request-storage-access').addEventListener('click', () =
 
 document.getElementById('save-to-blob').addEventListener('click', async () => {
   try {
-    const resp = await fetch('./video-partitioned.php')
+    const resp = await fetch('./video-partitioned.php');
     const blob = await resp.blob();
     const picker = await window.showSaveFilePicker();
     const writeable = await picker.createWriteable();

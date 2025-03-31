@@ -27,6 +27,7 @@ const orEmptyArr = obj => (obj || []);
 
 self.addEventListener('cookiechange', ev => {
   ++cookieChangeEventCount;
+  console.log(ev);
   mostRecentChanges = [...orEmptyArr(ev.changed), ...orEmptyArr(ev.deleted)];
 });
 
