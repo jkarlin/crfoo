@@ -1,0 +1,20 @@
+
+<body>
+<script src="adimage.js"></script>
+<script>
+  function generateStack(name) {
+    //let stack = (new Error()).stack;
+    //let hidFunction = (stack.includes('hideThisFunction') || stack.includes('asyncHideThisFunction')) ? '❌':'✅';
+    let hidFile = document.adScriptInStack() ? '❌':'✅';
+    let d = document.createElement('details');
+    let s = document.createElement('summary');
+    s.innerText = `${name} ( hid file: ${hidFile})`;
+    let p = document.createElement('pre');
+    //p.innerText = (new Error()).stack;
+    d.appendChild(s);
+    //d.appendChild(p);
+    document.body.appendChild(d);
+  }
+
+  test();
+</script>
