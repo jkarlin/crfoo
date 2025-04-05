@@ -5,7 +5,7 @@
   function generateStack(name) {
     //let stack = (new Error()).stack;
     //let hidFunction = (stack.includes('hideThisFunction') || stack.includes('asyncHideThisFunction')) ? '❌':'✅';
-    let adFound = document.adScriptInStack() == true ? '✅' : '❌';
+    let adFound = (document.adScriptInStack()) ? '✅' : '❌';
     let d = document.createElement('details');
     let s = document.createElement('summary');
     s.innerText = `${name} ( ad script detected: ${adFound})`;
