@@ -1,5 +1,5 @@
 function doHiddenAdThing(name) {
-  val foundInStack = document.adScriptInStack();
+  let foundInStack = document.adScriptInStack();
   generateStack(name, foundInStack);
 }
 
