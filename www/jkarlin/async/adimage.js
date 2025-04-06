@@ -1,36 +1,30 @@
-function doHiddenAdThing(name) {
-  let foundInStack = document.adScriptInStack();
-  generateStack(name, foundInStack);
-}
-
-
 function hideThisFunction() {
   // Not hiding anything.
-  doHiddenAdThing('Default');
+  generateStack('Default');
 
   // setTimeout
-  setTimeout(_ => { doHiddenAdThing('setTimeout'); }, 1);
+  setTimeout(_ => { generateStack('setTimeout'); }, 1);
   
   // event handler
   let i = document.createElement('img');
-  i.onerror = _ => doHiddenAdThing('onerror');
+  i.onerror = _ => generateStack('onerror');
   i.src = "file:///a";
 
   // postMessage
-  window.onmessage = _ => { doHiddenAdThing('postmessage'); };
+  window.onmessage = _ => { generateStack('postmessage'); };
   window.postMessage("Hi.", "*");
 
   // eval()
-  eval("doHiddenAdThing('eval')");
+  eval("generateStack('eval')");
 
   // Promise
-  new Promise(doHiddenAdThing.bind(null, "Promise"));
+  new Promise(generateStack.bind(null, "Promise"));
 
   // Promise.resolve
-  Promise.resolve('Promise.resolve').then(doHiddenAdThing.bind(null, "Promise.resolve"));
+  Promise.resolve('Promise.resolve').then(generateStack.bind(null, "Promise.resolve"));
 
   // Promise.reject
-  Promise.reject('Promise.reject').catch(doHiddenAdThing.bind(null, "Promise.reject"));
+  Promise.reject('Promise.reject').catch(generateStack.bind(null, "Promise.reject"));
 
   // <script>
   generateStackThroughScriptTag('<script>');
@@ -78,7 +72,7 @@ function hideThisFunction() {
 
   if (typeof requestIdleCallback === "function") {
     // requestIdleCallback
-    requestIdleCallback(_ => { doHiddenAdThing('requestIdleCallback'); });
+    requestIdleCallback(_ => { generateStack('requestIdleCallback'); });
     
     // requestIdleCallback + <script>
     requestIdleCallback(_ => { generateStackThroughScriptTag('requestIdleCallback + <script>'); });
@@ -96,12 +90,12 @@ function hideThisFunction() {
 
 function generateStackThroughScriptTag(name) {
   const s = document.createElement('script');
-  s.innerText = `doHiddenAdThing('${name}');`;
+  s.innerText = `generateStack('${name}');`;
   document.body.appendChild(s);
 }
 
 function generateStackThroughBlob(name) {
-  const b = new Blob([`doHiddenAdThing('${name}');`], {type: 'text/javascript'});
+  const b = new Blob([`generateStack('${name}');`], {type: 'text/javascript'});
   const s = document.createElement('script');
   s.src = URL.createObjectURL(b);
   s.onload = _ => { URL.revokeObjectURL(s.src); }
@@ -110,13 +104,13 @@ function generateStackThroughBlob(name) {
 
 function generateStackThroughData(name) {
   const s = document.createElement('script');
-  s.src = `data:text/javascript,doHiddenAdThing('${name}');`;
+  s.src = `data:text/javascript,generateStack('${name}');`;
   document.body.appendChild(s);
 }
 
 function generateStackThroughFrame(name) {
   const i = document.createElement('iframe');
-  i.srcdoc = `<script>top.doHiddenAdThing('${name}');top.document.body.querySelector('iframe').remove();</script>`;
+  i.srcdoc = `<script>top.generateStack('${name}');top.document.body.querySelector('iframe').remove();</script>`;
   document.body.appendChild(i);
 }
 
@@ -128,17 +122,17 @@ function test() {
 async function asyncHideThisFunction() {
   return new Promise(async (resolve, reject) => {
     // Not hiding anything.
-    doHiddenAdThing('async default');
+    generateStack('async default');
 
     // setTimeout
-    setTimeout(_ => { doHiddenAdThing('async setTimeout'); }, 1);
+    setTimeout(_ => { generateStack('async setTimeout'); }, 1);
     
     // <script>
     await generateStackThroughScriptTag('await <script>');
 
     // await + generateStack()
     await 1;
-    doHiddenAdThing('await, then generate');
+    generateStack('await, then generate');
 
     resolve();
   });
