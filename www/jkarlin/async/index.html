@@ -4,10 +4,10 @@
 <body>
 <script src="adimage.js"></script>
 <script>
-  function generateStack(name) {
+  function generateStack(name, found) {
     //let stack = (new Error()).stack;
     //let hidFunction = (stack.includes('hideThisFunction') || stack.includes('asyncHideThisFunction')) ? '❌':'✅';
-    let adFound = (document.adScriptInStack()) ? '✅' : '❌';
+    let adFound = found; //(document.adScriptInStack()) ? '✅' : '❌';
     let d = document.createElement('details');
     let s = document.createElement('summary');
     s.innerText = `${name} ( ad script detected: ${adFound})`;
