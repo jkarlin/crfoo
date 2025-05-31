@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Worker Fetch Demo</title>
+    <style>
+        body {
+            transition: background-color 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>Service Worker Fetch Demo</h1>
+    <p>Attempting to make a fetch request via Service Worker...</p>
+    <p>If the background turns red, check the browser's console for errors. Service Workers require HTTPS (or localhost for development).</p>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            // Register the service worker
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                    document.body.style.backgroundColor = 'red'; // SW registration failed
+                });
+
+            // Listen for messages from the Service Worker
+            navigator.serviceWorker.addEventListener('message', event => {
+                console.log('Message received from SW:', event.data);
+                if (event.data && event.data.type === 'FETCH_RESULT') {
+                    if (event.data.success) {
+                        document.body.style.backgroundColor = 'green';
+                        console.log('Fetch successful, background changed to green.');
+                    } else {
+                        document.body.style.backgroundColor = 'red';
+                        console.error('Fetch failed, background changed to red. Reason:', event.data.error || `Status: ${event.data.status}`);
+                    }
+                }
+            });
+
+            // Upon DOMContentLoaded, wait for the service worker to be ready and then send a message
+            document.addEventListener('DOMContentLoaded', () => {
+                navigator.serviceWorker.ready
+                    .then(registration => {
+                        console.log('DOMContentloaded: Service Worker is ready.');
+                        // registration.active is the currently active service worker
+                        if (registration.active) {
+                            console.log('Sending FETCH_DATA message to active SW.');
+                            registration.active.postMessage({ type: 'FETCH_DATA' });
+                        } else {
+                            console.warn('DOMContentloaded: Service Worker is ready, but there is no active service worker to send a message to. This might happen if the SW failed to activate or claim the page.');
+                            document.body.style.backgroundColor = 'red';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error waiting for Service Worker to be ready on DOMContentLoaded:', error);
+                        document.body.style.backgroundColor = 'red';
+                    });
+            });
+
+        } else {
+            console.error('Service Worker API not supported by this browser.');
+            document.body.style.backgroundColor = 'red'; // SW not supported
+        }
+    </script>
+</body>
+</html>
