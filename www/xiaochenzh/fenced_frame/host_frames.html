@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fenced Execution Environment Demo</title>
+    <style>
+      html,
+      body {
+        margin: 5px; /* Adjusted margin for a bit more space */
+        font-size: 17px;
+        font-family: "Helvetica", sans-serif;
+        box-sizing: border-box;
+        line-height: 1.6;
+        padding: 1em;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      .page-container {
+        display: flex;
+        gap: 20px; /* Space between the two iframe columns */
+      }
+
+      .iframe-column {
+        flex: 1; /* Each column takes equal width */
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+      }
+
+      .iframe-column h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      .iframe-column iframe {
+        resize: both;
+        width: 100%;
+        min-height: 300px; /* Minimum height for the iframe */
+        height: 640px; /* Default height */
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ccc; /* Explicit border for iframe */
+        background-color: white; /* Background for iframe area before content loads */
+      }
+
+      .iframe-column fencedframe {
+        resize: both;
+        width: 100%;
+        min-height: 300px; /* Minimum height for the iframe */
+        height: 640px; /* Default height */
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ccc; /* Explicit border for iframe */
+        background-color: white; /* Background for iframe area before content loads */
+      }
+
+      .iframe-column input[type="text"] {
+        width: 100%;
+        font-size: 16px;
+        padding: 8px; /* Slightly increased padding */
+        margin-bottom: 8px; /* Spacing between input and button */
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      .iframe-column button {
+        padding: 8px 12px; /* Slightly increased padding */
+        margin: 1px 0;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%; /* Make button full width of its column section */
+        background-color: #e7e7e7;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      .iframe-column button:hover {
+        background-color: #ddd;
+      }
+
+      /* Responsive: stack columns on smaller screens */
+      @media (max-width: 768px) {
+        .page-container {
+          flex-direction: column;
+        }
+        .iframe-column {
+          margin-bottom: 20px; /* Add space between stacked columns */
+        }
+        .iframe-column:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .callout {
+        margin: 20px 0;
+        padding: 15px;
+        border-left: 6px solid;
+      }
+      .callout-info {
+        background-color: #e7f3fe;
+        border-color: #2196f3;
+      }
+      .callout p {
+        margin: 0;
+      }
+      .callout-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <div class="iframe-column">
+        <h2>Iframe</h2>
+        <iframe id="iframe1"></iframe>
+        <input id="src1" type="text" placeholder="Iframe URL here" />
+        <button onclick="navigateFrame('iframe1', 'src1')">Load Iframe</button>
+      </div>
+
+      <div class="iframe-column">
+        <h2>Fenced Frame</h2>
+        <fencedframe id="fencedframe"></fencedframe>
+        <input id="src2" type="text" placeholder="Fenced Frame URL here" />
+        <button onclick="navigateFencedFrame('src2')">Load Fenced Frame</button>
+      </div>
+    </div>
+
+    <script>
+      function navigateFrame(iframeId, inputId) {
+        const iframeElement = document.getElementById(iframeId);
+        const srcInput = document.getElementById(inputId);
+        const urlValue = srcInput.value.trim();
+
+        if (!iframeElement || !srcInput) {
+          console.error("Could not find iframe or input element for IDs:", iframeId, inputId);
+          return;
+        }
+
+        if (urlValue === "") {
+          // If the input is empty, load a blank page in the iframe
+          iframeElement.src = "about:blank";
+          return;
+        }
+
+        try {
+          // Resolve the entered URL against the current page's origin.
+          // This allows relative paths like "/page.html" or "other.html".
+          const resolvedUrl = new URL(urlValue, window.location.origin);
+          iframeElement.src = resolvedUrl.href;
+        } catch (e) {
+          // If URL construction fails (e.g., invalid URL format)
+          console.error("Invalid URL entered for " + inputId + ":", e, "Input was:", urlValue);
+          // alert("The URL entered for " + inputId + " is invalid. Please check and try again."); // Optional: uncomment for user alert
+          iframeElement.src = "about:blank"; // Fallback to a blank page
+        }
+      }
+
+      function navigateFencedFrame(inputId) {
+        // Finally set the source
+        const fencedframeElement = document.getElementById("fencedframe");
+        const srcInput = document.getElementById(inputId);
+        const urlValue = srcInput.value.trim();
+
+        const url = new URL(urlValue, location.origin);
+
+        fencedframe.config = new FencedFrameConfig(url);
+      }
+
+      function navigateFencedFrameAndDisableNetwork(inputId) {
+        // Finally set the source
+      }
+    </script>
+  </body>
+</html>
