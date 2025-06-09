@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Status</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            padding: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3.75rem;
+            }
+        }
+
+        .tracked-theme {
+            background-color: #ef4444;
+            color: #ffffff;
+        }
+
+        .not-tracked-theme {
+            background-color: #4ade80;
+            color: #374151;
+        }
+    </style>
+</head>
+<body id="page-body">
+
+    <div>
+        <h1 id="message"></h1>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const paramName = 'clid';
+
+            const messageElement = document.getElementById('message');
+            const bodyElement = document.getElementById('page-body');
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.has(paramName) && urlParams.get(paramName) !== '') {
+messageElement.textContent = `You are being tracked! Click ID: ${urlParams.get(paramName)}`;
+                bodyElement.classList.add('tracked-theme');
+
+            } else {
+                messageElement.textContent = "You are not being tracked.";
+                bodyElement.classList.add('not-tracked-theme');
+            }
+        });
+    </script>
+
+</body>
+</html>
+

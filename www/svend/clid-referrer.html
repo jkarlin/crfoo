@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referrer Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Query param click ID demo</h1>
+    <p>This page will link to the tracking indicator with a unique ID in the URL's query params.</p>
+
+    <a id="tracking-link" href="#" title="Go to tracking page">Click to Check Tracking Status</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isProd = window.location.hostname.includes('kungfoo.net');
+            const targetPrefix = isProd ? (window.location.hostname.includes('cr2') ? 'https://cr.kungfoo.net/svend/' : 'https://cr2.kungfoo.net/svend/') : '';
+            const targetFile = 'clid-indicator.html';
+            const clickId = Math.random().toString(36).substring(2, 9);
+const trackingUrl = `${targetPrefix}${targetFile}?clid=${clickId}`;
+
+            const linkElement = document.getElementById('tracking-link');
+            if (linkElement) {
+                linkElement.href = trackingUrl;
+            }
+        });
+    </script>
+
+</body>
+</html>
+
