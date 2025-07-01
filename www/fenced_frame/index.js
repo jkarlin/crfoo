@@ -1,7 +1,7 @@
 function makeContentUrl() {
     let options = document.getElementById('frameUrl').options;
-    let fragment = options[options.selectedIndex].textContent;
-    return new URL(fragment, 'https://cr.kungfoo.net/fenced_frame/content');
+    let fragment = options[options.selectedIndex].value;
+    return new URL(fragment, 'https://cr.kungfoo.net/fenced_frame/content/');
 }
 
 function createFencedFrame() {

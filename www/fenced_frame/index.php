@@ -25,5 +25,5 @@ header("Supports-Loading-Mode: fenced-frame");
 
   <button onclick="createFencedFrame()">Add Fenced Frame</button>
   <button onclick="createIframe()">Add IFrame</button>
-  <button onclick="createCredentiallessIframe())">Add Credentialless IFrame</button>
+  <button onclick="createCredentiallessIframe()">Add Credentialless IFrame</button>
 </html>
