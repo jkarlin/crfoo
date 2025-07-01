@@ -20,7 +20,7 @@ header("Supports-Loading-Mode: fenced-frame");
   </body>
   <label for="frameUrl">Frame URL:</label>
   <select name="frameUrl" id="frameUrl">
-    <option value="hello_world">hello_world.php</option>
+    <option>hello_world.php</option>
   </select>
 
   <button onclick="createFencedFrame()">Add Fenced Frame</button>
