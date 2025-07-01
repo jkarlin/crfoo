@@ -1,26 +1,30 @@
 function makeContentUrl() {
-    let options = document.getElementById('frameUrl').options;
+    let options = document.getElementById('frame-url').options;
     let fragment = options[options.selectedIndex].value;
-    console.log(fragment);
     return new URL(fragment, 'https://cr.kungfoo.net/fenced_frame/content/');
+}
+
+function addFrame(frame_element) {
+    let container = document.getElementById('frame-container');
+    container.appendChild(frame_element);
 }
 
 function createFencedFrame() {
     let frame = document.createElement('fencedframe');
     let config = new FencedFrameConfig(makeContentUrl());
     frame.config = config;
-    document.body.appendChild(frame);
+    addFrame(frame);
 }
 
 function createIframe() {
     let frame = document.createElement('iframe');
     frame.src = makeContentUrl();
-    document.body.appendChild(frame);
+    addFrame(frame);
 }
 
 function createCredentiallessIframe() {
     let frame = document.createElement('iframe');
     frame.credentialless = true;
     frame.src = makeContentUrl();
-    document.body.appendChild(frame);
+    addFrame(frame);
 }

@@ -17,13 +17,24 @@ header("Supports-Loading-Mode: fenced-frame");
   <body>
     <h1>Fenced Frames Demo</h1>
     <p>This demo site is for testing functionality of fenced frames. Use the buttons below to create and manipulate frames.</p>
-  </body>
-  <label for="frameUrl">Frame URL:</label>
-  <select name="frameUrl" id="frameUrl">
-    <option>hello_world.php</option>
-  </select>
+  
+    <div>
+      <label for="frame-url">Frame URL:</label>
+      <select name="frame-url" id="frame-url">
+        <option>hello_world.php</option>
+      </select>
+    </div>
 
-  <button onclick="createFencedFrame()">Add Fenced Frame</button>
-  <button onclick="createIframe()">Add IFrame</button>
-  <button onclick="createCredentiallessIframe()">Add Credentialless IFrame</button>
+    <div>
+      <button onclick="createFencedFrame()">Add Fenced Frame</button>
+    </div>
+    <div>
+      <button onclick="createIframe()">Add IFrame</button>
+    </div>
+    <div>
+     <button onclick="createCredentiallessIframe()">Add Credentialless IFrame</button>
+    </div>
+
+    <div id="frame-container"></div>
+  </body>
 </html>
