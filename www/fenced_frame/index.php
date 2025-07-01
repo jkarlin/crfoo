@@ -12,7 +12,6 @@ header("Supports-Loading-Mode: fenced-frame");
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src=ff_demo.js></script>
   </head>
   <body>
     <h1>Test Commit</h1>
