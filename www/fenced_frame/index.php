@@ -17,7 +17,7 @@ header("Supports-Loading-Mode: fenced-frame");
   <body>
     <h1>Fenced Frames Demo</h1>
     <p>This demo site is for testing functionality of fenced frames. Use the buttons below to create and manipulate frames.</p>
-  
+    <p>For more info, see <a href="https://github.com/jkarlin/crfoo/tree/main/www/fenced_frame/README.md">README.md</a></p>
     <div>
       <label for="frame-url">Frame URL:</label>
       <select name="frame-url" id="frame-url">
