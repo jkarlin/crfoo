@@ -202,7 +202,12 @@ async function doRun() {
     let sum = 0;
     for (let x of results)
         sum += x;
-  console.log( sum / results.length );
+const p = document.createElement('p');
+
+p.textContent = sum / results.length;
+
+// Append the paragraph to the body of the document
+document.body.appendChild(p);
 }
 doRun();
 
