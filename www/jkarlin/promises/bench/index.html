@@ -192,7 +192,7 @@ class Benchmark {
 async function doRun() {
     let __benchmark = new Benchmark();
     let results = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 200; i++) {
         console.log("Running");
         let start = Date.now();
         await __benchmark.runIteration();
