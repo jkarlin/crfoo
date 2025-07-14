@@ -199,6 +199,7 @@ async function doRun() {
         let end = Date.now();
         results.push(Math.max(1, end - start));
     }
+    print(results);
     let sum = 0;
     for (let x of results)
         sum += x;
