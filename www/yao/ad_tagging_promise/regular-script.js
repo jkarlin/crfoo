@@ -1,5 +1,5 @@
 function insertAdFrameFromNonAdScriptAsync(url) {
-  Promise.resolve().catch( () => {
+  Promise.resolve().then(() => {
     const iframe = document.createElement('iframe');
     iframe.src = url;
     document.body.appendChild(iframe);
