@@ -5,7 +5,13 @@ function insertAdFrameFromNonAdScript(url) {
 }
 
 function insertAdFrameFromNonAdScriptAsync(url) {
-  setTimeout(() => {
-    insertAdFrameFromNonAdScript(url);
-  }, "100");
+  sharedStorage.set('a', 'b')
+    .then(() => {})
+    .catch(error => {
+      insertAdFrameFromNonAdScript(url);
+    });
+ 
+  // setTimeout(() => {
+  //   insertAdFrameFromNonAdScript(url);
+  // }, "100");
 }
