@@ -4,6 +4,8 @@
 
 <h1>Aaaaaaa aa Aa Aaaaaaa Aaaaaa</h1>
 
+<button id="toggleButton">Toggle Image</button>
+  
 <p>Aaaa aaaaaaa aaa aaaaaaaa aaaaaaa. Aa'aa aaaaaa aaaa aaaaaaaa aaa aaaaaaaaa aa aaaaaaa aaa aaa aaaaaaa aaa aaaaaaa aaaa aaaaaaaa aaa aaaaaaaa. Aaaa aa aaaaaaa aaa aaaaaaaaaa aaaaaaaaa aa aaaaaaaaa aaa aaaaaaaa aaa a aaaaaaaa aaaaaaa aaaaaaaa aaa aaaaaaa aaa aaaaaaa aaa aaaaaaa aaaaa.</p>
 
 <p>Aaaaa aaaaa aaaaa aaaa aaaa aaaa, aaaaaaaaaa aaaaaaaa aaaa. Aa aaaa aaaaaaa aaaaaaa aaaaaaaa aaaaaaaa aaaa aa aaaaaa aa aaaaaa aaaaaaaa aaaaaa aaaaaa. Aa aaaa aaaaa aa aaaaaa aaaaaaa aaaaaa aaaaaaaa aa aaaaaaa aa aaaaaaa aa aaaaaaaa aaaaaa aa aaa aaaaaaaaaaa aaaaa aaa aaaaaaa aaaaaaaa aaaa aaaaaaaa. Aaaaaaaaa aaa aaaaaa aaaaa aaaaaa aa aaaaaaaaa aaaaaaaa aaaaaaa.</p>
@@ -20,7 +22,9 @@
 
 <p>Aaa aaa aaaaa aaaaa aaaapa aaa aaa aaaa aaaa. Aaaa aaaaaaaa aa aaaaa aaaaa aa aaaaaaa aaaaaaaa aaa aa aa aaaaaaaaa, aaaaaaa aa aaaaaaaa aaaaa aaaaa aaaaaaa aa aaa aaaaaaaa aa aaaaa aaaaa. Aaa'a a aaaaaaa aaaaaaa aaa aaaa aaaaaa aaa aaaaaaa aaaaa.</p>
 
-<img src="ad/image/ad.png" width="500">
+<div id="image-container">
+  <img src="ad/image/ad.png" width="500">
+</div>
 
 <p>Aaaa aaaaaaa aaa aaaaaaaa aaaaaaa. Aa'aa aaaaaa aaaa aaaaaaaa aaa aaaaaaaaa aa aaaaaaa aaa aaa aaaaaaa aaa aaaaaaa aaaa aaaaaaaa aaa aaaaaaaa. Aaaa aa aaaaaaa aaa aaaaaaaaaa aaaaaaaaa aa aaaaaaaaa aaa aaaaaaaa aaa a aaaaaaaa aaaaaaa aaaaaaaa aaa aaaaaaa aaa aaaaaaa aaa aaaaaaa aaaaa.</p>
 
@@ -54,5 +58,23 @@
   
 <p>Aaaaa aaaaaaaa aa aaaa aaaaaaa aaaaaaa. Aa'aa aaaaaaaa aaa aaaa aa aaaaaaaa a aaaaaa AAAA aaaaa aaaa aa aaaaa aaa aaaaaa aaaaaaa aaaa aaaaaa aaa aaaaaaaa. Aaaa aaaaaaaaaa a aaaaaaaaaaa aaaaaa aa aaaaaaaa aaaaaa aaaaaaaa.</p>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('toggleButton');
+    const imageContainer = document.getElementById('image-container');
+    let storedElement = null;
+    const targetParagraph = document.querySelector('p:nth-of-type(1)');
+
+    toggleButton.addEventListener('click', () => {
+        if (imageContainer.parentNode) {
+            storedElement = imageContainer;
+            imageContainer.parentNode.removeChild(imageContainer);
+        } else if (storedElement) {
+            targetParagraph.insertAdjacentElement('afterend', storedElement);
+        }
+    });
+});
+</script>
+  
 </body>
 </html>
