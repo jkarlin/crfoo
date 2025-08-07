@@ -2,36 +2,20 @@
 <title>History</title>
 </head>
 <body>
+  <script src="prebid9.js"></script>
+  <script src="regular-script.js"></script>
   <div><p>Page1</p></div>
-  
-  <script>
-    function sameDocNavigation2() {
-      const stateObj = {};
-      const title = "";
-      history.pushState(stateObj, title, 'same-doc-page2');
-    }
-
-    function sameDocNavigation3() {
-      const stateObj = {};
-      const title = "";
-      history.pushState(stateObj, title, 'same-doc-page3');
-    }
-
-    function navNewPage() {
-      window.location.href = "page2.html";
-    }
-  </script>
 
   <div>
-    <button onclick="sameDocNavigation2()">Navigate to Same-Doc Page2</button>
+    <button onclick="pushStateFromAd('same-doc-page2')">Navigate to Same-Doc-Page2 From Ad</button>
   </div>
 
   <div>
-    <button onclick="sameDocNavigation3()">Navigate to Same-Doc Page3</button>
+    <button onclick="pushStateFromAd('same-doc-page3')">Navigate to Same-Doc-Page3 From Ad</button>
   </div>
   
   <div>
-    <button onclick="navNewPage()">Navigate to New Page2</button>
+    <button onclick="setLocationFromAd('page2.html')">Navigate to New page2.html</button>
   </div>
 
 </body>
