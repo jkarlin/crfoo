@@ -1,0 +1,27 @@
+<head>
+<title>History</title>
+</head>
+<body>
+  <div><p>Page2</p></div>
+  
+  <script>
+    function sameDocNavigation() {
+      const stateObj = {};
+      const title = "";
+      history.pushState(stateObj, title, 'same-doc-page3');
+    }
+
+    function navNewPage() {
+      window.location.href = "page3.html";
+    }
+  </script>
+
+  <div>
+    <button onclick="sameDocNavigation()">Navigate to Same-Doc Page3</button>
+  </div>
+  
+  <div>
+    <button onclick="navNewPage()">Navigate to Page3</button>
+  </div>
+
+</body>
