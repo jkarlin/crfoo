@@ -5,7 +5,13 @@
   <div><p>Page2</p></div>
   
   <script>
-    function sameDocNavigation() {
+    function sameDocNavigation2() {
+      const stateObj = {};
+      const title = "";
+      history.pushState(stateObj, title, 'same-doc-page2');
+    }
+
+    function sameDocNavigation3() {
       const stateObj = {};
       const title = "";
       history.pushState(stateObj, title, 'same-doc-page3');
@@ -17,11 +23,15 @@
   </script>
 
   <div>
-    <button onclick="sameDocNavigation()">Navigate to Same-Doc Page3</button>
+    <button onclick="sameDocNavigation2()">Navigate to Same-Doc Page2</button>
+  </div>
+
+  <div>
+    <button onclick="sameDocNavigation3()">Navigate to Same-Doc Page3</button>
   </div>
   
   <div>
-    <button onclick="navNewPage()">Navigate to Page3</button>
+    <button onclick="navNewPage()">Navigate to New Page3</button>
   </div>
 
 </body>
