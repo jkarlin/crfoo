@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Picker → Google</title>
+</head>
+<body>
+<h1>Tap anywhere to pick a file</h1>
+
+<script>
+document.body.onclick = async () => {
+    try {
+        await showOpenFilePicker();
+        window.open("https://www.google.com", "_blank");
+    } catch (err) {
+        console.error(err);
+    }
+};
+</script>
+</body>
+</html>
