@@ -16,13 +16,17 @@
   <div>
     <button onclick="pushStateFromAd('same-doc-page3')">Same-Doc-Page3 (From Ad)</button>
   </div>
-  
-  <div>
-    <button onclick="setLocationFromAd('page2.html')">page2.html (From Ad)</button>
-  </div>
 
   <div>
     <button onclick="replaceStateFromAd('same-doc-page2')">(Replace) Same-Doc-Page2 (From Ad)</button>
+  </div>
+
+  <div>
+    <button onclick="locationAssignFromAd('page2.html')">Location Assign page2.html (From Ad)</button>
+  </div>
+
+  <div>
+    <button onclick="locationReplaceFromAd('page2.html')">Location Replace page2.html (From Ad)</button>
   </div>
 
   <div>
@@ -42,7 +46,15 @@
   </div>
   
   <div>
-    <button onclick="setLocationFromRegularScript('page2.html')">page2.html</button>
+    <button onclick="replaceStateFromRegularScript('same-doc-page2')">(Replace) Same-Doc-Page2</button>
+  </div>
+
+  <div>
+    <button onclick="locationAssignFromRegularScript('page2.html')">Location Assign page2.html</button>
+  </div>
+
+  <div>
+    <button onclick="locationReplaceFromRegularScript('page2.html')">Location Replace page2.html</button>
   </div>
   
 </body>
