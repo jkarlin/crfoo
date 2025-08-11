@@ -1,27 +1,27 @@
 function pushStateFromAd(url) {
   const stateObj = {};
-  const title = "";
+  const title = "push";
   history.pushState(stateObj, title, url);
 }
 
 function replaceStateFromAd(url) {
   const stateObj = {};
-  const title = "";
+  const title = "replace";
   history.replaceState(stateObj, title, url);
 }
 
 function forwardFromAd() {
-  const stateObj = {};
-  const title = "";
   history.forward();
 }
 
 function backFromAd() {
-  const stateObj = {};
-  const title = "";
   history.forward();
 }
 
-function setLocationFromAd(url) {
-  window.location.href = url;
+function locationAssignFromAd(url) {
+  window.location.assign(url);
+}
+
+function locationReplaceFromAd(url) {
+  window.location.replace(url);
 }
