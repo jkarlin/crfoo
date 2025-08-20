@@ -1,3 +1,14 @@
+function generateStack(name) {
+  let adFound = (document.adScriptInStack()) ? '✅' : '❌';
+  let d = document.createElement('details');
+  let s = document.createElement('summary');
+  s.innerText = `${name} ( ad script detected: ${adFound})`;
+  let p = document.createElement('pre');
+  d.appendChild(s);
+  d.appendChild(p);
+  document.body.appendChild(d);
+}
+
 function hideThisFunction() {
   // Not hiding anything.
   generateStack('Default');
