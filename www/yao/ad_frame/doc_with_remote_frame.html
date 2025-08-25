@@ -4,6 +4,11 @@
     function insertCrossOriginFrame() {
       insertAdIframe('https://cdn.glitch.global/cd35de4f-7fd8-4eaf-87f1-9299f60517fc/social-engineering-ad1.png');
     }
+
+    function insertSameOriginFrame() {
+      insertAdIframe('https://cr.kungfoo.net/subresource_filter/social-engineering-ad1.png');
+    }
   </script>
+  <button onclick="insertSameOriginFrame()">insertSameOriginFrame</button>
   <button onclick="insertCrossOriginFrame()">insertCrossOriginFrame</button>
 </body>
