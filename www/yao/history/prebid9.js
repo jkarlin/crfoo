@@ -27,7 +27,7 @@ function locationReplaceFromAd(url) {
 }
 
 function overrideAndInvokePushState() {
-	const originalPushState = history.pushState;
+  const originalPushState = history.pushState;
   
   history.pushState = function(...args) {
     console.log('Intercepted pushState call with arguments:', {
