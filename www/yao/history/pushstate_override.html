@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <body>
 
-<script type="text/javascript" src="pushState-override.js"></script>
+<script type="text/javascript" src="prebid9.js"></script>
 
-<button onclick="invokePushState()">Invoke pushState()</button>
+<button onclick="overrideAndInvokePushStateFromAdScript()">Override and Invoke pushState() from Ad Script</button>
 
 <script>
-  function invokePushState() {
-    history.pushState({}, "", "state1");
+  function overrideAndInvokePushStateFromAdScript() {
+    overrideAndInvokePushState();
   }
 </script>
 
