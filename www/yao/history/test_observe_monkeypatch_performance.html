@@ -3,9 +3,15 @@
 
 <script type="text/javascript" src="test_observe_monkeypatch_performance.js"></script>
 
-<button onclick="storeDummyFunctionAndThenMonkeypatch()">Store history.dymmyFunction() and then monkeypatch</button>
+<input type="number" id="monkeypatchIterationsValue" placeholder="Enter # iterations for monkeypatch">
+<button onclick="storeDummyFunctionAndThenMonkeypatch(parseInt(document.getElementById('monkeypatchIterationsValue').value))">
+    Store and Monkeypatch
+</button>
 <br>
-<button onclick="invokeDummyFunction()">Invoke history.dymmyFunction()</button>
+<input type="number" id="invokeIterationsValue" placeholder="Enter # iterations to invoke">
+<button onclick="invokeDummyFunction(parseInt(document.getElementById('invokeIterationsValue').value))">
+    Invoke Dummy Function
+</button>
 
 </body>
 </html>
