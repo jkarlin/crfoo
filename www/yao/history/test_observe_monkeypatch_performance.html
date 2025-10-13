@@ -3,12 +3,12 @@
 
 <script type="text/javascript" src="test_observe_monkeypatch_performance.js"></script>
 
-<input type="number" id="monkeypatchIterationsValue" placeholder="Enter # iterations for monkeypatch">
+<input type="number" id="monkeypatchIterationsValue" placeholder="Enter # iterations">
 <button onclick="storeDummyFunctionAndThenMonkeypatch(parseInt(document.getElementById('monkeypatchIterationsValue').value))">
     Store and Monkeypatch
 </button>
 <br>
-<input type="number" id="invokeIterationsValue" placeholder="Enter # iterations to invoke">
+<input type="number" id="invokeIterationsValue" placeholder="Enter # iterations">
 <button onclick="invokeDummyFunction(parseInt(document.getElementById('invokeIterationsValue').value))">
     Invoke Dummy Function
 </button>
