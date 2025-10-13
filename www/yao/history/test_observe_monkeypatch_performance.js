@@ -1,7 +1,7 @@
 function storeDummyFunctionAndThenMonkeypatch(numIterations) {
   console.time('storeDummyFunctionAndThenMonkeypatch');
   for (let i = 0; i < numIterations; i++) {
-    const originalDummyFunction = history.dummyFunction;
+    var originalDummyFunction = history.dummyFunction;
     history.dummyFunction = function(...args) {
       return originalDummyFunction.apply(history, args);
     };
