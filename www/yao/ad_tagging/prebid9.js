@@ -1,3 +1,10 @@
-const iframe = document.createElement('iframe');
-iframe.src = 'iframe.html';
-document.body.appendChild(iframe);
+function navigateIframe(newUrl) {
+  const iframe = document.querySelector('iframe');
+  iframe.src = newUrl;
+}
+
+function createIframe(newUrl) {
+  const iframe = document.createElement('iframe');
+  iframe.src = newUrl;
+  document.body.appendChild(iframe);
+}
