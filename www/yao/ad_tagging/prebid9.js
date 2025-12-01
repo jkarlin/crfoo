@@ -10,7 +10,7 @@ function createIframe(newUrl) {
 }
 
 function appendInvisibleIframes(url) {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 200; i++) {
     appendInvisibleIframe(url);
   }
 }
