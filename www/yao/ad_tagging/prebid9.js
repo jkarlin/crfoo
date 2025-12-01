@@ -8,3 +8,9 @@ function createIframe(newUrl) {
   iframe.src = newUrl;
   document.body.appendChild(iframe);
 }
+
+function appendInvisibleIframes(url) {
+  for (let i = 0; i < 50; i++) {
+    appendInvisibleIframe(url);
+  }
+}
