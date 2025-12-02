@@ -14,3 +14,13 @@ function appendInvisibleIframes(url) {
     appendInvisibleIframe(url);
   }
 }
+
+function appendTransparentIframe() {
+  var container = document.querySelector('.container');
+  if (container) {
+    var iframe = document.createElement('iframe');
+    iframe.id = 'transparent-frame';
+    iframe.src = 'about:blank';
+    container.appendChild(iframe);
+  }
+}
