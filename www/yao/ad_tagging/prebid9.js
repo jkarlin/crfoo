@@ -59,8 +59,8 @@ function insertVideoAd() {
     );
 
     createVideoElement(
-        '&lt;video&gt; Ad (Float Right)', 
-        'float: right;', 
+        '&lt;video&gt; Ad (Float Left)', 
+        'float: left;', 
         'width: 100%;' 
     );
 }
