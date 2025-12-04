@@ -33,14 +33,34 @@ function insertVideoAd() {
         return;
     }
 
-    const wrapper = document.createElement('div');
+    function createVideoElement(labelText, videoCustomStyle, wrapperCustomStyle = '') {
+        const wrapper = document.createElement('div');
+        
+        if (wrapperCustomStyle) {
+            wrapper.style.cssText = wrapperCustomStyle;
+        }
 
-    wrapper.innerHTML = `
-        <div class="label">&lt;video&gt; Ad</div>
-        <video controls autoplay loop muted width="300" height="200" style="border: 1px solid #000; object-fit: cover;">
-            <source src="https://cr.kungfoo.net/yao/ad_tagging/sample.mp4" type="video/mp4">
-        </video>
-    `;
+        wrapper.innerHTML = `
+            <div class="label">${labelText}</div>
+            <video controls autoplay loop muted width="300" height="200" 
+                   style="border: 1px solid #000; object-fit: cover; ${videoCustomStyle}">
+                <source src="https://cr.kungfoo.net/yao/ad_tagging/sample.mp4" type="video/mp4">
+            </video>
+        `;
 
-    container.appendChild(wrapper);
+        container.appendChild(wrapper);
+    }
+
+    createVideoElement('&lt;video&gt; Ad', '');
+
+    createVideoElement(
+        '&lt;video&gt; Ad (Block)', 
+        'display: block; margin-top: 5px;'
+    );
+
+    createVideoElement(
+        '&lt;video&gt; Ad (Float Right)', 
+        'float: right;', 
+        'width: 100%;' 
+    );
 }
