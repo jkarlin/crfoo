@@ -26,41 +26,44 @@ function appendTransparentIframe() {
 }
 
 function insertVideoAd() {
-    const container = document.querySelector('.first-viewport-container');
+    const mainContainer = document.querySelector('.first-viewport-container');
 
-    if (!container) {
-        console.error("Target container '.first-viewport-container' not found.");
-        return;
-    }
+    if (mainContainer) {
+        function createVideoElement(labelText, videoCustomStyle, wrapperCustomStyle = '') {
+            const wrapper = document.createElement('div');
+            if (wrapperCustomStyle) wrapper.style.cssText = wrapperCustomStyle;
 
-    function createVideoElement(labelText, videoCustomStyle, wrapperCustomStyle = '') {
-        const wrapper = document.createElement('div');
-        
-        if (wrapperCustomStyle) {
-            wrapper.style.cssText = wrapperCustomStyle;
+            wrapper.innerHTML = `
+                <div class="label">${labelText}</div>
+                <video controls autoplay loop muted width="300" height="200" 
+                       style="border: 1px solid #000; object-fit: cover; ${videoCustomStyle}">
+                    <source src="https://cr.kungfoo.net/yao/ad_tagging/sample.mp4" type="video/mp4">
+                </video>
+            `;
+            mainContainer.appendChild(wrapper);
         }
 
-        wrapper.innerHTML = `
-            <div class="label">${labelText}</div>
+        createVideoElement('&lt;video&gt; Ad', '');
+
+        createVideoElement('&lt;video&gt; Ad (Block)', 'display: block; margin-top: 5px;');
+
+        createVideoElement('&lt;video&gt; Ad (Float Right)', 'float: right;', 'width: 100%;');
+    } else {
+        console.error("Target container '.first-viewport-container' not found.");
+    }
+
+    const stickyContainer = document.querySelector('.fixed-bottom-right');
+
+    if (stickyContainer) {
+        stickyContainer.innerHTML = '';
+        stickyContainer.innerHTML = `
+            <div class="label">Sticky &lt;video&gt; Ad</div>
             <video controls autoplay loop muted width="300" height="200" 
-                   style="border: 1px solid #000; object-fit: cover; ${videoCustomStyle}">
+                   style="border: 1px solid #000; object-fit: cover; display: block;">
                 <source src="https://cr.kungfoo.net/yao/ad_tagging/sample.mp4" type="video/mp4">
             </video>
         `;
-
-        container.appendChild(wrapper);
+    } else {
+        console.warn("Target container '.fixed-bottom-right' not found.");
     }
-
-    createVideoElement('&lt;video&gt; Ad', '');
-
-    createVideoElement(
-        '&lt;video&gt; Ad (Block)', 
-        'display: block; margin-top: 5px;'
-    );
-
-    createVideoElement(
-        '&lt;video&gt; Ad (Float Left)', 
-        'float: left;', 
-        'width: 100%;' 
-    );
 }
