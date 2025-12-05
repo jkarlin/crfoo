@@ -47,7 +47,7 @@ function insertVideoAd() {
 
         createVideoElement('&lt;video&gt; Ad (Block)', 'display: block; margin-top: 5px;');
 
-        createVideoElement('&lt;video&gt; Ad (Float Right)', 'float: right;', 'width: 100%;');
+        createVideoElement('&lt;video&gt; Ad (Float Left)', 'float: left;', 'width: 100%;');
     } else {
         console.error("Target container '.first-viewport-container' not found.");
     }
