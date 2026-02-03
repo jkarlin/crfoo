@@ -47,6 +47,12 @@ const adInventory = [
         type: 'iframe',
         label: 'Absolute &lt;iframe&gt; Ad',
         containerSelector: '.first-viewport-container',
+        wrapperStyles: {
+            position: 'absolute',
+            left: '10px',
+            top: '330px',
+            zIndex: '10'
+        },
         attributes: {
             src: 'https://cr.kungfoo.net/ad_img/300x250.png',
             width: '300',
@@ -54,10 +60,8 @@ const adInventory = [
             title: 'absolute iframe'
         },
         styles: {
-            position: 'absolute',
-            right: '50px',
-            top: '350px',
-            border: '2px solid red'
+            border: '2px solid red',
+            backgroundColor: 'white'
         }
     },
     {
