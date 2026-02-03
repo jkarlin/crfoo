@@ -25,45 +25,189 @@ function appendTransparentIframe() {
   }
 }
 
-function insertVideoAd() {
-    const mainContainer = document.querySelector('.first-viewport-container');
-
-    if (mainContainer) {
-        function createVideoElement(labelText, videoCustomStyle, wrapperCustomStyle = '') {
-            const wrapper = document.createElement('div');
-            if (wrapperCustomStyle) wrapper.style.cssText = wrapperCustomStyle;
-
-            wrapper.innerHTML = `
-                <div class="label">${labelText}</div>
-                <video controls autoplay loop muted width="300" height="200" 
-                       style="border: 1px solid #000; object-fit: cover; ${videoCustomStyle}">
-                    <source src="https://cr.kungfoo.net/yao/ad_tagging/sample.mp4" type="video/mp4">
-                </video>
-            `;
-            mainContainer.appendChild(wrapper);
+/**
+ * Ad Configuration Configuration
+ * * Defines the type, location, and styling of all ad units on the page.
+ * To add a new ad, append a new object to this array.
+ */
+const adInventory = [
+    // --- Main Flow Elements ---
+    {
+        type: 'iframe',
+        label: '&lt;iframe&gt; Ad',
+        containerSelector: '.first-viewport-container',
+        attributes: {
+            src: 'https://cr.kungfoo.net/ad_img/300x250.png',
+            width: '600',
+            height: '200',
+            title: 'iframe 1'
         }
+    },
+    {
+        type: 'img',
+        label: '&lt;img&gt; Ad',
+        containerSelector: '.first-viewport-container',
+        attributes: {
+            src: 'https://cr.kungfoo.net/ad_img/300x250.png',
+            alt: 'image 1',
+            width: '300',
+            height: '200'
+        }
+    },
+    {
+        type: 'span',
+        label: 'background-image &lt;span&gt; Ad',
+        containerSelector: '.first-viewport-container',
+        attributes: { id: 'span1' },
+        styles: {
+            display: 'inline-block',
+            width: '300px',
+            height: '200px',
+            backgroundImage: "url('https://cr.kungfoo.net/ad_img/300x250.png')",
+            backgroundSize: 'cover',
+            border: '1px solid #000'
+        }
+    },
+    {
+        type: 'video',
+        label: '&lt;video&gt; Ad',
+        containerSelector: '.first-viewport-container',
+        attributes: {
+            src: 'https://cr.kungfoo.net/yao/ad_tagging/sample.mp4',
+            width: '300',
+            height: '200',
+            controls: true,
+            autoplay: true,
+            loop: true,
+            muted: true
+        },
+        styles: {
+            border: '1px solid #000',
+            objectFit: 'cover'
+        }
+    },
+    {
+        type: 'video',
+        label: '&lt;video&gt; Ad (Block)',
+        containerSelector: '.first-viewport-container',
+        attributes: {
+            src: 'https://cr.kungfoo.net/yao/ad_tagging/sample.mp4',
+            width: '300',
+            height: '200',
+            controls: true,
+            autoplay: true,
+            loop: true,
+            muted: true
+        },
+        styles: {
+            border: '1px solid #000',
+            objectFit: 'cover',
+            display: 'block',
+            marginTop: '5px'
+        }
+    },
+    {
+        type: 'video',
+        label: '&lt;video&gt; Ad (Float Left)',
+        containerSelector: '.first-viewport-container',
+        wrapperStyles: { width: '100%' },
+        attributes: {
+            src: 'https://cr.kungfoo.net/yao/ad_tagging/sample.mp4',
+            width: '300',
+            height: '200',
+            controls: true,
+            autoplay: true,
+            loop: true,
+            muted: true
+        },
+        styles: {
+            border: '1px solid #000',
+            objectFit: 'cover',
+            float: 'left'
+        }
+    },
+    
+    // --- Sticky Position Elements ---
+    {
+        type: 'video',
+        label: 'Sticky &lt;video&gt; Ad',
+        containerSelector: '.fixed-bottom-right',
+        attributes: {
+            src: 'https://cr.kungfoo.net/yao/ad_tagging/sample.mp4',
+            width: '300',
+            height: '200',
+            controls: true,
+            autoplay: true,
+            loop: true,
+            muted: true
+        },
+        styles: {
+            border: '1px solid #000',
+            objectFit: 'cover',
+            display: 'block'
+        }
+    }
+];
 
-        createVideoElement('&lt;video&gt; Ad', '');
+/**
+ * Main Initialization Function
+ */
+window.initAdManager = function() {
+    adInventory.forEach(adConfig => {
+        renderAdUnit(adConfig);
+    });
+};
 
-        createVideoElement('&lt;video&gt; Ad (Block)', 'display: block; margin-top: 5px;');
-
-        createVideoElement('&lt;video&gt; Ad (Float Left)', 'float: left;', 'width: 100%;');
-    } else {
-        console.error("Target container '.first-viewport-container' not found.");
+/**
+ * Renders a single ad unit based on the provided configuration object.
+ * @param {Object} config - The ad definition object
+ */
+function renderAdUnit(config) {
+    const container = document.querySelector(config.containerSelector);
+    if (!container) {
+        console.warn(`Container not found for ${config.label}: ${config.containerSelector}`);
+        return;
     }
 
-    const stickyContainer = document.querySelector('.fixed-bottom-right');
-
-    if (stickyContainer) {
-        stickyContainer.innerHTML = '';
-        stickyContainer.innerHTML = `
-            <div class="label">Sticky &lt;video&gt; Ad</div>
-            <video controls autoplay loop muted width="300" height="200" 
-                   style="border: 1px solid #000; object-fit: cover; display: block;">
-                <source src="https://cr.kungfoo.net/yao/ad_tagging/sample.mp4" type="video/mp4">
-            </video>
-        `;
-    } else {
-        console.warn("Target container '.fixed-bottom-right' not found.");
+    // 1. Create Wrapper
+    const wrapper = document.createElement('div');
+    if (config.wrapperStyles) {
+        Object.assign(wrapper.style, config.wrapperStyles);
     }
+
+    // 2. Create and Append Label
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'ad-label'; // Maps to CSS class
+    labelDiv.innerHTML = config.label;
+    wrapper.appendChild(labelDiv);
+
+    // 3. Create Ad Element
+    const element = document.createElement(config.type);
+
+    // Apply attributes (src, width, controls, etc.)
+    if (config.attributes) {
+        Object.entries(config.attributes).forEach(([key, value]) => {
+            // Handle video source specifically as a child element or src attribute
+            if (config.type === 'video' && key === 'src') {
+                const source = document.createElement('source');
+                source.src = value;
+                source.type = 'video/mp4';
+                element.appendChild(source);
+            } else if (key === 'src' || key === 'href' || typeof value === 'string') {
+                element.setAttribute(key, value);
+            } else {
+                element[key] = value; // boolean attributes like autoplay/controls
+            }
+        });
+    }
+
+    // Apply inline styles (border, object-fit, float, etc.)
+    if (config.styles) {
+        Object.assign(element.style, config.styles);
+    }
+
+    // 4. Final Injection
+    wrapper.appendChild(element);
+    container.appendChild(wrapper);
 }
+
