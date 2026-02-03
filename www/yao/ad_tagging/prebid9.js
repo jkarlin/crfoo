@@ -45,6 +45,7 @@ const adInventory = [
     },
     {
         type: 'iframe',
+        label: 'Absolute &lt;iframe&gt; Ad',
         containerSelector: '.first-viewport-container',
         attributes: {
             src: 'https://cr.kungfoo.net/ad_img/300x250.png',
