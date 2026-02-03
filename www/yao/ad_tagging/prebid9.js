@@ -44,6 +44,23 @@ const adInventory = [
         }
     },
     {
+        type: 'iframe',
+        label: 'Absolute &lt;iframe&gt; Ad',
+        containerSelector: '.first-viewport-container',
+        attributes: {
+            src: 'https://cr.kungfoo.net/ad_img/300x250.png',
+            width: '300',
+            height: '250',
+            title: 'absolute iframe'
+        },
+        styles: {
+            position: 'absolute',
+            right: '50px',
+            top: '350px',
+            border: '2px solid red'
+        }
+    },
+    {
         type: 'img',
         label: '&lt;img&gt; Ad',
         containerSelector: '.first-viewport-container',
