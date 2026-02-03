@@ -49,9 +49,10 @@ const adInventory = [
         containerSelector: '.first-viewport-container',
         wrapperStyles: {
             position: 'absolute',
-            left: '10px',
+            right: '20px',
             top: '330px',
-            zIndex: '10'
+            zIndex: '10',
+            textAlign: 'right'
         },
         attributes: {
             src: 'https://cr.kungfoo.net/ad_img/300x250.png',
@@ -60,8 +61,7 @@ const adInventory = [
             title: 'absolute iframe'
         },
         styles: {
-            border: '2px solid red',
-            backgroundColor: 'white'
+            border: '1px solid #000'
         }
     },
     {
