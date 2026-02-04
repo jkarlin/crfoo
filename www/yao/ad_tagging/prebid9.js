@@ -103,67 +103,7 @@ const adInventory = [
             objectFit: 'cover'
         }
     },
-    {
-        type: 'video',
-        label: '&lt;video&gt; Ad (Block)',
-        containerSelector: '.first-viewport-container',
-        attributes: {
-            src: 'https://cr.kungfoo.net/yao/ad_tagging/sample.mp4',
-            width: '300',
-            height: '200',
-            controls: true,
-            autoplay: true,
-            loop: true,
-            muted: true
-        },
-        styles: {
-            border: '1px solid #000',
-            objectFit: 'cover',
-            display: 'block',
-            marginTop: '5px'
-        }
-    },
-    {
-        type: 'video',
-        label: '&lt;video&gt; Ad (Float Left)',
-        containerSelector: '.first-viewport-container',
-        wrapperStyles: { width: '100%' },
-        attributes: {
-            src: 'https://cr.kungfoo.net/yao/ad_tagging/sample.mp4',
-            width: '300',
-            height: '200',
-            controls: true,
-            autoplay: true,
-            loop: true,
-            muted: true
-        },
-        styles: {
-            border: '1px solid #000',
-            objectFit: 'cover',
-            float: 'left'
-        }
-    },
-    {
-        type: 'video',
-        label: 'Data URI &lt;video&gt; (No External File)',
-        containerSelector: '.first-viewport-container',
-        attributes: {
-            src: 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAgbW9vdgAAAGxtdmhkAAAAAAAAAAAAAAAAAAACAAAAAAHuwXRyYWsAAABcdGtoZAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABAAAAAAMAAAACAAAAAAHgbWRpYQAAACBtZGhkAAAAAAAAAAAAAAAAAAACAAAAAAHuwXEAAAAAAhxoZGxyAAAAAAAAAAB2aWRlAAAAAAAAAAAAAAAAVmlkZW9IYW5kbGVyAAAAAVBtaW5mAAAAFHZtaGQAAAABAAAAAAAAAAAAAAAkZGluZgAAABRkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAAAEcbXNibAAAABhzdGJsAAAAAAAAAAhzdHNkAAAAAAAAAAEAAABcbXA0dgAAAAAAAAABAAAAAwAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGP//AAAAM2F2Y0MBQAAkAAAAI2dkcCQAKH/iBAA38SgIAAAAD2JwcwYAAAAA/4j///8AAAAeaG11eQAAAAdmcmVlAAAAH3NkdHAUAAADAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAQbXZleQAAABB0cmV4AAAAAAAAAAEAAAB8bWRhdAgAAAAEAQAAIQ==',
-            width: '300',
-            height: '200',
-            controls: true,
-            autoplay: true,
-            loop: true,
-            muted: true,
-            playsinline: true
-        },
-        styles: {
-            border: '1px solid #000',
-            backgroundColor: '#000',
-            objectFit: 'contain'
-        }
-    },
-    
+        
     // --- Sticky Position Elements ---
     {
         type: 'video',
