@@ -143,6 +143,22 @@ const adInventory = [
             float: 'left'
         }
     },
+    {
+        type: 'video',
+        label: 'Trivial &lt;video&gt; Ad (No Source)',
+        containerSelector: '.first-viewport-container',
+        attributes: {
+            width: '300',
+            height: '200',
+            controls: true,
+            muted: true
+        },
+        styles: {
+            border: '1px solid #000',
+            display: 'block',
+            backgroundColor: '#000'     // Black background to mimic a player
+        }
+    },
     
     // --- Sticky Position Elements ---
     {
