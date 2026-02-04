@@ -145,22 +145,22 @@ const adInventory = [
     },
     {
         type: 'video',
-        label: 'Trivial &lt;video&gt; Ad (No Source)',
+        label: 'Data URI &lt;video&gt; (No External File)',
         containerSelector: '.first-viewport-container',
         attributes: {
-            // This is a valid, tiny (1x1 pixel) black MP4 video encoded as text
             src: 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAgbW9vdgAAAGxtdmhkAAAAAAAAAAAAAAAAAAACAAAAAAHuwXRyYWsAAABcdGtoZAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABAAAAAAMAAAACAAAAAAHgbWRpYQAAACBtZGhkAAAAAAAAAAAAAAAAAAACAAAAAAHuwXEAAAAAAhxoZGxyAAAAAAAAAAB2aWRlAAAAAAAAAAAAAAAAVmlkZW9IYW5kbGVyAAAAAVBtaW5mAAAAFHZtaGQAAAABAAAAAAAAAAAAAAAkZGluZgAAABRkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAAAEcbXNibAAAABhzdGJsAAAAAAAAAAhzdHNkAAAAAAAAAAEAAABcbXA0dgAAAAAAAAABAAAAAwAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGP//AAAAM2F2Y0MBQAAkAAAAI2dkcCQAKH/iBAA38SgIAAAAD2JwcwYAAAAA/4j///8AAAAeaG11eQAAAAdmcmVlAAAAH3NkdHAUAAADAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAQbXZleQAAABB0cmV4AAAAAAAAAAEAAAB8bWRhdAgAAAAEAQAAIQ==',
             width: '300',
             height: '200',
             controls: true,
             autoplay: true,
             loop: true,
-            muted: true
+            muted: true,
+            playsinline: true
         },
         styles: {
             border: '1px solid #000',
-            display: 'block',
-            backgroundColor: '#000'     // Black background to mimic a player
+            backgroundColor: '#000',
+            objectFit: 'contain'
         }
     },
     
