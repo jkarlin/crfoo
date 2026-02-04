@@ -116,8 +116,7 @@ const adInventory = [
             playsinline: true
         },
         styles: {
-            border: '1px solid #000',
-            background: white
+            border: '1px solid #000'
         }
     },
         
