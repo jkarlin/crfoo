@@ -103,6 +103,23 @@ const adInventory = [
             objectFit: 'cover'
         }
     },
+    {
+        type: 'video',
+        label: 'Trivial (No src) &lt;video&gt; Ad',
+        containerSelector: '.first-viewport-container',
+        attributes: {
+            width: '300',
+            height: '200',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            playsinline: true
+        },
+        styles: {
+            border: '1px solid #000',
+            background: white
+        }
+    },
         
     // --- Sticky Position Elements ---
     {
