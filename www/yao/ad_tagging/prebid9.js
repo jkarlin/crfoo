@@ -148,9 +148,13 @@ const adInventory = [
         label: 'Trivial &lt;video&gt; Ad (No Source)',
         containerSelector: '.first-viewport-container',
         attributes: {
+            // This is a valid, tiny (1x1 pixel) black MP4 video encoded as text
+            src: 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAgbW9vdgAAAGxtdmhkAAAAAAAAAAAAAAAAAAACAAAAAAHuwXRyYWsAAABcdGtoZAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABAAAAAAMAAAACAAAAAAHgbWRpYQAAACBtZGhkAAAAAAAAAAAAAAAAAAACAAAAAAHuwXEAAAAAAhxoZGxyAAAAAAAAAAB2aWRlAAAAAAAAAAAAAAAAVmlkZW9IYW5kbGVyAAAAAVBtaW5mAAAAFHZtaGQAAAABAAAAAAAAAAAAAAAkZGluZgAAABRkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAAAEcbXNibAAAABhzdGJsAAAAAAAAAAhzdHNkAAAAAAAAAAEAAABcbXA0dgAAAAAAAAABAAAAAwAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGP//AAAAM2F2Y0MBQAAkAAAAI2dkcCQAKH/iBAA38SgIAAAAD2JwcwYAAAAA/4j///8AAAAeaG11eQAAAAdmcmVlAAAAH3NkdHAUAAADAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAQbXZleQAAABB0cmV4AAAAAAAAAAEAAAB8bWRhdAgAAAAEAQAAIQ==',
             width: '300',
             height: '200',
             controls: true,
+            autoplay: true,
+            loop: true,
             muted: true
         },
         styles: {
