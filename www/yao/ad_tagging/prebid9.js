@@ -166,37 +166,11 @@ const adInventory = [
     }
 ];
 
-const adInventory2 = [
-    {
-        type: 'iframe',
-        label: 'Absolute &lt;iframe&gt; Ad',
-        containerSelector: '.first-viewport-container',
-        attributes: {
-            src: 'https://cr.kungfoo.net/ad_img/300x250.png',
-            width: '300',
-            height: '250',
-            title: 'absolute iframe'
-        },
-        styles: {
-            position: 'absolute',
-            right: '50px',
-            top: '350px',
-            border: '1px solid #000'
-        }
-    },
-];
-
 /**
  * Main Initialization Function
  */
 window.initAdManager = function() {
     adInventory.forEach(adConfig => {
-        renderAdUnit(adConfig);
-    });
-};
-
-window.initAdManager2 = function() {
-    adInventory2.forEach(adConfig => {
         renderAdUnit(adConfig);
     });
 };
