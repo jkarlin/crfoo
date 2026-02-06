@@ -109,11 +109,7 @@ const adInventory = [
         containerSelector: '.first-viewport-container',
         attributes: {
             width: '300',
-            height: '200',
-            autoplay: true,
-            loop: true,
-            muted: true,
-            playsinline: true
+            height: '200'
         },
         styles: {
             border: '1px solid #000'
