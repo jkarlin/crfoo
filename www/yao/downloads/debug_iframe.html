@@ -1,27 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script>
-        function triggerDownload(btnCode) {
-            var evt = new MouseEvent("click", { 
-                "button": btnCode,
-                "view": window,
-                "bubbles": true,
-                "cancelable": true
-            });
-            
-            var cb = document.getElementById("bug");
-            cb.dispatchEvent(evt);
-        }
-    </script>
-</head>
 <body>
-    <a id="bug" href="test.zip">Download test.zip</a>
+    <a href="test.zip">Go to test.zip</a>
     <br>
-    <button onclick="triggerDownload(0)">Trigger Main Click (0)</button>
+    <a href="test.zip" target="_blank">Go to test.zip (Targeting New Tab)</a>
     <br>
-    <button onclick="triggerDownload(1)">Trigger Aux Click (1)</button>
-    <br>
-    <a href="debug_empty.html">Go to empty page</a>
+    <a href="debug_empty.html">Go to debug_empty.html</a>
 </body>
 </html>
