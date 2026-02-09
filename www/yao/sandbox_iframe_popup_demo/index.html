@@ -1,7 +1,7 @@
-<section>
+<section style="font-family: sans-serif; max-width: 600px;">
   <h3>Prerequisite</h3>
   <p>
-    Open to <code style="background: #f4f4f4; padding: 2px 5px; border-radius: 4px;">chrome://settings/content/popups</code>
+    Navigate to: <code style="background: #f4f4f4; padding: 2px 5px; border-radius: 4px; border: 1px solid #ddd;">chrome://settings/content/popups</code>
   </p>
   <p>
     Change the default behavior to: <strong>"Sites can send pop-ups and use redirects"</strong>.
@@ -9,10 +9,13 @@
 
   <h3>Action</h3>
   <p>
-    <strong>Middle-click</strong> the link in the iframe.
+    <strong>Middle-click</strong> the link inside the iframe below:
   </p>
+
+  <iframe src="about:blank" style="width: 100%; height: 100px; border: 2px dashed #ccc;">
+    </iframe>
   
-  <div style="background-color: #fff3cd; padding: 10px; border-left: 5px solid #ffc107; margin-top: 15px;">
+  <div style="background-color: #fff3cd; color: #856404; padding: 15px; border-left: 5px solid #ffc107; margin-top: 15px; border-radius: 4px;">
     <strong>Observation:</strong> This action will launch a tab-under page while simultaneously focusing a new popup. This demonstrates a potential bypass of standard sandbox popup restrictions.
   </div>
 </section>
