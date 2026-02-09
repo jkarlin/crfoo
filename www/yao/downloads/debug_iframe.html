@@ -2,15 +2,24 @@
 <html>
 <head>
     <script>
-        onclick = function() {
-            var evt = new MouseEvent( "click", { "button": 1 });
+        function triggerDownload(btnCode) {
+            var evt = new MouseEvent("click", { 
+                "button": btnCode,
+                "view": window,
+                "bubbles": true,
+                "cancelable": true
+            });
+            
             var cb = document.getElementById("bug");
             cb.dispatchEvent(evt);
-            onclick = null;
         }
     </script>
 </head>
 <body>
     <a id="bug" href="test.zip">Download test.zip</a>
+    <br><br>
+    <button onclick="triggerDownload(0)">Trigger Main Click (0)</button>
+    <br><br>
+    <button onclick="triggerDownload(1)">Trigger Aux Click (1)</button>
 </body>
 </html>
