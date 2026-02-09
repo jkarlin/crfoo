@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <a id="hiddenLink" href="debug_empty.html" target="_blank" style="display:none;">
+        Target Link
+    </a>
+
+    <p>Attempting to open popup automatically...</p>
+
+    <script>
+        window.onload = function() {
+            var link = document.getElementById('hiddenLink');
+            link.click();
+            console.log("Click event triggered.");
+        };
+    </script>
+
+</body>
+</html>
