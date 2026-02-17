@@ -2,6 +2,15 @@
 <html>
 <head>
     <style>
+		body {
+            text-align: center;
+        }
+		.label {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: sans-serif;
+        }
         #ad-space {
             display: inline-block;
             width: 300px;
@@ -9,13 +18,19 @@
             border: 1px solid black;
             background-size: cover;
         }
+        button {
+            font-size: 40px;
+            padding: 15px 30px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <div>background-image &lt;span&gt; Ad</div>
+    <div class="label">background-image &lt;span&gt; Ad</div>
     <span id="ad-space"></span>
     <br>
-    <button onclick="loadAd()">Load ad</button>
+    <button onclick="loadAd()">Load Ad</button>
     <script>
         function loadAd() {
             document.getElementById('ad-space').style.backgroundImage = "url('https://cr.kungfoo.net/ad_img/300x250.png')";
@@ -23,3 +38,4 @@
     </script>
 </body>
 </html>
+
