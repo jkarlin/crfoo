@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #ad-space {
+            display: inline-block;
+            width: 300px;
+            height: 250px;
+            border: 1px solid black;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div>background-image &lt;span&gt; Ad</div>
+    <span id="ad-space"></span>
+    <br>
+    <button onclick="loadAd()">Load ad</button>
+    <script>
+        function loadAd() {
+            document.getElementById('ad-space').style.backgroundImage = "url('https://cr.kungfoo.net/ad_img/300x250.png')";
+        }
+    </script>
+</body>
+</html>
