@@ -17,13 +17,14 @@
 
         .container {
             text-align: center;
-            border: 1px solid black;
         }
 
         #image-placeholder {
             margin-bottom: 20px;
+            border: 1px solid black;
         }
         button {
+            text-align: center;
             font-size: 40px;
             padding: 15px 30px;
             cursor: pointer;
@@ -34,11 +35,9 @@
 <body>
     
     <div class="container">
-        <div id="image-placeholder"></div>
-        
-        <button onclick="loadImageFromAdScript()">Load Image</button>
+        <div id="image-placeholder"></div>        
     </div>
-
+    <button onclick="loadImageFromAdScript()">Load Image</button>
     <script src="https://cr.kungfoo.net/yao/ad_tagging/prebid9.js"></script>
 </body>
 </html>
