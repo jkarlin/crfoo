@@ -25,6 +25,20 @@ function appendTransparentIframe() {
   }
 }
 
+function loadImageFromAdScript() {
+    const placeholder = document.getElementById("image-placeholder");
+
+    if (placeholder.hasChildNodes()) {
+        return; 
+    }
+
+    const image = document.createElement("img");
+    image.src = "vanilla_image.png";
+    image.alt = "Dynamically loaded vanilla image";
+
+    placeholder.appendChild(image);
+}
+
 /**
  * Ad Configuration Configuration
  * * Defines the type, location, and styling of all ad units on the page.
