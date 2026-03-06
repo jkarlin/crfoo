@@ -1,0 +1,39 @@
+<script>
+  function timeSharedStorageSplit() {
+  // 1. The VERY FIRST check
+  const startFirst = performance.now();
+  const isSupportedFirst = 'sharedStorage' in window;
+  const endFirst = performance.now();
+  const firstDuration = endFirst - startFirst;
+
+  // 2. The SECOND check (to see immediate caching/optimization)
+  const startSecond = performance.now();
+  const isSupportedSecond = 'sharedStorage' in window;
+  const endSecond = performance.now();
+  const secondDuration = endSecond - startSecond;
+
+  // 3. Subsequent checks in a hot loop
+  const iterations = 100000;
+  let checkResult;
+  
+  const startLoop = performance.now();
+  for (let i = 0; i < iterations; i++) {
+    checkResult = 'sharedStorage' in window;
+  }
+  const endLoop = performance.now();
+  
+  const loopDuration = endLoop - startLoop;
+  const averageLoopDuration = loopDuration / iterations;
+
+  // Output formatting
+  console.log(`--- Shared Storage Feature Detection Timing ---`);
+  console.log(`Supported: ${isSupportedFirst}`);
+  console.log(`1st Call Time:      ${firstDuration.toFixed(4)} ms`);
+  console.log(`2nd Call Time:      ${secondDuration.toFixed(4)} ms`);
+  console.log(`Average of next ${iterations.toLocaleString()}: ${averageLoopDuration.toFixed(6)} ms per call`);
+  console.log(`Total loop time:    ${loopDuration.toFixed(4)} ms`);
+}
+
+// Run the function
+timeSharedStorageSplit();
+</script>
