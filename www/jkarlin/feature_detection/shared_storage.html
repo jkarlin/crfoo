@@ -19,7 +19,9 @@
   const startLoop = performance.now();
   for (let i = 0; i < iterations; i++) {
   
-    checkResult = 'sharedStorage' in window && window.isSecureContext && !!window['sharedStorage'];
+    checkResult = 'sharedStorage' in window && window.isSecureContext && !!window['sharedStorage'] &&
+    isFeaturePolicyAllowed(PermissionPolicy.SHARED_STORAGE, doc) &&
+    isFeaturePolicyAllowed(PermissionPolicy.SHARED_STORAGE_SELECT_URL, doc);
   }
   const endLoop = performance.now();
   
