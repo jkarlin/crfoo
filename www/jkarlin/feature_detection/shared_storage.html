@@ -18,7 +18,8 @@
   
   const startLoop = performance.now();
   for (let i = 0; i < iterations; i++) {
-    checkResult = 'sharedStorage' in window;
+  
+    checkResult = 'sharedStorage' in window && window.isSecureContext && !!window['sharedStorage'];
   }
   const endLoop = performance.now();
   
