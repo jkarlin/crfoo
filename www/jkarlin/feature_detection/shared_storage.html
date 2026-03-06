@@ -20,8 +20,7 @@
   for (let i = 0; i < iterations; i++) {
   
     checkResult = 'sharedStorage' in window && window.isSecureContext && !!window['sharedStorage'] &&
-    isFeaturePolicyAllowed(PermissionPolicy.SHARED_STORAGE, doc) &&
-    isFeaturePolicyAllowed(PermissionPolicy.SHARED_STORAGE_SELECT_URL, doc);
+    document.featurePolicy.allowsFeature('shared-storage');
   }
   const endLoop = performance.now();
   
