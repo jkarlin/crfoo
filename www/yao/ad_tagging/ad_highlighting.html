@@ -49,16 +49,24 @@
 <body>
     <h1 id="page-title">Ad Highlighting Test Page</h1>
 
+    <!-- Ensure this path points to your updated prebid9.js -->
     <script src="https://cr.kungfoo.net/yao/ad_tagging/prebid9.js"></script>
 
     <div class="first-viewport-container">
-        </div>
+    </div>
 
     <div class="fixed-bottom-right">
-        </div>
+    </div>
 
     <script>
-        // Initialize the ad insertion logic
+        // Wait for the dynamic script to be fully loaded and parsed
+        window.addEventListener('AdScriptLoaded', function() {
+            if (typeof window.initAdManager === 'function') {
+                window.initAdManager();
+            }
+        });
+
+        // Fallback catch in case the script loaded instantaneously before the listener attached
         if (typeof window.initAdManager === 'function') {
             window.initAdManager();
         }
