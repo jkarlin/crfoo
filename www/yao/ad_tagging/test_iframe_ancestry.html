@@ -3,35 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Script Test Page</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .first-viewport-container { margin-bottom: 20px; min-height: 50px; border: 1px dashed #ccc; padding: 10px; }
-        .fixed-bottom-right { position: fixed; bottom: 10px; right: 10px; z-index: 1000; }
-    </style>
+    <title>Single Iframe Test</title>
 </head>
 <body>
-    <h1>Ad Testing Environment</h1>
+    <h1>Vanilla Iframe Test</h1>
     
-    <div class="container"></div>
-    <div id="image-placeholder"></div>
-    <div class="first-viewport-container">
-        <h2>First Viewport Ads</h2>
-    </div>
-    <div class="fixed-bottom-right"></div>
-
     <script src="prebid9.js"></script>
 
     <script>
         window.addEventListener('AdScriptLoaded', function() {
-            console.log('Event received: regular-script.js is fully loaded.');
+            console.log('regular-script.js loaded!');
             
-            if (typeof window.initAdManager === 'function') {
-                window.initAdManager();
-            }
-
             if (typeof appendVanillaIframe === 'function') {
                 appendVanillaIframe();
+            } else {
+                console.error('appendVanillaIframe function not found.');
             }
         });
     </script>
