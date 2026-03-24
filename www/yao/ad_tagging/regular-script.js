@@ -51,7 +51,7 @@ const adInventory = [
         label: '&lt;iframe&gt; Ad',
         containerSelector: '.first-viewport-container',
         attributes: {
-            src: 'https://cr.kungfoo.net/ad_img/300x250.png',
+            src: 'vanilla_image.png',
             width: '600',
             height: '200',
             title: 'iframe 1'
@@ -62,7 +62,7 @@ const adInventory = [
         label: 'Absolute &lt;iframe&gt; Ad',
         containerSelector: '.first-viewport-container',
         attributes: {
-            src: 'https://cr.kungfoo.net/ad_img/300x250.png',
+            src: 'vanilla_image.png',
             width: '300',
             height: '250',
             title: 'absolute iframe'
