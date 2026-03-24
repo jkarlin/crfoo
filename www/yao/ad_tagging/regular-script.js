@@ -39,6 +39,16 @@ function loadImageFromAdScript() {
     placeholder.appendChild(image);
 }
 
+function appendVanillaIframe() {
+    const iframe = document.createElement('iframe');
+    iframe.src = 'vanilla_image.png';
+    iframe.width = '300';
+    iframe.height = '250';
+    iframe.style.border = '2px solid';
+    
+    document.body.appendChild(iframe);
+}
+
 /**
  * Ad Configuration Configuration
  * * Defines the type, location, and styling of all ad units on the page.
