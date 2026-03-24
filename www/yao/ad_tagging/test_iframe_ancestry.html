@@ -3,17 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Iframe Test</title>
+    <title>Single Iframe Test with Button</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 50px;
+            text-align: center;
+        }
+
+        #append-btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #append-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        #append-btn:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Vanilla Iframe Test</h1>
+    
+    <button id="append-btn" disabled>Loading Scripts...</button>
     
     <script src="prebid9.js"></script>
 
     <script>
+        const button = document.getElementById('append-btn');
+
         window.addEventListener('AdScriptLoaded', function() {
-            console.log('regular-script.js loaded!');
+            console.log('regular-script.js is loaded and ready!');
             
+            button.textContent = 'Append Vanilla Iframe';
+            button.disabled = false;
+        });
+
+        button.addEventListener('click', function() {
             if (typeof appendVanillaIframe === 'function') {
                 appendVanillaIframe();
             } else {
