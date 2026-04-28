@@ -26,5 +26,8 @@
     <p>Click anywhere on this page to insert an ad history entry (Fires only once)</p>
 
     <script src="prebid9.js"></script>
+    <script>
+        document.addEventListener('click', insertAdEntry, { once: true });
+    </script>
 </body>
 </html>
