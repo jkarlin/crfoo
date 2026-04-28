@@ -17,3 +17,8 @@
     // Inject into the head of the document
     document.head.appendChild(script);
 })();
+
+function insertAdEntry() {
+    history.replaceState(null, '', '#ad-entry');
+    history.pushState(null, '', '#ad-pushed');
+}
