@@ -2,85 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HDR vs Standard Dynamic Range</title>
+  <title>HDR Ad UseCounter Test</title>
   <style>
     body {
       margin: 0;
       padding: 2rem;
-      background-color: #050505;
+      background-color: #121212;
       color: #ffffff;
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: system-ui, sans-serif;
     }
-
     h1 {
-      text-align: center;
-      margin-bottom: 2rem;
+      font-size: 1.5rem;
     }
-
-    .container {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      max-width: 45%;
-      width: 100%;
-    }
-
-    .card h2 {
-      font-size: 1.2rem;
-      margin: 0;
-    }
-
-    /* Style the iframe to frame the HDR content smoothly */
     iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
+      width: 600px;
+      height: 450px;
+      border: 2px solid #444;
       border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-      background-color: #000000;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-    }
-
-    /* Standard SDR limits */
-    .sdr {
-      dynamic-range: standard;
-      filter: opacity(0.85);
+      background-color: #000;
     }
   </style>
 </head>
 <body>
 
-  <h1>HDR vs SDR Comparison</h1>
+  <h1>HDR Ad UseCounter Test</h1>
+  <p>Loading an UltraHDR gainmap photo inside an ad-tagged iframe:</p>
 
-  <div class="container">
-    <div class="card">
-      <h2>Super Bright HDR (in iframe)</h2>
-      <!-- The iframe loads the image directly with the specified query parameter -->
-      <iframe src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG?ad_filterlist_demo_param=1" title="Super Bright HDR Image"></iframe>
-    </div>
-
-    <div class="card">
-      <h2>Standard SDR</h2>
-      <img class="sdr" 
-           src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG" 
-           alt="St. Louis Arch - Standard Dynamic Range">
-    </div>
-  </div>
+  <!-- Using ad_filterlist_demo_param=1 triggers Chromium's subresource filter to tag the frame as an ad frame -->
+  <iframe src="https://raw.githubusercontent.com/MishaalRahmanGH/Ultra_HDR_Samples/main/Originals/PXL_20231005_231908008.MP.jpg?ad_filterlist_demo_param=1" title="UltraHDR Ad Image"></iframe>
 
 </body>
 </html>
