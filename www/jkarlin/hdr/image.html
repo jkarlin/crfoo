@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UltraHDR vs SDR Comparison</title>
+  <title>UltraHDR vs Forced SDR Mode</title>
   <style>
     body {
       margin: 0;
@@ -31,23 +31,27 @@
       background-color: #000;
       box-sizing: border-box;
     }
+    /* Force Chrome to ignore the gainmap and render in standard SDR */
+    .force-sdr {
+      dynamic-range-limit: standard;
+    }
   </style>
 </head>
 <body>
 
-  <h1>UltraHDR vs SDR Comparison</h1>
+  <h1>UltraHDR vs Forced SDR Mode</h1>
 
   <div class="container">
-    <!-- Top Card: Real UltraHDR Gainmap Image (in Ad Iframe) -->
+    <!-- Top Card: UltraHDR Image in Full HDR Mode (Ad Frame) -->
     <div class="card">
-      <h2>1. Real UltraHDR Image (Ad Frame)</h2>
+      <h2>1. UltraHDR Image (Full HDR Gainmap Boost)</h2>
       <iframe srcdoc="<!DOCTYPE html><html><head><style>html,body{margin:0;padding:0;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;}img{max-width:100%;max-height:100%;object-fit:contain;}</style></head><body><img src='https://github.com/MishaalRahmanGH/Ultra_HDR_Samples/blob/main/Originals/Ultra_HDR_Samples_Originals_05.jpg?raw=true&ad_filterlist_demo_param=1' /></body></html>"></iframe>
     </div>
 
-    <!-- Bottom Card: Standard SDR Version (Same Photo, No Gainmap) -->
+    <!-- Bottom Card: Same UltraHDR Image Forced to SDR Mode via CSS -->
     <div class="card">
-      <h2>2. Standard SDR Version (No Gainmap)</h2>
-      <img src="https://github.com/MishaalRahmanGH/Ultra_HDR_Samples/blob/main/SDR%20Emulation/Ultra_HDR_Samples_SDR_Emulation_05_base.jpg?raw=true" alt="Standard SDR Base">
+      <h2>2. Same Image Forced to SDR Mode (dynamic-range-limit: standard)</h2>
+      <img class="force-sdr" src="https://github.com/MishaalRahmanGH/Ultra_HDR_Samples/blob/main/Originals/Ultra_HDR_Samples_Originals_05.jpg?raw=true" alt="Forced SDR">
     </div>
   </div>
 
