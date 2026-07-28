@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube HDR vs SDR Video Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background-color: #121212;
+      color: #ffffff;
+      font-family: system-ui, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 650px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    iframe {
+      width: 100%;
+      height: 360px;
+      border: 2px solid #444;
+      border-radius: 8px;
+      background-color: #000;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>YouTube HDR vs SDR Video Comparison</h1>
+
+  <div class="container">
+    <!-- Top Card: YouTube HDR Video in Ad Iframe -->
+    <div class="card">
+      <h2>1. YouTube HDR Video (Ad Frame - Feature 5976)</h2>
+      <iframe src="https://www.youtube.com/embed/tSEKX2mx0q0?autoplay=1&mute=1&ad_filterlist_demo_param=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <!-- Bottom Card: Standard SDR YouTube Video -->
+    <div class="card">
+      <h2>2. Standard SDR Video (No HDR Feature)</h2>
+      <iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+</body>
+</html>
