@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HDR Image Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      /* Enables high dynamic range rendering on supporting displays and browsers */
+      dynamic-range: high;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG" 
+       alt="St. Louis Arch HDR Image">
+
+</body>
+</html>
