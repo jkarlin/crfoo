@@ -29,6 +29,7 @@
       border-radius: 8px;
       object-fit: contain;
       background-color: #000;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -37,13 +38,13 @@
   <h1>St. Kentigern's Church Comparison</h1>
 
   <div class="container">
-    <!-- Top Card: Ad Frame Version (with ad query param) -->
+    <!-- Top Card: Ad Iframe (uses srcdoc wrapper so the image fits without scrollbars) -->
     <div class="card">
       <h2>1. Image inside Ad Iframe</h2>
-      <iframe src="https://upload.wikimedia.org/wikipedia/commons/a/a3/St_Kentigerns_Church_HDR_%288226826999%29.jpg?ad_filterlist_demo_param=1"></iframe>
+      <iframe srcdoc="<!DOCTYPE html><html><head><style>html,body{margin:0;padding:0;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;}img{max-width:100%;max-height:100%;object-fit:contain;}</style></head><body><img src='https://upload.wikimedia.org/wikipedia/commons/a/a3/St_Kentigerns_Church_HDR_%288226826999%29.jpg?ad_filterlist_demo_param=1' /></body></html>"></iframe>
     </div>
 
-    <!-- Bottom Card: Standard Non-Ad Version -->
+    <!-- Bottom Card: Standard Image (No Ad Tag) -->
     <div class="card">
       <h2>2. Standard Image (No Ad Tag)</h2>
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/St_Kentigerns_Church_HDR_%288226826999%29.jpg" alt="St. Kentigern's Church">
