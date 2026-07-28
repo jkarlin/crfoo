@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 2rem;
-      background-color: #121212;
+      background-color: #050505;
       color: #ffffff;
       font-family: system-ui, -apple-system, sans-serif;
     }
@@ -42,17 +42,30 @@
       max-width: 100%;
       height: auto;
       border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     }
 
-    /* Force HDR rendering */
-    .hdr {
-      dynamic-range: high;
-    }
-
-    /* Restrict to Standard Dynamic Range */
+    /* Standard SDR limits */
     .sdr {
       dynamic-range: standard;
+      filter: opacity(0.85); /* Slightly dimmed to accentuate the HDR contrast */
+    }
+
+    /* Super bright HDR styling */
+    .hdr {
+      dynamic-range: high;
+      /* Boost exposure and contrast to push brightness into display highlight headroom */
+      filter: brightness(1.6) contrast(1.15) saturate(1.1);
+      /* Force mixing using Rec. 2020 ultra-wide color space */
+      color-interpolation-filters: rec2020;
+    }
+
+    /* Extra headroom push on HDR-capable screens */
+    @media (dynamic-range: high) {
+      .hdr {
+        /* Unlocks maximum display luminance highlights on supporting browsers */
+        filter: brightness(2.0) contrast(1.25);
+      }
     }
   </style>
 </head>
@@ -62,14 +75,14 @@
 
   <div class="container">
     <div class="card">
-      <h2>HDR Enabled</h2>
+      <h2>Super Bright HDR</h2>
       <img class="hdr" 
            src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG" 
-           alt="St. Louis Arch - High Dynamic Range">
+           alt="St. Louis Arch - Super Bright HDR">
     </div>
 
     <div class="card">
-      <h2>HDR Disabled (SDR)</h2>
+      <h2>Standard SDR</h2>
       <img class="sdr" 
            src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG" 
            alt="St. Louis Arch - Standard Dynamic Range">
