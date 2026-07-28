@@ -3,31 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HDR Image Viewer</title>
+  <title>HDR vs Standard Dynamic Range</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 2rem;
       background-color: #121212;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
     }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .container {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 45%;
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
     img {
-      max-width: 90vw;
-      max-height: 90vh;
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      /* Enables high dynamic range rendering on supporting displays and browsers */
+    }
+
+    /* Force HDR rendering */
+    .hdr {
       dynamic-range: high;
+    }
+
+    /* Restrict to Standard Dynamic Range */
+    .sdr {
+      dynamic-range: standard;
     }
   </style>
 </head>
 <body>
 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG" 
-       alt="St. Louis Arch HDR Image">
+  <h1>HDR vs SDR Comparison</h1>
+
+  <div class="container">
+    <div class="card">
+      <h2>HDR Enabled</h2>
+      <img class="hdr" 
+           src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG" 
+           alt="St. Louis Arch - High Dynamic Range">
+    </div>
+
+    <div class="card">
+      <h2>HDR Disabled (SDR)</h2>
+      <img class="sdr" 
+           src="https://upload.wikimedia.org/wikipedia/commons/8/89/StLouisArchMultExpEV%2B1.51.JPG" 
+           alt="St. Louis Arch - Standard Dynamic Range">
+    </div>
+  </div>
 
 </body>
 </html>
