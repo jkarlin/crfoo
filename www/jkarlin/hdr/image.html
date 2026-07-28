@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HDR vs SDR Side-by-Side Test</title>
+  <title>500px Photo Ad Test</title>
   <style>
     body {
       margin: 0;
@@ -11,44 +11,22 @@
       color: #ffffff;
       font-family: system-ui, sans-serif;
     }
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      max-width: 650px;
-    }
-    .card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    iframe, img {
+    iframe {
       width: 100%;
-      height: 400px;
+      max-width: 800px;
+      height: 600px;
       border: 2px solid #333;
       border-radius: 8px;
-      object-fit: cover;
       background-color: #000;
     }
   </style>
 </head>
 <body>
 
-  <h1>HDR vs SDR Comparison</h1>
+  <h1>500px Photo in Ad Iframe</h1>
 
-  <div class="container">
-    <!-- Top Card: UltraHDR Gainmap (in Ad Iframe) -->
-    <div class="card">
-      <h2>1. UltraHDR Gainmap Image (Ad Frame)</h2>
-      <iframe src="https://raw.githubusercontent.com/MishaalRahmanGH/Ultra_HDR_Samples/main/Originals/PXL_20231005_231908008.MP.jpg?ad_filterlist_demo_param=1"></iframe>
-    </div>
-
-    <!-- Bottom Card: Standard SDR Version (Same Photo) -->
-    <div class="card">
-      <h2>2. Standard SDR Image (Same Photo, No Gainmap)</h2>
-      <img src="https://raw.githubusercontent.com/MishaalRahmanGH/Ultra_HDR_Samples/main/SDR%20Emulation/PXL_20231005_231908008.MP_base.jpg" alt="SDR Base Image">
-    </div>
-  </div>
+  <!-- Loading the 500px photo page inside an ad-tagged iframe -->
+  <iframe src="https://500px.com/photo/107300285/malibu-sea-cave-sunset-el-matador-beach-nikon-d8-by-elliot-mcgucken?ad_filterlist_demo_param=1"></iframe>
 
 </body>
 </html>
