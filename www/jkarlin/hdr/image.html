@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>500px Photo Ad Test</title>
+  <title>Wikipedia St. Kentigern's Church HDR Test</title>
   <style>
     body {
       margin: 0;
@@ -11,10 +11,15 @@
       color: #ffffff;
       font-family: system-ui, sans-serif;
     }
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 700px;
+    }
     iframe {
       width: 100%;
-      max-width: 800px;
-      height: 600px;
+      height: 500px;
       border: 2px solid #333;
       border-radius: 8px;
       background-color: #000;
@@ -23,10 +28,12 @@
 </head>
 <body>
 
-  <h1>500px Photo in Ad Iframe</h1>
+  <h1>St. Kentigern's Church Image (Ad Frame)</h1>
 
-  <!-- Loading the 500px photo page inside an ad-tagged iframe -->
-  <iframe src="https://500px.com/photo/107300285/malibu-sea-cave-sunset-el-matador-beach-nikon-d8-by-elliot-mcgucken?ad_filterlist_demo_param=1"></iframe>
+  <div class="card">
+    <!-- Ad-tagged iframe loading the direct Wikimedia image -->
+    <iframe src="https://upload.wikimedia.org/wikipedia/commons/2/26/St_Kentigerns_Church_HDR_%288226826999%29.jpg?ad_filterlist_demo_param=1"></iframe>
+  </div>
 
 </body>
 </html>
