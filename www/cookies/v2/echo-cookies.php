@@ -1,5 +1,8 @@
 <?php
 header('Content-Type: application/json');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
 header('Access-Control-Allow-Origin: chrome-extension://bknnlbamapndemiekhkcnmdclnkijlhb');
 header('Access-Control-Allow-Credentials: true');
 $data = ['cookies' => getallheaders()['Cookie']];
