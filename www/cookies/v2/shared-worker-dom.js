@@ -5,12 +5,14 @@
 {
 
 const addWorkerBtn = document.getElementById('add-shared-worker');
+const addWorkerStorageAccessBtn =
+    document.getElementById('add-shared-worker-storage-access');
 const checkCookieBtn = document.getElementById('check-shared-worker-cookies');
 
 let worker;
 
-addWorkerBtn.addEventListener('click', () => {
-  worker = new SharedWorker('/cookies/v2/shared-worker.js');
+function setupWorker(w) {
+  worker = w;
   worker.port.onmessage = event => {
     if (!event.data?.ok) {
       console.log('Something went wrong!');
@@ -19,6 +21,19 @@ addWorkerBtn.addEventListener('click', () => {
     }
   };
   worker.port.start();
+}
+
+addWorkerBtn.addEventListener('click', () => {
+  setupWorker(new SharedWorker('/cookies/v2/shared-worker.js'));
+});
+
+addWorkerStorageAccessBtn?.addEventListener('click', async () => {
+  try {
+    const handle = await document.requestStorageAccess({SharedWorker: true});
+    setupWorker(handle.SharedWorker('/cookies/v2/shared-worker.js'));
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 checkCookieBtn.addEventListener('click', () => {
